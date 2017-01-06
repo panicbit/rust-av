@@ -127,7 +127,7 @@ impl Drop for IOContext {
     }
 }
 
-pub type IODropper = unsafe fn(*mut c_void);
+type IODropper = unsafe fn(*mut c_void);
 
 unsafe fn io_dropper<T>(io: *mut c_void) {
     Box::from_raw(io as *mut T);

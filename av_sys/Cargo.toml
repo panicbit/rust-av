@@ -1,12 +1,11 @@
 [package]
 authors = ["panicbit <panicbit.dev@gmail.com>"]
-name = "av"
+build = "build.rs"
+name = "av_sys"
 version = "0.1.0"
 
-[[bin]]
-name = "av"
+[build-dependencies]
+libbindgen = "0.1.5"
 
 [dependencies]
-av_sys = { path = "av_sys" }
 libc = "0.2.19"
-lazy_static = "0.2.2"

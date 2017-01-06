@@ -14,6 +14,6 @@ fn main() {
 
     let input = File::open("/tmp/input.mp4").expect("input file");
     AV.open_format_source(input);
-    
+
     println!("\n=== No crash ===");
 }

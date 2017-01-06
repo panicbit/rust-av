@@ -1,3 +1,4 @@
+extern crate av_sys as ffi;
 extern crate libc;
 use std::ffi::CStr;
 use std::sync::{Once, ONCE_INIT};
@@ -41,9 +42,4 @@ impl LibAV {
             format::FormatSource::new(io_context)
         }
     }
-}
-
-#[allow(warnings)]
-pub mod ffi {
-    include!(concat!(env!("OUT_DIR"), "/ffi.rs"));
 }

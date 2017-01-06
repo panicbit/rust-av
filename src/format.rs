@@ -10,6 +10,7 @@ pub struct FormatSource {
 }
 
 impl FormatSource {
+    #[doc(hidden)]
     pub unsafe fn new(mut io_ctx: io::IOContext) -> Self {
         let format_ctx = ffi::avformat_alloc_context();
         (*format_ctx).pb = io_ctx.as_mut_ptr();

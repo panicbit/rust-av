@@ -12,7 +12,7 @@ pub struct FormatSource {
 
 impl FormatSource {
     #[doc(hidden)]
-    pub unsafe fn new(mut io_ctx: io::IOContext) -> Self {
+    pub unsafe fn new(mut io_ctx: io::IOContext) -> Result<Self, &'static str> {
         let mut this = ffi::avformat_alloc_context();
         (*this).pb = io_ctx.as_mut_ptr();
 
@@ -20,14 +20,16 @@ impl FormatSource {
         let fmt = ptr::null_mut();
         let options = ptr::null_mut();
 
-        ffi::avformat_open_input(&mut this, url, fmt, options);
+        if ffi::avformat_open_input(&mut this, url, fmt, options) != 0 {
+            return Err("avformat_open_input failed")
+        }
 
         // let dict = ptr::null_mut();
 
-        FormatSource {
+        Ok(FormatSource {
             ptr: this,
             io_ctx: Some(io_ctx),
-        }
+        })
     }
 
     pub fn num_streams(&self) -> usize {

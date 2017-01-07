@@ -36,7 +36,7 @@ impl LibAV {
         }
     }
 
-    pub fn open_format_source<R: io::AVRead>(&self, reader: R) -> format::FormatSource {
+    pub fn open_format_source<R: io::AVRead>(&self, reader: R) -> Result<format::FormatSource, &'static str> {
         unsafe {
             let io_context = io::IOContext::from_reader(reader);
             format::FormatSource::new(io_context)

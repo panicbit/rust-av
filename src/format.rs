@@ -1,4 +1,5 @@
 use ffi;
+use std::ffi::CStr;
 use std::ptr;
 use std::fmt;
 use util::PtrTakeExt;
@@ -46,6 +47,22 @@ impl FormatSource {
             duration as u32 / ffi::AV_TIME_BASE
         }
     }
+
+    pub fn format_name(&self) -> &CStr {
+        unsafe {
+            let this = &*self.ptr;
+            let iformat = &*this.iformat;
+            CStr::from_ptr(iformat.name)
+        }
+    }
+
+    pub fn format_long_name(&self) -> &CStr {
+        unsafe {
+            let this = &*self.ptr;
+            let iformat = &*this.iformat;
+            CStr::from_ptr(iformat.long_name)
+        }
+    }
 }
 
 impl Drop for FormatSource {
@@ -63,6 +80,8 @@ impl fmt::Debug for FormatSource {
         writeln!(f, "FormatSource {{")?;
         writeln!(f, "    num_streams: {}", self.num_streams())?;
         writeln!(f, "    duration: {} seconds", self.duration())?;
+        writeln!(f, "    format_name: {:?}", self.format_name())?;
+        writeln!(f, "    format_long_name: {:?}", self.format_long_name())?;
         write!(f, "}}")
     }
 }

@@ -10,3 +10,5 @@ name = "av"
 av_sys = { path = "av_sys" }
 libc = "0.2.19"
 lazy_static = "0.2.2"
+
+[workspace]

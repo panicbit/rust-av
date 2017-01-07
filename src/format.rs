@@ -1,7 +1,7 @@
 use ffi;
 use std::ptr;
-use std::mem;
 use std::fmt;
+use util::PtrTakeExt;
 
 use io;
 
@@ -49,9 +49,9 @@ impl FormatSource {
 impl Drop for FormatSource {
     fn drop(&mut self) {
         unsafe {
-            self.io_ctx.take();
-            (*self.ptr).pb = ptr::null_mut();
-            ffi::avformat_free_context(mem::replace(&mut self.ptr, ptr::null_mut()));
+            self.io_ctx.take().expect("IOContext").close_with(||
+                ffi::avformat_close_input(&mut self.ptr.take())
+            );
         }
     }
 }

@@ -109,12 +109,18 @@ impl IOContext {
             }
         }
     }
+
+    pub unsafe fn close_with<F: FnMut()>(self, mut closer: F) {
+        let io = (*self.ptr).opaque;
+        closer();
+        (self.io_dropper)(io);
+    }
 }
 
 impl Drop for IOContext {
     fn drop(&mut self) {
         unsafe {
-            {
+            if !self.ptr.is_null() {
                 let this = &mut (*self.ptr);
                 (self.io_dropper)(this.opaque.take());
                 this.read_packet.take();

@@ -48,19 +48,20 @@ impl FormatSource {
         }
     }
 
+    unsafe fn input_format(&self) -> &ffi::AVInputFormat {
+        let this = &*self.ptr;
+        &*this.iformat
+    }
+
     pub fn format_name(&self) -> &CStr {
         unsafe {
-            let this = &*self.ptr;
-            let iformat = &*this.iformat;
-            CStr::from_ptr(iformat.name)
+            CStr::from_ptr(self.input_format().name)
         }
     }
 
     pub fn format_long_name(&self) -> &CStr {
         unsafe {
-            let this = &*self.ptr;
-            let iformat = &*this.iformat;
-            CStr::from_ptr(iformat.long_name)
+            CStr::from_ptr(self.input_format().long_name)
         }
     }
 }

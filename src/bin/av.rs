@@ -1,12 +1,7 @@
 extern crate av;
-#[macro_use] extern crate lazy_static;
 
 use std::fs::File;
-use av::LibAV;
-
-lazy_static! {
-    static ref AV: LibAV = LibAV::init();
-}
+use av::AV;
 
 fn main() {
     println!("{}", AV.version().to_string_lossy());

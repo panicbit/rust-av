@@ -1,5 +1,6 @@
 extern crate av_sys as ffi;
 extern crate libc;
+#[macro_use] extern crate lazy_static;
 use std::ffi::CStr;
 use std::sync::{Once, ONCE_INIT};
 
@@ -7,13 +8,16 @@ pub mod format;
 pub mod io;
 mod util;
 
-static INIT: Once = ONCE_INIT;
+lazy_static! {
+    pub static ref AV: LibAV = LibAV::init();
+}
 
 pub struct LibAV(());
 
 impl LibAV {
     pub fn init() -> LibAV {
         unsafe {
+            static INIT: Once = ONCE_INIT;
             INIT.call_once(|| {
                 // Init avformat
                 ffi::av_register_all();

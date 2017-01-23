@@ -7,6 +7,7 @@ use std::sync::{Once, ONCE_INIT};
 pub mod format;
 pub mod io;
 mod util;
+pub mod frame;
 
 lazy_static! {
     pub static ref AV: LibAV = LibAV::init();

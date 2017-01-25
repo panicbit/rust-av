@@ -8,6 +8,7 @@ pub mod format;
 pub mod io;
 mod util;
 pub mod frame;
+pub mod codec;
 
 lazy_static! {
     pub static ref AV: LibAV = LibAV::init();

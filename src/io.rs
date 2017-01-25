@@ -156,8 +156,7 @@ extern fn ffi_write_packet<W: AVWrite>(this: *mut c_void, buf: *mut uint8_t, buf
 unsafe extern fn ffi_seek<S: AVSeek>(this: *mut c_void, offset: int64_t, whence: c_int) -> int64_t {
     let this = &mut *(this as *mut S);
 
-    // According to the doc AVSEEK_SIZE is ORed with whence.
-    if offset & ffi::AVSEEK_SIZE as int64_t == ffi::AVSEEK_SIZE as int64_t {
+    if whence == ffi::AVSEEK_SIZE as c_int {
         return this.size().and_then(u64_into_int64_t).unwrap_or(-1);
     }
 

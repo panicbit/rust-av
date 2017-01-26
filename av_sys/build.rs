@@ -17,4 +17,6 @@ fn main() {
     println!("cargo:rustc-link-lib=dylib=avutil");
     println!("cargo:rustc-link-lib=dylib=avformat");
     println!("cargo:rustc-link-lib=dylib=avcodec");
+    println!("cargo:rustc-link-lib=dylib=swresample");
+    println!("cargo:rustc-link-lib=dylib=swscale");
 }

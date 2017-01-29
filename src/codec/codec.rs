@@ -1,6 +1,7 @@
 use std::fmt;
 use std::slice;
 use std::ffi::CStr;
+use LibAV;
 use ffi::{
     AVCodec,
     AVCodecID,
@@ -13,25 +14,21 @@ use super::{
     DescriptorIter,
 };
 
+#[derive(Copy,Clone)]
 pub struct Codec {
-    ptr: *mut AVCodec
+    ptr: *const AVCodec
 }
 
 impl Codec {
-    pub fn find_by_id(codec_id: AVCodecID) -> Result<Self, String> {
-        Ok(Codec {
-            ptr: Codec::find_encoder(codec_id)?,
-        })
-    }
-
-    pub fn find_encoder(codec_id: AVCodecID) -> Result<*mut AVCodec, String> {
+    pub fn find_encoder_by_id(codec_id: AVCodecID) -> Result<Self, String> {
         unsafe {
+            LibAV::init();
             let codec = avcodec_find_encoder(codec_id);
             if codec.is_null() {
                 // maybe use avcodec_get_name(codec_id)
                 return Err(format!("Could not find encoder for {:?}", codec_id))
             }
-            Ok(codec)
+            Ok(Self::from_ptr(codec))
         }
     }
 
@@ -67,20 +64,21 @@ impl Codec {
     }
 
     pub fn descriptors() -> DescriptorIter {
+        LibAV::init();
         DescriptorIter::new()
     }
 }
 
 impl Codec {
+    pub unsafe fn from_ptr(ptr: *const AVCodec) -> Self {
+        Codec { ptr: ptr }
+    }
+
     pub fn as_ref(&self) -> &AVCodec {
         unsafe { &*self.ptr }
     }
     
     pub fn as_ptr(&self) -> *const AVCodec {
-        self.ptr
-    }
-
-    pub fn as_ptr_mut(&mut self) -> *mut AVCodec {
         self.ptr
     }
 }

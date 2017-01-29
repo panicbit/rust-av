@@ -1,6 +1,7 @@
 use std::ffi::CStr;
 use std::fmt;
 use std::ptr;
+use LibAV;
 use ffi::{
     AVCodecID,
     AVCodecDescriptor,
@@ -19,6 +20,7 @@ pub struct Descriptor {
 impl Descriptor {
     pub fn from_codec_id(codec_id: AVCodecID) -> Option<Self> {
         unsafe {
+            LibAV::init();
             let descriptor = avcodec_descriptor_get(codec_id);;
             if descriptor.is_null() {
                 None

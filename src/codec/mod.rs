@@ -18,3 +18,9 @@ pub use self::profile::{
 
 mod mime;
 pub use self::mime::MimeTypeIter;
+
+mod encoder;
+pub use self::encoder::{
+    VideoEncoder,
+    VideoEncoderBuilder,
+};

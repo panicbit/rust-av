@@ -110,11 +110,11 @@ impl IOContext {
         }
     }
 
-    pub unsafe fn close_with<F: FnMut()>(self, mut closer: F) {
-        let io = (*self.ptr).opaque;
-        closer();
-        (self.io_dropper)(io);
-    }
+    // pub unsafe fn close_with<F: FnMut()>(self, mut closer: F) {
+    //     let io = (*self.ptr).opaque;
+    //     closer();
+    //     (self.io_dropper)(io);
+    // }
 }
 
 impl Drop for IOContext {

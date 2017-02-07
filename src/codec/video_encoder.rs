@@ -88,9 +88,9 @@ impl VideoEncoder {
 
     fn scaler_needs_update(&self, source: &VideoFrame) -> bool {
         if let Some(ref scaler) = self.scaler {
-               self.pixel_format() != scaler.source_pixel_format()
-            || self.width() != scaler.source_width()
-            || self.height() != scaler.source_height()
+               source.pixel_format() != scaler.source_pixel_format()
+            || source.width() != scaler.source_width()
+            || source.height() != scaler.source_height()
         } else {
             true
         }

@@ -26,8 +26,7 @@ pub struct Muxer {
     ptr: *mut AVFormatContext,
     // The io context is borrowed by the format context
     // and is kept around to be dropped at the right time.
-    #[allow(dead_code)]
-    io_context: io::IOContext,
+    _io_context: io::IOContext,
     encoders: Vec<VideoEncoder>,
     closed: bool,
 }
@@ -313,7 +312,7 @@ impl MuxerBuilder {
 
             Ok(Muxer {
                 ptr: format_context,
-                io_context: io_context,
+                _io_context: io_context,
                 encoders: encoders,
                 closed: false,
             })

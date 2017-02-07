@@ -9,7 +9,7 @@ use ffi::{
     avcodec_alloc_context3,
     avcodec_free_context,
 };
-use frame::VideoFrame;
+use frame::{RefMutFrame, VideoFrame};
 use scaler::Scaler;
 
 // TODO: Add align field to encoder
@@ -46,8 +46,12 @@ impl VideoEncoder {
 }
 
 impl VideoEncoder {
-    pub unsafe fn send_frame<F: FnMut(&mut ffi::AVPacket) -> Result<(), String>>(&mut self, frame: &mut VideoFrame, mut packet_handler: F) -> Result<(), String> {
-        let mut frame = frame;
+    pub unsafe fn send_frame<'a, F, H>(&mut self, frame: F, mut packet_handler: H) -> Result<(), String> where
+        F: Into<RefMutFrame<'a>>,
+        H: FnMut(&mut ffi::AVPacket) -> Result<(), String>,
+    {
+        let mut frame = frame.into().into_video_frame()
+            .ok_or_else(|| format!("Cannot encode non-video frame as video"))?;
 
         // Do scaling if needed
         if !frame.is_compatible_with_encoder(self) {

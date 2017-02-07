@@ -19,15 +19,15 @@ use ffi::{
     RUST_AVERROR_EAGAIN,
     RUST_AVERROR_EOF,
 };
-use codec::VideoEncoder;
-use frame::VideoFrame;
+use codec::Encoder;
+use frame::RefMutFrame;
 
 pub struct Muxer {
     ptr: *mut AVFormatContext,
     // The io context is borrowed by the format context
     // and is kept around to be dropped at the right time.
     _io_context: io::IOContext,
-    encoders: Vec<VideoEncoder>,
+    encoders: Vec<Encoder>,
     closed: bool,
 }
 
@@ -63,7 +63,7 @@ impl Muxer {
         }
     }
 
-    pub fn encoders(&self) -> &[VideoEncoder] {
+    pub fn encoders(&self) -> &[Encoder] {
         &self.encoders
     }
 
@@ -76,8 +76,11 @@ impl Muxer {
         }
     }
 
-    pub fn send_frame(&mut self, stream_id: usize, frame: &mut VideoFrame) -> Result<(), String> {
+    pub fn send_frame<'a, F>(&mut self, stream_id: usize, frame: F) -> Result<(), String> where
+        F: Into<RefMutFrame<'a>>
+    {
         unsafe {
+            let frame = frame.into();
             let format_context = self.ptr;
             let stream = *self.as_mut().streams.offset(stream_id as isize);
             let encoder = &mut self.encoders[stream_id];
@@ -180,7 +183,7 @@ impl Muxer {
     unsafe fn output_format(&self) -> &AVOutputFormat {
         &*self.as_ref().oformat
     }
-    pub fn encoders_mut(&mut self) -> &mut [VideoEncoder] {
+    pub fn encoders_mut(&mut self) -> &mut [Encoder] {
         &mut self.encoders
     }
 }
@@ -214,7 +217,7 @@ pub struct MuxerBuilder {
     name: Option<CString>,
     format_name: Option<CString>,
     format: Option<*mut AVOutputFormat>,
-    encoders: Vec<VideoEncoder>,
+    encoders: Vec<Encoder>,
 }
 
 impl MuxerBuilder {
@@ -248,8 +251,8 @@ impl MuxerBuilder {
         self.format_name = Some(CString::new(format).unwrap()); self
     }
 
-    pub fn add_encoder(&mut self, encoder: VideoEncoder) -> &mut Self {
-        self.encoders.push(encoder); self
+    pub fn add_encoder<E: Into<Encoder>>(&mut self, encoder: E) -> &mut Self {
+        self.encoders.push(encoder.into()); self
     }
 
     // TODO: fn format

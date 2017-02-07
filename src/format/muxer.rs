@@ -3,14 +3,12 @@ use std::mem;
 use std::fmt;
 use std::ffi::{CStr,CString};
 use libc::c_uint;
-use util::PtrTakeExt;
 use LibAV;
 use io;
 use ffi;
 use ffi::{
     AVFormatContext,
     AVOutputFormat,
-    AVFrame,
     AVPacket,
     AVStream,
     AVRational,
@@ -26,7 +24,10 @@ use frame::VideoFrame;
 
 pub struct Muxer {
     ptr: *mut AVFormatContext,
-    io_context: Option<io::IOContext>,
+    // The io context is borrowed by the format context
+    // and is kept around to be dropped at the right time.
+    #[allow(dead_code)]
+    io_context: io::IOContext,
     encoders: Vec<VideoEncoder>,
     closed: bool,
 }
@@ -191,8 +192,10 @@ impl Drop for Muxer {
             if !self.closed {
                 self._real_close().ok();
             }
-            // `avformat_free_context` doesn't touch the AVIOContext
             ffi::avformat_free_context(self.ptr)
+            // The associated io context will be implicitly dropped here.
+            // It may not be dropped before the format context because
+            // `avformat_free_context` might still write some data.
         }
     }
 }
@@ -310,7 +313,7 @@ impl MuxerBuilder {
 
             Ok(Muxer {
                 ptr: format_context,
-                io_context: Some(io_context),
+                io_context: io_context,
                 encoders: encoders,
                 closed: false,
             })

@@ -1,11 +1,9 @@
 use libc::{c_int, int64_t};
 use LibAV;
 use super::Codec;
-use util::PtrTakeExt;
 use ffi;
 use ffi::{
     AVCodecContext,
-    AVCodecID,
     AVPixelFormat,
     AVRational,
     avcodec_alloc_context3,

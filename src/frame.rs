@@ -1,6 +1,3 @@
-use std::ops::{Deref, DerefMut};
-use std::ptr;
-use std::mem;
 use std::slice;
 use libc::c_int;
 use ffi;

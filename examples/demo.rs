@@ -10,7 +10,12 @@ use av::ffi;
 const STREAM_DURATION: i64 = 10;
 const VIDEO_DATA: &'static [u8] = include_bytes!("../rgb-600x400.data");
 
-pub unsafe fn encode_demo() -> Result<(), String> {
+
+fn main() {
+    demo().unwrap();
+}
+
+pub fn demo() -> Result<(), String> {
     av::LibAV::init();
 
     let width = 600;
@@ -44,9 +49,11 @@ pub unsafe fn encode_demo() -> Result<(), String> {
     let mut next_video_pts = 0;
 
     loop {
-        // TODO: Use av_compare_ts for audio when applicable (see muxing example)
-        if ffi::av_compare_ts(next_video_pts, muxer.encoders()[video_stream_id].as_ref().time_base, STREAM_DURATION, ffi::AVRational { num: 1, den: 1 }) >= 0 {
-            break
+        unsafe {
+            // TODO: Use av_compare_ts for audio when applicable (see muxing example)
+            if ffi::av_compare_ts(next_video_pts, muxer.encoders()[video_stream_id].as_ref().time_base, STREAM_DURATION, ffi::AVRational { num: 1, den: 1 }) >= 0 {
+                break
+            }
         }
 
         // Render frame
@@ -74,12 +81,5 @@ fn render_demo_bar(frame_buffer: &mut [u8], width: usize, _height: usize, pts: i
                 *component = *component / 3;
             }
         }
-    }
-}
-
-
-fn main() {
-    unsafe {
-        encode_demo().unwrap();
     }
 }

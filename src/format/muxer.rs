@@ -21,7 +21,7 @@ use ffi::{
     RUST_AVERROR_EAGAIN,
     RUST_AVERROR_EOF,
 };
-use VideoEncoder;
+use codec::VideoEncoder;
 use frame::VideoFrame;
 
 pub struct Muxer {

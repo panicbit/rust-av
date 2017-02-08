@@ -3,6 +3,7 @@ use frame::RefMutFrame;
 use ffi::{
     AVCodecContext,
     AVPacket,
+    AVRational,
 };
 
 pub enum Encoder {
@@ -30,6 +31,14 @@ impl Encoder {
             Encoder::Video(ref encoder) => encoder.codec(),
             // Encoder::Audio(ref mut encoder) => encoder.as_mut_ptr(),
         }
+    }
+
+    pub fn time_base(&self) -> AVRational {
+        match *self {
+            Encoder::Video(ref encoder) => encoder.time_base(),
+            // Encoder::Audio(ref mut encoder) => encoder.time_base(),
+        }
+
     }
 
     pub unsafe fn send_frame<'a, F, H>(&mut self, frame: F, packet_handler: H) -> Result<(), String> where

@@ -283,6 +283,7 @@ impl MuxerBuilder {
                 }
 
                 (*stream).id = (*format_context).nb_streams as i32 - 1;
+                (*stream).time_base = encoder.time_base();
 
                 // Some formats want stream headers to be separate
                 if (*(*format_context).oformat).flags as c_uint & AVFMT_GLOBALHEADER != 0 {

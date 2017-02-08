@@ -43,6 +43,10 @@ impl VideoEncoder {
             Codec::from_ptr(self.as_ref().codec)
         }
     }
+
+    pub fn time_base(&self) -> AVRational {
+        self.as_ref().time_base
+    }
 }
 
 impl VideoEncoder {

@@ -65,7 +65,7 @@ impl VideoEncoder {
             let tmp_frame = self.tmp_frame.as_mut().unwrap();
             let scaler = self.scaler.as_mut().unwrap();
 
-            scaler.scale_frame(&frame, tmp_frame);
+            scaler.scale_frame(&mut frame, tmp_frame);
 
             // Copy frame data
             tmp_frame.set_pts(frame.pts());

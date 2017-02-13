@@ -16,8 +16,8 @@ use ffi::{
     AVFMT_GLOBALHEADER,
     AV_CODEC_FLAG_GLOBAL_HEADER,
     AV_CODEC_CAP_DELAY,
-    RUST_AVERROR_EAGAIN,
-    RUST_AVERROR_EOF,
+    AVERROR_EAGAIN,
+    AVERROR_EOF,
 };
 use codec::Encoder;
 use frame::RefMutFrame;
@@ -142,7 +142,7 @@ impl Muxer {
                             write_succeeded?;
                             continue_flushing = true;
                         },
-                        RUST_AVERROR_EAGAIN | RUST_AVERROR_EOF => {},
+                        AVERROR_EAGAIN | AVERROR_EOF => {},
                         _ => return Err(format!("Error encoding packet")),
                     }
                 }

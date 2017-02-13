@@ -86,7 +86,7 @@ impl VideoEncoder {
                     ffi::av_packet_unref(&mut packet);
                     handler_success?
                 },
-                ffi::RUST_AVERROR_EAGAIN | ffi::RUST_AVERROR_EOF => return Ok(()),
+                ffi::AVERROR_EAGAIN | ffi::AVERROR_EOF => return Ok(()),
                 _ => return Err(format!("Error encoding packet")),
             }
         }

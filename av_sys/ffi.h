@@ -8,6 +8,9 @@
 #include <libswresample/swresample.h>
 
 // Fix some problematic macros
+/// <div rustbindgen replaces="AV_NOPTS_VALUE"></div>
 const int64_t RUST_AV_NOPTS_VALUE = AV_NOPTS_VALUE;
+/// <div rustbindgen replaces="AVERROR_EAGAIN"></div>
 const int RUST_AVERROR_EAGAIN = AVERROR(EAGAIN);
+/// <div rustbindgen replaces="AVERROR_EOF"></div>
 const int RUST_AVERROR_EOF = AVERROR_EOF;

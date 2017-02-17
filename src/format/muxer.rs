@@ -84,7 +84,7 @@ impl Muxer {
             let format_context = self.ptr;
             let stream = *self.as_mut().streams.offset(stream_id as isize);
             let encoder = &mut self.encoders[stream_id];
-            let time_base = encoder.as_ref().time_base;
+            let time_base = encoder.time_base();
             
             encoder.send_frame(frame, |packet|
                 write_frame(format_context, time_base, stream, packet)
@@ -296,7 +296,7 @@ impl MuxerBuilder {
                 let res = ffi::avcodec_open2(encoder.as_mut_ptr(), codec, options);
                 if res < 0 {
                     ffi::avformat_free_context(format_context);
-                    return Err(format!("Failed to open video decoder ({})", res))
+                    return Err(format!("Failed to open encoder ({})", res))
                 }
 
                 // Copy encoder parameters to stream

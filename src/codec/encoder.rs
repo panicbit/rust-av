@@ -1,4 +1,8 @@
-use codec::{Codec, VideoEncoder};
+use codec::{
+    Codec,
+    VideoEncoder,
+    AudioEncoder,
+};
 use frame::RefMutFrame;
 use ffi::{
     AVCodecContext,
@@ -8,37 +12,64 @@ use ffi::{
 
 pub enum Encoder {
     Video(VideoEncoder),
-    // Audio(AudioEncoder),
+    Audio(AudioEncoder),
 }
 
 impl Encoder {
     pub fn into_video_encoder(self) -> Option<VideoEncoder> {
         match self {
             Encoder::Video(encoder) => Some(encoder),
-            // _ => None
+            _ => None
         }
     }
 
     pub fn as_video_encoder(&self) -> Option<&VideoEncoder> {
         match *self {
             Encoder::Video(ref encoder) => Some(encoder),
-            // _ => None
+            _ => None
+        }
+    }
+
+    pub fn as_mut_video_encoder(&mut self) -> Option<&mut VideoEncoder> {
+        match *self {
+            Encoder::Video(ref mut encoder) => Some(encoder),
+            _ => None
+        }
+    }
+
+    pub fn into_audio_encoder(self) -> Option<AudioEncoder> {
+        match self {
+            Encoder::Audio(encoder) => Some(encoder),
+            _ => None
+        }
+    }
+
+    pub fn as_audio_encoder(&self) -> Option<&AudioEncoder> {
+        match *self {
+            Encoder::Audio(ref encoder) => Some(encoder),
+            _ => None
+        }
+    }
+
+    pub fn as_mut_audio_encoder(&mut self) -> Option<&mut AudioEncoder> {
+        match *self {
+            Encoder::Audio(ref mut encoder) => Some(encoder),
+            _ => None
         }
     }
 
     pub fn codec(&self) -> Codec {
         match *self {
             Encoder::Video(ref encoder) => encoder.codec(),
-            // Encoder::Audio(ref mut encoder) => encoder.as_mut_ptr(),
+            Encoder::Audio(ref encoder) => encoder.codec(),
         }
     }
 
     pub fn time_base(&self) -> AVRational {
         match *self {
             Encoder::Video(ref encoder) => encoder.time_base(),
-            // Encoder::Audio(ref mut encoder) => encoder.time_base(),
+            Encoder::Audio(ref encoder) => encoder.time_base(),
         }
-
     }
 
     pub unsafe fn send_frame<'a, F, H>(&mut self, frame: F, packet_handler: H) -> Result<(), String> where
@@ -47,7 +78,7 @@ impl Encoder {
     {
         match *self {
             Encoder::Video(ref mut encoder) => encoder.send_frame(frame, packet_handler),
-            // Encoder::Audio(ref mut encoder) => encoder.send_frame(frame, packet_handler),
+            Encoder::Audio(ref mut encoder) => encoder.send_frame(frame, packet_handler),
         }
     }
 }
@@ -56,21 +87,21 @@ impl Encoder {
     pub fn as_mut_ptr(&mut self) -> *mut AVCodecContext {
         match *self {
             Encoder::Video(ref mut encoder) => encoder.as_mut_ptr(),
-            // Encoder::Audio(ref mut encoder) => encoder.as_mut_ptr(),
+            Encoder::Audio(ref mut encoder) => encoder.as_mut_ptr(),
         }
     }
 
     pub fn as_ref(&self) -> &AVCodecContext {
         match *self {
             Encoder::Video(ref encoder) => encoder.as_ref(),
-            // Encoder::Audio(ref encoder) => encoder.as_ref(),
+            Encoder::Audio(ref encoder) => encoder.as_ref(),
         }
     }
 
     pub fn as_mut(&mut self) -> &mut AVCodecContext {
         match *self {
             Encoder::Video(ref mut encoder) => encoder.as_mut(),
-            // Encoder::Audio(ref mut encoder) => encoder.as_mut(),
+            Encoder::Audio(ref mut encoder) => encoder.as_mut(),
         }
     }
 }
@@ -81,8 +112,8 @@ impl From<VideoEncoder> for Encoder {
     }
 }
 
-// impl From<AudioEncoder> for Encoder {
-//     fn from(encoder: AudioEncoder) -> Self {
-//         Encoder::Audio(encoder)
-//     }
-// }
+impl From<AudioEncoder> for Encoder {
+    fn from(encoder: AudioEncoder) -> Self {
+        Encoder::Audio(encoder)
+    }
+}

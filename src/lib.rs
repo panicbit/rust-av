@@ -2,6 +2,8 @@ pub extern crate av_sys as ffi;
 extern crate libc;
 #[macro_use]
 extern crate lazy_static;
+#[macro_use]
+extern crate bitflags;
 use std::ffi::CStr;
 use std::sync::{Once, ONCE_INIT};
 
@@ -13,6 +15,7 @@ pub mod io;
 pub mod frame;
 pub mod codec;
 pub mod scaler;
+pub mod audio;
 
 lazy_static! {
     pub static ref AV: LibAV = LibAV::init();

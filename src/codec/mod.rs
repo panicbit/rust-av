@@ -27,3 +27,9 @@ pub use self::video_encoder::{
     VideoEncoder,
     VideoEncoderBuilder,
 };
+
+mod audio_encoder;
+pub use self::audio_encoder::{
+    AudioEncoder,
+    AudioEncoderBuilder,
+};

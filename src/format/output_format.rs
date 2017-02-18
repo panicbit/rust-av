@@ -1,8 +1,5 @@
 use LibAV;
-use std::ffi::{
-    CString,
-    CStr,
-};
+use std::ffi::CString;
 use std::ptr;
 use std::fmt;
 use libc::c_char;
@@ -10,6 +7,7 @@ use ffi::{
     AVOutputFormat,
     av_guess_format,
 };
+use util::AsCStr;
 
 #[derive(Copy,Clone)]
 pub struct OutputFormat {
@@ -57,21 +55,12 @@ impl OutputFormat {
 impl fmt::Debug for OutputFormat {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         unsafe {
-            // println!("{:?}", CStr::from_ptr(self.as_ref().mime_type).to_str());
             f.debug_struct("OutputFormat")
-            .field("name", &safe_cstr(self.as_ref().name))
-            .field("long_name", &safe_cstr(self.as_ref().long_name))
-            .field("mime_type", &safe_cstr(self.as_ref().mime_type))
-            .field("extensions", &safe_cstr(self.as_ref().extensions))
+            .field("name", &self.as_ref().name.as_cstr().unwrap())
+            .field("long_name", &self.as_ref().long_name.as_cstr().unwrap())
+            .field("mime_type", &self.as_ref().mime_type.as_cstr()) // optional
+            .field("extensions", &self.as_ref().extensions.as_cstr().unwrap())
             .finish()
         }
-    }
-}
-
-unsafe fn safe_cstr<'a>(ptr: *const c_char) -> Option<&'a CStr> {
-    if ptr.is_null() {
-        None
-    } else {
-        Some(&CStr::from_ptr(ptr))
     }
 }

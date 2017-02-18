@@ -11,6 +11,7 @@ use ffi::{
 };
 use super::ProfileIter;
 use super::MimeTypeIter;
+use util::AsCStr;
 
 #[derive(PartialEq)]
 pub struct Descriptor {
@@ -43,11 +44,11 @@ impl Descriptor {
     }
 
     pub fn name(&self) -> &CStr {
-        unsafe { CStr::from_ptr(self.as_ref().name) }
+        unsafe { self.as_ref().name.as_cstr().unwrap() }
     }
 
     pub fn long_name(&self) -> &CStr {
-        unsafe { CStr::from_ptr(self.as_ref().long_name) }
+        unsafe { self.as_ref().long_name.as_cstr().unwrap() }
     }
 
     pub fn mime_types(&self) -> MimeTypeIter {

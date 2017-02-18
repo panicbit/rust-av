@@ -16,6 +16,7 @@ use super::{
     Descriptor,
     DescriptorIter,
 };
+use util::AsCStr;
 
 #[derive(Copy,Clone)]
 pub struct Codec {
@@ -60,11 +61,11 @@ impl Codec {
     }
 
     pub fn name(&self) -> &CStr {
-        unsafe { CStr::from_ptr(self.as_ref().name) }
+        unsafe { self.as_ref().name.as_cstr().unwrap() }
     }
 
     pub fn long_name(&self) -> &CStr {
-        unsafe { CStr::from_ptr(self.as_ref().name) }
+        unsafe { self.as_ref().name.as_cstr().unwrap() }
     }
 
     pub fn media_type(&self) -> AVMediaType {

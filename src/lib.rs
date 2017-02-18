@@ -6,6 +6,7 @@ extern crate lazy_static;
 extern crate bitflags;
 use std::ffi::CStr;
 use std::sync::{Once, ONCE_INIT};
+use util::AsCStr;
 
 #[macro_use]
 mod util;
@@ -41,13 +42,13 @@ impl LibAV {
 
     pub fn version(&self) -> &'static CStr {
         unsafe {
-            CStr::from_ptr(ffi::av_version_info())
+            ffi::av_version_info().as_cstr().unwrap()
         }
     }
 
     pub fn build_flags(&self) -> &'static CStr {
         unsafe {
-            CStr::from_ptr(ffi::avformat_configuration())
+            ffi::avformat_configuration().as_cstr().unwrap()
         }
     }
 }

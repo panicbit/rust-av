@@ -4,6 +4,7 @@ use ffi::{
     AVProfile,
     FF_PROFILE_UNKNOWN,
 };
+use util::AsCStr;
 
 pub struct Profile {
     ptr: *const AVProfile
@@ -12,7 +13,7 @@ pub struct Profile {
 impl Profile {
     pub fn name(&self) -> &CStr {
         unsafe {
-            CStr::from_ptr((*self.ptr).name)
+            (*self.ptr).name.as_cstr().unwrap()
         }
     }
 }

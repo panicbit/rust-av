@@ -24,6 +24,7 @@ use generic::{
     RefMutFrame,
 };
 use format::OutputFormat;
+use util::AsCStr;
 
 pub struct Muxer {
     ptr: *mut AVFormatContext,
@@ -56,13 +57,13 @@ impl Muxer {
 
     pub fn format_name(&self) -> &CStr {
         unsafe {
-            CStr::from_ptr(self.output_format().name)
+            self.output_format().name.as_cstr().unwrap()
         }
     }
 
     pub fn format_long_name(&self) -> &CStr {
         unsafe {
-            CStr::from_ptr(self.output_format().long_name)
+            self.output_format().long_name.as_cstr().unwrap()
         }
     }
 

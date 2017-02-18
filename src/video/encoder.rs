@@ -9,9 +9,11 @@ use ffi::{
     avcodec_alloc_context3,
     avcodec_free_context,
 };
+use format::OutputFormat;
 use generic::RefMutFrame;
 use scaler::Scaler;
 use video;
+use common;
 
 // TODO: Add align field to encoder
 const ALIGN: usize = 32;
@@ -178,7 +180,7 @@ impl EncoderBuilder {
         self.time_base = Some(AVRational { num: 1, den: framerate as i32 }); self
     }
 
-    pub fn open(&self) -> Result<Encoder, String> {
+    pub fn open(&self, format: OutputFormat) -> Result<Encoder, String> {
         unsafe {
             let width = self.width.ok_or_else(|| format!("Video encoder width not set"))?;
             let height = self.height.ok_or_else(|| format!("Video encoder height not set"))?;
@@ -192,6 +194,8 @@ impl EncoderBuilder {
                 return Err(format!("Could not allocate an encoding context"));
             }
 
+            // Initialize encoder fields
+            common::encoder::init(codec_context, format);
             (*codec_context).codec_id = self.codec.id();
             (*codec_context).width = width;
             (*codec_context).height = height;
@@ -204,6 +208,8 @@ impl EncoderBuilder {
             // time_base should be 1/framerate and timestamp increments should be
             // identical to 1.
             (*codec_context).time_base = time_base;
+
+            common::encoder::open(codec_context, "video")?;
 
             Ok(Encoder {
                 ptr: codec_context,

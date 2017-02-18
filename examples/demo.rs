@@ -2,7 +2,10 @@ extern crate av;
 
 use std::fs::File;
 use av::codec::Codec;
-use av::format::Muxer;
+use av::format::{
+    Muxer,
+    OutputFormat,
+};
 use av::ffi::AVPixelFormat::*;
 use av::ffi::AVSampleFormat::*;
 use av::ffi;
@@ -27,6 +30,9 @@ pub fn demo() -> Result<(), String> {
 
     let file = File::create("/tmp/output_rust.mp4").unwrap();
 
+    let output_format = OutputFormat::from_name("mp4").expect("output format not found");
+    println!("{:?}", output_format);
+
     // Create video encoder
     let width = 600;
     let height = 400;
@@ -40,7 +46,7 @@ pub fn demo() -> Result<(), String> {
         .height(height)
         .pixel_format(*video_codec.pixel_formats().first().expect("Video encoder does not support any pixel formats, wtf?"))
         .framerate(framerate)
-        .open()?;
+        .open(output_format)?;
 
     // Create audio encoder
     let sample_rate = 44100;
@@ -52,12 +58,11 @@ pub fn demo() -> Result<(), String> {
         .sample_rate(sample_rate)
         .sample_format(sample_format)
         .channel_layout(channel_layout)
-        .open()?;
+        .open(output_format)?;
 
     // Create format muxer
-    let format = "mp4";
     let mut muxer = Muxer::new()
-        .format_name(format)
+        .format(output_format)
         .add_encoder(video_encoder)
         .add_encoder(audio_encoder)
         .open(file)?;

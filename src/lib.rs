@@ -17,6 +17,7 @@ pub mod scaler;
 pub mod video;
 pub mod audio;
 pub mod generic;
+mod common;
 
 lazy_static! {
     pub static ref AV: LibAV = LibAV::init();

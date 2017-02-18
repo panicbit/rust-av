@@ -8,12 +8,15 @@ use ffi::{
     AVRational,
     AVPacket,
     avcodec_alloc_context3,
+    avcodec_free_context,
     av_get_channel_layout_nb_channels,
 };
 use ffi::AVSampleFormat::AV_SAMPLE_FMT_S16;
+use format::OutputFormat;
 use audio::ChannelLayout;
 use audio::constants::CHANNEL_LAYOUT_STEREO;
 use generic::RefMutFrame;
+use common;
 
 pub struct Encoder {
     ptr: *mut AVCodecContext,
@@ -100,6 +103,16 @@ impl Encoder {
     pub fn as_mut_ptr(&mut self) -> *mut AVCodecContext { self.ptr }
 }
 
+impl Drop for Encoder {
+    fn drop(&mut self) {
+        unsafe {
+            if !self.ptr.is_null() {
+                avcodec_free_context(&mut self.ptr);
+            }
+        }
+    }
+}
+
 pub struct EncoderBuilder {
     codec: Codec,
     sample_format: Option<AVSampleFormat>,
@@ -130,7 +143,7 @@ impl EncoderBuilder {
         self.channel_layout = Some(channel_layout); self
     }
 
-    pub fn open(&self) -> Result<Encoder, String> {
+    pub fn open(&self, format: OutputFormat) -> Result<Encoder, String> {
         unsafe {
             let sample_rate = self.sample_rate.unwrap_or(44100) as c_int;
             let sample_format = self.sample_format.unwrap_or(AV_SAMPLE_FMT_S16);
@@ -143,11 +156,15 @@ impl EncoderBuilder {
                 return Err(format!("Could not allocate an encoding context"));
             }
 
+            // Initialize encoder fields
+            common::encoder::init(codec_context, format);
             (*codec_context).sample_rate = sample_rate;
             (*codec_context).sample_fmt = sample_format;
             (*codec_context).time_base = AVRational { num: 1, den: sample_rate };
             (*codec_context).channel_layout = channel_layout.bits();
             (*codec_context).channels = av_get_channel_layout_nb_channels(channel_layout.bits());
+
+            common::encoder::open(codec_context, "audio")?;
 
             Ok(Encoder {
                 ptr: codec_context,

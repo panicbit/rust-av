@@ -2,7 +2,7 @@ use std::ptr;
 use std::mem;
 use std::fmt;
 use std::ffi::{CStr,CString};
-use libc::c_uint;
+use libc::{c_uint, int32_t};
 use LibAV;
 use io;
 use ffi;
@@ -23,6 +23,7 @@ use generic::{
     Encoder,
     RefMutFrame,
 };
+use format::OutputFormat;
 
 pub struct Muxer {
     ptr: *mut AVFormatContext,
@@ -218,7 +219,7 @@ impl fmt::Debug for Muxer {
 pub struct MuxerBuilder {
     name: Option<CString>,
     format_name: Option<CString>,
-    format: Option<*mut AVOutputFormat>,
+    format: Option<OutputFormat>,
     encoders: Vec<Encoder>,
 }
 
@@ -253,22 +254,25 @@ impl MuxerBuilder {
         self.format_name = Some(CString::new(format).unwrap()); self
     }
 
+    /// Set the output format.
+    pub fn format(&mut self, format: OutputFormat) -> &mut Self {
+        self.format = Some(format); self
+    }
+
     pub fn add_encoder<E: Into<Encoder>>(&mut self, encoder: E) -> &mut Self {
         self.encoders.push(encoder.into()); self
     }
-
-    // TODO: fn format
 
     pub fn open<W: io::AVWrite>(&mut self, writer: W) -> Result<Muxer, String> {
         unsafe {
             let name = self.name.as_ref().map(|s| s.as_ptr()).unwrap_or(ptr::null());
             let format_name = self.format_name.as_ref().map(|s| s.as_ptr()).unwrap_or(ptr::null());
-            let format = self.format.unwrap_or(ptr::null_mut());
+            let mut format = self.format.ok_or(format!("No format set"))?;
             let mut encoders = mem::replace(&mut self.encoders, Vec::new());
             let mut io_context = io::IOContext::from_writer(writer);
             let mut format_context = ptr::null_mut();
 
-            ffi::avformat_alloc_output_context2(&mut format_context, format, format_name, name);
+            ffi::avformat_alloc_output_context2(&mut format_context, format.as_mut_ptr(), format_name, name);
             if format_context.is_null() {
                 return Err(format!("Failed to allocate output context (unknown format?)"));
             }
@@ -287,18 +291,14 @@ impl MuxerBuilder {
                 (*stream).id = (*format_context).nb_streams as i32 - 1;
                 (*stream).time_base = encoder.time_base();
 
-                // Some formats want stream headers to be separate
-                if (*(*format_context).oformat).flags as c_uint & AVFMT_GLOBALHEADER != 0 {
-                    encoder.as_mut().flags |= AV_CODEC_FLAG_GLOBAL_HEADER as i32;
-                }
-
-                // Open the encoder
-                let codec = encoder.codec().as_ptr();
-                let options = ptr::null_mut();
-                let res = ffi::avcodec_open2(encoder.as_mut_ptr(), codec, options);
-                if res < 0 {
+                // Verify that encoder has global header flag set if required
+                let format_flags = (*(*format_context).oformat).flags as c_uint;
+                let encoder_flags = encoder.as_mut().flags;
+                if    0 != (format_flags & AVFMT_GLOBALHEADER)
+                   && 0 == (encoder_flags & AV_CODEC_FLAG_GLOBAL_HEADER as int32_t)
+                {
                     ffi::avformat_free_context(format_context);
-                    return Err(format!("Failed to open encoder ({})", res))
+                    return Err(format!("Format requires global headers but encoder for stream {} does not use global headers", (*stream).id))
                 }
 
                 // Copy encoder parameters to stream

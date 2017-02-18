@@ -8,6 +8,9 @@ use ffi::{
     AVMediaType,
     AVPixelFormat,
     avcodec_find_encoder,
+    avcodec_find_decoder,
+    av_codec_is_encoder,
+    av_codec_is_decoder,
 };
 use super::{
     Descriptor,
@@ -32,6 +35,30 @@ impl Codec {
         }
     }
 
+    pub fn find_decoder_by_id(codec_id: AVCodecID) -> Result<Self, String> {
+        unsafe {
+            LibAV::init();
+            let codec = avcodec_find_decoder(codec_id);
+            if codec.is_null() {
+                // maybe use avcodec_get_name(codec_id)
+                return Err(format!("Could not find decoder for {:?}", codec_id))
+            }
+            Ok(Self::from_ptr(codec))
+        }
+    }
+
+    pub fn is_encoder(&self) -> bool {
+        unsafe { av_codec_is_encoder(self.ptr) != 0 }
+    }
+
+    pub fn is_decoder(&self) -> bool {
+        unsafe { av_codec_is_decoder(self.ptr) != 0 }
+    }
+
+    pub fn id(&self) -> AVCodecID {
+        self.as_ref().id
+    }
+
     pub fn name(&self) -> &CStr {
         unsafe { CStr::from_ptr(self.as_ref().name) }
     }
@@ -42,10 +69,6 @@ impl Codec {
 
     pub fn media_type(&self) -> AVMediaType {
         self.as_ref().type_
-    }
-
-    pub fn id(&self) -> AVCodecID {
-        self.as_ref().id
     }
 
     pub fn pixel_formats(&self) -> &[AVPixelFormat] {
@@ -86,10 +109,12 @@ impl Codec {
 impl fmt::Debug for Codec {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         f.debug_struct("Codec")
+            .field("id", &self.id())
             .field("name", &self.name())
             .field("long_name", &self.long_name())
+            .field("is_encoder", &self.is_encoder())
+            .field("is_decoder", &self.is_decoder())
             .field("media_type", &self.media_type())
-            .field("id", &self.id())
             .field("pixel_formats", &self.pixel_formats())
             .finish()
     }

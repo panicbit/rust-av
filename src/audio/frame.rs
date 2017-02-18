@@ -12,12 +12,12 @@ use ffi::{
     AV_NUM_DATA_POINTERS,
 };
 
-pub struct AudioFrame {
+pub struct Frame {
     ptr: *mut AVFrame,
     sample_format: AVSampleFormat,
 }
 
-impl AudioFrame {
+impl Frame {
     /// TODO: Check for overflows
     pub fn new(num_samples: usize, sample_rate: u32, sample_format: AVSampleFormat, channel_layout: ChannelLayout) -> Result<Self, String> {
         unsafe {
@@ -42,7 +42,7 @@ impl AudioFrame {
                 }
             }
 
-            Ok(AudioFrame {
+            Ok(Frame {
                 ptr: frame,
                 sample_format: sample_format,
             })
@@ -85,7 +85,7 @@ impl AudioFrame {
     }
 }
 
-impl AudioFrame {
+impl Frame {
     pub fn as_ref(&self) -> &AVFrame {
         unsafe { &*self.ptr }
     }

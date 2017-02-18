@@ -12,10 +12,11 @@ mod util;
 
 pub mod format;
 pub mod io;
-pub mod frame;
 pub mod codec;
 pub mod scaler;
+pub mod video;
 pub mod audio;
+pub mod generic;
 
 lazy_static! {
     pub static ref AV: LibAV = LibAV::init();

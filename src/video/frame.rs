@@ -9,18 +9,18 @@ use ffi::{
     av_frame_get_buffer,
     AV_NUM_DATA_POINTERS,
 };
-use codec::VideoEncoder;
+use video;
 
-pub struct VideoFrame {
+pub struct Frame {
     ptr: *mut ffi::AVFrame,
     pixel_format: AVPixelFormat,
 }
 
-impl VideoFrame {
+impl Frame {
     /// # Panics
     ///
     /// Panics if `width`, `height` or `align` exceed `c_int::max_value()`.
-    pub fn new(width: usize, height: usize, pixel_format: AVPixelFormat, align: usize) -> Result<VideoFrame, String> {
+    pub fn new(width: usize, height: usize, pixel_format: AVPixelFormat, align: usize) -> Result<Frame, String> {
         unsafe {
             assert!(width <= c_int::max_value() as usize, "VideoFrame width exceeds c_int::max_value()");
             assert!(height <= c_int::max_value() as usize, "VideoFrame height exceeds c_int::max_value()");
@@ -48,7 +48,7 @@ impl VideoFrame {
     }
 }
 
-impl VideoFrame {
+impl Frame {
     pub fn pixel_format(&self) -> ffi::AVPixelFormat {
         self.pixel_format
     }
@@ -88,7 +88,7 @@ impl VideoFrame {
         }
     }
 
-    pub fn is_compatible_with_encoder(&self, encoder: &VideoEncoder) -> bool {
+    pub fn is_compatible_with_encoder(&self, encoder: &video::Encoder) -> bool {
            self.pixel_format() == encoder.pixel_format()
         && self.width() == encoder.width()
         && self.height() == encoder.height()
@@ -128,7 +128,7 @@ impl VideoFrame {
     }
 }
 
-impl VideoFrame {
+impl Frame {
     pub fn as_ref(&self) -> &AVFrame {
         unsafe { &*self.ptr }
     }
@@ -138,7 +138,7 @@ impl VideoFrame {
     }
 
     pub unsafe fn from_ptr(ptr: *mut AVFrame, pixel_format: AVPixelFormat) -> Self {
-        VideoFrame {
+        Frame {
             ptr: ptr,
             pixel_format: pixel_format,
         }
@@ -153,7 +153,7 @@ impl VideoFrame {
     }
 }
 
-impl Drop for VideoFrame {
+impl Drop for Frame {
     fn drop(&mut self) {
         unsafe {
             ffi::av_frame_free(&mut self.ptr);

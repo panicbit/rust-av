@@ -1,7 +1,6 @@
 use libc::c_int;
 use LibAV;
 use codec::Codec;
-use frame::RefMutFrame;
 use ffi::{
     self,
     AVCodecContext,
@@ -10,18 +9,19 @@ use ffi::{
     AVPacket,
     avcodec_alloc_context3,
     av_get_channel_layout_nb_channels,
-    AV_CH_LAYOUT_STEREO,
 };
 use ffi::AVSampleFormat::AV_SAMPLE_FMT_S16;
-use audio::*;
+use audio::ChannelLayout;
+use audio::constants::CHANNEL_LAYOUT_STEREO;
+use generic::RefMutFrame;
 
-pub struct AudioEncoder {
+pub struct Encoder {
     ptr: *mut AVCodecContext,
 }
 
-impl AudioEncoder {
-    pub fn from_codec(codec: Codec) -> AudioEncoderBuilder {
-        AudioEncoderBuilder::from_codec(codec)
+impl Encoder {
+    pub fn from_codec(codec: Codec) -> EncoderBuilder {
+        EncoderBuilder::from_codec(codec)
     }
 
     pub fn sample_format(&self) -> AVSampleFormat {
@@ -48,7 +48,7 @@ impl AudioEncoder {
     }
 }
 
-impl AudioEncoder {
+impl Encoder {
     pub unsafe fn send_frame<'a, F, H>(&mut self, frame: F, mut packet_handler: H) -> Result<(), String> where
         F: Into<RefMutFrame<'a>>,
         H: FnMut(&mut AVPacket) -> Result<(), String>,
@@ -93,23 +93,23 @@ impl AudioEncoder {
     }
 }
 
-impl AudioEncoder {
+impl Encoder {
     pub fn as_ref(&self) -> &AVCodecContext { unsafe { &*self.ptr } }
     pub fn as_mut(&mut self) -> &mut AVCodecContext { unsafe { &mut *self.ptr } }
     pub fn as_ptr(&self) -> *const AVCodecContext { self.ptr }
     pub fn as_mut_ptr(&mut self) -> *mut AVCodecContext { self.ptr }
 }
 
-pub struct AudioEncoderBuilder {
+pub struct EncoderBuilder {
     codec: Codec,
     sample_format: Option<AVSampleFormat>,
     sample_rate: Option<u32>,
     channel_layout: Option<ChannelLayout>,
 }
 
-impl AudioEncoderBuilder {
+impl EncoderBuilder {
     pub fn from_codec(codec: Codec) -> Self {
-        AudioEncoderBuilder {
+        EncoderBuilder {
             codec: codec,
             sample_format: None,
             sample_rate: None,
@@ -130,7 +130,7 @@ impl AudioEncoderBuilder {
         self.channel_layout = Some(channel_layout); self
     }
 
-    pub fn open(&self) -> Result<AudioEncoder, String> {
+    pub fn open(&self) -> Result<Encoder, String> {
         unsafe {
             let sample_rate = self.sample_rate.unwrap_or(44100) as c_int;
             let sample_format = self.sample_format.unwrap_or(AV_SAMPLE_FMT_S16);
@@ -149,7 +149,7 @@ impl AudioEncoderBuilder {
             (*codec_context).channel_layout = channel_layout.bits();
             (*codec_context).channels = av_get_channel_layout_nb_channels(channel_layout.bits());
 
-            Ok(AudioEncoder {
+            Ok(Encoder {
                 ptr: codec_context,
             })
         }

@@ -19,8 +19,10 @@ use ffi::{
     AVERROR_EAGAIN,
     AVERROR_EOF,
 };
-use codec::Encoder;
-use frame::RefMutFrame;
+use generic::{
+    Encoder,
+    RefMutFrame,
+};
 
 pub struct Muxer {
     ptr: *mut AVFormatContext,

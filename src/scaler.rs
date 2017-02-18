@@ -11,7 +11,7 @@ pub struct Scaler {
     target_width: usize,
     target_height: usize,
 }
-use frame::VideoFrame;
+use video;
 
 impl Scaler {
     pub fn new(
@@ -61,7 +61,7 @@ impl Scaler {
     }
 
     /// TODO: Ensure that width, height and pixel format match 
-    pub unsafe fn scale_frame(&mut self, source: &mut VideoFrame, target: &mut VideoFrame) {
+    pub unsafe fn scale_frame(&mut self, source: &mut video::Frame, target: &mut video::Frame) {
         self.__scale(
             source.as_ref().data.as_ptr() as _, source.as_mut().linesize.as_mut_ptr(), 0, source.height() as i32,
             target.as_mut().data.as_mut_ptr() as _, target.as_mut().linesize.as_mut_ptr()

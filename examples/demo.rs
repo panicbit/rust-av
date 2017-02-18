@@ -1,14 +1,17 @@
 extern crate av;
 
 use std::fs::File;
-use av::frame::{AudioFrame, VideoFrame};
-use av::codec::{Codec, VideoEncoder, AudioEncoder};
+use av::codec::Codec;
 use av::format::Muxer;
 use av::ffi::AVPixelFormat::*;
 use av::ffi::AVSampleFormat::*;
 use av::ffi;
-use av::audio::*;
+use av::audio::constants::CHANNEL_LAYOUT_MONO;
 use std::cmp::min;
+use av::{
+    audio,
+    video,
+};
 
 const STREAM_DURATION: i64 = 10;
 const VIDEO_DATA: &'static [u8] = include_bytes!("../rgb-600x400.data");
@@ -32,10 +35,10 @@ pub fn demo() -> Result<(), String> {
     let pixel_format = AV_PIX_FMT_RGB24;
     let video_codec_id = ffi::AVCodecID::AV_CODEC_ID_H264;
     let video_codec = Codec::find_encoder_by_id(video_codec_id)?;
-    let video_encoder = VideoEncoder::from_codec(video_codec)
+    let video_encoder = video::Encoder::from_codec(video_codec)
         .width(width)
         .height(height)
-        .pixel_format(*video_codec.pixel_formats().first().expect("VideoEncoder does not support any pixel formats, wtf?"))
+        .pixel_format(*video_codec.pixel_formats().first().expect("Video encoder does not support any pixel formats, wtf?"))
         .framerate(framerate)
         .open()?;
 
@@ -45,7 +48,7 @@ pub fn demo() -> Result<(), String> {
     let channel_layout = CHANNEL_LAYOUT_MONO;
     let audio_codec_id = ffi::AVCodecID::AV_CODEC_ID_AAC;
     let audio_codec = Codec::find_encoder_by_id(audio_codec_id)?;
-    let audio_encoder = AudioEncoder::from_codec(audio_codec)
+    let audio_encoder = audio::Encoder::from_codec(audio_codec)
         .sample_rate(sample_rate)
         .sample_format(sample_format)
         .channel_layout(channel_layout)
@@ -65,7 +68,7 @@ pub fn demo() -> Result<(), String> {
     muxer.dump_info();
 
     let mut video_frame_buffer = VIDEO_DATA.to_vec();
-    let mut video_frame = VideoFrame::new(width, height, pixel_format, align)?;
+    let mut video_frame = video::Frame::new(width, height, pixel_format, align)?;
     let mut next_video_pts = 0;
 
     let mut audio_data = AUDIO_DATA;
@@ -74,7 +77,7 @@ pub fn demo() -> Result<(), String> {
         audio_frame_size = 10000;
     }
     println!("Audio frame size: {} samples", audio_frame_size);
-    let mut audio_frame = AudioFrame::new(audio_frame_size, sample_rate, sample_format, channel_layout)?;
+    let mut audio_frame = audio::Frame::new(audio_frame_size, sample_rate, sample_format, channel_layout)?;
     let mut next_audio_pts = 0;
 
 
@@ -122,7 +125,7 @@ fn render_demo_bar(video_frame_buffer: &mut [u8], width: usize, _height: usize, 
     }
 }
 
-fn render_audio(audio_frame: &mut AudioFrame, audio_data: &mut &[u8]) {
+fn render_audio(audio_frame: &mut audio::Frame, audio_data: &mut &[u8]) {
     println!("### TODO: Do proper audio rendering");
     println!("### frame_size: {}", audio_frame.data_mut()[0].len());
     let buf_len = min(audio_data.len(), audio_frame.data_mut()[0].len());

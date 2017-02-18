@@ -1,57 +1,55 @@
-use codec::{
-    Codec,
-    VideoEncoder,
-    AudioEncoder,
-};
-use frame::RefMutFrame;
+use codec::Codec;
+use generic::RefMutFrame;
 use ffi::{
     AVCodecContext,
     AVPacket,
     AVRational,
 };
+use video;
+use audio;
 
 pub enum Encoder {
-    Video(VideoEncoder),
-    Audio(AudioEncoder),
+    Video(video::Encoder),
+    Audio(audio::Encoder),
 }
 
 impl Encoder {
-    pub fn into_video_encoder(self) -> Option<VideoEncoder> {
+    pub fn into_video_encoder(self) -> Option<video::Encoder> {
         match self {
             Encoder::Video(encoder) => Some(encoder),
             _ => None
         }
     }
 
-    pub fn as_video_encoder(&self) -> Option<&VideoEncoder> {
+    pub fn as_video_encoder(&self) -> Option<&video::Encoder> {
         match *self {
             Encoder::Video(ref encoder) => Some(encoder),
             _ => None
         }
     }
 
-    pub fn as_mut_video_encoder(&mut self) -> Option<&mut VideoEncoder> {
+    pub fn as_mut_video_encoder(&mut self) -> Option<&mut video::Encoder> {
         match *self {
             Encoder::Video(ref mut encoder) => Some(encoder),
             _ => None
         }
     }
 
-    pub fn into_audio_encoder(self) -> Option<AudioEncoder> {
+    pub fn into_audio_encoder(self) -> Option<audio::Encoder> {
         match self {
             Encoder::Audio(encoder) => Some(encoder),
             _ => None
         }
     }
 
-    pub fn as_audio_encoder(&self) -> Option<&AudioEncoder> {
+    pub fn as_audio_encoder(&self) -> Option<&audio::Encoder> {
         match *self {
             Encoder::Audio(ref encoder) => Some(encoder),
             _ => None
         }
     }
 
-    pub fn as_mut_audio_encoder(&mut self) -> Option<&mut AudioEncoder> {
+    pub fn as_mut_audio_encoder(&mut self) -> Option<&mut audio::Encoder> {
         match *self {
             Encoder::Audio(ref mut encoder) => Some(encoder),
             _ => None
@@ -106,14 +104,14 @@ impl Encoder {
     }
 }
 
-impl From<VideoEncoder> for Encoder {
-    fn from(encoder: VideoEncoder) -> Self {
+impl From<video::Encoder> for Encoder {
+    fn from(encoder: video::Encoder) -> Self {
         Encoder::Video(encoder)
     }
 }
 
-impl From<AudioEncoder> for Encoder {
-    fn from(encoder: AudioEncoder) -> Self {
+impl From<audio::Encoder> for Encoder {
+    fn from(encoder: audio::Encoder) -> Self {
         Encoder::Audio(encoder)
     }
 }

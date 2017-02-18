@@ -1,5 +1,4 @@
 use libc::uint64_t;
-
 use ffi::*;
 
 bitflags! {

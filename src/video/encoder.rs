@@ -1,6 +1,6 @@
 use libc::{c_int, int64_t};
 use LibAV;
-use super::Codec;
+use codec::Codec;
 use ffi;
 use ffi::{
     AVCodecContext,
@@ -9,21 +9,22 @@ use ffi::{
     avcodec_alloc_context3,
     avcodec_free_context,
 };
-use frame::{RefMutFrame, VideoFrame};
+use generic::RefMutFrame;
 use scaler::Scaler;
+use video;
 
 // TODO: Add align field to encoder
 const ALIGN: usize = 32;
 
-pub struct VideoEncoder {
+pub struct Encoder {
     ptr: *mut AVCodecContext,
     scaler: Option<Scaler>,
-    tmp_frame: Option<VideoFrame>,
+    tmp_frame: Option<video::Frame>,
 }
 
-impl VideoEncoder {
-    pub fn from_codec(codec: Codec) -> VideoEncoderBuilder {
-        VideoEncoderBuilder::from_codec(codec)
+impl Encoder {
+    pub fn from_codec(codec: Codec) -> EncoderBuilder {
+        EncoderBuilder::from_codec(codec)
     }
 
     pub fn pixel_format(&self) -> ffi::AVPixelFormat {
@@ -49,7 +50,7 @@ impl VideoEncoder {
     }
 }
 
-impl VideoEncoder {
+impl Encoder {
     pub unsafe fn send_frame<'a, F, H>(&mut self, frame: F, mut packet_handler: H) -> Result<(), String> where
         F: Into<RefMutFrame<'a>>,
         H: FnMut(&mut ffi::AVPacket) -> Result<(), String>,
@@ -92,7 +93,7 @@ impl VideoEncoder {
         }
     }
 
-    fn scaler_needs_update(&self, source: &VideoFrame) -> bool {
+    fn scaler_needs_update(&self, source: &video::Frame) -> bool {
         if let Some(ref scaler) = self.scaler {
                source.pixel_format() != scaler.source_pixel_format()
             || source.width() != scaler.source_width()
@@ -102,7 +103,7 @@ impl VideoEncoder {
         }
     }
 
-    fn update_scaler(&mut self, frame: &VideoFrame) -> Result<(), String> {
+    fn update_scaler(&mut self, frame: &video::Frame) -> Result<(), String> {
         if self.scaler_needs_update(frame) {
             self.scaler = Some(Scaler::new(
                 frame.width(), frame.height(), frame.pixel_format(),
@@ -114,20 +115,20 @@ impl VideoEncoder {
 
     fn init_tmp_frame(&mut self) -> Result<(), String> {
         if self.tmp_frame.is_none() {
-            self.tmp_frame = Some(VideoFrame::new(self.width(), self.height(), self.pixel_format(), ALIGN)?);
+            self.tmp_frame = Some(video::Frame::new(self.width(), self.height(), self.pixel_format(), ALIGN)?);
         }
         Ok(())
     }
 }
 
-impl VideoEncoder {
+impl Encoder {
     pub fn as_ref(&self) -> &AVCodecContext { unsafe { &*self.ptr } }
     pub fn as_mut(&mut self) -> &mut AVCodecContext { unsafe { &mut *self.ptr } }
     pub fn as_ptr(&self) -> *const AVCodecContext { self.ptr }
     pub fn as_mut_ptr(&mut self) -> *mut AVCodecContext { self.ptr }
 }
 
-impl Drop for VideoEncoder {
+impl Drop for Encoder {
     fn drop(&mut self) {
         unsafe {
             if !self.ptr.is_null() {
@@ -138,7 +139,7 @@ impl Drop for VideoEncoder {
 }
 
 /// TODO: Check for invalid value ranges
-pub struct VideoEncoderBuilder {
+pub struct EncoderBuilder {
     codec: Codec,
     pixel_format: Option<AVPixelFormat>,
     width: Option<c_int>,
@@ -147,9 +148,9 @@ pub struct VideoEncoderBuilder {
     bitrate: Option<int64_t>,
 }
 
-impl VideoEncoderBuilder {
+impl EncoderBuilder {
     pub fn from_codec(codec: Codec) -> Self {
-        VideoEncoderBuilder {
+        EncoderBuilder {
             codec: codec,
             pixel_format: None,
             width: None,
@@ -177,11 +178,11 @@ impl VideoEncoderBuilder {
         self.time_base = Some(AVRational { num: 1, den: framerate as i32 }); self
     }
 
-    pub fn open(&self) -> Result<VideoEncoder, String> {
+    pub fn open(&self) -> Result<Encoder, String> {
         unsafe {
-            let width = self.width.ok_or_else(|| format!("VideoEncoder width not set"))?;
-            let height = self.height.ok_or_else(|| format!("VideoEncoder height not set"))?;
-            let pixel_format = self.pixel_format.ok_or_else(|| format!("VideoEncoder pixel_format not set"))?;
+            let width = self.width.ok_or_else(|| format!("Video encoder width not set"))?;
+            let height = self.height.ok_or_else(|| format!("Video encoder height not set"))?;
+            let pixel_format = self.pixel_format.ok_or_else(|| format!("Video encoder pixel_format not set"))?;
             let time_base = self.time_base.unwrap_or(AVRational { num: 1, den: 30 });
 
             LibAV::init();
@@ -204,7 +205,7 @@ impl VideoEncoderBuilder {
             // identical to 1.
             (*codec_context).time_base = time_base;
 
-            Ok(VideoEncoder {
+            Ok(Encoder {
                 ptr: codec_context,
                 scaler: None,
                 tmp_frame: None,

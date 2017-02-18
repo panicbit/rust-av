@@ -9,15 +9,16 @@ use std::sync::{Once, ONCE_INIT};
 
 #[macro_use]
 mod util;
+mod common;
 
 pub mod format;
-pub mod io;
-pub mod codec;
-pub mod scaler;
 pub mod video;
 pub mod audio;
 pub mod generic;
-mod common;
+
+pub mod io;
+pub mod codec;
+pub mod scaler;
 
 lazy_static! {
     pub static ref AV: LibAV = LibAV::init();

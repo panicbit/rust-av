@@ -59,6 +59,11 @@ pub fn demo() -> Result<(), String> {
         .sample_format(sample_format)
         .channel_layout(channel_layout)
         .open(output_format)?;
+    let mut audio_frame_size = audio_encoder.frame_size();
+    if audio_frame_size == 0 {
+        audio_frame_size = 10000;
+    }
+    println!("Audio frame size: {} samples", audio_frame_size);
 
     // Create format muxer
     let mut muxer = Muxer::new()
@@ -77,11 +82,6 @@ pub fn demo() -> Result<(), String> {
     let mut next_video_pts = 0;
 
     let mut audio_data = AUDIO_DATA;
-    let mut audio_frame_size = muxer.encoders()[audio_stream_id].as_audio_encoder().unwrap().frame_size();
-    if audio_frame_size == 0 {
-        audio_frame_size = 10000;
-    }
-    println!("Audio frame size: {} samples", audio_frame_size);
     let mut audio_frame = audio::Frame::new(audio_frame_size, sample_rate, sample_format, channel_layout)?;
     let mut next_audio_pts = 0;
 

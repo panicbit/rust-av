@@ -96,7 +96,6 @@ impl Encoder {
                 _ => bail!("Error encoding packet"),
             }
         }
-        unimplemented!()
     }
 }
 

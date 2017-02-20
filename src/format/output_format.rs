@@ -2,7 +2,6 @@ use LibAV;
 use std::ffi::CString;
 use std::ptr;
 use std::fmt;
-use libc::c_char;
 use ffi::{
     AVOutputFormat,
     av_guess_format,

@@ -17,6 +17,7 @@ use generic::RefMutFrame;
 use scaler::Scaler;
 use video;
 use common;
+use errors::*;
 
 // TODO: Add align field to encoder
 const ALIGN: usize = 32;
@@ -28,7 +29,7 @@ pub struct Encoder {
 }
 
 impl Encoder {
-    pub fn from_codec(codec: Codec) -> Result<EncoderBuilder, String> {
+    pub fn from_codec(codec: Codec) -> Result<EncoderBuilder> {
         EncoderBuilder::from_codec(codec)
     }
 
@@ -56,12 +57,12 @@ impl Encoder {
 }
 
 impl Encoder {
-    pub unsafe fn send_frame<'a, F, H>(&mut self, frame: F, mut packet_handler: H) -> Result<(), String> where
+    pub unsafe fn send_frame<'a, F, H>(&mut self, frame: F, mut packet_handler: H) -> Result<()> where
         F: Into<RefMutFrame<'a>>,
-        H: FnMut(&mut ffi::AVPacket) -> Result<(), String>,
+        H: FnMut(&mut ffi::AVPacket) -> Result<()>,
     {
         let mut frame = frame.into().into_video_frame()
-            .ok_or_else(|| format!("Cannot encode non-video frame as video"))?;
+            .ok_or("Cannot encode non-video frame as video")?;
 
         // Do scaling if needed
         if !frame.is_compatible_with_encoder(self) {
@@ -93,7 +94,7 @@ impl Encoder {
                     handler_success?
                 },
                 ffi::AVERROR_EAGAIN | ffi::AVERROR_EOF => return Ok(()),
-                _ => return Err(format!("Error encoding packet")),
+                _ => bail!("Error encoding packet"),
             }
         }
     }
@@ -108,7 +109,7 @@ impl Encoder {
         }
     }
 
-    fn update_scaler(&mut self, frame: &video::Frame) -> Result<(), String> {
+    fn update_scaler(&mut self, frame: &video::Frame) -> Result<()> {
         if self.scaler_needs_update(frame) {
             self.scaler = Some(Scaler::new(
                 frame.width(), frame.height(), frame.pixel_format(),
@@ -118,7 +119,7 @@ impl Encoder {
         Ok(())
     }
 
-    fn init_tmp_frame(&mut self) -> Result<(), String> {
+    fn init_tmp_frame(&mut self) -> Result<()> {
         if self.tmp_frame.is_none() {
             self.tmp_frame = Some(video::Frame::new(self.width(), self.height(), self.pixel_format(), ALIGN)?);
         }
@@ -154,9 +155,9 @@ pub struct EncoderBuilder {
 }
 
 impl EncoderBuilder {
-    pub fn from_codec(codec: Codec) -> Result<Self, String> {
+    pub fn from_codec(codec: Codec) -> Result<Self> {
         common::encoder::require_is_encoder(codec)?;
-        common::encoder::require_codec_type(codec, MediaType::Video)?;
+        common::encoder::require_codec_type(MediaType::Video, codec)?;
 
         Ok(EncoderBuilder {
             codec: codec,
@@ -186,18 +187,18 @@ impl EncoderBuilder {
         self.time_base = Some(AVRational { num: 1, den: framerate as i32 }); self
     }
 
-    pub fn open(&self, format: OutputFormat) -> Result<Encoder, String> {
+    pub fn open(&self, format: OutputFormat) -> Result<Encoder> {
         unsafe {
-            let width = self.width.ok_or_else(|| format!("Video encoder width not set"))?;
-            let height = self.height.ok_or_else(|| format!("Video encoder height not set"))?;
-            let pixel_format = self.pixel_format.ok_or_else(|| format!("Video encoder pixel_format not set"))?;
+            let width = self.width.ok_or("Video encoder width not set")?;
+            let height = self.height.ok_or("Video encoder height not set")?;
+            let pixel_format = self.pixel_format.ok_or("Video encoder pixel_format not set")?;
             let time_base = self.time_base.unwrap_or(AVRational { num: 1, den: 30 });
 
             LibAV::init();
 
             let mut codec_context = avcodec_alloc_context3(self.codec.as_ptr());
             if codec_context.is_null() {
-                return Err(format!("Could not allocate an encoding context"));
+                bail!("Could not allocate an encoding context");
             }
 
             // Initialize encoder fields

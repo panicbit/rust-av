@@ -1,9 +1,13 @@
+// `error_chain!` can recurse deeply
+#![recursion_limit = "1024"]
 pub extern crate av_sys as ffi;
 extern crate libc;
 #[macro_use]
 extern crate lazy_static;
 #[macro_use]
 extern crate bitflags;
+#[macro_use]
+extern crate error_chain;
 use std::ffi::CStr;
 use std::sync::{Once, ONCE_INIT};
 use util::AsCStr;
@@ -20,6 +24,9 @@ pub mod generic;
 pub mod io;
 pub mod codec;
 pub mod scaler;
+
+pub mod errors;
+pub use self::errors::*;
 
 lazy_static! {
     pub static ref AV: LibAV = LibAV::init();

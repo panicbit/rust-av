@@ -1,3 +1,5 @@
+#[macro_use]
+extern crate error_chain;
 extern crate av;
 
 use std::fs::File;
@@ -15,22 +17,23 @@ use av::{
     audio,
     video,
 };
+use av::errors::ResultExt;
 
 const STREAM_DURATION: i64 = 10;
 const VIDEO_DATA: &'static [u8] = include_bytes!("../rgb-600x400.data");
 const AUDIO_DATA: &'static [u8] = include_bytes!("../music-44100hz-f32-le-mono.raw");
 
 
-fn main() {
-    demo().unwrap();
-}
+quick_main!(demo);
 
-pub fn demo() -> Result<(), String> {
+pub fn demo() -> av::Result<()> {
     av::LibAV::init();
 
-    let file = File::create("/tmp/output_rust.mp4").unwrap();
+    let file = File::create("/tmp/output_rust.mp4")
+        .chain_err(|| "Failed to create output file")?;
 
-    let output_format = OutputFormat::from_name("mp4").expect("output format not found");
+    let output_format = OutputFormat::from_name("mp4")
+        .ok_or("output format not found")?;
     println!("{:?}", output_format);
 
     // Create video encoder

@@ -12,6 +12,7 @@ use codec::{
     MediaType,
     Codec,
 };
+use errors::*;
 
 pub unsafe fn init(codec_context: *mut AVCodecContext, format: OutputFormat) {
     // Some formats require global headers
@@ -20,29 +21,29 @@ pub unsafe fn init(codec_context: *mut AVCodecContext, format: OutputFormat) {
     }
 }
 
-pub unsafe fn open(mut codec_context: *mut AVCodecContext, kind: &'static str) -> Result<(), String> {
+pub unsafe fn open(mut codec_context: *mut AVCodecContext, kind: &'static str) -> Result<()> {
     let codec = (*codec_context).codec;
     let options = ptr::null_mut();
     let res = avcodec_open2(codec_context, codec, options);
     if res < 0 {
         avcodec_free_context(&mut codec_context);
-        return Err(format!("Failed to open {} encoder ({})", kind, res))
+        bail!(ErrorKind::OpenEncoder(kind));
     }
 
     Ok(())
 }
 
-pub fn require_is_encoder(codec: Codec) -> Result<(), String> {
+pub fn require_is_encoder(codec: Codec) -> Result<()> {
     if !codec.is_encoder() {
-        Err(format!("{:?} does not support encoding", codec.id()))
+        Err(ErrorKind::EncodingUnsupported(codec.id()).into())
     } else {
         Ok(())
     }
 }
 
-pub fn require_codec_type(codec: Codec, required_type: MediaType) -> Result<(), String> {
-    if codec.media_type() != required_type {
-        Err(format!("{:?} encoder got {:?} codec", required_type, codec.media_type()))
+pub fn require_codec_type(encoder_type: MediaType, codec: Codec) -> Result<()> {
+    if encoder_type != codec.media_type() {
+        Err(ErrorKind::MediaTypeMismatch(encoder_type, codec.id()).into())
     } else {
         Ok(())
     }

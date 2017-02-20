@@ -1,6 +1,7 @@
 use std::ptr;
 use libc::c_int;
 use ffi;
+use errors::*;
 
 pub struct Scaler {
     ptr: *mut ffi::SwsContext,
@@ -17,7 +18,7 @@ impl Scaler {
     pub fn new(
         source_width: usize, source_height: usize, source_pixel_format: ffi::AVPixelFormat,
         target_width: usize, target_height: usize, target_pixel_format: ffi::AVPixelFormat
-    ) -> Result<Self, String> {
+    ) -> Result<Self> {
         unsafe {
             let source_filter = ptr::null_mut();
             let target_filter = ptr::null_mut();
@@ -34,7 +35,7 @@ impl Scaler {
             );
 
             if scaler.is_null() {
-                return Err(format!("Could not create scaler context"));
+                bail!("Could not create scaler context");
             }
 
             Ok(Scaler {

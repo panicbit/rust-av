@@ -10,6 +10,7 @@ use ffi::{
     AV_NUM_DATA_POINTERS,
 };
 use video;
+use errors::*;
 
 pub struct Frame {
     ptr: *mut ffi::AVFrame,
@@ -20,7 +21,7 @@ impl Frame {
     /// # Panics
     ///
     /// Panics if `width`, `height` or `align` exceed `c_int::max_value()`.
-    pub fn new(width: usize, height: usize, pixel_format: AVPixelFormat, align: usize) -> Result<Frame, String> {
+    pub fn new(width: usize, height: usize, pixel_format: AVPixelFormat, align: usize) -> Result<Self> {
         unsafe {
             assert!(width <= c_int::max_value() as usize, "VideoFrame width exceeds c_int::max_value()");
             assert!(height <= c_int::max_value() as usize, "VideoFrame height exceeds c_int::max_value()");
@@ -28,7 +29,7 @@ impl Frame {
 
             let mut frame = av_frame_alloc();
             if frame.is_null() {
-                return Err(format!("Could not allocate video frame"));
+                bail!("Could not allocate video frame");
             }
 
             // Fill in required information
@@ -40,7 +41,7 @@ impl Frame {
             let res = av_frame_get_buffer(frame, align as c_int);
             if res < 0 {
                 av_frame_free(&mut frame);
-                return Err(format!("Could not allocate video frame buffer"));
+                bail!("Could not allocate video frame buffer");
             }
 
             Ok(Self::from_ptr(frame, pixel_format))
@@ -101,14 +102,14 @@ impl Frame {
         }
     }
 
-    pub fn fill_channel(&mut self, channel_index: usize, source: &[u8]) -> Result<(), String> {
+    pub fn fill_channel(&mut self, channel_index: usize, source: &[u8]) -> Result<()> {
         unsafe {
             use std::cmp::min;
             // when we pass a frame to the encoder, it may keep a reference to it
             // internally; make sure we do not overwrite it here
             let res = ffi::av_frame_make_writable(self.as_mut_ptr());
             if res < 0 {
-                return Err(format!("Failed to make frame writeable"));
+                bail!("Failed to make frame writeable");
             }
 
             let source_linesize = source.len() / self.height();

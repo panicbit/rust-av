@@ -20,13 +20,14 @@ use audio::ChannelLayout;
 use audio::constants::CHANNEL_LAYOUT_STEREO;
 use generic::RefMutFrame;
 use common;
+use errors::*;
 
 pub struct Encoder {
     ptr: *mut AVCodecContext,
 }
 
 impl Encoder {
-    pub fn from_codec(codec: Codec) -> Result<EncoderBuilder, String> {
+    pub fn from_codec(codec: Codec) -> Result<EncoderBuilder> {
         EncoderBuilder::from_codec(codec)
     }
 
@@ -55,12 +56,12 @@ impl Encoder {
 }
 
 impl Encoder {
-    pub unsafe fn send_frame<'a, F, H>(&mut self, frame: F, mut packet_handler: H) -> Result<(), String> where
+    pub unsafe fn send_frame<'a, F, H>(&mut self, frame: F, mut packet_handler: H) -> Result<()> where
         F: Into<RefMutFrame<'a>>,
-        H: FnMut(&mut AVPacket) -> Result<(), String>,
+        H: FnMut(&mut AVPacket) -> Result<()>,
     {
         let mut frame = frame.into().into_audio_frame()
-            .ok_or_else(|| format!("Cannot encode non-audio frame as audio"))?;
+            .ok_or("Cannot encode non-audio frame as audio")?;
 
         // Do scaling if needed
         // if !frame.is_compatible_with_encoder(self) {
@@ -92,7 +93,7 @@ impl Encoder {
                     handler_success?
                 },
                 ffi::AVERROR_EAGAIN | ffi::AVERROR_EOF => return Ok(()),
-                _ => return Err(format!("Error encoding packet")),
+                _ => bail!("Error encoding packet"),
             }
         }
         unimplemented!()
@@ -124,9 +125,9 @@ pub struct EncoderBuilder {
 }
 
 impl EncoderBuilder {
-    pub fn from_codec(codec: Codec) -> Result<Self, String> {
+    pub fn from_codec(codec: Codec) -> Result<Self> {
         common::encoder::require_is_encoder(codec)?;
-        common::encoder::require_codec_type(codec, MediaType::Audio)?;
+        common::encoder::require_codec_type(MediaType::Audio, codec)?;
 
         Ok(EncoderBuilder {
             codec: codec,
@@ -149,7 +150,7 @@ impl EncoderBuilder {
         self.channel_layout = Some(channel_layout); self
     }
 
-    pub fn open(&self, format: OutputFormat) -> Result<Encoder, String> {
+    pub fn open(&self, format: OutputFormat) -> Result<Encoder> {
         unsafe {
             let sample_rate = self.sample_rate.unwrap_or(44100) as c_int;
             let sample_format = self.sample_format.unwrap_or(AV_SAMPLE_FMT_S16);
@@ -159,7 +160,7 @@ impl EncoderBuilder {
 
             let mut codec_context = avcodec_alloc_context3(self.codec.as_ptr());
             if codec_context.is_null() {
-                return Err(format!("Could not allocate an encoding context"));
+                bail!("Could not allocate an encoding context");
             }
 
             // Initialize encoder fields

@@ -22,27 +22,26 @@ use util::AsCStr;
 pub struct Codec {
     ptr: *const AVCodec
 }
+use errors::*;
 
 impl Codec {
-    pub fn find_encoder_by_id(codec_id: AVCodecID) -> Result<Self, String> {
+    pub fn find_encoder_by_id(codec_id: AVCodecID) -> Result<Self> {
         unsafe {
             LibAV::init();
             let codec = avcodec_find_encoder(codec_id);
             if codec.is_null() {
-                // maybe use avcodec_get_name(codec_id)
-                return Err(format!("Could not find encoder for {:?}", codec_id))
+                bail!(ErrorKind::EncoderNotFound(codec_id))
             }
             Ok(Self::from_ptr(codec))
         }
     }
 
-    pub fn find_decoder_by_id(codec_id: AVCodecID) -> Result<Self, String> {
+    pub fn find_decoder_by_id(codec_id: AVCodecID) -> Result<Self> {
         unsafe {
             LibAV::init();
             let codec = avcodec_find_decoder(codec_id);
             if codec.is_null() {
-                // maybe use avcodec_get_name(codec_id)
-                return Err(format!("Could not find decoder for {:?}", codec_id))
+                bail!(ErrorKind::DecoderNotFound(codec_id))
             }
             Ok(Self::from_ptr(codec))
         }

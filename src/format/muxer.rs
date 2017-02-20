@@ -25,6 +25,7 @@ use generic::{
 };
 use format::OutputFormat;
 use util::AsCStr;
+use errors::*;
 
 pub struct Muxer {
     ptr: *mut AVFormatContext,
@@ -80,7 +81,7 @@ impl Muxer {
         }
     }
 
-    pub fn send_frame<'a, F>(&mut self, stream_id: usize, frame: F) -> Result<(), String> where
+    pub fn send_frame<'a, F>(&mut self, stream_id: usize, frame: F) -> Result<()> where
         F: Into<RefMutFrame<'a>>
     {
         unsafe {
@@ -96,18 +97,18 @@ impl Muxer {
         }
     }
 
-    pub fn close(mut self) -> Result<(), String> {
+    pub fn close(mut self) -> Result<()> {
         self.closed = true;
         self._real_close()
     }
 
-    fn _real_close(&mut self) -> Result<(), String> {
+    fn _real_close(&mut self) -> Result<()> {
         unsafe {
             self._flush()?;
 
             let res = ffi::av_write_trailer(self.as_mut_ptr());
             if res < 0 {
-                return Err(format!("Failed to write trailer"));
+                bail!("Failed to write trailer");
             } else {
                  Ok(())
             }
@@ -115,7 +116,7 @@ impl Muxer {
     }
 
     // TODO: Improve flushing?
-    fn _flush(&mut self) -> Result<(), String> {
+    fn _flush(&mut self) -> Result<()> {
         unsafe {
             let streams = self.as_mut().streams;
             let mut packet = ::std::mem::zeroed();
@@ -147,7 +148,7 @@ impl Muxer {
                             continue_flushing = true;
                         },
                         AVERROR_EAGAIN | AVERROR_EOF => {},
-                        _ => return Err(format!("Error encoding packet")),
+                        _ => bail!("Error encoding packet"),
                     }
                 }
             }
@@ -157,7 +158,7 @@ impl Muxer {
     }
 }
 
-unsafe fn write_frame(format_context: *mut AVFormatContext, time_base: AVRational, stream: *mut AVStream, packet: &mut AVPacket) -> Result<(), String> {
+unsafe fn write_frame(format_context: *mut AVFormatContext, time_base: AVRational, stream: *mut AVStream, packet: &mut AVPacket) -> Result<()> {
     ffi::av_packet_rescale_ts(packet, time_base, (*stream).time_base);
     (*packet).stream_index = (*stream).index;
 
@@ -165,7 +166,7 @@ unsafe fn write_frame(format_context: *mut AVFormatContext, time_base: AVRationa
 
     let res = ffi::av_interleaved_write_frame(format_context, packet);
     if res < 0 {
-        return Err(format!("Failed to write frame"));
+        bail!("Failed to write frame");
     }
 
     Ok(())
@@ -264,18 +265,18 @@ impl MuxerBuilder {
         self.encoders.push(encoder.into()); self
     }
 
-    pub fn open<W: io::AVWrite>(&mut self, writer: W) -> Result<Muxer, String> {
+    pub fn open<W: io::AVWrite>(&mut self, writer: W) -> Result<Muxer> {
         unsafe {
             let name = self.name.as_ref().map(|s| s.as_ptr()).unwrap_or(ptr::null());
             let format_name = self.format_name.as_ref().map(|s| s.as_ptr()).unwrap_or(ptr::null());
-            let mut format = self.format.ok_or(format!("No format set"))?;
+            let mut format = self.format.ok_or("No format set")?;
             let mut encoders = mem::replace(&mut self.encoders, Vec::new());
             let mut io_context = io::IOContext::from_writer(writer);
             let mut format_context = ptr::null_mut();
 
             ffi::avformat_alloc_output_context2(&mut format_context, format.as_mut_ptr(), format_name, name);
             if format_context.is_null() {
-                return Err(format!("Failed to allocate output context (unknown format?)"));
+                bail!("Failed to allocate output context (unknown format?)");
             }
 
             // lend the io context to the format context
@@ -286,7 +287,7 @@ impl MuxerBuilder {
                 let stream = ffi::avformat_new_stream(format_context, encoder.codec().as_ptr());
                 if stream.is_null() {
                     ffi::avformat_free_context(format_context);
-                    return Err(format!("Could not allocate stream"))
+                    bail!("Could not allocate stream")
                 }
 
                 (*stream).id = (*format_context).nb_streams as i32 - 1;
@@ -299,14 +300,14 @@ impl MuxerBuilder {
                    && 0 == (encoder_flags & AV_CODEC_FLAG_GLOBAL_HEADER as int32_t)
                 {
                     ffi::avformat_free_context(format_context);
-                    return Err(format!("Format requires global headers but encoder for stream {} does not use global headers", (*stream).id))
+                    bail!("Format requires global headers but encoder for stream {} does not use global headers", (*stream).id)
                 }
 
                 // Copy encoder parameters to stream
                 let res = ffi::avcodec_parameters_from_context((*stream).codecpar, encoder.as_mut_ptr());
                 if res < 0 {
                     ffi::avformat_free_context(format_context);
-                    return Err(format!("Could not copy stream parameters ({})", res))
+                    bail!("Could not copy stream parameters ({})", res)
                 }
             }
 
@@ -314,7 +315,7 @@ impl MuxerBuilder {
             let res = ffi::avformat_write_header(format_context, options);
             if res < 0 {
                 ffi::avformat_free_context(format_context);
-                return Err(format!("Could not write header"));
+                bail!("Could not write header");
             }
 
             Ok(Muxer {

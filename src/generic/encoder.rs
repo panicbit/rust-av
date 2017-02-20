@@ -7,6 +7,7 @@ use ffi::{
 };
 use video;
 use audio;
+use errors::*;
 
 pub enum Encoder {
     Video(video::Encoder),
@@ -70,9 +71,9 @@ impl Encoder {
         }
     }
 
-    pub unsafe fn send_frame<'a, F, H>(&mut self, frame: F, packet_handler: H) -> Result<(), String> where
+    pub unsafe fn send_frame<'a, F, H>(&mut self, frame: F, packet_handler: H) -> Result<()> where
         F: Into<RefMutFrame<'a>>,
-        H: FnMut(&mut AVPacket) -> Result<(), String>,
+        H: FnMut(&mut AVPacket) -> Result<()>,
     {
         match *self {
             Encoder::Video(ref mut encoder) => encoder.send_frame(frame, packet_handler),

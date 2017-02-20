@@ -11,6 +11,7 @@ use ffi::{
     av_sample_fmt_is_planar,
     AV_NUM_DATA_POINTERS,
 };
+use errors::*;
 
 pub struct Frame {
     ptr: *mut AVFrame,
@@ -19,12 +20,12 @@ pub struct Frame {
 
 impl Frame {
     /// TODO: Check for overflows
-    pub fn new(num_samples: usize, sample_rate: u32, sample_format: AVSampleFormat, channel_layout: ChannelLayout) -> Result<Self, String> {
+    pub fn new(num_samples: usize, sample_rate: u32, sample_format: AVSampleFormat, channel_layout: ChannelLayout) -> Result<Self> {
         unsafe {
 
             let mut frame = av_frame_alloc();
             if frame.is_null() {
-                return Err(format!("Could not allocate frame"));
+                bail!("Could not allocate frame");
             }
 
             (*frame).pts = 0;
@@ -38,7 +39,7 @@ impl Frame {
                 let res = av_frame_get_buffer(frame, align);
                 if res < 0 {
                     av_frame_free(&mut frame);
-                    return Err(format!("Could not allocate audio frame buffer"));
+                    bail!("Could not allocate audio frame buffer");
                 }
             }
 

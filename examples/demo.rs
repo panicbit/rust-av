@@ -41,7 +41,7 @@ pub fn demo() -> Result<(), String> {
     let pixel_format = AV_PIX_FMT_RGB24;
     let video_codec_id = ffi::AVCodecID::AV_CODEC_ID_H264;
     let video_codec = Codec::find_encoder_by_id(video_codec_id)?;
-    let video_encoder = video::Encoder::from_codec(video_codec)
+    let video_encoder = video::Encoder::from_codec(video_codec)?
         .width(width)
         .height(height)
         .pixel_format(*video_codec.pixel_formats().first().expect("Video encoder does not support any pixel formats, wtf?"))
@@ -54,7 +54,7 @@ pub fn demo() -> Result<(), String> {
     let channel_layout = CHANNEL_LAYOUT_MONO;
     let audio_codec_id = ffi::AVCodecID::AV_CODEC_ID_AAC;
     let audio_codec = Codec::find_encoder_by_id(audio_codec_id)?;
-    let audio_encoder = audio::Encoder::from_codec(audio_codec)
+    let audio_encoder = audio::Encoder::from_codec(audio_codec)?
         .sample_rate(sample_rate)
         .sample_format(sample_format)
         .channel_layout(channel_layout)

@@ -1,6 +1,9 @@
 use libc::c_int;
 use LibAV;
-use codec::Codec;
+use codec::{
+    Codec,
+    MediaType,
+};
 use ffi::{
     self,
     AVCodecContext,
@@ -23,7 +26,7 @@ pub struct Encoder {
 }
 
 impl Encoder {
-    pub fn from_codec(codec: Codec) -> EncoderBuilder {
+    pub fn from_codec(codec: Codec) -> Result<EncoderBuilder, String> {
         EncoderBuilder::from_codec(codec)
     }
 
@@ -121,13 +124,16 @@ pub struct EncoderBuilder {
 }
 
 impl EncoderBuilder {
-    pub fn from_codec(codec: Codec) -> Self {
-        EncoderBuilder {
+    pub fn from_codec(codec: Codec) -> Result<Self, String> {
+        common::encoder::require_is_encoder(codec)?;
+        common::encoder::require_codec_type(codec, MediaType::Audio)?;
+
+        Ok(EncoderBuilder {
             codec: codec,
             sample_format: None,
             sample_rate: None,
             channel_layout: None,
-        }
+        })
     }
 
     pub fn sample_format(&mut self, sample_format: AVSampleFormat) -> &mut Self {

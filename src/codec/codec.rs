@@ -5,13 +5,13 @@ use LibAV;
 use ffi::{
     AVCodec,
     AVCodecID,
-    AVMediaType,
     AVPixelFormat,
     avcodec_find_encoder,
     avcodec_find_decoder,
     av_codec_is_encoder,
     av_codec_is_decoder,
 };
+use codec::MediaType;
 use super::{
     Descriptor,
     DescriptorIter,
@@ -68,8 +68,8 @@ impl Codec {
         unsafe { self.as_ref().name.as_cstr().unwrap() }
     }
 
-    pub fn media_type(&self) -> AVMediaType {
-        self.as_ref().type_
+    pub fn media_type(&self) -> MediaType {
+        MediaType::from_raw(self.as_ref().type_)
     }
 
     pub fn pixel_formats(&self) -> &[AVPixelFormat] {

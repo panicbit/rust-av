@@ -5,13 +5,13 @@ use LibAV;
 use ffi::{
     AVCodecID,
     AVCodecDescriptor,
-    AVMediaType,
     avcodec_descriptor_get,
     avcodec_descriptor_next,
 };
 use super::ProfileIter;
 use super::MimeTypeIter;
 use util::AsCStr;
+use codec::MediaType;
 
 #[derive(PartialEq)]
 pub struct Descriptor {
@@ -39,8 +39,8 @@ impl Descriptor {
         self.as_ref().id
     }
 
-    pub fn media_type(&self) -> AVMediaType {
-        self.as_ref().type_
+    pub fn media_type(&self) -> MediaType {
+        MediaType::from_raw(self.as_ref().type_)
     }
 
     pub fn name(&self) -> &CStr {

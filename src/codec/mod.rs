@@ -18,3 +18,6 @@ pub use self::profile::{
 
 mod mime;
 pub use self::mime::MimeTypeIter;
+
+mod media_type;
+pub use self::media_type::MediaType;

@@ -3,16 +3,14 @@ use codec::MediaType;
 
 error_chain! {
     errors {
-        EncoderNotFound(codec_id: AVCodecID) {
+        EncoderNotFound(name: String) {
             description("Could not find suitable encoder")
-            // TODO: maybe use avcodec_get_name(codec_id)
-            display("Could not find encoder for {:?}", codec_id)
+            display("Could not find encoder for {}", name)
         }
 
-        DecoderNotFound(codec_id: AVCodecID) {
+        DecoderNotFound(name: String) {
             description("Could not find suitable decoder")
-            // TODO: maybe use avcodec_get_name(codec_id)
-            display("Could not find decoder for {:?}", codec_id)
+            display("Could not find decoder for {}", name)
         }
 
         OpenEncoder(kind: &'static str) {

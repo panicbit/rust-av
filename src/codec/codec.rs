@@ -1,11 +1,12 @@
 use std::fmt;
 use std::slice;
-use std::ffi::CStr;
+use std::ffi::{CString, CStr};
 use LibAV;
 use ffi::{
     AVCodec,
     AVCodecID,
     AVPixelFormat,
+    avcodec_find_encoder_by_name,
     avcodec_find_encoder,
     avcodec_find_decoder,
     av_codec_is_encoder,
@@ -25,12 +26,26 @@ pub struct Codec {
 use errors::*;
 
 impl Codec {
+    pub fn find_encoder_by_name(name: &str) -> Result<Self> {
+        unsafe {
+            LibAV::init();
+            let c_name = CString::new(name)
+                .map_err(|_| ErrorKind::EncoderNotFound(name.to_string()))?;
+            let codec = avcodec_find_encoder_by_name(c_name.as_ptr());
+            if codec.is_null() {
+                bail!(ErrorKind::EncoderNotFound(name.to_string()))
+            }
+            Ok(Self::from_ptr(codec))
+        }
+    }
+
     pub fn find_encoder_by_id(codec_id: AVCodecID) -> Result<Self> {
         unsafe {
             LibAV::init();
             let codec = avcodec_find_encoder(codec_id);
             if codec.is_null() {
-                bail!(ErrorKind::EncoderNotFound(codec_id))
+                // TODO: maybe use avcodec_get_name(codec_id)
+                bail!(ErrorKind::EncoderNotFound(format!("{:?}", codec_id)))
             }
             Ok(Self::from_ptr(codec))
         }
@@ -41,7 +56,8 @@ impl Codec {
             LibAV::init();
             let codec = avcodec_find_decoder(codec_id);
             if codec.is_null() {
-                bail!(ErrorKind::DecoderNotFound(codec_id))
+                // TODO: maybe use avcodec_get_name(codec_id)
+                bail!(ErrorKind::DecoderNotFound(format!("{:?}", codec_id)))
             }
             Ok(Self::from_ptr(codec))
         }

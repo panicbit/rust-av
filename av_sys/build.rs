@@ -14,6 +14,10 @@ fn main() {
         .write_to_file(Path::new(&out_dir).join("ffi.rs"))
         .unwrap();
 
+    if let Ok(ffmpeg_path) = env::var("RUST_FFMPEG_PATH") {
+        println!("cargo:rustc-link-search=native={}", ffmpeg_path);
+    }
+
     println!("cargo:rustc-link-lib=dylib=avutil");
     println!("cargo:rustc-link-lib=dylib=avformat");
     println!("cargo:rustc-link-lib=dylib=avcodec");

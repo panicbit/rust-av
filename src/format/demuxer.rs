@@ -6,7 +6,7 @@ use io;
 use ffi;
 use ffi::{
     AVFormatContext,
-    AVOutputFormat,
+    AVInputFormat,
     AV_TIME_BASE,
 };
 use util::AsCStr;
@@ -85,13 +85,13 @@ impl Demuxer {
 
     pub fn format_name(&self) -> &CStr {
         unsafe {
-            self.output_format().name.as_cstr().unwrap()
+            self.input_format().name.as_cstr().unwrap()
         }
     }
 
     pub fn format_long_name(&self) -> &CStr {
         unsafe {
-            self.output_format().long_name.as_cstr().unwrap()
+            self.input_format().long_name.as_cstr().unwrap()
         }
     }
 
@@ -118,8 +118,8 @@ impl Demuxer {
     pub fn as_mut_ptr(&mut self) -> *mut AVFormatContext {
         self.ptr
     }
-    unsafe fn output_format(&self) -> &AVOutputFormat {
-        &*self.as_ref().oformat
+    unsafe fn input_format(&self) -> &AVInputFormat {
+        &*self.as_ref().iformat
     }
     // pub fn encoders_mut(&mut self) -> &mut [Encoder] {
     //     &mut self.encoders

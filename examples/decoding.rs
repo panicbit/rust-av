@@ -19,5 +19,7 @@ fn decoding() -> av::Result<()> {
 
     decoder.dump_info();
     
+    println!("{:?}", decoder);
+
     Ok(())
 }

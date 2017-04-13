@@ -1,6 +1,7 @@
 use std::marker::PhantomData;
 use ffi::{self, AVStream, AVFormatContext};
 use std::slice;
+use common::codec_parameters::CodecParameters;
 
 pub struct Stream<'fmt_ctx> {
     ptr: *mut AVStream,
@@ -48,6 +49,12 @@ impl<'fmt_ctx> Stream<'fmt_ctx> {
     // TODO: disposition
 
     // TODO: remaining fields
+
+    fn codec_parameters(&self) -> CodecParameters {
+        unsafe {
+            CodecParameters::from_ptr(self.as_ref().codecpar)
+        }
+    }
 }
 
 impl<'fmt_ctx> Stream<'fmt_ctx> {

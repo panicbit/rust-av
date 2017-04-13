@@ -15,11 +15,11 @@ fn decoding() -> av::Result<()> {
     let file = File::open("/tmp/output_rust.mp4")
         .chain_err(|| "Failed to open input file")?;
 
-    let decoder = Demuxer::open(file)?;
+    let demuxer = Demuxer::open(file)?;
 
-    decoder.dump_info();
+    demuxer.dump_info();
     
-    println!("{:?}", decoder);
+    println!("{:?}", demuxer);
 
     Ok(())
 }

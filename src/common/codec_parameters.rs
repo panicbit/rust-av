@@ -1,5 +1,6 @@
 use std::marker::PhantomData;
 use ffi::{self, AVCodecParameters, AVStream};
+use codec::MediaType;
 
 pub struct CodecParameters<'stream> {
     ptr: *mut AVCodecParameters,
@@ -14,8 +15,8 @@ impl<'stream> CodecParameters<'stream> {
         }
     }
 
-    pub fn codec_type(&self) -> ffi::AVMediaType {
-        self.as_ref().codec_type
+    pub fn media_type(&self) -> MediaType {
+        MediaType::from_raw(self.as_ref().codec_type)
     }
 
     pub fn codec_id(&self) -> ffi::AVCodecID {

@@ -18,14 +18,14 @@ impl Decoder {
 
             // Try to find a suitable codec
             let codec = Codec::find_decoder_by_id(codec_id)?;
-            if !codec.media_type().is_video() {
-                bail!(ErrorKind::MediaTypeMismatch(MediaType::Video, codec_id))
+            if !codec.media_type().is_audio() {
+                bail!(ErrorKind::MediaTypeMismatch(MediaType::Audio, codec_id))
             }
 
             // Try to allocate the decoder
             let mut codec_context = ffi::avcodec_alloc_context3(codec.as_ptr());
             if codec_context.is_null() {
-                bail!("Could not allocate video decoder");
+                bail!("Could not allocate audio decoder");
             }
 
             // Copy codec parameters to codec_parameters
@@ -43,7 +43,7 @@ impl Decoder {
                 let res = ffi::avcodec_open2(codec_context, codec.as_ptr(), options);
                 if res < 0 {
                     ffi::avcodec_free_context(&mut codec_context);
-                    bail!(ErrorKind::OpenDecoder("video"));
+                    bail!(ErrorKind::OpenDecoder("audio"));
                 }
             }
 

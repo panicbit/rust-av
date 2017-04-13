@@ -18,6 +18,13 @@ error_chain! {
             display("Could not open {} encoder", kind)
         }
 
+        OpenDecoder(kind: &'static str) {
+            description("Could not open decoder")
+            display("Could not open {} decoder", kind)
+        }
+
+        CopyCodecParameters
+
         EncodingUnsupported(codec_id: AVCodecID) {
             description("Codec does not support encoding")
             display("{:?} codec does not support encoding", codec_id)

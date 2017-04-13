@@ -5,5 +5,10 @@ pub use self::encoder::{
     EncoderBuilder,
 };
 
+mod decoder;
+pub use self::decoder::{
+    Decoder,
+};
+
 mod frame;
 pub use self::frame::Frame;

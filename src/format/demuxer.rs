@@ -11,6 +11,8 @@ use ffi::{
 };
 use util::AsCStr;
 use errors::*;
+use common::stream::Streams;
+use std::slice;
 
 pub struct Demuxer {
     ptr: *mut AVFormatContext,
@@ -60,11 +62,17 @@ impl Demuxer {
                 }
             }
 
-
             Ok(Demuxer {
                 ptr: format_context,
                 _io_context: io_context,
             })
+        }
+    }
+
+    pub fn streams(&self) -> Streams {
+        unsafe {
+            let streams = slice::from_raw_parts(self.as_ref().streams, self.num_streams());
+            Streams::from_slice(streams)
         }
     }
 

@@ -50,7 +50,7 @@ impl<'fmt_ctx> Stream<'fmt_ctx> {
 
     // TODO: remaining fields
 
-    fn codec_parameters(&self) -> CodecParameters {
+    pub fn codec_parameters(&self) -> CodecParameters {
         unsafe {
             CodecParameters::from_ptr(self.as_ref().codecpar)
         }

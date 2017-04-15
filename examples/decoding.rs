@@ -16,7 +16,7 @@ fn decoding() -> av::Result<()> {
     let file = File::open("/tmp/output_rust.mp4")
         .chain_err(|| "Failed to open input file")?;
 
-    let demuxer = Demuxer::open(file)?;
+    let mut demuxer = Demuxer::open(file)?;
 
     // Dump some info
     demuxer.dump_info();
@@ -26,6 +26,18 @@ fn decoding() -> av::Result<()> {
     let decoders = demuxer.streams()
         .map(|stream| Decoder::from_stream(&stream))
         .collect::<av::Result<Vec<Decoder>>>()?;
+
+    let mut num_packets = 0;
+    loop {
+        let packet = match demuxer.read_packet().unwrap() {
+            Some(packet) => packet,
+            None => break,
+        };
+
+        num_packets += 1;
+    }
+
+    println!("Demuxed {} packets", num_packets);
 
     Ok(())
 }

@@ -12,6 +12,7 @@ use ffi::{
 use util::AsCStr;
 use errors::*;
 use common::stream::Streams;
+use common::CowPacket;
 use std::slice;
 
 pub struct Demuxer {
@@ -109,6 +110,30 @@ impl Demuxer {
             let url = ptr::null();
             let is_output = 0;
             ffi::av_dump_format(self.as_ptr() as _, stream_index, url, is_output);
+        }
+    }
+
+    pub fn read_packet(&mut self) -> Result<Option<CowPacket>> {
+        unsafe {
+            let mut packet = ffi::av_packet_alloc();
+            if packet.is_null() {
+                bail!(ErrorKind::AllocFailed("demuxing packet"));
+            }
+
+            // Try to read a packet
+            {
+                let res = ffi::av_read_frame(self.ptr, packet);
+                if res < 0 {
+                    ffi::av_packet_free(&mut packet);
+
+                    match res {
+                        ffi::AVERROR_EOF => return Ok(None),
+                        _ => bail!("Demuxer failed to read packet"),
+                    }
+                }
+            }
+
+            Ok(Some(CowPacket::from_ptr(packet)))
         }
     }
 }

@@ -25,6 +25,11 @@ error_chain! {
 
         CopyCodecParameters
 
+        AllocFailed(of: &'static str) {
+            description("Failed to allocate something (OOM?)")
+            display("Failed to allocate {} (OOM?)", of)
+        }
+
         EncodingUnsupported(codec_id: AVCodecID) {
             description("Codec does not support encoding")
             display("{:?} codec does not support encoding", codec_id)

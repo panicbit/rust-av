@@ -38,7 +38,7 @@ impl Demuxer {
             // Lend the io context to the format context
             (*format_context).pb = io_context.as_mut_ptr();
 
-            // Open the decoder
+            // Open the demuxer
             {
                 let url = ptr::null_mut();
                 let format = ptr::null_mut();

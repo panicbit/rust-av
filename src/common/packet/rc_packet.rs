@@ -1,3 +1,4 @@
+use std::slice;
 use ffi::{self, AVPacket};
 use super::*;
 
@@ -29,13 +30,28 @@ impl RcPacket {
 
         RcPacket::from_ptr(packet)
     }
-}
 
-impl RcPacket {
     pub fn into_ref(self) -> RefPacket<'static> {
         unsafe {
             RefPacket::from_ptr(self.ptr)
         }
+    }
+
+    pub fn stream_index(&self) -> usize {
+        self.as_raw().stream_index as usize
+    }
+
+    pub fn as_slice(&self) -> &[u8] {
+        unsafe {
+            let packet = self.as_raw();
+            slice::from_raw_parts(packet.data, packet.size as usize)
+        }
+    }
+}
+
+impl RcPacket {
+    pub fn as_raw(&self) -> &AVPacket {
+        unsafe { &*self.ptr }
     }
 }
 

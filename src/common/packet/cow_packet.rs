@@ -32,6 +32,20 @@ impl<'packet> CowPacket<'packet> {
             }
         }
     }
+
+    pub fn stream_index(&self) -> usize {
+        match *self {
+            CowPacket::Ref(ref packet) => packet.stream_index(),
+            CowPacket::Rc(ref packet) => packet.stream_index(),
+        }
+    }
+
+    pub fn as_slice(&self) -> &[u8] {
+        match *self {
+            CowPacket::Ref(ref packet) => packet.as_slice(),
+            CowPacket::Rc(ref packet) => packet.as_slice(),
+        }
+    }
 }
 
 impl<'packet> From<RefPacket<'packet>> for CowPacket<'packet> {

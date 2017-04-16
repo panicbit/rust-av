@@ -1,6 +1,7 @@
 use std::marker::PhantomData;
 use ffi::{self, AVPacket};
 use std::mem;
+use std::slice;
 
 /// A reference to a packet as returned
 /// e.g. by Demuxer::read_packet
@@ -16,9 +17,23 @@ impl<'packet> RefPacket<'packet> {
             _phantom: PhantomData,
         }
     }
+
+    pub fn stream_index(&self) -> usize {
+        self.as_raw().stream_index as usize
+    }
+
+    pub fn as_slice(&self) -> &[u8] {
+        unsafe {
+            let packet = self.as_raw();
+            slice::from_raw_parts(packet.data, packet.size as usize)
+        }
+    }
 }
 
 impl<'packet> RefPacket<'packet> {
+    pub fn as_raw(&self) -> &AVPacket {
+        unsafe { &*self.ptr }
+    }
     pub fn as_ptr(&self) -> *const AVPacket {
         self.ptr
     }

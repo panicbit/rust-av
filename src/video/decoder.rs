@@ -4,6 +4,8 @@ use ffi::AVCodecContext;
 use codec::{Codec,MediaType};
 use common::codec_parameters::CodecParameters;
 use common::stream::Stream;
+use common::RcPacket;
+use super::Frame;
 use errors::*;
 
 pub struct Decoder {
@@ -66,6 +68,40 @@ impl Decoder {
     pub fn time_base(&self) -> ffi::AVRational {
         self.as_ref().time_base
     }
+
+    pub fn pixel_format(&self) -> ffi::AVPixelFormat {
+        self.as_ref().pix_fmt
+    }
+
+    pub fn decode<'decoder>(&'decoder mut self, packet: &RcPacket) -> Result<Frames<'decoder>> {
+        // TODO: Check that pkt->data is AV_INPUT_BUFFER_PADDING_SIZE larger than packet size
+
+        unsafe {
+            let res = ffi::avcodec_send_packet(self.as_mut_ptr(), packet.as_mut_ptr());
+            if res < 0 {
+                match res {
+                    ffi::AVERROR_EAGAIN => bail!("EAGAIN in Decoder::decode. This is not supposed to happen :("),
+                    _ => bail!(format!("Failed to decode packet: 0x{:X}", res))
+                }
+            }
+
+            Ok(Frames::from_decoder(self))
+        }
+    }
+
+    pub fn flush<'decoder>(&'decoder mut self) -> Result<Frames<'decoder>> {
+        // TODO: Check that pkt->data is AV_INPUT_BUFFER_PADDING_SIZE larger than packet size
+
+        unsafe {
+            let res = ffi::avcodec_send_packet(self.as_mut_ptr(), ptr::null_mut());
+
+            if res < 0 && res != ffi::AVERROR_EAGAIN {
+                bail!(format!("Failed to flush decoder: 0x{:X}", res))
+            }
+
+            Ok(Frames::from_decoder(self))
+        }
+    }
 }
 
 impl Decoder {
@@ -73,4 +109,48 @@ impl Decoder {
     pub fn as_mut(&mut self) -> &mut AVCodecContext { unsafe { &mut *self.ptr } }
     pub fn as_ptr(&self) -> *const AVCodecContext { self.ptr }
     pub fn as_mut_ptr(&mut self) -> *mut AVCodecContext { self.ptr }
+}
+
+pub struct Frames<'decoder> {
+    decoder: &'decoder mut Decoder,
+}
+
+impl<'decoder> Frames<'decoder> {
+    fn from_decoder(decoder: &'decoder mut Decoder) -> Self {
+        Frames {
+            decoder: decoder
+        }
+    }
+}
+
+impl<'decoder> Iterator for Frames<'decoder> {
+    type Item = Result<Frame>;
+
+    fn next(&mut self) -> Option<Self::Item> {
+        unsafe {
+            let mut frame = ffi::av_frame_alloc();
+            let res = ffi::avcodec_receive_frame(self.decoder.as_mut_ptr(), frame);
+
+            if res < 0 {
+                ffi::av_frame_free(&mut frame);
+
+                match res {
+                    ffi::AVERROR_EAGAIN | ffi::AVERROR_EOF => return None,
+                    _ => return Some(Err(format!("Failed to receive frame: 0x{:X}", res).into())),
+                }
+            }
+
+            let pixel_format = self.decoder.pixel_format();
+            let frame = Frame::from_ptr(frame, pixel_format);
+
+            Some(Ok(frame))
+        }
+    }
+}
+
+impl<'decoder> Drop for Frames<'decoder> {
+    fn drop(&mut self) {
+        // Decode every frame possible
+        for _ in self {}
+    }
 }

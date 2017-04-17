@@ -53,6 +53,10 @@ impl RcPacket {
     pub fn as_raw(&self) -> &AVPacket {
         unsafe { &*self.ptr }
     }
+
+    pub fn as_mut_ptr(&self) -> *mut AVPacket {
+        self.ptr
+    }
 }
 
 impl Clone for RcPacket {

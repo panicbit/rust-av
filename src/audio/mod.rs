@@ -11,6 +11,7 @@ pub use self::encoder::{
 mod decoder;
 pub use self::decoder::{
     Decoder,
+    Frames,
 };
 
 mod frame;

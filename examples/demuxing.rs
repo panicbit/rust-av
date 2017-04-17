@@ -6,7 +6,6 @@ use std::fs::File;
 
 use av::errors::ResultExt;
 use av::format::Demuxer;
-use av::generic::Decoder;
 
 quick_main!(decoding);
 
@@ -22,18 +21,9 @@ fn decoding() -> av::Result<()> {
     demuxer.dump_info();
     println!("{:?}", demuxer);
 
-    // Create decoders
-    let decoders = demuxer.streams()
-        .map(|stream| Decoder::from_stream(&stream))
-        .collect::<av::Result<Vec<Decoder>>>()?;
-
     let mut num_packets = 0;
-    loop {
-        let packet = match demuxer.read_packet().unwrap() {
-            Some(packet) => packet,
-            None => break,
-        };
 
+    while demuxer.read_packet()?.is_some() {
         num_packets += 1;
     }
 

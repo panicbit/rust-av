@@ -87,6 +87,13 @@ impl Frame {
 }
 
 impl Frame {
+    pub unsafe fn from_ptr(ptr: *mut AVFrame, sample_format: AVSampleFormat) -> Self {
+        Frame {
+            ptr: ptr,
+            sample_format: sample_format,
+        }
+    }
+
     pub fn as_ref(&self) -> &AVFrame {
         unsafe { &*self.ptr }
     }

@@ -9,7 +9,9 @@ use video;
 use audio;
 use errors::*;
 use common::stream::Stream;
+use common::RcPacket;
 use codec::MediaType;
+use super::Frame;
 
 pub enum Decoder {
     Video(video::Decoder),
@@ -104,6 +106,20 @@ impl Decoder {
             Decoder::Audio(ref mut decoder) => decoder.as_mut(),
         }
     }
+
+    pub fn decode<'decoder>(&'decoder mut self, packet: &RcPacket) -> Result<Frames<'decoder>> {
+        match *self {
+            Decoder::Video(ref mut decoder) => decoder.decode(packet).map(Frames::from),
+            Decoder::Audio(ref mut decoder) => decoder.decode(packet).map(Frames::from),
+        }
+    }
+
+    pub fn flush<'decoder>(&'decoder mut self) -> Result<Frames<'decoder>> {
+        match *self {
+            Decoder::Video(ref mut decoder) => decoder.flush().map(Frames::from),
+            Decoder::Audio(ref mut decoder) => decoder.flush().map(Frames::from),
+        }
+    }
 }
 
 impl From<video::Decoder> for Decoder {
@@ -115,5 +131,33 @@ impl From<video::Decoder> for Decoder {
 impl From<audio::Decoder> for Decoder {
     fn from(decoder: audio::Decoder) -> Self {
         Decoder::Audio(decoder)
+    }
+}
+
+pub enum Frames<'decoder> {
+    Video(video::Frames<'decoder>),
+    Audio(audio::Frames<'decoder>),
+}
+
+impl<'decoder> Iterator for Frames<'decoder> {
+    type Item = Result<Frame>;
+
+    fn next(&mut self) -> Option<Self::Item> {
+        match *self {
+            Frames::Video(ref mut frames) => frames.next().map(|res| res.map(Frame::from)),
+            Frames::Audio(ref mut frames) => frames.next().map(|res| res.map(Frame::from)),
+        }
+    }
+}
+
+impl<'decoder> From<video::Frames<'decoder>> for Frames<'decoder> {
+    fn from(frames: video::Frames<'decoder>) -> Self {
+        Frames::Video(frames)
+    }
+}
+
+impl<'decoder> From<audio::Frames<'decoder>> for Frames<'decoder> {
+    fn from(frames: audio::Frames<'decoder>) -> Self {
+        Frames::Audio(frames)
     }
 }

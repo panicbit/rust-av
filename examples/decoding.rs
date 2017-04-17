@@ -6,7 +6,7 @@ use std::fs::File;
 
 use av::errors::ResultExt;
 use av::format::Demuxer;
-use av::generic::{Decoder,Frame,Frames};
+use av::generic::{Decoder,Frame};
 
 quick_main!(decoding);
 
@@ -41,12 +41,16 @@ fn decoding() -> av::Result<()> {
         // Feed the packet to the decoder
         let frames = decoder.decode(&packet.into_rc())?;
 
-        handle_frames(frames, &mut num_video_frames, &mut num_audio_frames)?;
+        for frame in frames {
+            handle_frame(frame?, &mut num_video_frames, &mut num_audio_frames);
+        }
     }
 
     // Flush decoders
     for mut decoder in decoders {
-        handle_frames(decoder.flush()?, &mut num_video_frames, &mut num_audio_frames)?;
+        for frame in decoder.flush()? {
+            handle_frame(frame?, &mut num_video_frames, &mut num_audio_frames);
+        }
     }
 
     println!("Demuxed {} packets", num_packets);
@@ -56,14 +60,10 @@ fn decoding() -> av::Result<()> {
     Ok(())
 }
 
-fn handle_frames(frames: Frames, num_video_frames: &mut usize, num_audio_frames: &mut usize) -> av::Result<()> {
-    // Handle the decoded frames
-    for frame in frames {
-        match frame? {
-            Frame::Video(_) => *num_video_frames += 1,
-            Frame::Audio(_) => *num_audio_frames += 1,
-        }
+fn handle_frame(frame: Frame, num_video_frames: &mut usize, num_audio_frames: &mut usize) {
+    // Handle decoded frame
+    match frame {
+        Frame::Video(_) => *num_video_frames += 1,
+        Frame::Audio(_) => *num_audio_frames += 1,
     }
-
-    Ok(())
 }

@@ -3,6 +3,7 @@ mod encoder;
 pub use self::encoder::{
     Encoder,
     EncoderBuilder,
+    Packets,
 };
 
 mod decoder;

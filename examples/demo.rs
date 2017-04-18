@@ -44,12 +44,13 @@ pub fn demo() -> av::Result<()> {
     let pixel_format = AV_PIX_FMT_RGB24;
     let video_codec_id = ffi::AVCodecID::AV_CODEC_ID_H264;
     let video_codec = Codec::find_encoder_by_id(video_codec_id)?;
-    let video_encoder = video::Encoder::from_codec(video_codec)?
+    let mut video_encoder = video::Encoder::from_codec(video_codec)?
         .width(width)
         .height(height)
         .pixel_format(*video_codec.pixel_formats().first().expect("Video encoder does not support any pixel formats, wtf?"))
         .framerate(framerate)
         .open(output_format)?;
+    let video_time_base = video_encoder.time_base();
 
     // Create audio encoder
     let sample_rate = 44100;
@@ -57,11 +58,13 @@ pub fn demo() -> av::Result<()> {
     let channel_layout = CHANNEL_LAYOUT_MONO;
     let audio_codec_id = ffi::AVCodecID::AV_CODEC_ID_AAC;
     let audio_codec = Codec::find_encoder_by_id(audio_codec_id)?;
-    let audio_encoder = audio::Encoder::from_codec(audio_codec)?
+    let mut audio_encoder = audio::Encoder::from_codec(audio_codec)?
         .sample_rate(sample_rate)
         .sample_format(sample_format)
         .channel_layout(channel_layout)
         .open(output_format)?;
+    let audio_time_base = audio_encoder.time_base();
+
     let mut audio_frame_size = audio_encoder.frame_size();
     if audio_frame_size == 0 {
         audio_frame_size = 10000;
@@ -69,11 +72,12 @@ pub fn demo() -> av::Result<()> {
     println!("Audio frame size: {} samples", audio_frame_size);
 
     // Create format muxer
-    let mut muxer = Muxer::new()
-        .format(output_format)
-        .add_encoder(video_encoder)
-        .add_encoder(audio_encoder)
-        .open(file)?;
+    let mut muxer = Muxer::new(output_format, file)?;
+
+    muxer.add_stream_from_encoder(&video_encoder)?;
+    muxer.add_stream_from_encoder(&audio_encoder)?;
+
+    let mut muxer = muxer.open()?;
 
     let video_stream_id = 0;
     let audio_stream_id = 1;
@@ -86,13 +90,11 @@ pub fn demo() -> av::Result<()> {
 
     let mut audio_data = AUDIO_DATA;
     let mut audio_frame = audio::Frame::new(audio_frame_size, sample_rate, sample_format, channel_layout)?;
-    let mut next_audio_pts = 0;
-
 
     loop {
         unsafe {
             // TODO: Use av_compare_ts for audio when applicable (see muxing example)
-            if ffi::av_compare_ts(next_video_pts, muxer.encoders()[video_stream_id].as_ref().time_base, STREAM_DURATION, ffi::AVRational { num: 1, den: 1 }) >= 0 {
+            if ffi::av_compare_ts(next_video_pts, video_encoder.time_base(), STREAM_DURATION, ffi::AVRational { num: 1, den: 1 }) >= 0 {
                 break
             }
         }
@@ -103,15 +105,33 @@ pub fn demo() -> av::Result<()> {
         video_frame.set_pts(next_video_pts);
         next_video_pts += 1;
 
+        // For each channel
         for _ in 0..2 {
             if audio_data.len() < audio_frame_size { break }
             // Render audio_frame
             render_audio(&mut audio_frame, &mut audio_data);
-            muxer.send_frame(audio_stream_id, &mut audio_frame)?;
+
+            // Encode audio frames
+            for packet in audio_encoder.encode(&mut audio_frame)? {
+                muxer.mux(audio_time_base, audio_stream_id, packet?)?;
+            }
             audio_frame.pts_add(audio_frame_size as i64);
         }
 
-        muxer.send_frame(video_stream_id, &mut video_frame)?
+        // Encode video frame
+        for packet in video_encoder.encode(&mut video_frame)? {
+            muxer.mux(video_time_base, video_stream_id, packet?)?;
+        }
+    }
+
+    // Flush video encoder
+    for packet in video_encoder.flush()? {
+        muxer.mux(video_time_base, video_stream_id, packet?)?;
+    }
+
+    // Flush audio encoder
+    for packet in audio_encoder.flush()? {
+        muxer.mux(audio_time_base, audio_stream_id, packet?)?;
     }
 
     Ok(())

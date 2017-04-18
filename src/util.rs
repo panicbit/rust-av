@@ -2,6 +2,7 @@ use std::mem;
 use std::ptr;
 use std::ffi::CStr;
 use libc::c_char;
+use std::ops;
 
 pub trait PtrTakeExt {
     fn take(&mut self) -> Self;
@@ -31,4 +32,29 @@ impl AsCStr for *const c_char {
             Some(&CStr::from_ptr(self))
         }
     }
+}
+
+pub enum OwnedOrRefMut<'a, T: 'a> {
+    Owned(T),
+    Borrowed(&'a mut T),
+}
+
+impl<'a, T: 'a> ops::Deref for OwnedOrRefMut<'a, T> {
+    type Target = T;
+
+    fn deref(&self) -> &T {
+        match *self {
+            OwnedOrRefMut::Owned(ref t) => t,
+            OwnedOrRefMut::Borrowed(ref t) => t,
+        }
+    } 
+}
+
+impl<'a, T: 'a> ops::DerefMut for OwnedOrRefMut<'a, T> {
+    fn deref_mut(&mut self) -> &mut T {
+        match *self {
+            OwnedOrRefMut::Owned(ref mut t) => t,
+            OwnedOrRefMut::Borrowed(ref mut t) => t,
+        }
+    } 
 }

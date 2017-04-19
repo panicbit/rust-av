@@ -10,6 +10,7 @@ use av::format::{
 };
 use av::ffi::AVPixelFormat::*;
 use av::ffi::AVSampleFormat::*;
+use av::ffi::AVRational;
 use av::ffi;
 use av::audio::constants::CHANNEL_LAYOUT_MONO;
 use std::cmp::min;
@@ -18,8 +19,10 @@ use av::{
     video,
 };
 use av::errors::ResultExt;
+use av::common::Ts;
 
-const STREAM_DURATION: i64 = 10;
+const MOVIE_DURATION: i64 = 10;
+const MOVIE_TIMEBASE: AVRational = AVRational { num: 1, den: 1 };
 const VIDEO_DATA: &'static [u8] = include_bytes!("../rgb-600x400.data");
 const AUDIO_DATA: &'static [u8] = include_bytes!("../music-44100hz-f32-le-mono.raw");
 
@@ -36,6 +39,8 @@ pub fn demo() -> av::Result<()> {
         .ok_or("output format not found")?;
     println!("{:?}", output_format);
 
+    let final_ts = Ts::new(MOVIE_DURATION, MOVIE_TIMEBASE);
+
     // Create video encoder
     let width = 600;
     let height = 400;
@@ -51,6 +56,7 @@ pub fn demo() -> av::Result<()> {
         .framerate(framerate)
         .open(output_format)?;
     let video_time_base = video_encoder.time_base();
+    let mut video_ts = Ts::new(0, video_time_base);
 
     // Create audio encoder
     let sample_rate = 44100;
@@ -64,6 +70,7 @@ pub fn demo() -> av::Result<()> {
         .channel_layout(channel_layout)
         .open(output_format)?;
     let audio_time_base = audio_encoder.time_base();
+    let mut audio_ts = Ts::new(0, audio_time_base);
 
     let mut audio_frame_size = audio_encoder.frame_size();
     if audio_frame_size == 0 {
@@ -86,36 +93,26 @@ pub fn demo() -> av::Result<()> {
 
     let mut video_frame_buffer = VIDEO_DATA.to_vec();
     let mut video_frame = video::Frame::new(width, height, pixel_format, align)?;
-    let mut next_video_pts = 0;
-
     let mut audio_data = AUDIO_DATA;
     let mut audio_frame = audio::Frame::new(audio_frame_size, sample_rate, sample_format, channel_layout)?;
 
-    loop {
-        unsafe {
-            // TODO: Use av_compare_ts for audio when applicable (see muxing example)
-            if ffi::av_compare_ts(next_video_pts, video_encoder.time_base(), STREAM_DURATION, ffi::AVRational { num: 1, den: 1 }) >= 0 {
-                break
-            }
-        }
-
+    while video_ts < final_ts {
         // Render video_frame
-        render_demo_bar(&mut video_frame_buffer, width, height, next_video_pts);
+        render_demo_bar(&mut video_frame_buffer, width, height, video_ts.index());
         video_frame.fill_channel(0, &video_frame_buffer)?;
-        video_frame.set_pts(next_video_pts);
-        next_video_pts += 1;
+        video_ts += 1;
+        video_frame.set_pts(video_ts.index());
 
-        // Render frames twice to keep some balance
-        // TODO: Use timestamps
-        for _ in 0..2 {
-            if audio_data.len() < audio_frame_size { break }
+        // Catch up audio frames with video frames (if there is enough data left)
+        while audio_ts < video_ts && audio_data.len() >= audio_frame_size {
             // Render audio_frame
             render_audio(&mut audio_frame, &mut audio_data);
 
             // Encode audio frames
             muxer.mux_all(audio_encoder.encode(&mut audio_frame)?, audio_stream_id, audio_time_base)?;
 
-            audio_frame.pts_add(audio_frame_size as i64);
+            audio_ts += audio_frame_size as i64;
+            audio_frame.set_pts(audio_ts.index());
         }
 
         // Encode video frame

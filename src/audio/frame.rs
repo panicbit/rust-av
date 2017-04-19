@@ -81,6 +81,10 @@ impl Frame {
         }
     }
 
+    pub fn num_samples(&self) -> usize {
+        self.as_ref().nb_samples as usize
+    }
+
     pub fn set_pts(&mut self, pts: i64) {
         self.as_mut().pts = pts;
     }

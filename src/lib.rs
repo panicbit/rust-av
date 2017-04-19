@@ -14,7 +14,7 @@ use util::AsCStr;
 
 #[macro_use]
 mod util;
-mod common;
+pub mod common;
 
 pub mod format;
 pub mod video;

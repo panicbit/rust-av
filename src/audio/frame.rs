@@ -81,8 +81,8 @@ impl Frame {
         }
     }
 
-    pub fn pts_add(&mut self, amount: i64) {
-        self.as_mut().pts += amount;
+    pub fn set_pts(&mut self, pts: i64) {
+        self.as_mut().pts = pts;
     }
 }
 

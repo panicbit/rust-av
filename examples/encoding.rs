@@ -98,7 +98,8 @@ pub fn demo() -> av::Result<()> {
     let mut audio_frame = audio::Frame::new(audio_frame_size, sample_rate, sample_format, channel_layout)?;
 
     loop {
-        let (index, ts) = timestamps.iter_mut().enumerate().min_by_key(|&(_, &mut ts)| ts).unwrap();
+        let index = timestamps.iter().enumerate().min_by_key(|&(_, ts)| ts).unwrap().0;
+        let ts = &mut timestamps[index];
         let encoder = &mut encoders[index];
 
         if *ts >= final_ts {

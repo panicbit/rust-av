@@ -125,7 +125,7 @@ impl Frame {
                 target[..linesize].copy_from_slice(&source[..linesize]);
             }
 
-            Ok(())   
+            Ok(())
         }
     }
 }

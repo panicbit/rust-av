@@ -105,34 +105,27 @@ pub fn demo() -> av::Result<()> {
         video_frame.set_pts(next_video_pts);
         next_video_pts += 1;
 
-        // For each channel
+        // Render frames twice to keep some balance
+        // TODO: Use timestamps
         for _ in 0..2 {
             if audio_data.len() < audio_frame_size { break }
             // Render audio_frame
             render_audio(&mut audio_frame, &mut audio_data);
 
             // Encode audio frames
-            for packet in audio_encoder.encode(&mut audio_frame)? {
-                muxer.mux(audio_time_base, audio_stream_id, packet?)?;
-            }
+            muxer.mux_all(audio_encoder.encode(&mut audio_frame)?, audio_stream_id, audio_time_base)?;
+
             audio_frame.pts_add(audio_frame_size as i64);
         }
 
         // Encode video frame
-        for packet in video_encoder.encode(&mut video_frame)? {
-            muxer.mux(video_time_base, video_stream_id, packet?)?;
-        }
+        muxer.mux_all(video_encoder.encode(&mut video_frame)?, video_stream_id, video_time_base)?;
     }
 
     // Flush video encoder
-    for packet in video_encoder.flush()? {
-        muxer.mux(video_time_base, video_stream_id, packet?)?;
-    }
-
+    muxer.mux_all(video_encoder.flush()?, video_stream_id, video_time_base)?;
     // Flush audio encoder
-    for packet in audio_encoder.flush()? {
-        muxer.mux(audio_time_base, audio_stream_id, packet?)?;
-    }
+    muxer.mux_all(audio_encoder.flush()?, audio_stream_id, audio_time_base)?;
 
     Ok(())
 }

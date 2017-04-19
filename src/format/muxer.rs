@@ -22,6 +22,7 @@ use ffi::{
 use generic::{
     Encoder,
     RefMutFrame,
+    Packets,
 };
 use format::OutputFormat;
 use util::AsCStr;
@@ -78,7 +79,7 @@ impl Muxer {
         }
     }
 
-    pub fn mux(&mut self, time_base: AVRational, stream_index: usize, packet: RcPacket) -> Result<()> {
+    pub fn mux(&mut self, packet: RcPacket, stream_index: usize, time_base: AVRational) -> Result<()> {
         unsafe {
             if stream_index >= self.num_streams() {
                 bail!("Invalid stream index {}. Only {} stream(s) exist(s).", stream_index, self.num_streams());
@@ -99,6 +100,13 @@ impl Muxer {
 
             Ok(())
         }
+    }
+
+    pub fn mux_all<'a, P: Into<Packets<'a>>>(&mut self, packets: P, stream_index: usize, time_base: AVRational) -> Result<()> {
+        for packet in packets.into() {
+            self.mux(packet?, stream_index, time_base)?;
+        }
+        Ok(())
     }
 
     pub fn close(mut self) -> Result<()> {

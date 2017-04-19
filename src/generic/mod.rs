@@ -1,6 +1,6 @@
 
 mod encoder;
-pub use self::encoder::Encoder;
+pub use self::encoder::{Encoder,Packets};
 
 mod decoder;
 pub use self::decoder::{Decoder,Frames};

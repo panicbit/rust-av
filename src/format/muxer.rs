@@ -79,16 +79,17 @@ impl Muxer {
         }
     }
 
-    pub fn mux(&mut self, packet: RcPacket, stream_index: usize, time_base: AVRational) -> Result<()> {
+    pub fn mux(&mut self, packet: RcPacket, stream_index: usize) -> Result<()> {
         unsafe {
             if stream_index >= self.num_streams() {
                 bail!("Invalid stream index {}. Only {} stream(s) exist(s).", stream_index, self.num_streams());
             }
 
+            let packet_time_base = packet.time_base();
             let packet = &mut *packet.as_mut_ptr();
             let stream = *self.as_ref().streams.offset(stream_index as isize);
             let stream_time_base = (*stream).time_base;
-            ffi::av_packet_rescale_ts(packet, time_base, stream_time_base);
+            ffi::av_packet_rescale_ts(packet, packet_time_base, stream_time_base);
             packet.stream_index = stream_index as i32;
 
             // // TODO: log_packet(muxer.as_mut_ptr(), packet);
@@ -102,9 +103,9 @@ impl Muxer {
         }
     }
 
-    pub fn mux_all<'a, P: Into<Packets<'a>>>(&mut self, packets: P, stream_index: usize, time_base: AVRational) -> Result<()> {
+    pub fn mux_all<'a, P: Into<Packets<'a>>>(&mut self, packets: P, stream_index: usize) -> Result<()> {
         for packet in packets.into() {
-            self.mux(packet?, stream_index, time_base)?;
+            self.mux(packet?, stream_index)?;
         }
         Ok(())
     }

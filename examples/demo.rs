@@ -109,20 +109,20 @@ pub fn demo() -> av::Result<()> {
             render_audio(&mut audio_frame, &mut audio_data);
 
             // Encode audio frames
-            muxer.mux_all(audio_encoder.encode(&mut audio_frame)?, audio_stream_id, audio_time_base)?;
+            muxer.mux_all(audio_encoder.encode(&mut audio_frame)?, audio_stream_id)?;
 
             audio_ts += audio_frame_size as i64;
             audio_frame.set_pts(audio_ts.index());
         }
 
         // Encode video frame
-        muxer.mux_all(video_encoder.encode(&mut video_frame)?, video_stream_id, video_time_base)?;
+        muxer.mux_all(video_encoder.encode(&mut video_frame)?, video_stream_id)?;
     }
 
     // Flush video encoder
-    muxer.mux_all(video_encoder.flush()?, video_stream_id, video_time_base)?;
+    muxer.mux_all(video_encoder.flush()?, video_stream_id)?;
     // Flush audio encoder
-    muxer.mux_all(audio_encoder.flush()?, audio_stream_id, audio_time_base)?;
+    muxer.mux_all(audio_encoder.flush()?, audio_stream_id)?;
 
     Ok(())
 }

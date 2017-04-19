@@ -8,6 +8,7 @@ use ffi::{
     AVFormatContext,
     AVInputFormat,
     AV_TIME_BASE,
+    AVRational,
 };
 use util::AsCStr;
 use errors::*;
@@ -133,7 +134,10 @@ impl Demuxer {
                 }
             }
 
-            Ok(Some(CowPacket::from_ptr(packet)))
+            let time_base = self.streams().nth((*packet).stream_index as usize).map(|stream| stream.time_base())
+                .ok_or("Demuxed packet has invalid stream index")?;
+
+            Ok(Some(CowPacket::from_ptr(packet, time_base)))
         }
     }
 }

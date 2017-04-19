@@ -276,7 +276,7 @@ impl<'encoder> Iterator for Packets<'encoder> {
                 }
             }
 
-            let packet = RcPacket::from_ptr(packet);
+            let packet = RcPacket::from_ptr(packet, self.encoder.time_base());
 
             Some(Ok(packet))
         }

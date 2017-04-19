@@ -1,5 +1,5 @@
 use std::marker::PhantomData;
-use ffi::{self, AVPacket};
+use ffi::{self, AVPacket, AVRational};
 use std::mem;
 use std::slice;
 
@@ -7,13 +7,15 @@ use std::slice;
 /// e.g. by Demuxer::read_packet
 pub struct RefPacket<'packet> {
     ptr: *mut AVPacket,
+    time_base: AVRational,
     _phantom: PhantomData<&'packet AVPacket>,
 }
 
 impl<'packet> RefPacket<'packet> {
-    pub unsafe fn from_ptr(ptr: *mut AVPacket) -> RefPacket<'packet> {
+    pub unsafe fn from_ptr(ptr: *mut AVPacket, time_base: AVRational) -> RefPacket<'packet> {
         RefPacket {
             ptr: ptr,
+            time_base: time_base,
             _phantom: PhantomData,
         }
     }
@@ -27,6 +29,10 @@ impl<'packet> RefPacket<'packet> {
             let packet = self.as_raw();
             slice::from_raw_parts(packet.data, packet.size as usize)
         }
+    }
+
+    pub fn time_base(&self) -> AVRational {
+        self.time_base
     }
 }
 

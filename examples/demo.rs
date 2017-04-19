@@ -55,8 +55,7 @@ pub fn demo() -> av::Result<()> {
         .pixel_format(*video_codec.pixel_formats().first().expect("Video encoder does not support any pixel formats, wtf?"))
         .framerate(framerate)
         .open(output_format)?;
-    let video_time_base = video_encoder.time_base();
-    let mut video_ts = Ts::new(0, video_time_base);
+    let mut video_ts = Ts::new(0, video_encoder.time_base());
 
     // Create audio encoder
     let sample_rate = 44100;
@@ -69,8 +68,7 @@ pub fn demo() -> av::Result<()> {
         .sample_format(sample_format)
         .channel_layout(channel_layout)
         .open(output_format)?;
-    let audio_time_base = audio_encoder.time_base();
-    let mut audio_ts = Ts::new(0, audio_time_base);
+    let mut audio_ts = Ts::new(0, audio_encoder.time_base());
 
     let mut audio_frame_size = audio_encoder.frame_size();
     if audio_frame_size == 0 {
@@ -150,5 +148,5 @@ fn render_audio(audio_frame: &mut audio::Frame, audio_data: &mut &[u8]) {
 
     audio_frame.data_mut()[0][..buf_len].copy_from_slice(&audio_data[..buf_len]);
     *audio_data = &audio_data[buf_len..];
-    println!("### Remaining bytes: {}", audio_data.len());
+    println!("### Remaining audio bytes: {}", audio_data.len());
 }

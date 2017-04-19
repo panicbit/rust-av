@@ -98,7 +98,13 @@ impl Frame {
 
     pub fn channel_mut(&mut self, channel_index: usize) -> &mut [u8] {
         unsafe {
+
+            if ffi::av_frame_make_writable(self.ptr) < 0 {
+                panic!("av_frame_make_writable failed (OOM?)");
+            }
+
             let buf_len = self.height() * self.linesize(channel_index);
+
             slice::from_raw_parts_mut(self.as_mut().data[channel_index], buf_len)
         }
     }
@@ -106,11 +112,9 @@ impl Frame {
     pub fn fill_channel(&mut self, channel_index: usize, source: &[u8]) -> Result<()> {
         unsafe {
             use std::cmp::min;
-            // when we pass a frame to the encoder, it may keep a reference to it
-            // internally; make sure we do not overwrite it here
-            let res = ffi::av_frame_make_writable(self.as_mut_ptr());
-            if res < 0 {
-                bail!("Failed to make frame writeable");
+
+            if ffi::av_frame_make_writable(self.ptr) < 0 {
+                panic!("av_frame_make_writable failed (OOM?)");
             }
 
             let source_linesize = source.len() / self.height();

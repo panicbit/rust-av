@@ -2,6 +2,7 @@ use std::slice;
 use libc::c_int;
 use audio::ChannelLayout;
 use ffi::{
+    self,
     AVFrame,
     AVSampleFormat,
     av_frame_alloc,
@@ -64,6 +65,10 @@ impl Frame {
 
     pub fn data_mut(&mut self) -> [&mut [u8]; AV_NUM_DATA_POINTERS as usize] {
         unsafe {
+            if ffi::av_frame_make_writable(self.ptr) < 0 {
+                panic!("av_frame_make_writable failed (OOM?)");
+            }
+
             // For audio only linesize[0] is set. Every channel needs to have the same size.
             let buf_len = self.as_ref().linesize[0] as usize;
             let mut channels: [&mut [u8]; AV_NUM_DATA_POINTERS as usize] = Default::default();

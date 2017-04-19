@@ -81,9 +81,7 @@ impl Encoder {
         }
     }
 
-    pub fn flush<'a, F>(self) -> Result<Packets<'static>> where
-        F: Into<RefMutFrame<'a>>,
-    {
+    pub fn flush<'a>(self) -> Result<Packets<'static>> {
         match self {
             Encoder::Video(encoder) => encoder.flush().map(Packets::from),
             Encoder::Audio(encoder) => encoder.flush().map(Packets::from),

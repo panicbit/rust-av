@@ -1,4 +1,5 @@
 use std::fs::File;
+use std::net::TcpStream;
 use std::io::{Read,Write,Seek,SeekFrom};
 use std::{mem, slice};
 use libc::{self, c_void, c_int, uint8_t, int64_t};
@@ -54,14 +55,14 @@ impl IOContext {
         self.ptr
     }
 
-    pub fn from_reader<R: AVRead>(input: R) -> IOContext  {
+    pub fn from_reader<R: AVRead>(mut input: R) -> IOContext  {
         unsafe {
             let buffer_size = R::buffer_size();
             let buffer = ffi::av_malloc(buffer_size as usize * mem::size_of::<uint8_t>()) as _;
             let write_flag = 0; // Make buffer read-only for ffmpeg
             let read_packet = Some(ffi_read_packet::<R> as _);
             let write_packet = None;
-            let seek = Some(ffi_seek::<R> as _);
+            let seek = input.seek(SeekFrom::Current(0)).map(|_| ffi_seek::<R> as _);
             let this = Box::into_raw(Box::new(input)) as *mut c_void;
             let avio_ctx = ffi::avio_alloc_context(
                 buffer,
@@ -82,14 +83,14 @@ impl IOContext {
         }
     }
 
-    pub fn from_writer<W: AVWrite>(output: W) -> IOContext  {
+    pub fn from_writer<W: AVWrite>(mut output: W) -> IOContext  {
         unsafe {
             let buffer_size = W::buffer_size();
             let buffer = ffi::av_malloc(buffer_size as usize * mem::size_of::<uint8_t>()) as _;
             let write_flag = 1; // Make buffer writable for ffmpeg
             let read_packet = None;
             let write_packet = Some(ffi_write_packet::<W> as _);
-            let seek = Some(ffi_seek::<W> as _);
+            let seek = output.seek(SeekFrom::Current(0)).map(|_| ffi_seek::<W> as _);;
             let this = Box::into_raw(Box::new(output)) as *mut c_void;
             let avio_ctx = ffi::avio_alloc_context(
                 buffer,
@@ -205,6 +206,27 @@ impl AVRead for File {
 }
 
 impl AVWrite for File {
+    fn write_packet(&mut self, buf: &[u8]) -> Option<usize> {
+        self.write(buf).ok()
+    }
+}
+
+impl AVSeek for TcpStream {
+    fn seek(&mut self, _pos: SeekFrom) -> Option<u64> {
+        None
+    }
+    fn size(&self) -> Option<u64> {
+        None
+    }
+}
+
+impl AVRead for TcpStream {
+    fn read_packet(&mut self, buf: &mut [u8]) -> Option<usize> {
+        self.read(buf).ok()
+    }
+}
+
+impl AVWrite for TcpStream {
     fn write_packet(&mut self, buf: &[u8]) -> Option<usize> {
         self.write(buf).ok()
     }

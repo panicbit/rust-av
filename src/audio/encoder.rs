@@ -46,8 +46,13 @@ impl Encoder {
         self.as_ref().time_base
     }
 
-    pub fn frame_size(&self) -> usize {
-        self.as_ref().frame_size as usize
+    // Returns the frame size required by the encoder.
+    // If the result is `None`, any frame size can be used.
+    pub fn frame_size(&self) -> Option<usize> {
+        match self.as_ref().frame_size as usize {
+            0 => None,
+            size => Some(size),
+        }
     }
 
     pub fn codec(&self) -> Codec {

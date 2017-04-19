@@ -20,7 +20,7 @@ use av::{
 };
 use av::errors::ResultExt;
 use av::common::Ts;
-use av::generic::Encoder;
+use av::generic::{Encoder, Frame};
 
 const MOVIE_DURATION: i64 = 10;
 const MOVIE_TIMEBASE: AVRational = AVRational { num: 1, den: 1 };
@@ -43,6 +43,7 @@ pub fn demo() -> av::Result<()> {
     let final_ts = Ts::new(MOVIE_DURATION, MOVIE_TIMEBASE);
     let mut timestamps = Vec::<Ts>::new();
     let mut encoders = Vec::<Encoder>::new();
+    let mut frames = Vec::<Frame>::new();
 
     // Create video encoder
     let width = 600;
@@ -60,6 +61,9 @@ pub fn demo() -> av::Result<()> {
         .open(output_format)?;
     timestamps.push(Ts::new(0, video_encoder.time_base()));
     encoders.push(video_encoder.into());
+    let mut video_frame_buffer = VIDEO_DATA.to_vec();
+    let video_frame = video::Frame::new(width, height, pixel_format, align)?;
+    frames.push(video_frame.into());
 
     // Create audio encoder
     let sample_rate = 44100;
@@ -78,6 +82,11 @@ pub fn demo() -> av::Result<()> {
         audio_frame_size = 10000;
     }
     println!("Audio frame size: {} samples", audio_frame_size);
+
+    let mut audio_data = AUDIO_DATA;
+    let audio_frame = audio::Frame::new(audio_frame_size, sample_rate, sample_format, channel_layout)?;
+    frames.push(audio_frame.into());
+
     timestamps.push(Ts::new(0, audio_encoder.time_base()));
     encoders.push(audio_encoder.into());
 
@@ -92,11 +101,6 @@ pub fn demo() -> av::Result<()> {
 
     muxer.dump_info();
 
-    let mut video_frame_buffer = VIDEO_DATA.to_vec();
-    let mut video_frame = video::Frame::new(width, height, pixel_format, align)?;
-    let mut audio_data = AUDIO_DATA;
-    let mut audio_frame = audio::Frame::new(audio_frame_size, sample_rate, sample_format, channel_layout)?;
-
     loop {
         let index = timestamps.iter().enumerate().min_by_key(|&(_, ts)| ts).unwrap().0;
         let ts = &mut timestamps[index];
@@ -108,23 +112,26 @@ pub fn demo() -> av::Result<()> {
 
         match *encoder {
             Encoder::Video(ref mut encoder) => {
-                // Render video_frame
-                render_demo_bar(&mut video_frame_buffer, width, height, ts.index());
-                video_frame.fill_channel(0, &video_frame_buffer)?;
-                video_frame.set_pts(ts.index());
+                let frame = frames[index].as_mut_video_frame().unwrap();
+
+                // Render video frame
+                frame.set_pts(ts.index());
+                render_demo_bar(frame, &mut video_frame_buffer, ts)?;
                 *ts += 1;
 
                 // Encode and mux video frame
-                muxer.mux_all(encoder.encode(&mut video_frame)?, index)?;
+                muxer.mux_all(encoder.encode(frame)?, index)?;
             },
             Encoder::Audio(ref mut encoder) => {
-                // Render audio_frame
-                render_audio(&mut audio_frame, &mut audio_data);
-                audio_frame.set_pts(ts.index());
+                let frame = frames[index].as_mut_audio_frame().unwrap();
+
+                // Render audio frame
+                frame.set_pts(ts.index());
+                render_audio(frame, &mut audio_data);
                 *ts += audio_frame_size as i64;
 
-                // Encode and mux audio frames
-                muxer.mux_all(encoder.encode(&mut audio_frame)?, index)?;
+                // Encode and mux audio frame
+                muxer.mux_all(encoder.encode(frame)?, index)?;
             },
         }
     }
@@ -137,10 +144,11 @@ pub fn demo() -> av::Result<()> {
     Ok(())
 }
 
-fn render_demo_bar(video_frame_buffer: &mut [u8], width: usize, _height: usize, pts: i64) {
+fn render_demo_bar(frame: &mut video::Frame, video_frame_buffer: &mut [u8], ts: &Ts) -> av::Result<()> {
+    let width = frame.width();
     let max_pts = 300;
     let pixel_per_pts = width / max_pts;
-    let bar_pos = pts as usize * pixel_per_pts;
+    let bar_pos = ts.index() as usize * pixel_per_pts;
     let bytes_per_pixel = 3;
 
     video_frame_buffer.copy_from_slice(VIDEO_DATA);
@@ -151,6 +159,8 @@ fn render_demo_bar(video_frame_buffer: &mut [u8], width: usize, _height: usize, 
             }
         }
     }
+
+    frame.fill_channel(0, &video_frame_buffer)
 }
 
 fn render_audio(audio_frame: &mut audio::Frame, audio_data: &mut &[u8]) {

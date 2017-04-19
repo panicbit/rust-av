@@ -21,6 +21,20 @@ impl Frame {
             _ => None,
         }
     }
+
+    pub fn as_mut_video_frame(&mut self) -> Option<&mut video::Frame> {
+        match *self {
+            Frame::Video(ref mut frame) => Some(frame),
+            _ => None,
+        }
+    }
+
+    pub fn as_mut_audio_frame(&mut self) -> Option<&mut audio::Frame> {
+        match *self {
+            Frame::Audio(ref mut frame) => Some(frame),
+            _ => None,
+        }
+    }
 }
 
 impl From<video::Frame> for Frame {

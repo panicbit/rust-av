@@ -10,6 +10,7 @@ use av::format::{
 };
 use av::ffi::AVPixelFormat::*;
 use av::ffi::AVSampleFormat::*;
+use av::ffi::AVCodecID::*;
 use av::ffi::AVRational;
 use av::ffi;
 use av::audio::constants::CHANNEL_LAYOUT_MONO;
@@ -26,7 +27,6 @@ const MOVIE_DURATION: i64 = 10;
 const MOVIE_TIMEBASE: AVRational = AVRational { num: 1, den: 1 };
 const VIDEO_DATA: &'static [u8] = include_bytes!("../rgb-600x400.data");
 const AUDIO_DATA: &'static [u8] = include_bytes!("../music-44100hz-f32-le-mono.raw");
-
 
 quick_main!(demo);
 
@@ -46,49 +46,44 @@ pub fn demo() -> av::Result<()> {
     let mut frames = Vec::<Frame>::new();
 
     // Create video encoder
-    let width = 600;
-    let height = 400;
-    let framerate = 30;
-    let align = 32;
-    let pixel_format = AV_PIX_FMT_RGB24;
-    let video_codec_id = ffi::AVCodecID::AV_CODEC_ID_H264;
-    let video_codec = Codec::find_encoder_by_id(video_codec_id)?;
-    let video_encoder = video::Encoder::from_codec(video_codec)?
-        .width(width)
-        .height(height)
-        .pixel_format(*video_codec.pixel_formats().first().expect("Video encoder does not support any pixel formats, wtf?"))
-        .framerate(framerate)
-        .open(output_format)?;
-    timestamps.push(Ts::new(0, video_encoder.time_base()));
-    encoders.push(video_encoder.into());
+    {
+        let width = 600;
+        let height = 400;
+        let framerate = 30;
+        let align = 32;
+        let video_codec = Codec::find_encoder_by_id(AV_CODEC_ID_H264)?;
+        let video_encoder = video::Encoder::from_codec(video_codec)?
+            .width(width)
+            .height(height)
+            .pixel_format(*video_codec.pixel_formats().first().expect("Video encoder does not support any pixel formats, wtf?"))
+            .framerate(framerate)
+            .open(output_format)?;
+
+        frames.push(video::Frame::new(width, height, AV_PIX_FMT_RGB24, align)?.into());
+        timestamps.push(Ts::new(0, video_encoder.time_base()));
+        encoders.push(video_encoder.into());
+    }
     let mut video_frame_buffer = VIDEO_DATA.to_vec();
-    let video_frame = video::Frame::new(width, height, pixel_format, align)?;
-    frames.push(video_frame.into());
 
     // Create audio encoder
-    let sample_rate = 44100;
-    let sample_format = AV_SAMPLE_FMT_FLTP;
-    let channel_layout = CHANNEL_LAYOUT_MONO;
-    let audio_codec_id = ffi::AVCodecID::AV_CODEC_ID_AAC;
-    let audio_codec = Codec::find_encoder_by_id(audio_codec_id)?;
-    let audio_encoder = audio::Encoder::from_codec(audio_codec)?
-        .sample_rate(sample_rate)
-        .sample_format(sample_format)
-        .channel_layout(channel_layout)
-        .open(output_format)?;
+    {
+        let sample_rate = 44100;
+        let sample_format = AV_SAMPLE_FMT_FLTP;
+        let channel_layout = CHANNEL_LAYOUT_MONO;
+        let audio_codec = Codec::find_encoder_by_id(AV_CODEC_ID_AAC)?;
+        let audio_encoder = audio::Encoder::from_codec(audio_codec)?
+            .sample_rate(sample_rate)
+            .sample_format(sample_format)
+            .channel_layout(channel_layout)
+            .open(output_format)?;
+        let audio_frame_size = audio_encoder.frame_size().unwrap_or(10000);
+        let audio_frame = audio::Frame::new(audio_frame_size, sample_rate, sample_format, channel_layout)?;
 
-    let mut audio_frame_size = audio_encoder.frame_size();
-    if audio_frame_size == 0 {
-        audio_frame_size = 10000;
+        frames.push(audio_frame.into());
+        timestamps.push(Ts::new(0, audio_encoder.time_base()));
+        encoders.push(audio_encoder.into());
     }
-    println!("Audio frame size: {} samples", audio_frame_size);
-
     let mut audio_data = AUDIO_DATA;
-    let audio_frame = audio::Frame::new(audio_frame_size, sample_rate, sample_format, channel_layout)?;
-    frames.push(audio_frame.into());
-
-    timestamps.push(Ts::new(0, audio_encoder.time_base()));
-    encoders.push(audio_encoder.into());
 
     // Create format muxer
     let mut muxer = Muxer::new(output_format, file)?;
@@ -128,7 +123,7 @@ pub fn demo() -> av::Result<()> {
                 // Render audio frame
                 frame.set_pts(ts.index());
                 render_audio(frame, &mut audio_data);
-                *ts += audio_frame_size as i64;
+                *ts += frame.num_samples() as i64;
 
                 // Encode and mux audio frame
                 muxer.mux_all(encoder.encode(frame)?, index)?;

@@ -20,6 +20,7 @@ use av::{
 };
 use av::errors::ResultExt;
 use av::common::Ts;
+use av::generic::Encoder;
 
 const MOVIE_DURATION: i64 = 10;
 const MOVIE_TIMEBASE: AVRational = AVRational { num: 1, den: 1 };
@@ -40,6 +41,8 @@ pub fn demo() -> av::Result<()> {
     println!("{:?}", output_format);
 
     let final_ts = Ts::new(MOVIE_DURATION, MOVIE_TIMEBASE);
+    let mut timestamps = Vec::<Ts>::new();
+    let mut encoders = Vec::<Encoder>::new();
 
     // Create video encoder
     let width = 600;
@@ -49,13 +52,14 @@ pub fn demo() -> av::Result<()> {
     let pixel_format = AV_PIX_FMT_RGB24;
     let video_codec_id = ffi::AVCodecID::AV_CODEC_ID_H264;
     let video_codec = Codec::find_encoder_by_id(video_codec_id)?;
-    let mut video_encoder = video::Encoder::from_codec(video_codec)?
+    let video_encoder = video::Encoder::from_codec(video_codec)?
         .width(width)
         .height(height)
         .pixel_format(*video_codec.pixel_formats().first().expect("Video encoder does not support any pixel formats, wtf?"))
         .framerate(framerate)
         .open(output_format)?;
-    let mut video_ts = Ts::new(0, video_encoder.time_base());
+    timestamps.push(Ts::new(0, video_encoder.time_base()));
+    encoders.push(video_encoder.into());
 
     // Create audio encoder
     let sample_rate = 44100;
@@ -63,29 +67,28 @@ pub fn demo() -> av::Result<()> {
     let channel_layout = CHANNEL_LAYOUT_MONO;
     let audio_codec_id = ffi::AVCodecID::AV_CODEC_ID_AAC;
     let audio_codec = Codec::find_encoder_by_id(audio_codec_id)?;
-    let mut audio_encoder = audio::Encoder::from_codec(audio_codec)?
+    let audio_encoder = audio::Encoder::from_codec(audio_codec)?
         .sample_rate(sample_rate)
         .sample_format(sample_format)
         .channel_layout(channel_layout)
         .open(output_format)?;
-    let mut audio_ts = Ts::new(0, audio_encoder.time_base());
 
     let mut audio_frame_size = audio_encoder.frame_size();
     if audio_frame_size == 0 {
         audio_frame_size = 10000;
     }
     println!("Audio frame size: {} samples", audio_frame_size);
+    timestamps.push(Ts::new(0, audio_encoder.time_base()));
+    encoders.push(audio_encoder.into());
 
     // Create format muxer
     let mut muxer = Muxer::new(output_format, file)?;
 
-    muxer.add_stream_from_encoder(&video_encoder)?;
-    muxer.add_stream_from_encoder(&audio_encoder)?;
+    for encoder in &encoders {
+        muxer.add_stream_from_encoder(&encoder)?;
+    }
 
     let mut muxer = muxer.open()?;
-
-    let video_stream_id = 0;
-    let audio_stream_id = 1;
 
     muxer.dump_info();
 
@@ -94,33 +97,41 @@ pub fn demo() -> av::Result<()> {
     let mut audio_data = AUDIO_DATA;
     let mut audio_frame = audio::Frame::new(audio_frame_size, sample_rate, sample_format, channel_layout)?;
 
-    while video_ts < final_ts {
-        // Render video_frame
-        render_demo_bar(&mut video_frame_buffer, width, height, video_ts.index());
-        video_frame.fill_channel(0, &video_frame_buffer)?;
-        video_ts += 1;
-        video_frame.set_pts(video_ts.index());
+    loop {
+        let (index, ts) = timestamps.iter_mut().enumerate().min_by_key(|&(_, &mut ts)| ts).unwrap();
+        let encoder = &mut encoders[index];
 
-        // Catch up audio frames with video frames (if there is enough data left)
-        while audio_ts < video_ts && audio_data.len() >= audio_frame_size {
-            // Render audio_frame
-            render_audio(&mut audio_frame, &mut audio_data);
-
-            // Encode audio frames
-            muxer.mux_all(audio_encoder.encode(&mut audio_frame)?, audio_stream_id)?;
-
-            audio_ts += audio_frame_size as i64;
-            audio_frame.set_pts(audio_ts.index());
+        if *ts >= final_ts {
+            break;
         }
 
-        // Encode video frame
-        muxer.mux_all(video_encoder.encode(&mut video_frame)?, video_stream_id)?;
+        match *encoder {
+            Encoder::Video(ref mut encoder) => {
+                // Render video_frame
+                render_demo_bar(&mut video_frame_buffer, width, height, ts.index());
+                video_frame.fill_channel(0, &video_frame_buffer)?;
+                video_frame.set_pts(ts.index());
+                *ts += 1;
+
+                // Encode and mux video frame
+                muxer.mux_all(encoder.encode(&mut video_frame)?, index)?;
+            },
+            Encoder::Audio(ref mut encoder) => {
+                // Render audio_frame
+                render_audio(&mut audio_frame, &mut audio_data);
+                audio_frame.set_pts(ts.index());
+                *ts += audio_frame_size as i64;
+
+                // Encode and mux audio frames
+                muxer.mux_all(encoder.encode(&mut audio_frame)?, index)?;
+            },
+        }
     }
 
-    // Flush video encoder
-    muxer.mux_all(video_encoder.flush()?, video_stream_id)?;
-    // Flush audio encoder
-    muxer.mux_all(audio_encoder.flush()?, audio_stream_id)?;
+    // Flush encoders
+    for (index, encoder) in encoders.into_iter().enumerate() {
+        muxer.mux_all(encoder.flush()?, index)?;
+    }
 
     Ok(())
 }

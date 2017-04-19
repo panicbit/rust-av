@@ -33,6 +33,7 @@ impl Frame {
             }
 
             // Fill in required information
+            (*frame).pts = 0;
             (*frame).format = pixel_format as c_int;
             (*frame).width = width as c_int;
             (*frame).height = height as c_int;

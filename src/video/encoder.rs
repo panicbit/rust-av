@@ -202,7 +202,7 @@ impl EncoderBuilder {
     }
 
     pub fn framerate_raw(&mut self, raw: &AVRational) -> &mut Self {
-        self.time_base = Some(raw); self
+        self.time_base = Some(*raw); self
     }
 
     pub fn open(&self, format: OutputFormat) -> Result<Encoder> {

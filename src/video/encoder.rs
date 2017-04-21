@@ -201,6 +201,10 @@ impl EncoderBuilder {
         self.time_base = Some(AVRational { num: 1, den: framerate as i32 }); self
     }
 
+    pub fn framerate_raw(&mut self, raw: &AVRational) -> &mut Self {
+        self.time_base = Some(raw); self
+    }
+
     pub fn open(&self, format: OutputFormat) -> Result<Encoder> {
         unsafe {
             let width = self.width.ok_or("Video encoder width not set")?;

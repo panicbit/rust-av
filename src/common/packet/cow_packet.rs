@@ -1,5 +1,6 @@
-use ffi::{AVPacket, AVRational};
+use ffi::AVPacket;
 use super::*;
+use common::Timebase;
 
 /// A copy-on-write packet
 pub enum CowPacket<'packet> {
@@ -8,7 +9,7 @@ pub enum CowPacket<'packet> {
 }
 
 impl<'packet> CowPacket<'packet> {
-    pub unsafe fn from_ptr(ptr: *mut AVPacket, time_base: AVRational) -> CowPacket<'packet> {
+    pub unsafe fn from_ptr(ptr: *mut AVPacket, time_base: Timebase) -> CowPacket<'packet> {
         let is_ref = (*ptr).buf.is_null();
         if is_ref {
             CowPacket::Ref(RefPacket::from_ptr(ptr, time_base))
@@ -47,7 +48,7 @@ impl<'packet> CowPacket<'packet> {
         }
     }
 
-    pub fn time_base(&self) -> AVRational {
+    pub fn time_base(&self) -> Timebase {
         match *self {
             CowPacket::Ref(ref packet) => packet.time_base(),
             CowPacket::Rc(ref packet) => packet.time_base(),

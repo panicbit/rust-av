@@ -1,18 +1,19 @@
 use std::marker::PhantomData;
-use ffi::{self, AVPacket, AVRational};
 use std::mem;
 use std::slice;
+use ffi::{self, AVPacket};
+use common::Timebase;
 
 /// A reference to a packet as returned
 /// e.g. by Demuxer::read_packet
 pub struct RefPacket<'packet> {
     ptr: *mut AVPacket,
-    time_base: AVRational,
+    time_base: Timebase,
     _phantom: PhantomData<&'packet AVPacket>,
 }
 
 impl<'packet> RefPacket<'packet> {
-    pub unsafe fn from_ptr(ptr: *mut AVPacket, time_base: AVRational) -> RefPacket<'packet> {
+    pub unsafe fn from_ptr(ptr: *mut AVPacket, time_base: Timebase) -> RefPacket<'packet> {
         RefPacket {
             ptr: ptr,
             time_base: time_base,
@@ -31,7 +32,7 @@ impl<'packet> RefPacket<'packet> {
         }
     }
 
-    pub fn time_base(&self) -> AVRational {
+    pub fn time_base(&self) -> Timebase {
         self.time_base
     }
 }

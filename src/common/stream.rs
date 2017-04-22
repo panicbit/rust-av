@@ -2,6 +2,7 @@ use std::marker::PhantomData;
 use ffi::{self, AVStream, AVFormatContext};
 use std::slice;
 use common::codec_parameters::CodecParameters;
+use common::Timebase;
 
 pub struct Stream<'fmt_ctx> {
     ptr: *mut AVStream,
@@ -25,8 +26,8 @@ impl<'fmt_ctx> Stream<'fmt_ctx> {
     //     self.as_ref().id as usize
     // }
 
-    pub fn time_base(&self) -> ffi::AVRational {
-        self.as_ref().time_base
+    pub fn time_base(&self) -> Timebase {
+        self.as_ref().time_base.into()
     }
 
     // TODO: start_time

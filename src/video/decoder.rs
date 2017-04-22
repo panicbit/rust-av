@@ -4,7 +4,7 @@ use ffi::AVCodecContext;
 use codec::{Codec,MediaType};
 use common::codec_parameters::CodecParameters;
 use common::stream::Stream;
-use common::RcPacket;
+use common::{RcPacket, Timebase};
 use super::Frame;
 use errors::*;
 
@@ -65,8 +65,8 @@ impl Decoder {
         }
     }
 
-    pub fn time_base(&self) -> ffi::AVRational {
-        self.as_ref().time_base
+    pub fn time_base(&self) -> Timebase {
+        self.as_ref().time_base.into()
     }
 
     pub fn pixel_format(&self) -> ffi::AVPixelFormat {

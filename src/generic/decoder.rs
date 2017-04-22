@@ -3,13 +3,12 @@ use generic::RefMutFrame;
 use ffi::{
     AVCodecContext,
     AVPacket,
-    AVRational,
 };
 use video;
 use audio;
 use errors::*;
 use common::stream::Stream;
-use common::RcPacket;
+use common::{RcPacket, Timebase};
 use codec::MediaType;
 use super::Frame;
 
@@ -77,7 +76,7 @@ impl Decoder {
         }
     }
 
-    pub fn time_base(&self) -> AVRational {
+    pub fn time_base(&self) -> Timebase {
         match *self {
             Decoder::Video(ref decoder) => decoder.time_base(),
             Decoder::Audio(ref decoder) => decoder.time_base(),

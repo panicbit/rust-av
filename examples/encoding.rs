@@ -24,7 +24,7 @@ use av::common::Ts;
 use av::generic::{Encoder, Frame};
 
 const MOVIE_DURATION: i64 = 10;
-const MOVIE_TIMEBASE: AVRational = AVRational { num: 1, den: 1 };
+const MOVIE_TIMEBASE: (i32, i32) = (1, 1);
 const VIDEO_DATA: &'static [u8] = include_bytes!("../rgb-600x400.data");
 const AUDIO_DATA: &'static [u8] = include_bytes!("../music-44100hz-f32-le-mono.raw");
 
@@ -56,7 +56,7 @@ pub fn demo() -> av::Result<()> {
             .width(width)
             .height(height)
             .pixel_format(*video_codec.pixel_formats().first().expect("Video encoder does not support any pixel formats, wtf?"))
-            .framerate(framerate)
+            .time_base(framerate)
             .open(output_format)?;
 
         frames.push(video::Frame::new(width, height, AV_PIX_FMT_RGB24, align)?.into());

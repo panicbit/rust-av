@@ -9,7 +9,6 @@ use ffi;
 use ffi::{
     AVCodecContext,
     AVPixelFormat,
-    AVRational,
     avcodec_alloc_context3,
     avcodec_free_context,
 };
@@ -17,7 +16,7 @@ use format::OutputFormat;
 use generic::RefMutFrame;
 use scaler::Scaler;
 use video;
-use common::{self, RcPacket};
+use common::{self, RcPacket, Timebase};
 use errors::*;
 use util::OwnedOrRefMut;
 
@@ -53,8 +52,8 @@ impl Encoder {
         }
     }
 
-    pub fn time_base(&self) -> AVRational {
-        self.as_ref().time_base
+    pub fn time_base(&self) -> Timebase {
+        self.as_ref().time_base.into()
     }
 }
 
@@ -164,7 +163,7 @@ pub struct EncoderBuilder {
     pixel_format: Option<AVPixelFormat>,
     width: Option<c_int>,
     height: Option<c_int>,
-    time_base: Option<AVRational>,
+    time_base: Option<Timebase>,
     bitrate: Option<int64_t>,
 }
 
@@ -197,12 +196,8 @@ impl EncoderBuilder {
         self.pixel_format = Some(pixel_format); self
     }
 
-    pub fn framerate(&mut self, framerate: usize) -> &mut Self {
-        self.time_base = Some(AVRational { num: 1, den: framerate as i32 }); self
-    }
-
-    pub fn time_base(&mut self, num: i32, den: i32) -> &mut Self {
-        self.time_base = Some(AVRational { num: num, den: den }); self
+    pub fn time_base<TB: Into<Timebase>>(&mut self, time_base: TB) -> &mut Self {
+        self.time_base = Some(time_base.into()); self
     }
 
     pub fn open(&self, format: OutputFormat) -> Result<Encoder> {
@@ -210,7 +205,7 @@ impl EncoderBuilder {
             let width = self.width.ok_or("Video encoder width not set")?;
             let height = self.height.ok_or("Video encoder height not set")?;
             let pixel_format = self.pixel_format.ok_or("Video encoder pixel_format not set")?;
-            let time_base = self.time_base.unwrap_or(AVRational { num: 1, den: 30 });
+            let time_base = self.time_base.unwrap_or((1, 30).into());
 
             LibAV::init();
 
@@ -232,7 +227,7 @@ impl EncoderBuilder {
             // of which frame timestamps are represented. For fixed-fps content,
             // time_base should be 1/framerate and timestamp increments should be
             // identical to 1.
-            (*codec_context).time_base = time_base;
+            (*codec_context).time_base = time_base.into();
 
             common::encoder::open(codec_context, "video")?;
 

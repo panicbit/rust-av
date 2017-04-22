@@ -11,7 +11,6 @@ use ffi::{
     AVOutputFormat,
     AVPacket,
     AVStream,
-    AVRational,
     AV_TIME_BASE,
     AVFMT_GLOBALHEADER,
     AV_CODEC_FLAG_GLOBAL_HEADER,
@@ -89,7 +88,7 @@ impl Muxer {
             let packet = &mut *packet.as_mut_ptr();
             let stream = *self.as_ref().streams.offset(stream_index as isize);
             let stream_time_base = (*stream).time_base;
-            ffi::av_packet_rescale_ts(packet, packet_time_base, stream_time_base);
+            ffi::av_packet_rescale_ts(packet, packet_time_base.into(), stream_time_base);
             packet.stream_index = stream_index as i32;
 
             // // TODO: log_packet(muxer.as_mut_ptr(), packet);

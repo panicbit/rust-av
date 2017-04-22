@@ -10,7 +10,6 @@ use ffi::{
     AVCodecContext,
     AVSampleFormat,
     AVRational,
-    AVPacket,
     avcodec_alloc_context3,
     avcodec_free_context,
     av_get_channel_layout_nb_channels,
@@ -20,7 +19,7 @@ use format::OutputFormat;
 use audio::ChannelLayout;
 use audio::constants::CHANNEL_LAYOUT_STEREO;
 use generic::RefMutFrame;
-use common::{self, RcPacket};
+use common::{self, RcPacket, Timebase};
 use errors::*;
 use util::OwnedOrRefMut;
 
@@ -42,8 +41,8 @@ impl Encoder {
         self.as_ref().sample_rate as u32
     }
 
-    pub fn time_base(&self) -> AVRational {
-        self.as_ref().time_base
+    pub fn time_base(&self) -> Timebase {
+        self.as_ref().time_base.into()
     }
 
     // Returns the frame size required by the encoder.

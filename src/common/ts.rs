@@ -1,18 +1,19 @@
-use ffi::{AVRational, av_compare_ts};
+use ffi::av_compare_ts;
 use std::cmp;
 use std::ops;
+use common::Timebase;
 
 #[derive(Copy,Clone)]
 pub struct Ts {
     index: i64,
-    time_base: AVRational,
+    time_base: Timebase,
 }
 
 impl Ts {
-    pub fn new(index: i64, time_base: AVRational) -> Self {
+    pub fn new<TB: Into<Timebase>>(index: i64, time_base: TB) -> Self {
         Ts {
             index: index,
-            time_base: time_base,
+            time_base: time_base.into(),
         }
     }
 
@@ -20,7 +21,7 @@ impl Ts {
         self.index
     }
 
-    pub fn time_base(&self) -> AVRational {
+    pub fn time_base(&self) -> Timebase {
         self.time_base
     }
 }
@@ -28,7 +29,7 @@ impl Ts {
 impl cmp::PartialEq for Ts {
     fn eq(&self, other: &Ts) -> bool {
         unsafe {
-            av_compare_ts(self.index, self.time_base, other.index, other.time_base) == 0
+            av_compare_ts(self.index, self.time_base.into(), other.index, other.time_base.into()) == 0
         }
     }
 }
@@ -45,7 +46,7 @@ impl cmp::Ord for Ts {
     fn cmp(&self, other: &Ts) -> cmp::Ordering {
         unsafe {
             use std::cmp::Ordering::*;
-            match av_compare_ts(self.index, self.time_base, other.index, other.time_base) {
+            match av_compare_ts(self.index, self.time_base.into(), other.index, other.time_base.into()) {
                 -1 => Less,
                  0 => Equal,
                  1 => Greater,

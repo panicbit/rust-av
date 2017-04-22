@@ -1,22 +1,23 @@
 use std::slice;
-use ffi::{self, AVPacket, AVRational};
+use ffi::{self, AVPacket};
+use common::Timebase;
 use super::*;
 
 /// A reference-counted packet
 pub struct RcPacket {
     ptr: *mut AVPacket,
-    time_base: AVRational,
+    time_base: Timebase,
 }
 
 impl RcPacket {
-    pub unsafe fn from_ptr(ptr: *mut AVPacket, time_base: AVRational) -> RcPacket {
+    pub unsafe fn from_ptr(ptr: *mut AVPacket, time_base: Timebase) -> RcPacket {
         RcPacket {
             ptr: ptr,
             time_base: time_base,
         }
     }
 
-    pub unsafe fn ref_ptr(ptr: *const AVPacket, time_base: AVRational) -> RcPacket {
+    pub unsafe fn ref_ptr(ptr: *const AVPacket, time_base: Timebase) -> RcPacket {
         let packet = ffi::av_packet_alloc();
         if packet.is_null() {
             panic!("av_packet_alloc: out of memory!");
@@ -50,7 +51,7 @@ impl RcPacket {
         }
     }
 
-    pub fn time_base(&self) -> AVRational {
+    pub fn time_base(&self) -> Timebase {
         self.time_base
     }
 }

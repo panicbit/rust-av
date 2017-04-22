@@ -3,12 +3,11 @@ use generic::RefMutFrame;
 use ffi::{
     AVCodecContext,
     AVPacket,
-    AVRational,
 };
 use video;
 use audio;
 use errors::*;
-use common::RcPacket;
+use common::{RcPacket, Timebase};
 
 pub enum Encoder {
     Video(video::Encoder),
@@ -65,7 +64,7 @@ impl Encoder {
         }
     }
 
-    pub fn time_base(&self) -> AVRational {
+    pub fn time_base(&self) -> Timebase {
         match *self {
             Encoder::Video(ref encoder) => encoder.time_base(),
             Encoder::Audio(ref encoder) => encoder.time_base(),

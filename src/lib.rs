@@ -1,3 +1,4 @@
+#![doc(html_root_url = "https://panicbit.github.io/rust-av/")]
 // `error_chain!` can recurse deeply
 #![recursion_limit = "1024"]
 pub extern crate av_sys as ffi;

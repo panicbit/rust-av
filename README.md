@@ -1,4 +1,6 @@
 
+# [Documentation](https://panicbit.github.io/rust-av/av/)
+
 # Requirements
 
 - **LLVM >=3.9**

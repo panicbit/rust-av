@@ -42,7 +42,7 @@ impl Frame {
             let res = av_frame_get_buffer(frame, align as c_int);
             if res < 0 {
                 av_frame_free(&mut frame);
-                bail!("Could not allocate video frame buffer");
+                bail!("Could not allocate video frame buffer: 0x{:X}", res);
             }
 
             Ok(Self::from_ptr(frame, pixel_format))

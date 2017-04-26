@@ -40,7 +40,7 @@ impl Frame {
                 let res = av_frame_get_buffer(frame, align);
                 if res < 0 {
                     av_frame_free(&mut frame);
-                    bail!("Could not allocate audio frame buffer");
+                    bail!("Could not allocate audio frame buffer: 0x{:X}", res);
                 }
             }
 

@@ -1,7 +1,6 @@
 // `error_chain!` can recurse deeply
 #![recursion_limit = "1024"]
 pub extern crate av_sys as ffi;
-extern crate libc;
 #[macro_use]
 extern crate lazy_static;
 #[macro_use]

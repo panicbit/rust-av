@@ -1,5 +1,5 @@
 use std::ptr;
-use libc::{c_int, int64_t};
+use std::os::raw::c_int;
 use LibAV;
 use codec::{
     Codec,
@@ -164,7 +164,7 @@ pub struct EncoderBuilder {
     width: Option<c_int>,
     height: Option<c_int>,
     time_base: Option<Timebase>,
-    bitrate: Option<int64_t>,
+    bitrate: Option<i64>,
 }
 
 impl EncoderBuilder {

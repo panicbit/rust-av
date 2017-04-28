@@ -19,7 +19,6 @@ fn main() {
         .header("ffi.h")
         .clang_arg(format!("-I{}/include", prefix))
         .no_unstable_rust()
-        .ctypes_prefix("::libc")
         .whitelisted_type("AV.*")
         .whitelisted_var("AV.*")
         .whitelisted_var("FF.*")
@@ -28,6 +27,8 @@ fn main() {
         .whitelisted_var("SWS.*")
         .whitelisted_function("sws.*")
         .whitelisted_type("RUST_AV.*")
+        .whitelisted_var("SEEK_.*")
+        .whitelisted_type(".*_t")
         .generate()
         .unwrap()
         .to_string();
@@ -42,7 +43,12 @@ fn main() {
 
     for variant in variants {
         let variant_ident: Vec<&str> = variant.ident.as_ref().split("__").collect();
-        let ty = syn::parse_type(&format!("::libc::{}", variant_ident[1])).unwrap();
+        let ty_prefix = match variant_ident[0] {
+            "RUST" => "",
+            "RUST_OS_RAW" => "::std::os::raw::",
+            _ => panic!("Unknown type prefix"),
+        };
+        let ty = syn::parse_type(&format!("{}{}", ty_prefix, variant_ident[1])).unwrap();
         let ident = syn::parse_ident(variant_ident[2]).unwrap();
         let expr = const_expr_into_expr(variant.discriminant.expect("Discriminant missing from RUST_AV_CONSTANTS variant"));
 

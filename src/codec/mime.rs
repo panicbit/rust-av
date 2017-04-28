@@ -1,5 +1,5 @@
 use std::ffi::CStr;
-use libc::c_char;
+use std::os::raw::c_char;
 
 pub struct MimeTypeIter {
     ptr: *const *const c_char

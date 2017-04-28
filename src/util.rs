@@ -1,7 +1,7 @@
 use std::mem;
 use std::ptr;
 use std::ffi::CStr;
-use libc::c_char;
+use std::os::raw::c_char;
 use std::ops;
 
 pub trait PtrTakeExt {

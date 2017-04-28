@@ -8,7 +8,7 @@
 #include <libswresample/swresample.h>
 
 enum RUST_AV_CONSTANTS {
-    RUST__int64_t__NOPTS_VALUE = AV_NOPTS_VALUE,
-    RUST__c_int__AVERROR_EAGAIN = AVERROR(EAGAIN),
-    RUST__c_int__AVERROR_EOF = AVERROR_EOF,
+    RUST__i64__NOPTS_VALUE = AV_NOPTS_VALUE,
+    RUST_OS_RAW__c_int__AVERROR_EAGAIN = AVERROR(EAGAIN),
+    RUST_OS_RAW__c_int__AVERROR_EOF = AVERROR_EOF,
 };

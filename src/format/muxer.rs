@@ -2,7 +2,7 @@ use std::ptr;
 use std::mem;
 use std::fmt;
 use std::ffi::{CStr,CString};
-use libc::{c_uint, int32_t};
+use std::os::raw::c_uint;
 use LibAV;
 use io;
 use ffi;
@@ -217,7 +217,7 @@ impl MuxerBuilder {
                 let encoder_flags = encoder.as_ref().flags;
 
                 if    0 != (format_flags & AVFMT_GLOBALHEADER)
-                   && 0 == (encoder_flags & AV_CODEC_FLAG_GLOBAL_HEADER as int32_t)
+                   && 0 == (encoder_flags & AV_CODEC_FLAG_GLOBAL_HEADER as i32)
                 {
                     bail!("Format requires global headers but encoder does not use global headers")
                 }

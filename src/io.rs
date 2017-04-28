@@ -2,7 +2,7 @@ use std::fs::File;
 use std::net::TcpStream;
 use std::io::{Read,Write,Seek,SeekFrom};
 use std::{mem, slice};
-use libc::{self, c_void, c_int, uint8_t, int64_t};
+use std::os::raw::{self, c_void, c_int};
 use ffi;
 use util::PtrTakeExt;
 
@@ -58,7 +58,7 @@ impl IOContext {
     pub fn from_reader<R: AVRead>(mut input: R) -> IOContext  {
         unsafe {
             let buffer_size = R::buffer_size();
-            let buffer = ffi::av_malloc(buffer_size as usize * mem::size_of::<uint8_t>()) as _;
+            let buffer = ffi::av_malloc(buffer_size as usize * mem::size_of::<u8>()) as _;
             let write_flag = 0; // Make buffer read-only for ffmpeg
             let read_packet = Some(ffi_read_packet::<R> as _);
             let write_packet = None;
@@ -86,7 +86,7 @@ impl IOContext {
     pub fn from_writer<W: AVWrite>(mut output: W) -> IOContext  {
         unsafe {
             let buffer_size = W::buffer_size();
-            let buffer = ffi::av_malloc(buffer_size as usize * mem::size_of::<uint8_t>()) as _;
+            let buffer = ffi::av_malloc(buffer_size as usize * mem::size_of::<u8>()) as _;
             let write_flag = 1; // Make buffer writable for ffmpeg
             let read_packet = None;
             let write_packet = Some(ffi_write_packet::<W> as _);
@@ -140,49 +140,49 @@ unsafe fn io_dropper<T>(io: *mut c_void) {
     Box::from_raw(io as *mut T);
 }
 
-extern fn ffi_read_packet<R: AVRead>(this: *mut c_void, buf: *mut uint8_t, buf_size: c_int) -> c_int {
+extern fn ffi_read_packet<R: AVRead>(this: *mut c_void, buf: *mut u8, buf_size: c_int) -> c_int {
     let this = unsafe { &mut *(this as *mut R) };
     let buf = unsafe { slice::from_raw_parts_mut(buf, buf_size as usize) };
     let eof = -1;
     this.read_packet(buf).map(|n_read| n_read as c_int).unwrap_or(eof)
 }
 
-extern fn ffi_write_packet<W: AVWrite>(this: *mut c_void, buf: *mut uint8_t, buf_size: c_int) -> c_int {
+extern fn ffi_write_packet<W: AVWrite>(this: *mut c_void, buf: *mut u8, buf_size: c_int) -> c_int {
     let this = unsafe { &mut *(this as *mut W) };
     let buf = unsafe { slice::from_raw_parts(buf as *const _, buf_size as usize) };
     let eof = -1;
     this.write_packet(buf).map(|n_written| n_written as c_int).unwrap_or(eof)
 }
 
-unsafe extern fn ffi_seek<S: AVSeek>(this: *mut c_void, offset: int64_t, whence: c_int) -> int64_t {
+unsafe extern fn ffi_seek<S: AVSeek>(this: *mut c_void, offset: i64, whence: c_int) -> i64 {
     let this = &mut *(this as *mut S);
 
     if whence == ffi::AVSEEK_SIZE as c_int {
-        return this.size().and_then(u64_into_int64_t).unwrap_or(-1);
+        return this.size().and_then(u64_into_i64).unwrap_or(-1);
     }
 
-    let pos = match whence {
-        libc::SEEK_SET => match int64_t_into_u64(offset) {
+    let pos = match whence as u32 {
+        ffi::SEEK_SET => match i64_into_u64(offset) {
             Some(offset) => SeekFrom::Start(offset),
             None => return -1,
         },
-        libc::SEEK_CUR => SeekFrom::Current(offset),
-        libc::SEEK_END => SeekFrom::End(offset),
+        ffi::SEEK_CUR => SeekFrom::Current(offset),
+        ffi::SEEK_END => SeekFrom::End(offset),
         _ => return -1,
     };
 
-    this.seek(pos).and_then(u64_into_int64_t).unwrap_or(-1)
+    this.seek(pos).and_then(u64_into_i64).unwrap_or(-1)
 }
 
-fn u64_into_int64_t(n: u64) -> Option<int64_t> {
-    if n <= int64_t::max_value() as u64 {
-        Some(n as int64_t)
+fn u64_into_i64(n: u64) -> Option<i64> {
+    if n <= i64::max_value() as u64 {
+        Some(n as i64)
     } else {
         None
     }
 }
 
-fn int64_t_into_u64(n: int64_t) -> Option<u64> {
+fn i64_into_u64(n: i64) -> Option<u64> {
     if n >= 0 {
         Some(n as u64)
     } else {

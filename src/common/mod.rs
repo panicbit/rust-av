@@ -1,10 +1,10 @@
 pub mod encoder;
 pub mod stream;
 pub mod codec_parameters;
-pub mod packet;
-pub mod ts;
-pub mod timebase;
+mod packet;
+mod ts;
+mod timebase;
 
-pub use self::packet::*;
-pub use self::ts::*;
+pub use self::packet::Packet;
+pub use self::ts::Ts;
 pub use self::timebase::Timebase;

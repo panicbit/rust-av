@@ -19,7 +19,7 @@ use format::OutputFormat;
 use audio::ChannelLayout;
 use audio::constants::CHANNEL_LAYOUT_STEREO;
 use generic::RefMutFrame;
-use common::{self, RcPacket, Timebase};
+use common::{self, Packet, Timebase};
 use errors::*;
 use util::OwnedOrRefMut;
 
@@ -217,7 +217,7 @@ impl<'encoder> Packets<'encoder> {
 }
 
 impl<'encoder> Iterator for Packets<'encoder> {
-    type Item = Result<RcPacket>;
+    type Item = Result<Packet<'static>>;
 
     fn next(&mut self) -> Option<Self::Item> {
         unsafe {
@@ -233,7 +233,7 @@ impl<'encoder> Iterator for Packets<'encoder> {
                 }
             }
 
-            let packet = RcPacket::from_ptr(packet, self.encoder.time_base());
+            let packet = Packet::from_ptr(packet, self.encoder.time_base());
 
             Some(Ok(packet))
         }

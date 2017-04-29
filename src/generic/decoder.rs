@@ -8,7 +8,7 @@ use video;
 use audio;
 use errors::*;
 use common::stream::Stream;
-use common::{RcPacket, Timebase};
+use common::{Packet, Timebase};
 use codec::MediaType;
 use super::Frame;
 
@@ -106,7 +106,7 @@ impl Decoder {
         }
     }
 
-    pub fn decode<'decoder>(&'decoder mut self, packet: &RcPacket) -> Result<Frames<'decoder>> {
+    pub fn decode<'decoder>(&'decoder mut self, packet: Packet) -> Result<Frames<'decoder>> {
         match *self {
             Decoder::Video(ref mut decoder) => decoder.decode(packet).map(Frames::from),
             Decoder::Audio(ref mut decoder) => decoder.decode(packet).map(Frames::from),

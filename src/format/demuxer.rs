@@ -12,7 +12,7 @@ use ffi::{
 use util::AsCStr;
 use errors::*;
 use common::stream::Streams;
-use common::CowPacket;
+use common::Packet;
 use std::slice;
 
 pub struct Demuxer {
@@ -113,7 +113,7 @@ impl Demuxer {
         }
     }
 
-    pub fn read_packet(&mut self) -> Result<Option<CowPacket>> {
+    pub fn read_packet(&mut self) -> Result<Option<Packet>> {
         unsafe {
             let mut packet = ffi::av_packet_alloc();
             if packet.is_null() {
@@ -136,7 +136,7 @@ impl Demuxer {
             let time_base = self.streams().nth((*packet).stream_index as usize).map(|stream| stream.time_base())
                 .ok_or("Demuxed packet has invalid stream index")?;
 
-            Ok(Some(CowPacket::from_ptr(packet, time_base.into())))
+            Ok(Some(Packet::from_ptr(packet, time_base.into())))
         }
     }
 }

@@ -7,7 +7,7 @@ use ffi::{
 use video;
 use audio;
 use errors::*;
-use common::{RcPacket, Timebase};
+use common::{Packet, Timebase};
 
 pub enum Encoder {
     Video(video::Encoder),
@@ -138,7 +138,7 @@ pub enum Packets<'encoder> {
 }
 
 impl<'encoder> Iterator for Packets<'encoder> {
-    type Item = Result<RcPacket>;
+    type Item = Result<Packet<'static>>;
 
     fn next(&mut self) -> Option<Self::Item> {
         match *self {

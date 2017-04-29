@@ -4,7 +4,7 @@ use ffi::AVCodecContext;
 use codec::{Codec,MediaType};
 use common::codec_parameters::CodecParameters;
 use common::stream::Stream;
-use common::{RcPacket, Timebase};
+use common::{Packet, Timebase};
 use super::Frame;
 use errors::*;
 
@@ -73,7 +73,7 @@ impl Decoder {
         self.as_ref().pix_fmt
     }
 
-    pub fn decode<'decoder>(&'decoder mut self, packet: &RcPacket) -> Result<Frames<'decoder>> {
+    pub fn decode<'decoder>(&'decoder mut self, mut packet: Packet) -> Result<Frames<'decoder>> {
         // TODO: Check that pkt->data is AV_INPUT_BUFFER_PADDING_SIZE larger than packet size
 
         unsafe {

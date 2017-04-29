@@ -25,7 +25,7 @@ use generic::{
 };
 use format::OutputFormat;
 use util::AsCStr;
-use common::RcPacket;
+use common::Packet;
 use errors::*;
 
 pub struct Muxer {
@@ -78,7 +78,7 @@ impl Muxer {
         }
     }
 
-    pub fn mux(&mut self, packet: RcPacket, stream_index: usize) -> Result<()> {
+    pub fn mux(&mut self, mut packet: Packet, stream_index: usize) -> Result<()> {
         unsafe {
             if stream_index >= self.num_streams() {
                 bail!("Invalid stream index {}. Only {} stream(s) exist(s).", stream_index, self.num_streams());

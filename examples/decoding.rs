@@ -39,7 +39,7 @@ fn decoding() -> av::Result<()> {
         let decoder = &mut decoders[packet.stream_index()];
 
         // Feed the packet to the decoder
-        let frames = decoder.decode(&packet.into_rc())?;
+        let frames = decoder.decode(packet)?;
 
         for frame in frames {
             handle_frame(frame?, &mut num_video_frames, &mut num_audio_frames);

@@ -23,6 +23,15 @@ use util::OwnedOrRefMut;
 // TODO: Add align field to encoder
 const ALIGN: usize = 32;
 
+/// Video encoder.
+///
+/// Encoding is done by repeatedly calling `encode` with
+/// the `Frame` that should be encoded and by consuming
+/// the returned `Packet` iterator.
+///
+/// When no more frames need to be encoded,
+/// the encoder should be `flush`ed to obtain
+/// the remaining buffered packets.
 pub struct Encoder {
     ptr: *mut AVCodecContext,
     scaler: Option<Scaler>,
@@ -30,18 +39,22 @@ pub struct Encoder {
 }
 
 impl Encoder {
+    /// Create a new encoder builder with the passed `codec`.
     pub fn from_codec(codec: Codec) -> Result<EncoderBuilder> {
         EncoderBuilder::from_codec(codec)
     }
 
+    /// Returns the pixel format of the encoder.
     pub fn pixel_format(&self) -> ffi::AVPixelFormat {
         self.as_ref().pix_fmt
     }
 
+    /// Returns the width of the encoder.
     pub fn width(&self) -> usize {
         self.as_ref().width as usize
     }
 
+    /// Returns the height of the encoder.
     pub fn height(&self) -> usize {
         self.as_ref().height as usize
     }

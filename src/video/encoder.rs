@@ -108,13 +108,14 @@ impl Encoder {
     }
 
     fn scaler_needs_update(&self, source: &video::Frame) -> bool {
-        if let Some(ref scaler) = self.scaler {
-               source.pixel_format() != scaler.source_pixel_format()
-            || source.width() != scaler.source_width()
-            || source.height() != scaler.source_height()
-        } else {
-            true
-        }
+        // if let Some(ref scaler) = self.scaler {
+        //        source.pixel_format() != scaler.source_pixel_format()
+        //     || source.width() != scaler.source_width()
+        //     || source.height() != scaler.source_height()
+        // } else {
+        //     true
+        // }
+        true
     }
 
     fn update_scaler(&mut self, frame: &video::Frame) -> Result<()> {

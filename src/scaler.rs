@@ -52,8 +52,8 @@ impl Scaler {
 
     // `&mut self` is required to avoid corrupting the SwsContext
     pub unsafe fn __scale(&mut self,
-        source: *mut *const u8, source_stride: *mut c_int, source_y: c_int, source_height: c_int,
-        target: *mut *const u8, target_stride: *mut c_int
+        source: *const *const u8, source_stride: *const c_int, source_y: c_int, source_height: c_int,
+        target: *mut   *const u8, target_stride: *const c_int
     ) {
         ffi::sws_scale(self.ptr,
             source, source_stride, source_y, source_height,
@@ -62,9 +62,9 @@ impl Scaler {
     }
 
     /// TODO: Ensure that width, height and pixel format match 
-    pub unsafe fn scale_frame(&mut self, source: &mut video::Frame, target: &mut video::Frame) {
+    pub unsafe fn scale_frame(&mut self, source: &video::Frame, target: &mut video::Frame) {
         self.__scale(
-            source.as_ref().data.as_ptr() as _, source.as_mut().linesize.as_mut_ptr(), 0, source.height() as i32,
+            source.as_ref().data.as_ptr() as _, source.as_ref().linesize.as_ptr(), 0, source.height() as i32,
             target.as_mut().data.as_mut_ptr() as _, target.as_mut().linesize.as_mut_ptr()
         );
     }

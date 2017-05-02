@@ -101,3 +101,65 @@ impl Drop for Scaler {
         }
     }
 }
+
+#[cfg(test)]
+mod test {
+    #[test]
+    fn reusable() {
+        use super::Scaler;
+        use std::ptr;
+        use ffi::AVPixelFormat::*;
+
+        let source = vec![0xFF, 0x00, 0x00];
+        let source = &[source.as_ptr(), ptr::null(), ptr::null(), ptr::null()];
+        let target: Vec<u8> = vec![
+            1,2,3, 4,5,6, 7,8,9, 10,11,12,
+            1,2,3, 4,5,6, 7,8,9, 10,11,12,
+            1,2,3, 4,5,6, 7,8,9, 10,11,12,
+            1,2,3, 4,5,6, 7,8,9, 10,11,12,
+            99,99,99,99,99,99,99,99,99,99,99,99, // Canary
+            99,99,99,99,99,99,99,99,99,99,99,99,
+            99,99,99,99,99,99,99,99,99,99,99,99,
+            99,99,99,99,99,99,99,99,99,99,99,99,
+        ];
+
+        {
+            let target = &mut [target.as_ptr(), ptr::null(), ptr::null(), ptr::null()];
+
+            let source_width = 1;
+            let source_linesize: &[i32] = &[3*source_width, 0, 0, 0];
+            let source_height = 1;
+            let source_pixel_format = AV_PIX_FMT_RGB24;
+
+            let target_width = 4;
+            let target_linesize: &[i32] = &[3*target_width, 0, 0, 0];
+            let target_height = 4;
+            let target_pixel_format = AV_PIX_FMT_RGB24;
+
+            let mut scaler = Scaler::new(
+                source_width as usize, source_height, source_pixel_format,
+                target_width as usize, target_height, target_pixel_format,
+            ).unwrap();
+
+            unsafe {
+                for _ in 0 .. 2000 {
+                    scaler.__scale(
+                        source.as_ptr(),     source_linesize.as_ptr(), 0, source_height as i32,
+                        target.as_mut_ptr(), target_linesize.as_ptr(),
+                    );
+                }
+            }
+        }
+
+        assert_eq!(target, vec![
+            0xFF,0x00,0x00, 0xFF,0x00,0x00, 0xFF,0x00,0x00, 0xFF,0x00,0x00,
+            0xFF,0x00,0x00, 0xFF,0x00,0x00, 0xFF,0x00,0x00, 0xFF,0x00,0x00,
+            0xFF,0x00,0x00, 0xFF,0x00,0x00, 0xFF,0x00,0x00, 0xFF,0x00,0x00,
+            0xFF,0x00,0x00, 0xFF,0x00,0x00, 0xFF,0x00,0x00, 0xFF,0x00,0x00,
+            99,99,99,99,99,99,99,99,99,99,99,99, // Canary
+            99,99,99,99,99,99,99,99,99,99,99,99,
+            99,99,99,99,99,99,99,99,99,99,99,99,
+            99,99,99,99,99,99,99,99,99,99,99,99,
+        ]);
+    }
+}

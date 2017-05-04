@@ -14,19 +14,18 @@ use ffi::{
 };
 use format::OutputFormat;
 use generic::RefMutFrame;
-use scaler::Scaler;
-use video;
 use common::{self, Packet, Timebase};
 use errors::*;
 use util::OwnedOrRefMut;
+use super::{Frame, Scaler};
 
 // TODO: Add align field to encoder
 const ALIGN: usize = 32;
 
 pub struct Encoder {
     ptr: *mut AVCodecContext,
-    scaler: Option<Scaler>,
-    tmp_frame: Option<video::Frame>,
+    scaler: Scaler,
+    tmp_frame: Option<Frame>,
 }
 
 impl Encoder {
@@ -67,13 +66,12 @@ impl Encoder {
 
             // Do scaling if needed
             if !frame.is_compatible_with_encoder(self) {
-                self.update_scaler(frame)?;
                 self.init_tmp_frame()?;
 
                 let tmp_frame = self.tmp_frame.as_mut().unwrap();
-                let scaler = self.scaler.as_mut().unwrap();
+                let scaler = &mut self.scaler;
 
-                scaler.scale_frame(&mut frame, tmp_frame);
+                scaler.scale_frame(&mut frame, tmp_frame)?;
 
                 // Copy frame data
                 tmp_frame.set_pts(frame.pts());
@@ -107,30 +105,9 @@ impl Encoder {
         }
     }
 
-    fn scaler_needs_update(&self, source: &video::Frame) -> bool {
-        // if let Some(ref scaler) = self.scaler {
-        //        source.pixel_format() != scaler.source_pixel_format()
-        //     || source.width() != scaler.source_width()
-        //     || source.height() != scaler.source_height()
-        // } else {
-        //     true
-        // }
-        true
-    }
-
-    fn update_scaler(&mut self, frame: &video::Frame) -> Result<()> {
-        if self.scaler_needs_update(frame) {
-            self.scaler = Some(Scaler::new(
-                frame.width(), frame.height(), frame.pixel_format(),
-                self.width(), self.height(), self.pixel_format()
-            )?);
-        }
-        Ok(())
-    }
-
     fn init_tmp_frame(&mut self) -> Result<()> {
         if self.tmp_frame.is_none() {
-            self.tmp_frame = Some(video::Frame::new(self.width(), self.height(), self.pixel_format(), ALIGN)?);
+            self.tmp_frame = Some(Frame::new(self.width(), self.height(), self.pixel_format(), ALIGN)?);
         }
         Ok(())
     }
@@ -234,7 +211,7 @@ impl EncoderBuilder {
 
             Ok(Encoder {
                 ptr: codec_context,
-                scaler: None,
+                scaler: Scaler::new(),
                 tmp_frame: None,
             })
         }

@@ -7,6 +7,7 @@ extern crate lazy_static;
 extern crate bitflags;
 #[macro_use]
 extern crate error_chain;
+extern crate smallvec;
 use std::ffi::CStr;
 use std::sync::{Once, ONCE_INIT};
 use util::AsCStr;
@@ -22,7 +23,6 @@ pub mod generic;
 
 pub mod io;
 pub mod codec;
-pub mod scaler;
 
 pub mod errors;
 pub use self::errors::*;

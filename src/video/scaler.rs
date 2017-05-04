@@ -143,30 +143,6 @@ impl Scaler {
             dst_data, dst_linesize, dst_w, dst_h, dst_fmt,
         )
     }
-
-    pub fn source_width(&self) -> usize {
-        self.src_w
-    }
-
-    pub fn source_height(&self) -> usize {
-        self.src_h
-    }
-
-    pub fn source_pixel_format(&self) -> AVPixelFormat {
-        self.src_fmt
-    }
-
-    pub fn target_width(&self) -> usize {
-        self.dst_w
-    }
-
-    pub fn target_height(&self) -> usize {
-        self.dst_h
-    }
-
-    pub fn target_pixel_format(&self) -> AVPixelFormat {
-        self.dst_fmt
-    }
 }
 
 struct SwsContext(*mut ffi::SwsContext);

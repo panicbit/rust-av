@@ -71,7 +71,7 @@ impl Encoder {
                 let tmp_frame = self.tmp_frame.as_mut().unwrap();
                 let scaler = &mut self.scaler;
 
-                scaler.scale_frame(&mut frame, tmp_frame);
+                scaler.scale_frame(&mut frame, tmp_frame)?;
 
                 // Copy frame data
                 tmp_frame.set_pts(frame.pts());

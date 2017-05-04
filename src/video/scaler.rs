@@ -3,6 +3,14 @@ use smallvec::SmallVec;
 use ffi::{self,AVPixelFormat};
 use errors::*;
 use super::{Frame, MAX_PLANES};
+
+/// A context for scaling/converting video frames.
+///
+/// Scaling is most efficiently done by reusing the scaler
+/// for a specific combination of source/target width, height and format.
+/// It's allowed to use different values for each invocation of the scaling
+/// functions, but it will result in reallocation of the internal scaling context,
+/// which might not be desireable.
 pub struct Scaler {
     context: Option<SwsContext>,
     src_w: usize,
@@ -14,6 +22,7 @@ pub struct Scaler {
 }
 
 impl Scaler {
+    /// Create a new scaling context.
     pub fn new() -> Self {
         Scaler {
             context: None,
@@ -25,10 +34,14 @@ impl Scaler {
             dst_fmt: AVPixelFormat::AV_PIX_FMT_RGB24,
         }
     }
+
+    /// Actually initialize the context and
+    /// reinitialize it if needed.
     fn init_context(&mut self,
         src_w: usize, src_h: usize, src_fmt: AVPixelFormat,
         dst_w: usize, dst_h: usize, dst_fmt: AVPixelFormat,
     ) -> Result<&mut SwsContext> {
+        // (Re)allocate
         if    self.context.is_none()
            || self.src_w   != src_w   || self.dst_w   != dst_w
            || self.src_h   != src_h   || self.dst_h   != dst_h
@@ -52,7 +65,16 @@ impl Scaler {
         Ok(self.context.as_mut().unwrap())
     }
 
-    // TODO: Verify that 4 is actually the minimum size
+    /// Scale `src_data` to `src_data` by using the given dimensions and formats.
+    ///
+    /// # Requirements
+    ///
+    /// - `src_fmt` and `dst_fmt` need to be valid pixel formats.
+    /// - `src_w`, `src_h`, `dst_w` and `dst_h` need to be greater than 0.
+    /// - The number of planes need to be greater than or equal to the
+    ///   number of planes required by the pixel formats.
+    /// - The planes need to be big enough to contain the amount of bytes
+    ///   described by their linesize and the height (`linesize * height`).
     pub fn scale(&mut self,
         src_data: &    [&    [u8]], src_linesize: &[usize], src_w: usize, src_h: usize, src_fmt: AVPixelFormat,
         dst_data: &mut [&mut [u8]], dst_linesize: &[usize], dst_w: usize, dst_h: usize, dst_fmt: AVPixelFormat,
@@ -123,6 +145,8 @@ impl Scaler {
         }
     }
 
+    /// Copy the `src` pixel data to the `dst` pixel data,
+    /// scaling dimensions and converting pixel formats as required.
     pub fn scale_frame(&mut self, src: &Frame, dst: &mut Frame) -> Result<()> {
         let src_data     = &src.data();
         let src_linesize = &src.linesizes();

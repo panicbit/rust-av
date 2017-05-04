@@ -1,3 +1,4 @@
+pub const MAX_PLANES: usize = 4;
 
 mod encoder;
 pub use self::encoder::{
@@ -14,4 +15,6 @@ pub use self::decoder::{
 
 mod frame;
 pub use self::frame::Frame;
-pub const MAX_PLANES: usize = 4;
+
+mod scaler;
+pub use self::scaler::Scaler;

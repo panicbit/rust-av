@@ -2,7 +2,7 @@ use std::ptr;
 use smallvec::SmallVec;
 use ffi::{self,AVPixelFormat};
 use errors::*;
-use video::MAX_PLANES;
+use super::MAX_PLANES;
 
 pub struct Scaler {
     context: Option<SwsContext>,

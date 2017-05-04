@@ -14,11 +14,10 @@ use ffi::{
 };
 use format::OutputFormat;
 use generic::RefMutFrame;
-use scaler::Scaler;
-use video;
 use common::{self, Packet, Timebase};
 use errors::*;
 use util::OwnedOrRefMut;
+use super::{Frame, Scaler};
 
 // TODO: Add align field to encoder
 const ALIGN: usize = 32;
@@ -26,7 +25,7 @@ const ALIGN: usize = 32;
 pub struct Encoder {
     ptr: *mut AVCodecContext,
     scaler: Scaler,
-    tmp_frame: Option<video::Frame>,
+    tmp_frame: Option<Frame>,
 }
 
 impl Encoder {
@@ -108,7 +107,7 @@ impl Encoder {
 
     fn init_tmp_frame(&mut self) -> Result<()> {
         if self.tmp_frame.is_none() {
-            self.tmp_frame = Some(video::Frame::new(self.width(), self.height(), self.pixel_format(), ALIGN)?);
+            self.tmp_frame = Some(Frame::new(self.width(), self.height(), self.pixel_format(), ALIGN)?);
         }
         Ok(())
     }

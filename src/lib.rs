@@ -23,7 +23,6 @@ pub mod generic;
 
 pub mod io;
 pub mod codec;
-pub mod scaler;
 
 pub mod errors;
 pub use self::errors::*;

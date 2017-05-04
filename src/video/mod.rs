@@ -14,3 +14,4 @@ pub use self::decoder::{
 
 mod frame;
 pub use self::frame::Frame;
+pub const MAX_PLANES: usize = 4;

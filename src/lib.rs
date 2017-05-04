@@ -7,6 +7,7 @@ extern crate lazy_static;
 extern crate bitflags;
 #[macro_use]
 extern crate error_chain;
+extern crate smallvec;
 use std::ffi::CStr;
 use std::sync::{Once, ONCE_INIT};
 use util::AsCStr;

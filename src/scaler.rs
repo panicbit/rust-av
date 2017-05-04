@@ -1,33 +1,201 @@
 use std::ptr;
-use std::os::raw::c_int;
-use ffi;
+use smallvec::SmallVec;
+use ffi::{self,AVPixelFormat};
 use errors::*;
+use video::MAX_PLANES;
 
 pub struct Scaler {
-    ptr: *mut ffi::SwsContext,
-    source_pixel_format: ffi::AVPixelFormat,
-    target_pixel_format: ffi::AVPixelFormat,
-    source_width: usize,
-    source_height: usize,
-    target_width: usize,
-    target_height: usize,
+    context: Option<SwsContext>,
+    src_w: usize,
+    src_h: usize,
+    src_fmt: AVPixelFormat,
+    dst_w: usize,
+    dst_h: usize,
+    dst_fmt: AVPixelFormat,
 }
 use video;
 
 impl Scaler {
-    pub fn new(
-        source_width: usize, source_height: usize, source_pixel_format: ffi::AVPixelFormat,
-        target_width: usize, target_height: usize, target_pixel_format: ffi::AVPixelFormat
+    pub fn new() -> Self {
+        Scaler {
+            context: None,
+            src_w: 0,
+            src_h: 0,
+            src_fmt: AVPixelFormat::AV_PIX_FMT_RGB24,
+            dst_w: 0,
+            dst_h: 0,
+            dst_fmt: AVPixelFormat::AV_PIX_FMT_RGB24,
+        }
+    }
+    fn init_context(&mut self,
+        src_w: usize, src_h: usize, src_fmt: AVPixelFormat,
+        dst_w: usize, dst_h: usize, dst_fmt: AVPixelFormat,
+    ) -> Result<&mut SwsContext> {
+        if    self.context.is_none()
+           || self.src_w   != src_w   || self.dst_w   != dst_w
+           || self.src_h   != src_h   || self.dst_h   != dst_h
+           || self.src_fmt != src_fmt || self.dst_fmt != dst_fmt
+        {
+            let flags = ffi::SWS_BICUBIC as i32;
+            self.context = Some(SwsContext::new(
+                src_w as i32, src_h as i32, src_fmt,
+                dst_w as i32, dst_h as i32, dst_fmt,
+                flags
+            )?);
+
+            self.src_h   = src_h;
+            self.src_w   = src_w;
+            self.src_fmt = src_fmt;
+            self.dst_h   = dst_h;
+            self.dst_w   = dst_w;
+            self.dst_fmt = dst_fmt;
+        }
+
+        Ok(self.context.as_mut().unwrap())
+    }
+
+    // TODO: Verify that 4 is actually the minimum size
+    pub fn scale(&mut self,
+        src_data: &    [&    [u8]], src_linesize: &[usize], src_w: usize, src_h: usize, src_fmt: AVPixelFormat,
+        dst_data: &mut [&mut [u8]], dst_linesize: &[usize], dst_w: usize, dst_h: usize, dst_fmt: AVPixelFormat,
+    ) -> Result<()> {
+        unsafe {
+            // Get appropriate scaling context
+            let context = self.init_context(
+                src_w, src_h, src_fmt,
+                dst_w, dst_h, dst_fmt,
+            )?;
+
+            let src_num_planes = ffi::av_pix_fmt_count_planes(src_fmt);
+            let dst_num_planes = ffi::av_pix_fmt_count_planes(dst_fmt);
+
+            if src_num_planes <= 0 || dst_num_planes <= 0 {
+                bail!("Invalid pixel format for scale source or target");
+            }
+
+            let src_num_planes = src_num_planes as usize;
+            let dst_num_planes = dst_num_planes as usize;
+
+            // Check that the required planes are availabe
+            {
+                if src_data.len() < src_num_planes || src_linesize.len() < src_num_planes {
+                    bail!("Scale source has invalid number of planes");
+                }
+
+                if dst_data.len() < dst_num_planes || dst_linesize.len() < dst_num_planes {
+                    bail!("Scale target has invalid number of planes");
+                }
+            }
+
+            // Check that the buffers are big enough for the given h/w
+            {
+                for (plane, linesize) in src_data.iter().zip(src_linesize) {
+                    if src_h * linesize > plane.len() {
+                        println!("Source plane data too small");
+                    }
+                }
+
+                for (plane, linesize) in dst_data.iter().zip(dst_linesize) {
+                    if dst_h * linesize > plane.len() {
+                        println!("Target plane data too small");
+                    }
+                }
+            }
+
+            // Convert the slices to the proper ffmpeg types
+            let mut src_data: SmallVec<[*const u8; MAX_PLANES]> = src_data.iter().map(| s| s.as_ptr()).collect();
+            let mut dst_data: SmallVec<[*const u8; MAX_PLANES]> = dst_data.iter().map(| s| s.as_ptr()).collect();
+            let mut src_linesize: SmallVec<[i32; MAX_PLANES]> = src_linesize.iter().map(|&s| s as i32).collect();
+            let mut dst_linesize: SmallVec<[i32; MAX_PLANES]> = dst_linesize.iter().map(|&s| s as i32).collect();
+
+            // Fill arrays up to MAX_PLANES
+            while src_data.len() < 4 { src_data.push(ptr::null()) }
+            while dst_data.len() < 4 { dst_data.push(ptr::null()) }
+            while src_linesize.len() < 4 { src_linesize.push(0) }
+            while dst_linesize.len() < 4 { dst_linesize.push(0) }
+
+            let source_y = 0;
+
+            ffi::sws_scale(context.as_mut_ptr(),
+                src_data.as_ptr()    , src_linesize.as_ptr(), source_y, src_h as i32,
+                dst_data.as_mut_ptr(), dst_linesize.as_ptr(),
+            );
+
+            Ok(())
+        }
+    }
+
+    pub fn scale_frame(&mut self, src: &video::Frame, dst: &mut video::Frame) -> Result<()> {
+        let src_data     = &src.data();
+        let src_linesize = &src.linesizes();
+        let src_h        =  src.height();
+        let src_w        =  src.width();
+        let src_fmt      =  src.pixel_format();
+
+        let dst_data     = &mut dst.data_mut();
+        let dst_linesize = &    dst.linesizes();
+        let dst_h        =      dst.height();
+        let dst_w        =      dst.width();
+        let dst_fmt      =      dst.pixel_format();
+
+        self.scale(
+            src_data, src_linesize, src_w, src_h, src_fmt,
+            dst_data, dst_linesize, dst_w, dst_h, dst_fmt,
+        )
+    }
+
+    pub fn source_width(&self) -> usize {
+        self.src_w
+    }
+
+    pub fn source_height(&self) -> usize {
+        self.src_h
+    }
+
+    pub fn source_pixel_format(&self) -> AVPixelFormat {
+        self.src_fmt
+    }
+
+    pub fn target_width(&self) -> usize {
+        self.dst_w
+    }
+
+    pub fn target_height(&self) -> usize {
+        self.dst_h
+    }
+
+    pub fn target_pixel_format(&self) -> AVPixelFormat {
+        self.dst_fmt
+    }
+}
+
+struct SwsContext(*mut ffi::SwsContext);
+
+impl SwsContext {
+    fn new(
+        source_width: i32, source_height: i32, source_pixel_format: AVPixelFormat,
+        target_width: i32, target_height: i32, target_pixel_format: AVPixelFormat,
+        flags: i32,
     ) -> Result<Self> {
         unsafe {
             let source_filter = ptr::null_mut();
             let target_filter = ptr::null_mut();
             let param = ptr::null_mut();
-            let flags = ffi::SWS_BICUBIC as i32;
+
+            // Check that the pixel dimensions are valid
+            {
+                if source_width <= 0 || source_height <= 0 {
+                    bail!("Scale source dimension {} x {} invalid", source_width, source_height)
+                }
+
+                if target_width <= 0 || target_height <= 0 {
+                    bail!("Scale target dimension {} x {} invalid", target_width, target_height)
+                }
+            }
 
             let scaler = ffi::sws_getContext(
-                source_width as i32, source_height as i32, source_pixel_format,
-                target_width as i32, target_height as i32, target_pixel_format,
+                source_width, source_height, source_pixel_format,
+                target_width, target_height, target_pixel_format,
                 flags,
                 source_filter,
                 target_filter,
@@ -38,81 +206,46 @@ impl Scaler {
                 bail!("Could not create scaler context");
             }
 
-            Ok(Scaler {
-                ptr: scaler,
-                source_pixel_format: source_pixel_format,
-                target_pixel_format: target_pixel_format,
-                source_width: source_width,
-                source_height: source_height,
-                target_width: target_width,
-                target_height: target_height,
-            })
+            Ok(SwsContext(scaler))
         }
     }
 
-    // `&mut self` is required to avoid corrupting the SwsContext
-    pub unsafe fn __scale(&mut self,
-        source: *const *const u8, source_stride: *const c_int, source_y: c_int, source_height: c_int,
-        target: *mut   *const u8, target_stride: *const c_int
-    ) {
-        ffi::sws_scale(self.ptr,
-            source, source_stride, source_y, source_height,
-            target, target_stride
-        );
+    unsafe fn free(&mut self) {
+        if !self.0.is_null() {
+            ffi::sws_freeContext(self.0);
+            self.0 = ptr::null_mut();
+        }
     }
 
-    /// TODO: Ensure that width, height and pixel format match 
-    pub unsafe fn scale_frame(&mut self, source: &video::Frame, target: &mut video::Frame) {
-        self.__scale(
-            source.as_ref().data.as_ptr() as _, source.as_ref().linesize.as_ptr(), 0, source.height() as i32,
-            target.as_mut().data.as_mut_ptr() as _, target.as_mut().linesize.as_mut_ptr()
-        );
-    }
-
-    pub fn source_pixel_format(&self) -> ffi::AVPixelFormat {
-        self.source_pixel_format
-    }
-
-    pub fn source_width(&self) -> usize {
-        self.source_width
-    }
-    
-    pub fn source_height(&self) -> usize {
-        self.source_height
-    }
-
-    pub fn target_pixel_format(&self) -> ffi::AVPixelFormat {
-        self.target_pixel_format
-    }
-
-    pub fn target_width(&self) -> usize {
-        self.target_width
-    }
-
-    pub fn target_height(&self) -> usize {
-        self.target_height
+    fn as_mut_ptr(&mut self) -> *mut ffi::SwsContext {
+        self.0
     }
 }
 
-impl Drop for Scaler {
+impl Drop for SwsContext {
     fn drop(&mut self) {
         unsafe {
-            ffi::sws_freeContext(self.ptr);
+            self.free()
         }
     }
 }
 
 #[cfg(test)]
 mod test {
+    use ffi::AVPixelFormat::*;
+    use super::Scaler;
+
     #[test]
     fn reusable() {
-        use super::Scaler;
-        use std::ptr;
-        use ffi::AVPixelFormat::*;
 
         let source = vec![0xFF, 0x00, 0x00];
-        let source = &[source.as_ptr(), ptr::null(), ptr::null(), ptr::null()];
-        let target: Vec<u8> = vec![
+        let source_data = &[&source[..], &[], &[], &[]];
+        let source_width = 1;
+        let source_linesize = &[3*source_width, 0, 0, 0];
+        let source_height = 1;
+        let source_format = AV_PIX_FMT_RGB24;
+
+        let mut target: Vec<u8> = vec![
             1,2,3, 4,5,6, 7,8,9, 10,11,12,
             1,2,3, 4,5,6, 7,8,9, 10,11,12,
             1,2,3, 4,5,6, 7,8,9, 10,11,12,
@@ -122,36 +255,22 @@ mod test {
             99,99,99,99,99,99,99,99,99,99,99,99,
             99,99,99,99,99,99,99,99,99,99,99,99,
         ];
+        let target_data = &mut [&mut target[..], &mut [], &mut [], &mut []];
+        let target_width = 4;
+        let target_linesize = &[3*target_width, 0, 0, 0];
+        let target_height = 4;
+        let target_format = AV_PIX_FMT_RGB24;
 
-        {
-            let target = &mut [target.as_ptr(), ptr::null(), ptr::null(), ptr::null()];
+        let mut scaler = Scaler::new();
 
-            let source_width = 1;
-            let source_linesize: &[i32] = &[3*source_width, 0, 0, 0];
-            let source_height = 1;
-            let source_pixel_format = AV_PIX_FMT_RGB24;
-
-            let target_width = 4;
-            let target_linesize: &[i32] = &[3*target_width, 0, 0, 0];
-            let target_height = 4;
-            let target_pixel_format = AV_PIX_FMT_RGB24;
-
-            let mut scaler = Scaler::new(
-                source_width as usize, source_height, source_pixel_format,
-                target_width as usize, target_height, target_pixel_format,
+        for _ in 0 .. 2000 {
+            scaler.scale(
+                source_data, source_linesize, source_width, source_height, source_format,
+                target_data, target_linesize, target_width, target_height, target_format,
             ).unwrap();
-
-            unsafe {
-                for _ in 0 .. 2000 {
-                    scaler.__scale(
-                        source.as_ptr(),     source_linesize.as_ptr(), 0, source_height as i32,
-                        target.as_mut_ptr(), target_linesize.as_ptr(),
-                    );
-                }
-            }
         }
 
-        assert_eq!(target, vec![
+        assert_eq!(target_data[0], &[
             0xFF,0x00,0x00, 0xFF,0x00,0x00, 0xFF,0x00,0x00, 0xFF,0x00,0x00,
             0xFF,0x00,0x00, 0xFF,0x00,0x00, 0xFF,0x00,0x00, 0xFF,0x00,0x00,
             0xFF,0x00,0x00, 0xFF,0x00,0x00, 0xFF,0x00,0x00, 0xFF,0x00,0x00,
@@ -160,6 +279,28 @@ mod test {
             99,99,99,99,99,99,99,99,99,99,99,99,
             99,99,99,99,99,99,99,99,99,99,99,99,
             99,99,99,99,99,99,99,99,99,99,99,99,
-        ]);
+        ][..]);
+    }
+
+    #[test]
+    #[should_panic]
+    fn not_enough_planes() {
+        let mut scaler = Scaler::new();
+
+        scaler.scale(
+            &    [], &    [], 1, 1, AV_PIX_FMT_RGB24,
+            &mut [], &mut [], 1, 1, AV_PIX_FMT_RGB24,
+        ).unwrap();
+    }
+
+    #[test]
+    #[should_panic]
+    fn invalid_dimensions() {
+        let mut scaler = Scaler::new();
+
+        scaler.scale(
+            &    [], &    [], 0, 0, AV_PIX_FMT_RGB24,
+            &mut [], &mut [], 0, 0, AV_PIX_FMT_RGB24,
+        ).unwrap();
     }
 }

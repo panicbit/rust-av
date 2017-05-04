@@ -2,8 +2,7 @@ use std::ptr;
 use smallvec::SmallVec;
 use ffi::{self,AVPixelFormat};
 use errors::*;
-use super::MAX_PLANES;
-
+use super::{Frame, MAX_PLANES};
 pub struct Scaler {
     context: Option<SwsContext>,
     src_w: usize,
@@ -13,7 +12,6 @@ pub struct Scaler {
     dst_h: usize,
     dst_fmt: AVPixelFormat,
 }
-use video;
 
 impl Scaler {
     pub fn new() -> Self {
@@ -125,7 +123,7 @@ impl Scaler {
         }
     }
 
-    pub fn scale_frame(&mut self, src: &video::Frame, dst: &mut video::Frame) -> Result<()> {
+    pub fn scale_frame(&mut self, src: &Frame, dst: &mut Frame) -> Result<()> {
         let src_data     = &src.data();
         let src_linesize = &src.linesizes();
         let src_h        =  src.height();

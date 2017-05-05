@@ -19,6 +19,14 @@ impl Timebase {
     pub fn den(&self) -> c_int {
         self.0.den
     }
+
+    pub fn as_f32(&self) -> f32 {
+        self.num() as f32 / self.den() as f32
+    }
+
+    pub fn as_f64(&self) -> f64 {
+        self.num() as f64 / self.den() as f64
+    }
 }
 
 impl From<AVRational> for Timebase {

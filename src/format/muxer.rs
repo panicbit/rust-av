@@ -209,7 +209,7 @@ impl MuxerBuilder {
     }
 
     /// Add a new stream using the settings from an encoder.
-    pub fn add_stream_from_encoder<E: AsRef<ffi::AVCodecContext>>(&mut self, encoder: E) -> Result<()> {
+    pub fn add_stream_from_encoder(&mut self, encoder: &Encoder) -> Result<()> {
         unsafe {
             // Verify that encoder has global header flag set if required
             {

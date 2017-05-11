@@ -12,6 +12,10 @@ pub struct Packet<'buf> {
     _phantom: PhantomData<&'buf AVPacket>,
 }
 
+// See https://github.com/panicbit/rust-av/issues/28
+unsafe impl<'buf> Send for Packet<'buf> {}
+unsafe impl<'buf> Sync for Packet<'buf> {}
+
 impl<'buf> Packet<'buf> {
     pub unsafe fn from_ptr(ptr: *mut AVPacket, time_base: Timebase) -> Packet<'buf> {
         Packet {

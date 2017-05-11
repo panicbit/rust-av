@@ -18,6 +18,10 @@ pub struct Frame {
     pixel_format: AVPixelFormat,
 }
 
+// See https://github.com/panicbit/rust-av/issues/28
+unsafe impl Send for Frame {}
+unsafe impl Sync for Frame {}
+
 impl Frame {
     /// # Panics
     ///

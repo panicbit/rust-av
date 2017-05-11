@@ -19,6 +19,10 @@ pub struct Frame {
     sample_format: AVSampleFormat,
 }
 
+// See https://github.com/panicbit/rust-av/issues/28
+unsafe impl Send for Frame {}
+unsafe impl Sync for Frame {}
+
 impl Frame {
     /// TODO: Check for overflows
     pub fn new(num_samples: usize, sample_rate: u32, sample_format: AVSampleFormat, channel_layout: ChannelLayout) -> Result<Self> {

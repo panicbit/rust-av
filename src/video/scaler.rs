@@ -167,6 +167,9 @@ impl Scaler {
     }
 }
 
+unsafe impl Send for Scaler{}
+unsafe impl Sync for Scaler{}
+
 struct SwsContext(*mut ffi::SwsContext);
 
 impl SwsContext {

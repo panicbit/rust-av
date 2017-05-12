@@ -119,6 +119,9 @@ impl Encoder {
     pub fn as_mut_ptr(&mut self) -> *mut AVCodecContext { self.ptr }
 }
 
+unsafe impl Send for Encoder {}
+unsafe impl Sync for Encoder {}
+
 impl AsRef<AVCodecContext> for Encoder {
     fn as_ref(&self) -> &AVCodecContext {
         unsafe { &*self.ptr }

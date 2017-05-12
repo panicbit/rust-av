@@ -173,6 +173,9 @@ impl fmt::Debug for Muxer {
     }
 }
 
+unsafe impl Send for Muxer{}
+unsafe impl Sync for Muxer{}
+
 pub struct MuxerBuilder {
     ptr: *mut AVFormatContext,
     io_context: Option<io::IOContext>,

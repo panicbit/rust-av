@@ -276,3 +276,6 @@ impl Drop for MuxerBuilder {
         }
     }
 }
+
+unsafe impl<'buf> Send for MuxerBuilder<'buf> {}
+unsafe impl<'buf> Sync for MuxerBuilder<'buf> {}

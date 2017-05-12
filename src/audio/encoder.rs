@@ -26,6 +26,8 @@ use util::OwnedOrRefMut;
 pub struct Encoder {
     ptr: *mut AVCodecContext,
 }
+unsafe impl Send for Encoder {}
+unsafe impl Sync for Encoder {}
 
 impl Encoder {
     pub fn from_codec(codec: Codec) -> Result<EncoderBuilder> {

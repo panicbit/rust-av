@@ -28,6 +28,9 @@ pub struct Encoder {
     tmp_frame: Option<Frame>,
 }
 
+unsafe impl Send for Encoder {}
+unsafe impl Sync for Encoder {}
+
 impl Encoder {
     pub fn from_codec(codec: Codec) -> Result<EncoderBuilder> {
         EncoderBuilder::from_codec(codec)
@@ -118,9 +121,6 @@ impl Encoder {
     pub fn as_ptr(&self) -> *const AVCodecContext { self.ptr }
     pub fn as_mut_ptr(&mut self) -> *mut AVCodecContext { self.ptr }
 }
-
-unsafe impl Send for Encoder {}
-unsafe impl Sync for Encoder {}
 
 impl AsRef<AVCodecContext> for Encoder {
     fn as_ref(&self) -> &AVCodecContext {

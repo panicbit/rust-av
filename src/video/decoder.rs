@@ -13,7 +13,7 @@ pub struct Decoder {
 }
 
 unsafe impl Send for Decoder{}
-unsafe impl Sync for Deocder{}
+unsafe impl Sync for Decoder{}
 
 impl Decoder {
     // TODO: Share code between audio/video

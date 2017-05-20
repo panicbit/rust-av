@@ -12,6 +12,9 @@ pub struct Decoder {
     ptr: *mut AVCodecContext,
 }
 
+unsafe impl Send for Decoder{}
+unsafe impl Sync for Decoder{}
+
 impl Decoder {
     // TODO: Share code between audio/video
     pub fn from_codec_parameters<'fmt_ctx>(codec_parameters: CodecParameters<'fmt_ctx>) -> Result<Self> {

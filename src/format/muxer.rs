@@ -37,6 +37,9 @@ pub struct Muxer {
     closed: bool,
 }
 
+unsafe impl Send for Muxer{}
+unsafe impl Sync for Muxer{}
+
 impl Muxer {
     pub fn new<W: io::AVWrite>(format: OutputFormat, writer: W) -> Result<MuxerBuilder> {
         MuxerBuilder::new(format, writer)
@@ -172,9 +175,6 @@ impl fmt::Debug for Muxer {
             .finish()
     }
 }
-
-unsafe impl Send for Muxer{}
-unsafe impl Sync for Muxer{}
 
 pub struct MuxerBuilder {
     ptr: *mut AVFormatContext,

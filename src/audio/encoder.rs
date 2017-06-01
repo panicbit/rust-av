@@ -23,6 +23,15 @@ use common::{self, Packet, Timebase};
 use errors::*;
 use util::OwnedOrRefMut;
 
+/// Audio encoder.
+///
+/// Encoding is done by repeatedly calling `encode` with
+/// the `Frame` that should be encoded and by consuming
+/// the returned `Packet` iterator.
+///
+/// When no more frames need to be encoded,
+/// the encoder should be `flush`ed to obtain
+/// the remaining buffered packets.
 pub struct Encoder {
     ptr: *mut AVCodecContext,
 }
@@ -30,25 +39,29 @@ unsafe impl Send for Encoder {}
 unsafe impl Sync for Encoder {}
 
 impl Encoder {
+    /// Create a new encoder builder with the passed `codec`.
     pub fn from_codec(codec: Codec) -> Result<EncoderBuilder> {
         EncoderBuilder::from_codec(codec)
     }
 
+    /// Returns the sample format of the encoder.
     pub fn sample_format(&self) -> AVSampleFormat {
         self.as_ref().sample_fmt
     }
 
-    /// TODO: Check for underflow
+    // TODO: Check for underflow
+    /// Returns the sample rate of the encoder.
     pub fn sample_rate(&self) -> u32 {
         self.as_ref().sample_rate as u32
     }
 
+    /// Returns the time base of the encoder.
     pub fn time_base(&self) -> Timebase {
         self.as_ref().time_base.into()
     }
 
-    // Returns the frame size required by the encoder.
-    // If the result is `None`, any frame size can be used.
+    /// Returns the frame size required by the encoder.
+    /// If the result is `None`, any frame size may be used.
     pub fn frame_size(&self) -> Option<usize> {
         match self.as_ref().frame_size as usize {
             0 => None,
@@ -56,14 +69,14 @@ impl Encoder {
         }
     }
 
+    /// Returns the codec of the encoder.
     pub fn codec(&self) -> Codec {
         unsafe {
             Codec::from_ptr(self.as_ref().codec)
         }
     }
-}
 
-impl Encoder {
+    /// Encode a Frame and return the encoded packets as iterator.
     pub fn encode<'a, F>(&mut self, frame: F) -> Result<Packets> where
         F: Into<RefMutFrame<'a>>,
     {
@@ -102,6 +115,9 @@ impl Encoder {
         }
     }
 
+    /// Flush the encoder.
+    /// The encoder may buffer data and needs to be flushed
+    /// to obtain the remaining packets as iterator.
     pub fn flush(self) -> Result<Packets<'static>> {
         unsafe {
             // Flush encoder
@@ -137,6 +153,7 @@ impl Drop for Encoder {
     }
 }
 
+/// Builder for creating encoders.
 pub struct EncoderBuilder {
     codec: Codec,
     sample_format: Option<AVSampleFormat>,
@@ -145,6 +162,7 @@ pub struct EncoderBuilder {
 }
 
 impl EncoderBuilder {
+    /// Create a new encoder builder with the passed `codec`.
     pub fn from_codec(codec: Codec) -> Result<Self> {
         common::encoder::require_is_encoder(codec)?;
         common::encoder::require_codec_type(MediaType::Audio, codec)?;
@@ -157,19 +175,23 @@ impl EncoderBuilder {
         })
     }
 
+    /// Set the sample format. Default: `AV_SAMPLE_FMT_S16`.
     pub fn sample_format(&mut self, sample_format: AVSampleFormat) -> &mut Self {
         self.sample_format = Some(sample_format); self
     }
 
-    /// TODO: Check for overflow
+    // TODO: Check for overflow
+    /// Set the sample rate. Default: `44100`.
     pub fn sample_rate(&mut self, sample_rate: u32) -> &mut Self {
         self.sample_rate = Some(sample_rate); self
     }
 
+    /// Set the channel layout. Default: `CHANNEL_LAYOUT_STEREO`.
     pub fn channel_layout(&mut self, channel_layout: ChannelLayout) -> &mut Self {
         self.channel_layout = Some(channel_layout); self
     }
 
+    /// Open the encoder.
     pub fn open(&self, format: OutputFormat) -> Result<Encoder> {
         unsafe {
             let sample_rate = self.sample_rate.unwrap_or(44100) as c_int;
@@ -200,6 +222,7 @@ impl EncoderBuilder {
     }
 }
 
+/// Iterator over encoded packets.
 pub struct Packets<'encoder> {
     encoder: OwnedOrRefMut<'encoder, Encoder>,
 }
@@ -248,4 +271,3 @@ impl<'encoder> Drop for Packets<'encoder> {
         for _ in self {}
     }
 }
-

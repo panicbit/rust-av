@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <meta name="description" content="API documentation for the Rust `avcodec_decode_video2` fn in crate `av_sys`.">
+    <meta name="keywords" content="rust, rustlang, rust-lang, avcodec_decode_video2">
+
+    <title>av_sys::avcodec_decode_video2 - Rust</title>
+
+    <link rel="stylesheet" type="text/css" href="../normalize.css">
+    <link rel="stylesheet" type="text/css" href="../rustdoc.css">
+    <link rel="stylesheet" type="text/css" href="../main.css">
+    
+
+    
+    
+</head>
+<body class="rustdoc fn">
+    <!--[if lte IE 8]>
+    <div class="warning">
+        This old browser is unsupported and will most likely display funky
+        things.
+    </div>
+    <![endif]-->
+
+    
+
+    <nav class="sidebar">
+        
+        <p class='location'><a href='index.html'>av_sys</a></p><script>window.sidebarCurrent = {name: 'avcodec_decode_video2', ty: 'fn', relpath: ''};</script><script defer src="sidebar-items.js"></script>
+    </nav>
+
+    <nav class="sub">
+        <form class="search-form js-only">
+            <div class="search-container">
+                <input class="search-input" name="search"
+                       autocomplete="off"
+                       placeholder="Click or press ‘S’ to search, ‘?’ for more options…"
+                       type="search">
+            </div>
+        </form>
+    </nav>
+
+    <section id='main' class="content">
+<h1 class='fqn'><span class='in-band'>Function <a href='index.html'>av_sys</a>::<wbr><a class="fn" href=''>avcodec_decode_video2</a></span><span class='out-of-band'><span id='render-detail'>
+                   <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
+                       [<span class='inner'>&#x2212;</span>]
+                   </a>
+               </span><a class='srclink' href='../src/av_sys/home/travis/build/panicbit/rust-av/target/debug/build/av_sys-5aff961289ea4337/out/ffi.rs.html#3674' title='goto source code'>[src]</a></span></h1>
+<pre class='rust fn'>pub unsafe extern fn avcodec_decode_video2(<br>&nbsp;&nbsp;&nbsp;&nbsp;avctx: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*mut </a><a class="struct" href="../av_sys/struct.AVCodecContext.html" title="struct av_sys::AVCodecContext">AVCodecContext</a>, <br>&nbsp;&nbsp;&nbsp;&nbsp;picture: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*mut </a><a class="struct" href="../av_sys/struct.AVFrame.html" title="struct av_sys::AVFrame">AVFrame</a>, <br>&nbsp;&nbsp;&nbsp;&nbsp;got_picture_ptr: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*mut </a><a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a>, <br>&nbsp;&nbsp;&nbsp;&nbsp;avpkt: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*const </a><a class="struct" href="../av_sys/struct.AVPacket.html" title="struct av_sys::AVPacket">AVPacket</a><br>) -&gt; <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a></pre><div class='docblock'><p>Decode the video frame of size avpkt-&gt;size from avpkt-&gt;data into picture.
+Some decoders may support multiple frames in a single AVPacket, such
+decoders would then just decode the first frame.</p>
+
+<p>@warning The input buffer must be AV_INPUT_BUFFER_PADDING_SIZE larger than
+the actual read bytes because some optimized bitstream readers read 32 or 64
+bits at once and could read over the end.</p>
+
+<p>@warning The end of the input buffer buf should be set to 0 to ensure that
+no overreading happens for damaged MPEG streams.</p>
+
+<p>@note Codecs which have the AV_CODEC_CAP_DELAY capability set have a delay
+between input and output, these need to be fed with avpkt-&gt;data=NULL,
+avpkt-&gt;size=0 at the end to return the remaining frames.</p>
+
+<p>@note The AVCodecContext MUST have been opened with @ref avcodec_open2()
+before packets may be fed to the decoder.</p>
+
+<p>@param avctx the codec context
+@param[out] picture The AVFrame in which the decoded video frame will be stored.
+            Use av_frame_alloc() to get an AVFrame. The codec will
+            allocate memory for the actual bitmap by calling the
+            AVCodecContext.get_buffer2() callback.
+            When AVCodecContext.refcounted_frames is set to 1, the frame is
+            reference counted and the returned reference belongs to the
+            caller. The caller must release the frame using av_frame_unref()
+            when the frame is no longer needed. The caller may safely write
+            to the frame if av_frame_is_writable() returns 1.
+            When AVCodecContext.refcounted_frames is set to 0, the returned
+            reference belongs to the decoder and is valid only until the
+            next call to this function or until closing or flushing the
+            decoder. The caller may not write to it.</p>
+
+<p>@param[in] avpkt The input AVPacket containing the input buffer.
+           You can create such packet with av_init_packet() and by then setting
+           data and size, some decoders might in addition need other fields like
+           flags&amp;AV_PKT_FLAG_KEY. All decoders are designed to use the least
+           fields possible.
+@param[in,out] got_picture_ptr Zero if no frame could be decompressed, otherwise, it is nonzero.
+@return On error a negative value is returned, otherwise the number of bytes
+used or zero if no frame could be decompressed.</p>
+
+<p>@deprecated Use avcodec_send_packet() and avcodec_receive_frame().</p>
+</div></section>
+    <section id='search' class="content hidden"></section>
+
+    <section class="footer"></section>
+
+    <aside id="help" class="hidden">
+        <div>
+            <h1 class="hidden">Help</h1>
+
+            <div class="shortcuts">
+                <h2>Keyboard Shortcuts</h2>
+
+                <dl>
+                    <dt>?</dt>
+                    <dd>Show this help dialog</dd>
+                    <dt>S</dt>
+                    <dd>Focus the search field</dd>
+                    <dt>&larrb;</dt>
+                    <dd>Move up in search results</dd>
+                    <dt>&rarrb;</dt>
+                    <dd>Move down in search results</dd>
+                    <dt>&#9166;</dt>
+                    <dd>Go to active search result</dd>
+                    <dt>+</dt>
+                    <dd>Collapse/expand all sections</dd>
+                </dl>
+            </div>
+
+            <div class="infos">
+                <h2>Search Tricks</h2>
+
+                <p>
+                    Prefix searches with a type followed by a colon (e.g.
+                    <code>fn:</code>) to restrict the search to a given type.
+                </p>
+
+                <p>
+                    Accepted types are: <code>fn</code>, <code>mod</code>,
+                    <code>struct</code>, <code>enum</code>,
+                    <code>trait</code>, <code>type</code>, <code>macro</code>,
+                    and <code>const</code>.
+                </p>
+
+                <p>
+                    Search functions by type signature (e.g.
+                    <code>vec -> usize</code> or <code>* -> vec</code>)
+                </p>
+            </div>
+        </div>
+    </aside>
+
+    
+
+    <script>
+        window.rootPath = "../";
+        window.currentCrate = "av_sys";
+    </script>
+    <script src="../jquery.js"></script>
+    <script src="../main.js"></script>
+    <script defer src="../search-index.js"></script>
+</body>
+</html>

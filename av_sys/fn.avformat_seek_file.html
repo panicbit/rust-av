@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <meta name="description" content="API documentation for the Rust `avformat_seek_file` fn in crate `av_sys`.">
+    <meta name="keywords" content="rust, rustlang, rust-lang, avformat_seek_file">
+
+    <title>av_sys::avformat_seek_file - Rust</title>
+
+    <link rel="stylesheet" type="text/css" href="../normalize.css">
+    <link rel="stylesheet" type="text/css" href="../rustdoc.css">
+    <link rel="stylesheet" type="text/css" href="../main.css">
+    
+
+    
+    
+</head>
+<body class="rustdoc fn">
+    <!--[if lte IE 8]>
+    <div class="warning">
+        This old browser is unsupported and will most likely display funky
+        things.
+    </div>
+    <![endif]-->
+
+    
+
+    <nav class="sidebar">
+        
+        <p class='location'><a href='index.html'>av_sys</a></p><script>window.sidebarCurrent = {name: 'avformat_seek_file', ty: 'fn', relpath: ''};</script><script defer src="sidebar-items.js"></script>
+    </nav>
+
+    <nav class="sub">
+        <form class="search-form js-only">
+            <div class="search-container">
+                <input class="search-input" name="search"
+                       autocomplete="off"
+                       placeholder="Click or press ‘S’ to search, ‘?’ for more options…"
+                       type="search">
+            </div>
+        </form>
+    </nav>
+
+    <section id='main' class="content">
+<h1 class='fqn'><span class='in-band'>Function <a href='index.html'>av_sys</a>::<wbr><a class="fn" href=''>avformat_seek_file</a></span><span class='out-of-band'><span id='render-detail'>
+                   <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
+                       [<span class='inner'>&#x2212;</span>]
+                   </a>
+               </span><a class='srclink' href='../src/av_sys/home/travis/build/panicbit/rust-av/target/debug/build/av_sys-5aff961289ea4337/out/ffi.rs.html#5892' title='goto source code'>[src]</a></span></h1>
+<pre class='rust fn'>pub unsafe extern fn avformat_seek_file(<br>&nbsp;&nbsp;&nbsp;&nbsp;s: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*mut </a><a class="struct" href="../av_sys/struct.AVFormatContext.html" title="struct av_sys::AVFormatContext">AVFormatContext</a>, <br>&nbsp;&nbsp;&nbsp;&nbsp;stream_index: <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a>, <br>&nbsp;&nbsp;&nbsp;&nbsp;min_ts: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.i64.html">i64</a>, <br>&nbsp;&nbsp;&nbsp;&nbsp;ts: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.i64.html">i64</a>, <br>&nbsp;&nbsp;&nbsp;&nbsp;max_ts: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.i64.html">i64</a>, <br>&nbsp;&nbsp;&nbsp;&nbsp;flags: <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a><br>) -&gt; <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a></pre><div class='docblock'><p>Seek to timestamp ts.
+Seeking will be done so that the point from which all active streams
+can be presented successfully will be closest to ts and within min/max_ts.
+Active streams are all streams that have AVStream.discard &lt; AVDISCARD_ALL.</p>
+
+<p>If flags contain AVSEEK_FLAG_BYTE, then all timestamps are in bytes and
+are the file position (this may not be supported by all demuxers).
+If flags contain AVSEEK_FLAG_FRAME, then all timestamps are in frames
+in the stream with stream_index (this may not be supported by all demuxers).
+Otherwise all timestamps are in units of the stream selected by stream_index
+or if stream_index is -1, in AV_TIME_BASE units.
+If flags contain AVSEEK_FLAG_ANY, then non-keyframes are treated as
+keyframes (this may not be supported by all demuxers).
+If flags contain AVSEEK_FLAG_BACKWARD, it is ignored.</p>
+
+<p>@param s media file handle
+@param stream_index index of the stream which is used as time base reference
+@param min_ts smallest acceptable timestamp
+@param ts target timestamp
+@param max_ts largest acceptable timestamp
+@param flags flags
+@return &gt;=0 on success, error code otherwise</p>
+
+<p>@note This is part of the new seek API which is still under construction.
+      Thus do not use this yet. It may change at any time, do not expect
+      ABI compatibility yet!</p>
+</div></section>
+    <section id='search' class="content hidden"></section>
+
+    <section class="footer"></section>
+
+    <aside id="help" class="hidden">
+        <div>
+            <h1 class="hidden">Help</h1>
+
+            <div class="shortcuts">
+                <h2>Keyboard Shortcuts</h2>
+
+                <dl>
+                    <dt>?</dt>
+                    <dd>Show this help dialog</dd>
+                    <dt>S</dt>
+                    <dd>Focus the search field</dd>
+                    <dt>&larrb;</dt>
+                    <dd>Move up in search results</dd>
+                    <dt>&rarrb;</dt>
+                    <dd>Move down in search results</dd>
+                    <dt>&#9166;</dt>
+                    <dd>Go to active search result</dd>
+                    <dt>+</dt>
+                    <dd>Collapse/expand all sections</dd>
+                </dl>
+            </div>
+
+            <div class="infos">
+                <h2>Search Tricks</h2>
+
+                <p>
+                    Prefix searches with a type followed by a colon (e.g.
+                    <code>fn:</code>) to restrict the search to a given type.
+                </p>
+
+                <p>
+                    Accepted types are: <code>fn</code>, <code>mod</code>,
+                    <code>struct</code>, <code>enum</code>,
+                    <code>trait</code>, <code>type</code>, <code>macro</code>,
+                    and <code>const</code>.
+                </p>
+
+                <p>
+                    Search functions by type signature (e.g.
+                    <code>vec -> usize</code> or <code>* -> vec</code>)
+                </p>
+            </div>
+        </div>
+    </aside>
+
+    
+
+    <script>
+        window.rootPath = "../";
+        window.currentCrate = "av_sys";
+    </script>
+    <script src="../jquery.js"></script>
+    <script src="../main.js"></script>
+    <script defer src="../search-index.js"></script>
+</body>
+</html>

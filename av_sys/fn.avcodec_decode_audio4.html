@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <meta name="description" content="API documentation for the Rust `avcodec_decode_audio4` fn in crate `av_sys`.">
+    <meta name="keywords" content="rust, rustlang, rust-lang, avcodec_decode_audio4">
+
+    <title>av_sys::avcodec_decode_audio4 - Rust</title>
+
+    <link rel="stylesheet" type="text/css" href="../normalize.css">
+    <link rel="stylesheet" type="text/css" href="../rustdoc.css">
+    <link rel="stylesheet" type="text/css" href="../main.css">
+    
+
+    
+    
+</head>
+<body class="rustdoc fn">
+    <!--[if lte IE 8]>
+    <div class="warning">
+        This old browser is unsupported and will most likely display funky
+        things.
+    </div>
+    <![endif]-->
+
+    
+
+    <nav class="sidebar">
+        
+        <p class='location'><a href='index.html'>av_sys</a></p><script>window.sidebarCurrent = {name: 'avcodec_decode_audio4', ty: 'fn', relpath: ''};</script><script defer src="sidebar-items.js"></script>
+    </nav>
+
+    <nav class="sub">
+        <form class="search-form js-only">
+            <div class="search-container">
+                <input class="search-input" name="search"
+                       autocomplete="off"
+                       placeholder="Click or press ‘S’ to search, ‘?’ for more options…"
+                       type="search">
+            </div>
+        </form>
+    </nav>
+
+    <section id='main' class="content">
+<h1 class='fqn'><span class='in-band'>Function <a href='index.html'>av_sys</a>::<wbr><a class="fn" href=''>avcodec_decode_audio4</a></span><span class='out-of-band'><span id='render-detail'>
+                   <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
+                       [<span class='inner'>&#x2212;</span>]
+                   </a>
+               </span><a class='srclink' href='../src/av_sys/home/travis/build/panicbit/rust-av/target/debug/build/av_sys-5aff961289ea4337/out/ffi.rs.html#3630' title='goto source code'>[src]</a></span></h1>
+<pre class='rust fn'>pub unsafe extern fn avcodec_decode_audio4(<br>&nbsp;&nbsp;&nbsp;&nbsp;avctx: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*mut </a><a class="struct" href="../av_sys/struct.AVCodecContext.html" title="struct av_sys::AVCodecContext">AVCodecContext</a>, <br>&nbsp;&nbsp;&nbsp;&nbsp;frame: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*mut </a><a class="struct" href="../av_sys/struct.AVFrame.html" title="struct av_sys::AVFrame">AVFrame</a>, <br>&nbsp;&nbsp;&nbsp;&nbsp;got_frame_ptr: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*mut </a><a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a>, <br>&nbsp;&nbsp;&nbsp;&nbsp;avpkt: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*const </a><a class="struct" href="../av_sys/struct.AVPacket.html" title="struct av_sys::AVPacket">AVPacket</a><br>) -&gt; <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a></pre><div class='docblock'><ul>
+<li>Decode the audio frame of size avpkt-&gt;size from avpkt-&gt;data into frame.
+*
+
+<ul>
+<li>Some decoders may support multiple frames in a single AVPacket. Such</li>
+<li>decoders would then just decode the first frame and the return value would be</li>
+<li>less than the packet size. In this case, avcodec_decode_audio4 has to be</li>
+<li>called again with an AVPacket containing the remaining data in order to</li>
+<li>decode the second frame, etc...  Even if no frames are returned, the packet</li>
+<li>needs to be fed to the decoder with remaining data until it is completely</li>
+<li>consumed or an error occurs.
+*</li>
+<li>Some decoders (those marked with AV_CODEC_CAP_DELAY) have a delay between input</li>
+<li>and output. This means that for some packets they will not immediately</li>
+<li>produce decoded output and need to be flushed at the end of decoding to get</li>
+<li>all the decoded data. Flushing is done by calling this function with packets</li>
+<li>with avpkt-&gt;data set to NULL and avpkt-&gt;size set to 0 until it stops</li>
+<li>returning samples. It is safe to flush even those decoders that are not</li>
+<li>marked with AV_CODEC_CAP_DELAY, then no samples will be returned.
+*</li>
+<li>@warning The input buffer, avpkt-&gt;data must be AV_INPUT_BUFFER_PADDING_SIZE</li>
+<li>         larger than the actual read bytes because some optimized bitstream</li>
+<li>         readers read 32 or 64 bits at once and could read over the end.
+*</li>
+<li>@note The AVCodecContext MUST have been opened with @ref avcodec_open2()</li>
+<li>before packets may be fed to the decoder.
+*</li>
+<li>@param      avctx the codec context</li>
+<li>@param[out] frame The AVFrame in which to store decoded audio samples.</li>
+<li>                  The decoder will allocate a buffer for the decoded frame by</li>
+<li>                  calling the AVCodecContext.get_buffer2() callback.</li>
+<li>                  When AVCodecContext.refcounted_frames is set to 1, the frame is</li>
+<li>                  reference counted and the returned reference belongs to the</li>
+<li>                  caller. The caller must release the frame using av_frame_unref()</li>
+<li>                  when the frame is no longer needed. The caller may safely write</li>
+<li>                  to the frame if av_frame_is_writable() returns 1.</li>
+<li>                  When AVCodecContext.refcounted_frames is set to 0, the returned</li>
+<li>                  reference belongs to the decoder and is valid only until the</li>
+<li>                  next call to this function or until closing or flushing the</li>
+<li>                  decoder. The caller may not write to it.</li>
+<li>@param[out] got_frame_ptr Zero if no frame could be decoded, otherwise it is</li>
+<li>                          non-zero. Note that this field being set to zero</li>
+<li>                          does not mean that an error has occurred. For</li>
+<li>                          decoders with AV_CODEC_CAP_DELAY set, no given decode</li>
+<li>                          call is guaranteed to produce a frame.</li>
+<li>@param[in]  avpkt The input AVPacket containing the input buffer.</li>
+<li>                  At least avpkt-&gt;data and avpkt-&gt;size should be set. Some</li>
+<li>                  decoders might also require additional fields to be set.</li>
+<li>@return A negative error code is returned if an error occurred during</li>
+<li>        decoding, otherwise the number of bytes consumed from the input</li>
+<li>        AVPacket is returned.
+*</li>
+</ul></li>
+<li>@deprecated Use avcodec_send_packet() and avcodec_receive_frame().</li>
+</ul>
+</div></section>
+    <section id='search' class="content hidden"></section>
+
+    <section class="footer"></section>
+
+    <aside id="help" class="hidden">
+        <div>
+            <h1 class="hidden">Help</h1>
+
+            <div class="shortcuts">
+                <h2>Keyboard Shortcuts</h2>
+
+                <dl>
+                    <dt>?</dt>
+                    <dd>Show this help dialog</dd>
+                    <dt>S</dt>
+                    <dd>Focus the search field</dd>
+                    <dt>&larrb;</dt>
+                    <dd>Move up in search results</dd>
+                    <dt>&rarrb;</dt>
+                    <dd>Move down in search results</dd>
+                    <dt>&#9166;</dt>
+                    <dd>Go to active search result</dd>
+                    <dt>+</dt>
+                    <dd>Collapse/expand all sections</dd>
+                </dl>
+            </div>
+
+            <div class="infos">
+                <h2>Search Tricks</h2>
+
+                <p>
+                    Prefix searches with a type followed by a colon (e.g.
+                    <code>fn:</code>) to restrict the search to a given type.
+                </p>
+
+                <p>
+                    Accepted types are: <code>fn</code>, <code>mod</code>,
+                    <code>struct</code>, <code>enum</code>,
+                    <code>trait</code>, <code>type</code>, <code>macro</code>,
+                    and <code>const</code>.
+                </p>
+
+                <p>
+                    Search functions by type signature (e.g.
+                    <code>vec -> usize</code> or <code>* -> vec</code>)
+                </p>
+            </div>
+        </div>
+    </aside>
+
+    
+
+    <script>
+        window.rootPath = "../";
+        window.currentCrate = "av_sys";
+    </script>
+    <script src="../jquery.js"></script>
+    <script src="../main.js"></script>
+    <script defer src="../search-index.js"></script>
+</body>
+</html>

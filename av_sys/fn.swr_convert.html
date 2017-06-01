@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <meta name="description" content="API documentation for the Rust `swr_convert` fn in crate `av_sys`.">
+    <meta name="keywords" content="rust, rustlang, rust-lang, swr_convert">
+
+    <title>av_sys::swr_convert - Rust</title>
+
+    <link rel="stylesheet" type="text/css" href="../normalize.css">
+    <link rel="stylesheet" type="text/css" href="../rustdoc.css">
+    <link rel="stylesheet" type="text/css" href="../main.css">
+    
+
+    
+    
+</head>
+<body class="rustdoc fn">
+    <!--[if lte IE 8]>
+    <div class="warning">
+        This old browser is unsupported and will most likely display funky
+        things.
+    </div>
+    <![endif]-->
+
+    
+
+    <nav class="sidebar">
+        
+        <p class='location'><a href='index.html'>av_sys</a></p><script>window.sidebarCurrent = {name: 'swr_convert', ty: 'fn', relpath: ''};</script><script defer src="sidebar-items.js"></script>
+    </nav>
+
+    <nav class="sub">
+        <form class="search-form js-only">
+            <div class="search-container">
+                <input class="search-input" name="search"
+                       autocomplete="off"
+                       placeholder="Click or press ‘S’ to search, ‘?’ for more options…"
+                       type="search">
+            </div>
+        </form>
+    </nav>
+
+    <section id='main' class="content">
+<h1 class='fqn'><span class='in-band'>Function <a href='index.html'>av_sys</a>::<wbr><a class="fn" href=''>swr_convert</a></span><span class='out-of-band'><span id='render-detail'>
+                   <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
+                       [<span class='inner'>&#x2212;</span>]
+                   </a>
+               </span><a class='srclink' href='../src/av_sys/home/travis/build/panicbit/rust-av/target/debug/build/av_sys-5aff961289ea4337/out/ffi.rs.html#6531' title='goto source code'>[src]</a></span></h1>
+<pre class='rust fn'>pub unsafe extern fn swr_convert(<br>&nbsp;&nbsp;&nbsp;&nbsp;s: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*mut </a><a class="struct" href="../av_sys/struct.SwrContext.html" title="struct av_sys::SwrContext">SwrContext</a>, <br>&nbsp;&nbsp;&nbsp;&nbsp;out: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*mut </a><a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*mut </a><a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u8.html">u8</a>, <br>&nbsp;&nbsp;&nbsp;&nbsp;out_count: <a class="type" href="../libc/type.c_int.html" title="type libc::c_int">c_int</a>, <br>&nbsp;&nbsp;&nbsp;&nbsp;in_: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*mut </a><a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*const </a><a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u8.html">u8</a>, <br>&nbsp;&nbsp;&nbsp;&nbsp;in_count: <a class="type" href="../libc/type.c_int.html" title="type libc::c_int">c_int</a><br>) -&gt; <a class="type" href="../libc/type.c_int.html" title="type libc::c_int">c_int</a></pre><div class='docblock'><p>Convert audio.
+*
+* in and in_count can be set to 0 to flush the last few samples out at the
+* end.
+*
+* If more input is provided than output space, then the input will be buffered.
+* You can avoid this buffering by using swr_get_out_samples() to retrieve an
+* upper bound on the required number of output samples for the given number of
+* input samples. Conversion will run directly without copying whenever possible.
+*
+* @param s         allocated Swr context, with parameters set
+* @param out       output buffers, only the first one need be set in case of packed audio
+* @param out_count amount of space available for output in samples per channel
+* @param in        input buffers, only the first one need to be set in case of packed audio
+* @param in_count  number of input samples available in one channel
+*
+* @return number of samples output per channel, negative value on error</p>
+</div></section>
+    <section id='search' class="content hidden"></section>
+
+    <section class="footer"></section>
+
+    <aside id="help" class="hidden">
+        <div>
+            <h1 class="hidden">Help</h1>
+
+            <div class="shortcuts">
+                <h2>Keyboard Shortcuts</h2>
+
+                <dl>
+                    <dt>?</dt>
+                    <dd>Show this help dialog</dd>
+                    <dt>S</dt>
+                    <dd>Focus the search field</dd>
+                    <dt>&larrb;</dt>
+                    <dd>Move up in search results</dd>
+                    <dt>&rarrb;</dt>
+                    <dd>Move down in search results</dd>
+                    <dt>&#9166;</dt>
+                    <dd>Go to active search result</dd>
+                    <dt>+</dt>
+                    <dd>Collapse/expand all sections</dd>
+                </dl>
+            </div>
+
+            <div class="infos">
+                <h2>Search Tricks</h2>
+
+                <p>
+                    Prefix searches with a type followed by a colon (e.g.
+                    <code>fn:</code>) to restrict the search to a given type.
+                </p>
+
+                <p>
+                    Accepted types are: <code>fn</code>, <code>mod</code>,
+                    <code>struct</code>, <code>enum</code>,
+                    <code>trait</code>, <code>type</code>, <code>macro</code>,
+                    and <code>const</code>.
+                </p>
+
+                <p>
+                    Search functions by type signature (e.g.
+                    <code>vec -> usize</code> or <code>* -> vec</code>)
+                </p>
+            </div>
+        </div>
+    </aside>
+
+    
+
+    <script>
+        window.rootPath = "../";
+        window.currentCrate = "av_sys";
+    </script>
+    <script src="../jquery.js"></script>
+    <script src="../main.js"></script>
+    <script defer src="../search-index.js"></script>
+</body>
+</html>

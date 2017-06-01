@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <meta name="description" content="API documentation for the Rust `Decoder` enum in crate `av`.">
+    <meta name="keywords" content="rust, rustlang, rust-lang, Decoder">
+
+    <title>av::generic::Decoder - Rust</title>
+
+    <link rel="stylesheet" type="text/css" href="../../normalize.css">
+    <link rel="stylesheet" type="text/css" href="../../rustdoc.css">
+    <link rel="stylesheet" type="text/css" href="../../main.css">
+    
+
+    
+    
+</head>
+<body class="rustdoc enum">
+    <!--[if lte IE 8]>
+    <div class="warning">
+        This old browser is unsupported and will most likely display funky
+        things.
+    </div>
+    <![endif]-->
+
+    
+
+    <nav class="sidebar">
+        
+        <p class='location'>Enum Decoder</p><div class="block items"><ul><li><a href="#variants">Variants</a></li><li><a href="#methods">Methods</a></li><li><a href="#implementations">Trait Implementations</a></li></ul></div><p class='location'><a href='../index.html'>av</a>::<wbr><a href='index.html'>generic</a></p><script>window.sidebarCurrent = {name: 'Decoder', ty: 'enum', relpath: ''};</script><script defer src="sidebar-items.js"></script>
+    </nav>
+
+    <nav class="sub">
+        <form class="search-form js-only">
+            <div class="search-container">
+                <input class="search-input" name="search"
+                       autocomplete="off"
+                       placeholder="Click or press ‘S’ to search, ‘?’ for more options…"
+                       type="search">
+            </div>
+        </form>
+    </nav>
+
+    <section id='main' class="content">
+<h1 class='fqn'><span class='in-band'>Enum <a href='../index.html'>av</a>::<wbr><a href='index.html'>generic</a>::<wbr><a class="enum" href=''>Decoder</a></span><span class='out-of-band'><span id='render-detail'>
+                   <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
+                       [<span class='inner'>&#x2212;</span>]
+                   </a>
+               </span><a class='srclink' href='../../src/av/generic/decoder.rs.html#15-18' title='goto source code'>[src]</a></span></h1>
+<pre class='rust enum'>pub enum Decoder {
+    Video(<a class="struct" href="../../av/video/struct.Decoder.html" title="struct av::video::Decoder">Decoder</a>),
+    Audio(<a class="struct" href="../../av/audio/struct.Decoder.html" title="struct av::audio::Decoder">Decoder</a>),
+}</pre><h2 id='variants' class='variants'>Variants</h2>
+<span id='variant.Video' class='variant'><span id='Video.v' class='invisible'><code>Video(<a class="struct" href="../../av/video/struct.Decoder.html" title="struct av::video::Decoder">Decoder</a>)</code></span></span><span id='variant.Audio' class='variant'><span id='Audio.v' class='invisible'><code>Audio(<a class="struct" href="../../av/audio/struct.Decoder.html" title="struct av::audio::Decoder">Decoder</a>)</code></span></span><h2 id='methods'>Methods</h2><h3 class='impl'><span class='in-band'><code>impl <a class="enum" href="../../av/generic/enum.Decoder.html" title="enum av::generic::Decoder">Decoder</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/av/generic/decoder.rs.html#20-85' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.from_stream' class="method"><span id='from_stream.v' class='invisible'><code>fn <a href='#method.from_stream' class='fnname'>from_stream</a>(stream: &amp;<a class="struct" href="../../av/common/stream/struct.Stream.html" title="struct av::common::stream::Stream">Stream</a>) -&gt; <a class="type" href="../../av/errors/type.Result.html" title="type av::errors::Result">Result</a>&lt;Self&gt;</code></span></h4>
+<h4 id='method.into_video_encoder' class="method"><span id='into_video_encoder.v' class='invisible'><code>fn <a href='#method.into_video_encoder' class='fnname'>into_video_encoder</a>(self) -&gt; <a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;<a class="struct" href="../../av/video/struct.Decoder.html" title="struct av::video::Decoder">Decoder</a>&gt;</code></span></h4>
+<h4 id='method.as_video_encoder' class="method"><span id='as_video_encoder.v' class='invisible'><code>fn <a href='#method.as_video_encoder' class='fnname'>as_video_encoder</a>(&amp;self) -&gt; <a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;&amp;<a class="struct" href="../../av/video/struct.Decoder.html" title="struct av::video::Decoder">Decoder</a>&gt;</code></span></h4>
+<h4 id='method.as_mut_video_encoder' class="method"><span id='as_mut_video_encoder.v' class='invisible'><code>fn <a href='#method.as_mut_video_encoder' class='fnname'>as_mut_video_encoder</a>(&amp;mut self) -&gt; <a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;&amp;mut <a class="struct" href="../../av/video/struct.Decoder.html" title="struct av::video::Decoder">Decoder</a>&gt;</code></span></h4>
+<h4 id='method.into_audio_encoder' class="method"><span id='into_audio_encoder.v' class='invisible'><code>fn <a href='#method.into_audio_encoder' class='fnname'>into_audio_encoder</a>(self) -&gt; <a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;<a class="struct" href="../../av/audio/struct.Decoder.html" title="struct av::audio::Decoder">Decoder</a>&gt;</code></span></h4>
+<h4 id='method.as_audio_encoder' class="method"><span id='as_audio_encoder.v' class='invisible'><code>fn <a href='#method.as_audio_encoder' class='fnname'>as_audio_encoder</a>(&amp;self) -&gt; <a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;&amp;<a class="struct" href="../../av/audio/struct.Decoder.html" title="struct av::audio::Decoder">Decoder</a>&gt;</code></span></h4>
+<h4 id='method.as_mut_audio_encoder' class="method"><span id='as_mut_audio_encoder.v' class='invisible'><code>fn <a href='#method.as_mut_audio_encoder' class='fnname'>as_mut_audio_encoder</a>(&amp;mut self) -&gt; <a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;&amp;mut <a class="struct" href="../../av/audio/struct.Decoder.html" title="struct av::audio::Decoder">Decoder</a>&gt;</code></span></h4>
+<h4 id='method.codec' class="method"><span id='codec.v' class='invisible'><code>fn <a href='#method.codec' class='fnname'>codec</a>(&amp;self) -&gt; <a class="struct" href="../../av/codec/struct.Codec.html" title="struct av::codec::Codec">Codec</a></code></span></h4>
+<h4 id='method.time_base' class="method"><span id='time_base.v' class='invisible'><code>fn <a href='#method.time_base' class='fnname'>time_base</a>(&amp;self) -&gt; <a class="struct" href="../../av/common/struct.Timebase.html" title="struct av::common::Timebase">Timebase</a></code></span></h4>
+</div><h3 class='impl'><span class='in-band'><code>impl <a class="enum" href="../../av/generic/enum.Decoder.html" title="enum av::generic::Decoder">Decoder</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/av/generic/decoder.rs.html#87-122' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.as_mut_ptr' class="method"><span id='as_mut_ptr.v' class='invisible'><code>fn <a href='#method.as_mut_ptr' class='fnname'>as_mut_ptr</a>(&amp;mut self) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*mut </a><a class="struct" href="../../av_sys/struct.AVCodecContext.html" title="struct av_sys::AVCodecContext">AVCodecContext</a></code></span></h4>
+<h4 id='method.as_ref' class="method"><span id='as_ref.v' class='invisible'><code>fn <a href='#method.as_ref' class='fnname'>as_ref</a>(&amp;self) -&gt; &amp;<a class="struct" href="../../av_sys/struct.AVCodecContext.html" title="struct av_sys::AVCodecContext">AVCodecContext</a></code></span></h4>
+<h4 id='method.as_mut' class="method"><span id='as_mut.v' class='invisible'><code>fn <a href='#method.as_mut' class='fnname'>as_mut</a>(&amp;mut self) -&gt; &amp;mut <a class="struct" href="../../av_sys/struct.AVCodecContext.html" title="struct av_sys::AVCodecContext">AVCodecContext</a></code></span></h4>
+<h4 id='method.decode' class="method"><span id='decode.v' class='invisible'><code>fn <a href='#method.decode' class='fnname'>decode</a>&lt;'decoder&gt;(<br>&nbsp;&nbsp;&nbsp;&nbsp;&amp;'decoder mut self, <br>&nbsp;&nbsp;&nbsp;&nbsp;packet: <a class="struct" href="../../av/common/struct.Packet.html" title="struct av::common::Packet">Packet</a><br>) -&gt; <a class="type" href="../../av/errors/type.Result.html" title="type av::errors::Result">Result</a>&lt;<a class="enum" href="../../av/generic/enum.Frames.html" title="enum av::generic::Frames">Frames</a>&lt;'decoder&gt;&gt;</code></span></h4>
+<h4 id='method.flush' class="method"><span id='flush.v' class='invisible'><code>fn <a href='#method.flush' class='fnname'>flush</a>&lt;'decoder&gt;(&amp;'decoder mut self) -&gt; <a class="type" href="../../av/errors/type.Result.html" title="type av::errors::Result">Result</a>&lt;<a class="enum" href="../../av/generic/enum.Frames.html" title="enum av::generic::Frames">Frames</a>&lt;'decoder&gt;&gt;</code></span></h4>
+</div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><span class='in-band'><code>impl <a class="trait" href="https://doc.rust-lang.org/nightly/core/convert/trait.From.html" title="trait core::convert::From">From</a>&lt;<a class="struct" href="../../av/video/struct.Decoder.html" title="struct av::video::Decoder">Decoder</a>&gt; for <a class="enum" href="../../av/generic/enum.Decoder.html" title="enum av::generic::Decoder">Decoder</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/av/generic/decoder.rs.html#124-128' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.from' class="method"><span id='from.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/convert/trait.From.html#tymethod.from' class='fnname'>from</a>(decoder: <a class="struct" href="../../av/video/struct.Decoder.html" title="struct av::video::Decoder">Decoder</a>) -&gt; Self</code></span></h4>
+<div class='docblock'><p>Performs the conversion.</p>
+</div></div><h3 class='impl'><span class='in-band'><code>impl <a class="trait" href="https://doc.rust-lang.org/nightly/core/convert/trait.From.html" title="trait core::convert::From">From</a>&lt;<a class="struct" href="../../av/audio/struct.Decoder.html" title="struct av::audio::Decoder">Decoder</a>&gt; for <a class="enum" href="../../av/generic/enum.Decoder.html" title="enum av::generic::Decoder">Decoder</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/av/generic/decoder.rs.html#130-134' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.from-1' class="method"><span id='from.v-1' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/convert/trait.From.html#tymethod.from' class='fnname'>from</a>(decoder: <a class="struct" href="../../av/audio/struct.Decoder.html" title="struct av::audio::Decoder">Decoder</a>) -&gt; Self</code></span></h4>
+<div class='docblock'><p>Performs the conversion.</p>
+</div></div></section>
+    <section id='search' class="content hidden"></section>
+
+    <section class="footer"></section>
+
+    <aside id="help" class="hidden">
+        <div>
+            <h1 class="hidden">Help</h1>
+
+            <div class="shortcuts">
+                <h2>Keyboard Shortcuts</h2>
+
+                <dl>
+                    <dt>?</dt>
+                    <dd>Show this help dialog</dd>
+                    <dt>S</dt>
+                    <dd>Focus the search field</dd>
+                    <dt>&larrb;</dt>
+                    <dd>Move up in search results</dd>
+                    <dt>&rarrb;</dt>
+                    <dd>Move down in search results</dd>
+                    <dt>&#9166;</dt>
+                    <dd>Go to active search result</dd>
+                    <dt>+</dt>
+                    <dd>Collapse/expand all sections</dd>
+                </dl>
+            </div>
+
+            <div class="infos">
+                <h2>Search Tricks</h2>
+
+                <p>
+                    Prefix searches with a type followed by a colon (e.g.
+                    <code>fn:</code>) to restrict the search to a given type.
+                </p>
+
+                <p>
+                    Accepted types are: <code>fn</code>, <code>mod</code>,
+                    <code>struct</code>, <code>enum</code>,
+                    <code>trait</code>, <code>type</code>, <code>macro</code>,
+                    and <code>const</code>.
+                </p>
+
+                <p>
+                    Search functions by type signature (e.g.
+                    <code>vec -> usize</code> or <code>* -> vec</code>)
+                </p>
+            </div>
+        </div>
+    </aside>
+
+    
+
+    <script>
+        window.rootPath = "../../";
+        window.currentCrate = "av";
+    </script>
+    <script src="../../jquery.js"></script>
+    <script src="../../main.js"></script>
+    <script defer src="../../search-index.js"></script>
+</body>
+</html>

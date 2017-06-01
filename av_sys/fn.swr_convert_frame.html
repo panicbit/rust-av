@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <meta name="description" content="API documentation for the Rust `swr_convert_frame` fn in crate `av_sys`.">
+    <meta name="keywords" content="rust, rustlang, rust-lang, swr_convert_frame">
+
+    <title>av_sys::swr_convert_frame - Rust</title>
+
+    <link rel="stylesheet" type="text/css" href="../normalize.css">
+    <link rel="stylesheet" type="text/css" href="../rustdoc.css">
+    <link rel="stylesheet" type="text/css" href="../main.css">
+    
+
+    
+    
+</head>
+<body class="rustdoc fn">
+    <!--[if lte IE 8]>
+    <div class="warning">
+        This old browser is unsupported and will most likely display funky
+        things.
+    </div>
+    <![endif]-->
+
+    
+
+    <nav class="sidebar">
+        
+        <p class='location'><a href='index.html'>av_sys</a></p><script>window.sidebarCurrent = {name: 'swr_convert_frame', ty: 'fn', relpath: ''};</script><script defer src="sidebar-items.js"></script>
+    </nav>
+
+    <nav class="sub">
+        <form class="search-form js-only">
+            <div class="search-container">
+                <input class="search-input" name="search"
+                       autocomplete="off"
+                       placeholder="Click or press ‘S’ to search, ‘?’ for more options…"
+                       type="search">
+            </div>
+        </form>
+    </nav>
+
+    <section id='main' class="content">
+<h1 class='fqn'><span class='in-band'>Function <a href='index.html'>av_sys</a>::<wbr><a class="fn" href=''>swr_convert_frame</a></span><span class='out-of-band'><span id='render-detail'>
+                   <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
+                       [<span class='inner'>&#x2212;</span>]
+                   </a>
+               </span><a class='srclink' href='../src/av_sys/home/travis/build/panicbit/rust-av/target/debug/build/av_sys-5aff961289ea4337/out/ffi.rs.html#6705' title='goto source code'>[src]</a></span></h1>
+<pre class='rust fn'>pub unsafe extern fn swr_convert_frame(<br>&nbsp;&nbsp;&nbsp;&nbsp;swr: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*mut </a><a class="struct" href="../av_sys/struct.SwrContext.html" title="struct av_sys::SwrContext">SwrContext</a>, <br>&nbsp;&nbsp;&nbsp;&nbsp;output: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*mut </a><a class="struct" href="../av_sys/struct.AVFrame.html" title="struct av_sys::AVFrame">AVFrame</a>, <br>&nbsp;&nbsp;&nbsp;&nbsp;input: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*const </a><a class="struct" href="../av_sys/struct.AVFrame.html" title="struct av_sys::AVFrame">AVFrame</a><br>) -&gt; <a class="type" href="../libc/type.c_int.html" title="type libc::c_int">c_int</a></pre><div class='docblock'><p>Convert the samples in the input AVFrame and write them to the output AVFrame.</p>
+
+<p>Input and output AVFrames must have channel_layout, sample_rate and format set.</p>
+
+<p>If the output AVFrame does not have the data pointers allocated the nb_samples
+field will be set using av_frame_get_buffer()
+is called to allocate the frame.</p>
+
+<p>The output AVFrame can be NULL or have fewer allocated samples than required.
+In this case, any remaining samples not written to the output will be added
+to an internal FIFO buffer, to be returned at the next call to this function
+or to swr_convert().</p>
+
+<p>If converting sample rate, there may be data remaining in the internal
+resampling delay buffer. swr_get_delay() tells the number of
+remaining samples. To get this data as output, call this function or
+swr_convert() with NULL input.</p>
+
+<p>If the SwrContext configuration does not match the output and
+input AVFrame settings the conversion does not take place and depending on
+which AVFrame is not matching AVERROR_OUTPUT_CHANGED, AVERROR_INPUT_CHANGED
+or the result of a bitwise-OR of them is returned.</p>
+
+<p>@see swr_delay()
+@see swr_convert()
+@see swr_get_delay()</p>
+
+<p>@param swr             audio resample context
+@param output          output AVFrame
+@param input           input AVFrame
+@return                0 on success, AVERROR on failure or nonmatching
+                       configuration.</p>
+</div></section>
+    <section id='search' class="content hidden"></section>
+
+    <section class="footer"></section>
+
+    <aside id="help" class="hidden">
+        <div>
+            <h1 class="hidden">Help</h1>
+
+            <div class="shortcuts">
+                <h2>Keyboard Shortcuts</h2>
+
+                <dl>
+                    <dt>?</dt>
+                    <dd>Show this help dialog</dd>
+                    <dt>S</dt>
+                    <dd>Focus the search field</dd>
+                    <dt>&larrb;</dt>
+                    <dd>Move up in search results</dd>
+                    <dt>&rarrb;</dt>
+                    <dd>Move down in search results</dd>
+                    <dt>&#9166;</dt>
+                    <dd>Go to active search result</dd>
+                    <dt>+</dt>
+                    <dd>Collapse/expand all sections</dd>
+                </dl>
+            </div>
+
+            <div class="infos">
+                <h2>Search Tricks</h2>
+
+                <p>
+                    Prefix searches with a type followed by a colon (e.g.
+                    <code>fn:</code>) to restrict the search to a given type.
+                </p>
+
+                <p>
+                    Accepted types are: <code>fn</code>, <code>mod</code>,
+                    <code>struct</code>, <code>enum</code>,
+                    <code>trait</code>, <code>type</code>, <code>macro</code>,
+                    and <code>const</code>.
+                </p>
+
+                <p>
+                    Search functions by type signature (e.g.
+                    <code>vec -> usize</code> or <code>* -> vec</code>)
+                </p>
+            </div>
+        </div>
+    </aside>
+
+    
+
+    <script>
+        window.rootPath = "../";
+        window.currentCrate = "av_sys";
+    </script>
+    <script src="../jquery.js"></script>
+    <script src="../main.js"></script>
+    <script defer src="../search-index.js"></script>
+</body>
+</html>

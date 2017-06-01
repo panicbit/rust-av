@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <meta name="description" content="API documentation for the Rust `AVCodec` struct in crate `av_sys`.">
+    <meta name="keywords" content="rust, rustlang, rust-lang, AVCodec">
+
+    <title>av_sys::AVCodec - Rust</title>
+
+    <link rel="stylesheet" type="text/css" href="../normalize.css">
+    <link rel="stylesheet" type="text/css" href="../rustdoc.css">
+    <link rel="stylesheet" type="text/css" href="../main.css">
+    
+
+    
+    
+</head>
+<body class="rustdoc struct">
+    <!--[if lte IE 8]>
+    <div class="warning">
+        This old browser is unsupported and will most likely display funky
+        things.
+    </div>
+    <![endif]-->
+
+    
+
+    <nav class="sidebar">
+        
+        <p class='location'>Struct AVCodec</p><div class="block items"><ul><li><a href="#fields">Fields</a></li><li><a href="#implementations">Trait Implementations</a></li></ul></div><p class='location'><a href='index.html'>av_sys</a></p><script>window.sidebarCurrent = {name: 'AVCodec', ty: 'struct', relpath: ''};</script><script defer src="sidebar-items.js"></script>
+    </nav>
+
+    <nav class="sub">
+        <form class="search-form js-only">
+            <div class="search-container">
+                <input class="search-input" name="search"
+                       autocomplete="off"
+                       placeholder="Click or press ‘S’ to search, ‘?’ for more options…"
+                       type="search">
+            </div>
+        </form>
+    </nav>
+
+    <section id='main' class="content">
+<h1 class='fqn'><span class='in-band'>Struct <a href='index.html'>av_sys</a>::<wbr><a class="struct" href=''>AVCodec</a></span><span class='out-of-band'><span id='render-detail'>
+                   <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
+                       [<span class='inner'>&#x2212;</span>]
+                   </a>
+               </span><a class='srclink' href='../src/av_sys/home/travis/build/panicbit/rust-av/target/debug/build/av_sys-5aff961289ea4337/out/ffi.rs.html#2934-2995' title='goto source code'>[src]</a></span></h1>
+<pre class='rust struct'><div class="docblock attributes">#[repr(C)]
+</div>pub struct AVCodec {
+    pub name: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*const </a><a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_char.html" title="type std::os::raw::c_char">c_char</a>,
+    pub long_name: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*const </a><a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_char.html" title="type std::os::raw::c_char">c_char</a>,
+    pub type_: <a class="enum" href="../av_sys/enum.AVMediaType.html" title="enum av_sys::AVMediaType">AVMediaType</a>,
+    pub id: <a class="enum" href="../av_sys/enum.AVCodecID.html" title="enum av_sys::AVCodecID">AVCodecID</a>,
+    pub capabilities: <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a>,
+    pub supported_framerates: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*const </a><a class="struct" href="../av_sys/struct.AVRational.html" title="struct av_sys::AVRational">AVRational</a>,
+    pub pix_fmts: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*const </a><a class="enum" href="../av_sys/enum.AVPixelFormat.html" title="enum av_sys::AVPixelFormat">AVPixelFormat</a>,
+    pub supported_samplerates: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*const </a><a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a>,
+    pub sample_fmts: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*const </a><a class="enum" href="../av_sys/enum.AVSampleFormat.html" title="enum av_sys::AVSampleFormat">AVSampleFormat</a>,
+    pub channel_layouts: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*const </a><a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u64.html">u64</a>,
+    pub max_lowres: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u8.html">u8</a>,
+    pub priv_class: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*const </a><a class="struct" href="../av_sys/struct.AVClass.html" title="struct av_sys::AVClass">AVClass</a>,
+    pub profiles: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*const </a><a class="struct" href="../av_sys/struct.AVProfile.html" title="struct av_sys::AVProfile">AVProfile</a>,
+    pub priv_data_size: <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a>,
+    pub next: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*mut </a><a class="struct" href="../av_sys/struct.AVCodec.html" title="struct av_sys::AVCodec">AVCodec</a>,
+    pub init_thread_copy: <a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;unsafe extern fn(_: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*mut </a><a class="struct" href="../av_sys/struct.AVCodecContext.html" title="struct av_sys::AVCodecContext">AVCodecContext</a>) -&gt; <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a>&gt;,
+    pub update_thread_context: <a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;unsafe extern fn(_: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*mut </a><a class="struct" href="../av_sys/struct.AVCodecContext.html" title="struct av_sys::AVCodecContext">AVCodecContext</a>, _: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*const </a><a class="struct" href="../av_sys/struct.AVCodecContext.html" title="struct av_sys::AVCodecContext">AVCodecContext</a>) -&gt; <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a>&gt;,
+    pub defaults: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*const </a><a class="struct" href="../av_sys/struct.AVCodecDefault.html" title="struct av_sys::AVCodecDefault">AVCodecDefault</a>,
+    pub init_static_data: <a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;unsafe extern fn(_: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*mut </a><a class="struct" href="../av_sys/struct.AVCodec.html" title="struct av_sys::AVCodec">AVCodec</a>)&gt;,
+    pub init: <a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;unsafe extern fn(_: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*mut </a><a class="struct" href="../av_sys/struct.AVCodecContext.html" title="struct av_sys::AVCodecContext">AVCodecContext</a>) -&gt; <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a>&gt;,
+    pub encode_sub: <a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;unsafe extern fn(_: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*mut </a><a class="struct" href="../av_sys/struct.AVCodecContext.html" title="struct av_sys::AVCodecContext">AVCodecContext</a>, _: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*mut </a><a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u8.html">u8</a>, _: <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a>, _: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*const </a><a class="struct" href="../av_sys/struct.AVSubtitle.html" title="struct av_sys::AVSubtitle">AVSubtitle</a>) -&gt; <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a>&gt;,
+    pub encode2: <a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;unsafe extern fn(_: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*mut </a><a class="struct" href="../av_sys/struct.AVCodecContext.html" title="struct av_sys::AVCodecContext">AVCodecContext</a>, _: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*mut </a><a class="struct" href="../av_sys/struct.AVPacket.html" title="struct av_sys::AVPacket">AVPacket</a>, _: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*const </a><a class="struct" href="../av_sys/struct.AVFrame.html" title="struct av_sys::AVFrame">AVFrame</a>, _: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*mut </a><a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a>) -&gt; <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a>&gt;,
+    pub decode: <a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;unsafe extern fn(_: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*mut </a><a class="struct" href="../av_sys/struct.AVCodecContext.html" title="struct av_sys::AVCodecContext">AVCodecContext</a>, _: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*mut </a><a class="enum" href="https://doc.rust-lang.org/nightly/std/os/raw/enum.c_void.html" title="enum std::os::raw::c_void">c_void</a>, _: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*mut </a><a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a>, _: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*mut </a><a class="struct" href="../av_sys/struct.AVPacket.html" title="struct av_sys::AVPacket">AVPacket</a>) -&gt; <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a>&gt;,
+    pub close: <a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;unsafe extern fn(_: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*mut </a><a class="struct" href="../av_sys/struct.AVCodecContext.html" title="struct av_sys::AVCodecContext">AVCodecContext</a>) -&gt; <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a>&gt;,
+    pub send_frame: <a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;unsafe extern fn(_: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*mut </a><a class="struct" href="../av_sys/struct.AVCodecContext.html" title="struct av_sys::AVCodecContext">AVCodecContext</a>, _: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*const </a><a class="struct" href="../av_sys/struct.AVFrame.html" title="struct av_sys::AVFrame">AVFrame</a>) -&gt; <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a>&gt;,
+    pub send_packet: <a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;unsafe extern fn(_: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*mut </a><a class="struct" href="../av_sys/struct.AVCodecContext.html" title="struct av_sys::AVCodecContext">AVCodecContext</a>, _: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*const </a><a class="struct" href="../av_sys/struct.AVPacket.html" title="struct av_sys::AVPacket">AVPacket</a>) -&gt; <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a>&gt;,
+    pub receive_frame: <a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;unsafe extern fn(_: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*mut </a><a class="struct" href="../av_sys/struct.AVCodecContext.html" title="struct av_sys::AVCodecContext">AVCodecContext</a>, _: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*mut </a><a class="struct" href="../av_sys/struct.AVFrame.html" title="struct av_sys::AVFrame">AVFrame</a>) -&gt; <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a>&gt;,
+    pub receive_packet: <a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;unsafe extern fn(_: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*mut </a><a class="struct" href="../av_sys/struct.AVCodecContext.html" title="struct av_sys::AVCodecContext">AVCodecContext</a>, _: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*mut </a><a class="struct" href="../av_sys/struct.AVPacket.html" title="struct av_sys::AVPacket">AVPacket</a>) -&gt; <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a>&gt;,
+    pub flush: <a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;unsafe extern fn(_: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*mut </a><a class="struct" href="../av_sys/struct.AVCodecContext.html" title="struct av_sys::AVCodecContext">AVCodecContext</a>)&gt;,
+    pub caps_internal: <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a>,
+}</pre><div class='docblock'><p>AVCodec.</p>
+</div><h2 id='fields' class='fields'>Fields</h2><span id='structfield.name' class="structfield">
+                           <span id='name.v' class='invisible'>
+                           <code>name: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*const </a><a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_char.html" title="type std::os::raw::c_char">c_char</a></code>
+                           </span></span><div class='docblock'><p>Name of the codec implementation.
+The name is globally unique among encoders and among decoders (but an
+encoder and a decoder can share the same name).
+This is the primary way to find a codec from the user perspective.</p>
+</div><span id='structfield.long_name' class="structfield">
+                           <span id='long_name.v' class='invisible'>
+                           <code>long_name: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*const </a><a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_char.html" title="type std::os::raw::c_char">c_char</a></code>
+                           </span></span><div class='docblock'><p>Descriptive name for the codec, meant to be more human readable than name.
+You should use the NULL_IF_CONFIG_SMALL() macro to define it.</p>
+</div><span id='structfield.type_' class="structfield">
+                           <span id='type_.v' class='invisible'>
+                           <code>type_: <a class="enum" href="../av_sys/enum.AVMediaType.html" title="enum av_sys::AVMediaType">AVMediaType</a></code>
+                           </span></span><span id='structfield.id' class="structfield">
+                           <span id='id.v' class='invisible'>
+                           <code>id: <a class="enum" href="../av_sys/enum.AVCodecID.html" title="enum av_sys::AVCodecID">AVCodecID</a></code>
+                           </span></span><span id='structfield.capabilities' class="structfield">
+                           <span id='capabilities.v' class='invisible'>
+                           <code>capabilities: <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a></code>
+                           </span></span><div class='docblock'><p>Codec capabilities.
+see AV_CODEC_CAP_*</p>
+</div><span id='structfield.supported_framerates' class="structfield">
+                           <span id='supported_framerates.v' class='invisible'>
+                           <code>supported_framerates: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*const </a><a class="struct" href="../av_sys/struct.AVRational.html" title="struct av_sys::AVRational">AVRational</a></code>
+                           </span></span><div class='docblock'><p>&lt; array of supported framerates, or NULL if any, array is terminated by {0,0}</p>
+</div><span id='structfield.pix_fmts' class="structfield">
+                           <span id='pix_fmts.v' class='invisible'>
+                           <code>pix_fmts: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*const </a><a class="enum" href="../av_sys/enum.AVPixelFormat.html" title="enum av_sys::AVPixelFormat">AVPixelFormat</a></code>
+                           </span></span><div class='docblock'><p>&lt; array of supported pixel formats, or NULL if unknown, array is terminated by -1</p>
+</div><span id='structfield.supported_samplerates' class="structfield">
+                           <span id='supported_samplerates.v' class='invisible'>
+                           <code>supported_samplerates: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*const </a><a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a></code>
+                           </span></span><div class='docblock'><p>&lt; array of supported audio samplerates, or NULL if unknown, array is terminated by 0</p>
+</div><span id='structfield.sample_fmts' class="structfield">
+                           <span id='sample_fmts.v' class='invisible'>
+                           <code>sample_fmts: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*const </a><a class="enum" href="../av_sys/enum.AVSampleFormat.html" title="enum av_sys::AVSampleFormat">AVSampleFormat</a></code>
+                           </span></span><div class='docblock'><p>&lt; array of supported sample formats, or NULL if unknown, array is terminated by -1</p>
+</div><span id='structfield.channel_layouts' class="structfield">
+                           <span id='channel_layouts.v' class='invisible'>
+                           <code>channel_layouts: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*const </a><a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u64.html">u64</a></code>
+                           </span></span><div class='docblock'><p>&lt; array of support channel layouts, or NULL if unknown. array is terminated by 0</p>
+</div><span id='structfield.max_lowres' class="structfield">
+                           <span id='max_lowres.v' class='invisible'>
+                           <code>max_lowres: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u8.html">u8</a></code>
+                           </span></span><div class='docblock'><p>&lt; maximum value for lowres supported by the decoder</p>
+</div><span id='structfield.priv_class' class="structfield">
+                           <span id='priv_class.v' class='invisible'>
+                           <code>priv_class: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*const </a><a class="struct" href="../av_sys/struct.AVClass.html" title="struct av_sys::AVClass">AVClass</a></code>
+                           </span></span><div class='docblock'><p>&lt; AVClass for the private context</p>
+</div><span id='structfield.profiles' class="structfield">
+                           <span id='profiles.v' class='invisible'>
+                           <code>profiles: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*const </a><a class="struct" href="../av_sys/struct.AVProfile.html" title="struct av_sys::AVProfile">AVProfile</a></code>
+                           </span></span><div class='docblock'><p>&lt; array of recognized profiles, or NULL if unknown, array is terminated by {FF_PROFILE_UNKNOWN}</p>
+</div><span id='structfield.priv_data_size' class="structfield">
+                           <span id='priv_data_size.v' class='invisible'>
+                           <code>priv_data_size: <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a></code>
+                           </span></span><span id='structfield.next' class="structfield">
+                           <span id='next.v' class='invisible'>
+                           <code>next: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*mut </a><a class="struct" href="../av_sys/struct.AVCodec.html" title="struct av_sys::AVCodec">AVCodec</a></code>
+                           </span></span><span id='structfield.init_thread_copy' class="structfield">
+                           <span id='init_thread_copy.v' class='invisible'>
+                           <code>init_thread_copy: <a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;unsafe extern fn(_: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*mut </a><a class="struct" href="../av_sys/struct.AVCodecContext.html" title="struct av_sys::AVCodecContext">AVCodecContext</a>) -&gt; <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a>&gt;</code>
+                           </span></span><div class='docblock'><p>@name Frame-level threading support functions
+@{
+If defined, called on thread contexts when they are created.
+If the codec allocates writable tables in init(), re-allocate them here.
+priv_data will be set to a copy of the original.</p>
+</div><span id='structfield.update_thread_context' class="structfield">
+                           <span id='update_thread_context.v' class='invisible'>
+                           <code>update_thread_context: <a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;unsafe extern fn(_: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*mut </a><a class="struct" href="../av_sys/struct.AVCodecContext.html" title="struct av_sys::AVCodecContext">AVCodecContext</a>, _: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*const </a><a class="struct" href="../av_sys/struct.AVCodecContext.html" title="struct av_sys::AVCodecContext">AVCodecContext</a>) -&gt; <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a>&gt;</code>
+                           </span></span><div class='docblock'><p>Copy necessary context variables from a previous thread context to the current one.
+If not defined, the next thread will start automatically; otherwise, the codec
+must call ff_thread_finish_setup().</p>
+
+<p>dst and src will (rarely) point to the same context, in which case memcpy should be skipped.</p>
+</div><span id='structfield.defaults' class="structfield">
+                           <span id='defaults.v' class='invisible'>
+                           <code>defaults: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*const </a><a class="struct" href="../av_sys/struct.AVCodecDefault.html" title="struct av_sys::AVCodecDefault">AVCodecDefault</a></code>
+                           </span></span><div class='docblock'><p>Private codec-specific defaults.</p>
+</div><span id='structfield.init_static_data' class="structfield">
+                           <span id='init_static_data.v' class='invisible'>
+                           <code>init_static_data: <a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;unsafe extern fn(_: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*mut </a><a class="struct" href="../av_sys/struct.AVCodec.html" title="struct av_sys::AVCodec">AVCodec</a>)&gt;</code>
+                           </span></span><div class='docblock'><p>Initialize codec static data, called from avcodec_register().</p>
+</div><span id='structfield.init' class="structfield">
+                           <span id='init.v' class='invisible'>
+                           <code>init: <a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;unsafe extern fn(_: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*mut </a><a class="struct" href="../av_sys/struct.AVCodecContext.html" title="struct av_sys::AVCodecContext">AVCodecContext</a>) -&gt; <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a>&gt;</code>
+                           </span></span><span id='structfield.encode_sub' class="structfield">
+                           <span id='encode_sub.v' class='invisible'>
+                           <code>encode_sub: <a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;unsafe extern fn(_: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*mut </a><a class="struct" href="../av_sys/struct.AVCodecContext.html" title="struct av_sys::AVCodecContext">AVCodecContext</a>, _: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*mut </a><a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u8.html">u8</a>, _: <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a>, _: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*const </a><a class="struct" href="../av_sys/struct.AVSubtitle.html" title="struct av_sys::AVSubtitle">AVSubtitle</a>) -&gt; <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a>&gt;</code>
+                           </span></span><span id='structfield.encode2' class="structfield">
+                           <span id='encode2.v' class='invisible'>
+                           <code>encode2: <a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;unsafe extern fn(_: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*mut </a><a class="struct" href="../av_sys/struct.AVCodecContext.html" title="struct av_sys::AVCodecContext">AVCodecContext</a>, _: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*mut </a><a class="struct" href="../av_sys/struct.AVPacket.html" title="struct av_sys::AVPacket">AVPacket</a>, _: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*const </a><a class="struct" href="../av_sys/struct.AVFrame.html" title="struct av_sys::AVFrame">AVFrame</a>, _: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*mut </a><a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a>) -&gt; <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a>&gt;</code>
+                           </span></span><div class='docblock'><p>Encode data to an AVPacket.</p>
+
+<p>@param      avctx          codec context
+@param      avpkt          output AVPacket (may contain a user-provided buffer)
+@param[in]  frame          AVFrame containing the raw data to be encoded
+@param[out] got_packet_ptr encoder sets to 0 or 1 to indicate that a
+                           non-empty packet was returned in avpkt.
+@return 0 on success, negative error code on failure</p>
+</div><span id='structfield.decode' class="structfield">
+                           <span id='decode.v' class='invisible'>
+                           <code>decode: <a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;unsafe extern fn(_: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*mut </a><a class="struct" href="../av_sys/struct.AVCodecContext.html" title="struct av_sys::AVCodecContext">AVCodecContext</a>, _: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*mut </a><a class="enum" href="https://doc.rust-lang.org/nightly/std/os/raw/enum.c_void.html" title="enum std::os::raw::c_void">c_void</a>, _: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*mut </a><a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a>, _: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*mut </a><a class="struct" href="../av_sys/struct.AVPacket.html" title="struct av_sys::AVPacket">AVPacket</a>) -&gt; <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a>&gt;</code>
+                           </span></span><span id='structfield.close' class="structfield">
+                           <span id='close.v' class='invisible'>
+                           <code>close: <a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;unsafe extern fn(_: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*mut </a><a class="struct" href="../av_sys/struct.AVCodecContext.html" title="struct av_sys::AVCodecContext">AVCodecContext</a>) -&gt; <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a>&gt;</code>
+                           </span></span><span id='structfield.send_frame' class="structfield">
+                           <span id='send_frame.v' class='invisible'>
+                           <code>send_frame: <a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;unsafe extern fn(_: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*mut </a><a class="struct" href="../av_sys/struct.AVCodecContext.html" title="struct av_sys::AVCodecContext">AVCodecContext</a>, _: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*const </a><a class="struct" href="../av_sys/struct.AVFrame.html" title="struct av_sys::AVFrame">AVFrame</a>) -&gt; <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a>&gt;</code>
+                           </span></span><div class='docblock'><p>Decode/encode API with decoupled packet/frame dataflow. The API is the
+same as the avcodec_ prefixed APIs (avcodec_send_frame() etc.), except
+that:
+- never called if the codec is closed or the wrong type,
+- AVPacket parameter change side data is applied right before calling
+  AVCodec-&gt;send_packet,
+- if AV_CODEC_CAP_DELAY is not set, drain packets or frames are never sent,
+- only one drain packet is ever passed down (until the next flush()),
+- a drain AVPacket is always NULL (no need to check for avpkt-&gt;size).</p>
+</div><span id='structfield.send_packet' class="structfield">
+                           <span id='send_packet.v' class='invisible'>
+                           <code>send_packet: <a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;unsafe extern fn(_: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*mut </a><a class="struct" href="../av_sys/struct.AVCodecContext.html" title="struct av_sys::AVCodecContext">AVCodecContext</a>, _: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*const </a><a class="struct" href="../av_sys/struct.AVPacket.html" title="struct av_sys::AVPacket">AVPacket</a>) -&gt; <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a>&gt;</code>
+                           </span></span><span id='structfield.receive_frame' class="structfield">
+                           <span id='receive_frame.v' class='invisible'>
+                           <code>receive_frame: <a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;unsafe extern fn(_: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*mut </a><a class="struct" href="../av_sys/struct.AVCodecContext.html" title="struct av_sys::AVCodecContext">AVCodecContext</a>, _: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*mut </a><a class="struct" href="../av_sys/struct.AVFrame.html" title="struct av_sys::AVFrame">AVFrame</a>) -&gt; <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a>&gt;</code>
+                           </span></span><span id='structfield.receive_packet' class="structfield">
+                           <span id='receive_packet.v' class='invisible'>
+                           <code>receive_packet: <a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;unsafe extern fn(_: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*mut </a><a class="struct" href="../av_sys/struct.AVCodecContext.html" title="struct av_sys::AVCodecContext">AVCodecContext</a>, _: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*mut </a><a class="struct" href="../av_sys/struct.AVPacket.html" title="struct av_sys::AVPacket">AVPacket</a>) -&gt; <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a>&gt;</code>
+                           </span></span><span id='structfield.flush' class="structfield">
+                           <span id='flush.v' class='invisible'>
+                           <code>flush: <a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;unsafe extern fn(_: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*mut </a><a class="struct" href="../av_sys/struct.AVCodecContext.html" title="struct av_sys::AVCodecContext">AVCodecContext</a>)&gt;</code>
+                           </span></span><div class='docblock'><p>Flush buffers.
+Will be called when seeking</p>
+</div><span id='structfield.caps_internal' class="structfield">
+                           <span id='caps_internal.v' class='invisible'>
+                           <code>caps_internal: <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a></code>
+                           </span></span><div class='docblock'><p>Internal codec capabilities.
+See FF_CODEC_CAP_* in internal.h</p>
+</div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><span class='in-band'><code>impl <a class="trait" href="https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html" title="trait core::fmt::Debug">Debug</a> for <a class="struct" href="../av_sys/struct.AVCodec.html" title="struct av_sys::AVCodec">AVCodec</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/av_sys/home/travis/build/panicbit/rust-av/target/debug/build/av_sys-5aff961289ea4337/out/ffi.rs.html#2934' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.fmt' class="method"><span id='fmt.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html#tymethod.fmt' class='fnname'>fmt</a>(&amp;self, __arg_0: &amp;mut <a class="struct" href="https://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html" title="struct core::fmt::Formatter">Formatter</a>) -&gt; <a class="type" href="https://doc.rust-lang.org/nightly/core/fmt/type.Result.html" title="type core::fmt::Result">Result</a></code></span></h4>
+<div class='docblock'><p>Formats the value using the given formatter.</p>
+</div></div><h3 class='impl'><span class='in-band'><code>impl <a class="trait" href="https://doc.rust-lang.org/nightly/core/marker/trait.Copy.html" title="trait core::marker::Copy">Copy</a> for <a class="struct" href="../av_sys/struct.AVCodec.html" title="struct av_sys::AVCodec">AVCodec</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/av_sys/home/travis/build/panicbit/rust-av/target/debug/build/av_sys-5aff961289ea4337/out/ffi.rs.html#2934' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'></div><h3 class='impl'><span class='in-band'><code>impl <a class="trait" href="https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html" title="trait core::clone::Clone">Clone</a> for <a class="struct" href="../av_sys/struct.AVCodec.html" title="struct av_sys::AVCodec">AVCodec</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/av_sys/home/travis/build/panicbit/rust-av/target/debug/build/av_sys-5aff961289ea4337/out/ffi.rs.html#2995' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.clone' class="method"><span id='clone.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#tymethod.clone' class='fnname'>clone</a>(&amp;self) -&gt; Self</code></span></h4>
+<div class='docblock'><p>Returns a copy of the value. <a href="https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#tymethod.clone">Read more</a></p>
+</div><h4 id='method.clone_from' class="method"><span id='clone_from.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#method.clone_from' class='fnname'>clone_from</a>(&amp;mut self, source: &amp;Self)</code><div class='since' title='Stable since Rust version 1.0.0'>1.0.0</div></span></h4>
+<div class='docblock'><p>Performs copy-assignment from <code>source</code>. <a href="https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#method.clone_from">Read more</a></p>
+</div></div></section>
+    <section id='search' class="content hidden"></section>
+
+    <section class="footer"></section>
+
+    <aside id="help" class="hidden">
+        <div>
+            <h1 class="hidden">Help</h1>
+
+            <div class="shortcuts">
+                <h2>Keyboard Shortcuts</h2>
+
+                <dl>
+                    <dt>?</dt>
+                    <dd>Show this help dialog</dd>
+                    <dt>S</dt>
+                    <dd>Focus the search field</dd>
+                    <dt>&larrb;</dt>
+                    <dd>Move up in search results</dd>
+                    <dt>&rarrb;</dt>
+                    <dd>Move down in search results</dd>
+                    <dt>&#9166;</dt>
+                    <dd>Go to active search result</dd>
+                    <dt>+</dt>
+                    <dd>Collapse/expand all sections</dd>
+                </dl>
+            </div>
+
+            <div class="infos">
+                <h2>Search Tricks</h2>
+
+                <p>
+                    Prefix searches with a type followed by a colon (e.g.
+                    <code>fn:</code>) to restrict the search to a given type.
+                </p>
+
+                <p>
+                    Accepted types are: <code>fn</code>, <code>mod</code>,
+                    <code>struct</code>, <code>enum</code>,
+                    <code>trait</code>, <code>type</code>, <code>macro</code>,
+                    and <code>const</code>.
+                </p>
+
+                <p>
+                    Search functions by type signature (e.g.
+                    <code>vec -> usize</code> or <code>* -> vec</code>)
+                </p>
+            </div>
+        </div>
+    </aside>
+
+    
+
+    <script>
+        window.rootPath = "../";
+        window.currentCrate = "av_sys";
+    </script>
+    <script src="../jquery.js"></script>
+    <script src="../main.js"></script>
+    <script defer src="../search-index.js"></script>
+</body>
+</html>

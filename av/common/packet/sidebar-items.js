@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["Packet","A reference to a packet as returned e.g. by Demuxer::read_packet"]]});

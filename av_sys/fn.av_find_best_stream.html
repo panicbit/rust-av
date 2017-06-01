@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <meta name="description" content="API documentation for the Rust `av_find_best_stream` fn in crate `av_sys`.">
+    <meta name="keywords" content="rust, rustlang, rust-lang, av_find_best_stream">
+
+    <title>av_sys::av_find_best_stream - Rust</title>
+
+    <link rel="stylesheet" type="text/css" href="../normalize.css">
+    <link rel="stylesheet" type="text/css" href="../rustdoc.css">
+    <link rel="stylesheet" type="text/css" href="../main.css">
+    
+
+    
+    
+</head>
+<body class="rustdoc fn">
+    <!--[if lte IE 8]>
+    <div class="warning">
+        This old browser is unsupported and will most likely display funky
+        things.
+    </div>
+    <![endif]-->
+
+    
+
+    <nav class="sidebar">
+        
+        <p class='location'><a href='index.html'>av_sys</a></p><script>window.sidebarCurrent = {name: 'av_find_best_stream', ty: 'fn', relpath: ''};</script><script defer src="sidebar-items.js"></script>
+    </nav>
+
+    <nav class="sub">
+        <form class="search-form js-only">
+            <div class="search-container">
+                <input class="search-input" name="search"
+                       autocomplete="off"
+                       placeholder="Click or press ‘S’ to search, ‘?’ for more options…"
+                       type="search">
+            </div>
+        </form>
+    </nav>
+
+    <section id='main' class="content">
+<h1 class='fqn'><span class='in-band'>Function <a href='index.html'>av_sys</a>::<wbr><a class="fn" href=''>av_find_best_stream</a></span><span class='out-of-band'><span id='render-detail'>
+                   <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
+                       [<span class='inner'>&#x2212;</span>]
+                   </a>
+               </span><a class='srclink' href='../src/av_sys/home/travis/build/panicbit/rust-av/target/debug/build/av_sys-5aff961289ea4337/out/ffi.rs.html#5830' title='goto source code'>[src]</a></span></h1>
+<pre class='rust fn'>pub unsafe extern fn av_find_best_stream(<br>&nbsp;&nbsp;&nbsp;&nbsp;ic: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*mut </a><a class="struct" href="../av_sys/struct.AVFormatContext.html" title="struct av_sys::AVFormatContext">AVFormatContext</a>, <br>&nbsp;&nbsp;&nbsp;&nbsp;type_: <a class="enum" href="../av_sys/enum.AVMediaType.html" title="enum av_sys::AVMediaType">AVMediaType</a>, <br>&nbsp;&nbsp;&nbsp;&nbsp;wanted_stream_nb: <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a>, <br>&nbsp;&nbsp;&nbsp;&nbsp;related_stream: <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a>, <br>&nbsp;&nbsp;&nbsp;&nbsp;decoder_ret: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*mut </a><a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*mut </a><a class="struct" href="../av_sys/struct.AVCodec.html" title="struct av_sys::AVCodec">AVCodec</a>, <br>&nbsp;&nbsp;&nbsp;&nbsp;flags: <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a><br>) -&gt; <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a></pre><div class='docblock'><p>Find the &quot;best&quot; stream in the file.
+The best stream is determined according to various heuristics as the most
+likely to be what the user expects.
+If the decoder parameter is non-NULL, av_find_best_stream will find the
+default decoder for the stream&#39;s codec; streams for which no decoder can
+be found are ignored.</p>
+
+<p>@param ic                media file handle
+@param type              stream type: video, audio, subtitles, etc.
+@param wanted_stream_nb  user-requested stream number,
+                         or -1 for automatic selection
+@param related_stream    try to find a stream related (eg. in the same
+                         program) to this one, or -1 if none
+@param decoder_ret       if non-NULL, returns the decoder for the
+                         selected stream
+@param flags             flags; none are currently defined
+@return  the non-negative stream number in case of success,
+         AVERROR_STREAM_NOT_FOUND if no stream with the requested type
+         could be found,
+         AVERROR_DECODER_NOT_FOUND if streams were found but no decoder
+@note  If av_find_best_stream returns successfully and decoder_ret is not
+       NULL, then *decoder_ret is guaranteed to be set to a valid AVCodec.</p>
+</div></section>
+    <section id='search' class="content hidden"></section>
+
+    <section class="footer"></section>
+
+    <aside id="help" class="hidden">
+        <div>
+            <h1 class="hidden">Help</h1>
+
+            <div class="shortcuts">
+                <h2>Keyboard Shortcuts</h2>
+
+                <dl>
+                    <dt>?</dt>
+                    <dd>Show this help dialog</dd>
+                    <dt>S</dt>
+                    <dd>Focus the search field</dd>
+                    <dt>&larrb;</dt>
+                    <dd>Move up in search results</dd>
+                    <dt>&rarrb;</dt>
+                    <dd>Move down in search results</dd>
+                    <dt>&#9166;</dt>
+                    <dd>Go to active search result</dd>
+                    <dt>+</dt>
+                    <dd>Collapse/expand all sections</dd>
+                </dl>
+            </div>
+
+            <div class="infos">
+                <h2>Search Tricks</h2>
+
+                <p>
+                    Prefix searches with a type followed by a colon (e.g.
+                    <code>fn:</code>) to restrict the search to a given type.
+                </p>
+
+                <p>
+                    Accepted types are: <code>fn</code>, <code>mod</code>,
+                    <code>struct</code>, <code>enum</code>,
+                    <code>trait</code>, <code>type</code>, <code>macro</code>,
+                    and <code>const</code>.
+                </p>
+
+                <p>
+                    Search functions by type signature (e.g.
+                    <code>vec -> usize</code> or <code>* -> vec</code>)
+                </p>
+            </div>
+        </div>
+    </aside>
+
+    
+
+    <script>
+        window.rootPath = "../";
+        window.currentCrate = "av_sys";
+    </script>
+    <script src="../jquery.js"></script>
+    <script src="../main.js"></script>
+    <script defer src="../search-index.js"></script>
+</body>
+</html>

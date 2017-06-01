@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <meta name="description" content="API documentation for the Rust `Scaler` struct in crate `av`.">
+    <meta name="keywords" content="rust, rustlang, rust-lang, Scaler">
+
+    <title>av::scaler::Scaler - Rust</title>
+
+    <link rel="stylesheet" type="text/css" href="../../normalize.css">
+    <link rel="stylesheet" type="text/css" href="../../rustdoc.css">
+    <link rel="stylesheet" type="text/css" href="../../main.css">
+    
+
+    
+    
+</head>
+<body class="rustdoc struct">
+    <!--[if lte IE 8]>
+    <div class="warning">
+        This old browser is unsupported and will most likely display funky
+        things.
+    </div>
+    <![endif]-->
+
+    
+
+    <nav class="sidebar">
+        
+        <p class='location'>Struct Scaler</p><div class="block items"><ul><li><a href="#methods">Methods</a></li><li><a href="#implementations">Trait Implementations</a></li></ul></div><p class='location'><a href='../index.html'>av</a>::<wbr><a href='index.html'>scaler</a></p><script>window.sidebarCurrent = {name: 'Scaler', ty: 'struct', relpath: ''};</script><script defer src="sidebar-items.js"></script>
+    </nav>
+
+    <nav class="sub">
+        <form class="search-form js-only">
+            <div class="search-container">
+                <input class="search-input" name="search"
+                       autocomplete="off"
+                       placeholder="Click or press ‘S’ to search, ‘?’ for more options…"
+                       type="search">
+            </div>
+        </form>
+    </nav>
+
+    <section id='main' class="content">
+<h1 class='fqn'><span class='in-band'>Struct <a href='../index.html'>av</a>::<wbr><a href='index.html'>scaler</a>::<wbr><a class="struct" href=''>Scaler</a></span><span class='out-of-band'><span id='render-detail'>
+                   <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
+                       [<span class='inner'>&#x2212;</span>]
+                   </a>
+               </span><a class='srclink' href='../../src/av/scaler.rs.html#6-14' title='goto source code'>[src]</a></span></h1>
+<pre class='rust struct'>pub struct Scaler { /* fields omitted */ }</pre><h2 id='methods'>Methods</h2><h3 class='impl'><span class='in-band'><code>impl <a class="struct" href="../../av/scaler/struct.Scaler.html" title="struct av::scaler::Scaler">Scaler</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/av/scaler.rs.html#17-95' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.new' class="method"><span id='new.v' class='invisible'><code>fn <a href='#method.new' class='fnname'>new</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;source_width: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.usize.html">usize</a>, <br>&nbsp;&nbsp;&nbsp;&nbsp;source_height: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.usize.html">usize</a>, <br>&nbsp;&nbsp;&nbsp;&nbsp;source_pixel_format: <a class="enum" href="../../av_sys/enum.AVPixelFormat.html" title="enum av_sys::AVPixelFormat">AVPixelFormat</a>, <br>&nbsp;&nbsp;&nbsp;&nbsp;target_width: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.usize.html">usize</a>, <br>&nbsp;&nbsp;&nbsp;&nbsp;target_height: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.usize.html">usize</a>, <br>&nbsp;&nbsp;&nbsp;&nbsp;target_pixel_format: <a class="enum" href="../../av_sys/enum.AVPixelFormat.html" title="enum av_sys::AVPixelFormat">AVPixelFormat</a><br>) -&gt; <a class="type" href="../../av/errors/type.Result.html" title="type av::errors::Result">Result</a>&lt;Self&gt;</code></span></h4>
+<h4 id='method.__scale' class="method"><span id='__scale.v' class='invisible'><code>unsafe fn <a href='#method.__scale' class='fnname'>__scale</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;&amp;mut self, <br>&nbsp;&nbsp;&nbsp;&nbsp;source: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*mut </a><a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*const </a><a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u8.html">u8</a>, <br>&nbsp;&nbsp;&nbsp;&nbsp;source_stride: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*mut </a><a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a>, <br>&nbsp;&nbsp;&nbsp;&nbsp;source_y: <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a>, <br>&nbsp;&nbsp;&nbsp;&nbsp;source_height: <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a>, <br>&nbsp;&nbsp;&nbsp;&nbsp;target: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*mut </a><a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*const </a><a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u8.html">u8</a>, <br>&nbsp;&nbsp;&nbsp;&nbsp;target_stride: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*mut </a><a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a><br>)</code></span></h4>
+<h4 id='method.scale_frame' class="method"><span id='scale_frame.v' class='invisible'><code>unsafe fn <a href='#method.scale_frame' class='fnname'>scale_frame</a>(&amp;mut self, source: &amp;mut <a class="struct" href="../../av/video/struct.Frame.html" title="struct av::video::Frame">Frame</a>, target: &amp;mut <a class="struct" href="../../av/video/struct.Frame.html" title="struct av::video::Frame">Frame</a>)</code></span></h4>
+<div class='docblock'><p>TODO: Ensure that width, height and pixel format match </p>
+</div><h4 id='method.source_pixel_format' class="method"><span id='source_pixel_format.v' class='invisible'><code>fn <a href='#method.source_pixel_format' class='fnname'>source_pixel_format</a>(&amp;self) -&gt; <a class="enum" href="../../av_sys/enum.AVPixelFormat.html" title="enum av_sys::AVPixelFormat">AVPixelFormat</a></code></span></h4>
+<h4 id='method.source_width' class="method"><span id='source_width.v' class='invisible'><code>fn <a href='#method.source_width' class='fnname'>source_width</a>(&amp;self) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.usize.html">usize</a></code></span></h4>
+<h4 id='method.source_height' class="method"><span id='source_height.v' class='invisible'><code>fn <a href='#method.source_height' class='fnname'>source_height</a>(&amp;self) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.usize.html">usize</a></code></span></h4>
+<h4 id='method.target_pixel_format' class="method"><span id='target_pixel_format.v' class='invisible'><code>fn <a href='#method.target_pixel_format' class='fnname'>target_pixel_format</a>(&amp;self) -&gt; <a class="enum" href="../../av_sys/enum.AVPixelFormat.html" title="enum av_sys::AVPixelFormat">AVPixelFormat</a></code></span></h4>
+<h4 id='method.target_width' class="method"><span id='target_width.v' class='invisible'><code>fn <a href='#method.target_width' class='fnname'>target_width</a>(&amp;self) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.usize.html">usize</a></code></span></h4>
+<h4 id='method.target_height' class="method"><span id='target_height.v' class='invisible'><code>fn <a href='#method.target_height' class='fnname'>target_height</a>(&amp;self) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.usize.html">usize</a></code></span></h4>
+</div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><span class='in-band'><code>impl <a class="trait" href="https://doc.rust-lang.org/nightly/core/ops/trait.Drop.html" title="trait core::ops::Drop">Drop</a> for <a class="struct" href="../../av/scaler/struct.Scaler.html" title="struct av::scaler::Scaler">Scaler</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/av/scaler.rs.html#97-103' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.drop' class="method"><span id='drop.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/ops/trait.Drop.html#tymethod.drop' class='fnname'>drop</a>(&amp;mut self)</code></span></h4>
+<div class='docblock'><p>A method called when the value goes out of scope. <a href="https://doc.rust-lang.org/nightly/core/ops/trait.Drop.html#tymethod.drop">Read more</a></p>
+</div></div></section>
+    <section id='search' class="content hidden"></section>
+
+    <section class="footer"></section>
+
+    <aside id="help" class="hidden">
+        <div>
+            <h1 class="hidden">Help</h1>
+
+            <div class="shortcuts">
+                <h2>Keyboard Shortcuts</h2>
+
+                <dl>
+                    <dt>?</dt>
+                    <dd>Show this help dialog</dd>
+                    <dt>S</dt>
+                    <dd>Focus the search field</dd>
+                    <dt>&larrb;</dt>
+                    <dd>Move up in search results</dd>
+                    <dt>&rarrb;</dt>
+                    <dd>Move down in search results</dd>
+                    <dt>&#9166;</dt>
+                    <dd>Go to active search result</dd>
+                    <dt>+</dt>
+                    <dd>Collapse/expand all sections</dd>
+                </dl>
+            </div>
+
+            <div class="infos">
+                <h2>Search Tricks</h2>
+
+                <p>
+                    Prefix searches with a type followed by a colon (e.g.
+                    <code>fn:</code>) to restrict the search to a given type.
+                </p>
+
+                <p>
+                    Accepted types are: <code>fn</code>, <code>mod</code>,
+                    <code>struct</code>, <code>enum</code>,
+                    <code>trait</code>, <code>type</code>, <code>macro</code>,
+                    and <code>const</code>.
+                </p>
+
+                <p>
+                    Search functions by type signature (e.g.
+                    <code>vec -> usize</code> or <code>* -> vec</code>)
+                </p>
+            </div>
+        </div>
+    </aside>
+
+    
+
+    <script>
+        window.rootPath = "../../";
+        window.currentCrate = "av";
+    </script>
+    <script src="../../jquery.js"></script>
+    <script src="../../main.js"></script>
+    <script defer src="../../search-index.js"></script>
+</body>
+</html>

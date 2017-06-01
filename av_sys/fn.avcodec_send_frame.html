@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <meta name="description" content="API documentation for the Rust `avcodec_send_frame` fn in crate `av_sys`.">
+    <meta name="keywords" content="rust, rustlang, rust-lang, avcodec_send_frame">
+
+    <title>av_sys::avcodec_send_frame - Rust</title>
+
+    <link rel="stylesheet" type="text/css" href="../normalize.css">
+    <link rel="stylesheet" type="text/css" href="../rustdoc.css">
+    <link rel="stylesheet" type="text/css" href="../main.css">
+    
+
+    
+    
+</head>
+<body class="rustdoc fn">
+    <!--[if lte IE 8]>
+    <div class="warning">
+        This old browser is unsupported and will most likely display funky
+        things.
+    </div>
+    <![endif]-->
+
+    
+
+    <nav class="sidebar">
+        
+        <p class='location'><a href='index.html'>av_sys</a></p><script>window.sidebarCurrent = {name: 'avcodec_send_frame', ty: 'fn', relpath: ''};</script><script defer src="sidebar-items.js"></script>
+    </nav>
+
+    <nav class="sub">
+        <form class="search-form js-only">
+            <div class="search-container">
+                <input class="search-input" name="search"
+                       autocomplete="off"
+                       placeholder="Click or press ‘S’ to search, ‘?’ for more options…"
+                       type="search">
+            </div>
+        </form>
+    </nav>
+
+    <section id='main' class="content">
+<h1 class='fqn'><span class='in-band'>Function <a href='index.html'>av_sys</a>::<wbr><a class="fn" href=''>avcodec_send_frame</a></span><span class='out-of-band'><span id='render-detail'>
+                   <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
+                       [<span class='inner'>&#x2212;</span>]
+                   </a>
+               </span><a class='srclink' href='../src/av_sys/home/travis/build/panicbit/rust-av/target/debug/build/av_sys-5aff961289ea4337/out/ffi.rs.html#3800' title='goto source code'>[src]</a></span></h1>
+<pre class='rust fn'>pub unsafe extern fn avcodec_send_frame(<br>&nbsp;&nbsp;&nbsp;&nbsp;avctx: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*mut </a><a class="struct" href="../av_sys/struct.AVCodecContext.html" title="struct av_sys::AVCodecContext">AVCodecContext</a>, <br>&nbsp;&nbsp;&nbsp;&nbsp;frame: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*const </a><a class="struct" href="../av_sys/struct.AVFrame.html" title="struct av_sys::AVFrame">AVFrame</a><br>) -&gt; <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a></pre><div class='docblock'><p>Supply a raw video or audio frame to the encoder. Use avcodec_receive_packet()
+to retrieve buffered output packets.</p>
+
+<p>@param avctx     codec context
+@param[in] frame AVFrame containing the raw audio or video frame to be encoded.
+                 Ownership of the frame remains with the caller, and the
+                 encoder will not write to the frame. The encoder may create
+                 a reference to the frame data (or copy it if the frame is
+                 not reference-counted).
+                 It can be NULL, in which case it is considered a flush
+                 packet.  This signals the end of the stream. If the encoder
+                 still has packets buffered, it will return them after this
+                 call. Once flushing mode has been entered, additional flush
+                 packets are ignored, and sending frames will return
+                 AVERROR_EOF.</p>
+
+<pre class="rust rust-example-rendered">
+<span class="ident">For</span> <span class="ident">audio</span>:
+             <span class="ident">If</span> <span class="ident">AV_CODEC_CAP_VARIABLE_FRAME_SIZE</span> <span class="ident">is</span> <span class="ident">set</span>, <span class="ident">then</span> <span class="ident">each</span> <span class="ident">frame</span>
+             <span class="ident">can</span> <span class="ident">have</span> <span class="ident">any</span> <span class="ident">number</span> <span class="ident">of</span> <span class="ident">samples</span>.
+             <span class="ident">If</span> <span class="ident">it</span> <span class="ident">is</span> <span class="ident">not</span> <span class="ident">set</span>, <span class="ident">frame</span><span class="op">-&gt;</span><span class="ident">nb_samples</span> <span class="ident">must</span> <span class="ident">be</span> <span class="ident">equal</span> <span class="ident">to</span>
+             <span class="ident">avctx</span><span class="op">-&gt;</span><span class="ident">frame_size</span> <span class="kw">for</span> <span class="ident">all</span> <span class="ident">frames</span> <span class="ident">except</span> <span class="ident">the</span> <span class="ident">last</span>.
+             <span class="ident">The</span> <span class="kw">final</span> <span class="ident">frame</span> <span class="ident">may</span> <span class="ident">be</span> <span class="ident">smaller</span> <span class="ident">than</span> <span class="ident">avctx</span><span class="op">-&gt;</span><span class="ident">frame_size</span>.</pre>
+
+<p>@return 0 on success, otherwise negative error code:
+     AVERROR(EAGAIN):   input is not accepted in the current state - user
+                        must read output with avcodec_receive_packet() (once
+                        all output is read, the packet should be resent, and
+                        the call will not fail with EAGAIN).
+     AVERROR_EOF:       the encoder has been flushed, and no new frames can
+                        be sent to it
+     AVERROR(EINVAL):   codec not opened, refcounted_frames not set, it is a
+                        decoder, or requires flush
+     AVERROR(ENOMEM):   failed to add packet to internal queue, or similar
+     other errors: legitimate decoding errors</p>
+</div></section>
+    <section id='search' class="content hidden"></section>
+
+    <section class="footer"></section>
+
+    <aside id="help" class="hidden">
+        <div>
+            <h1 class="hidden">Help</h1>
+
+            <div class="shortcuts">
+                <h2>Keyboard Shortcuts</h2>
+
+                <dl>
+                    <dt>?</dt>
+                    <dd>Show this help dialog</dd>
+                    <dt>S</dt>
+                    <dd>Focus the search field</dd>
+                    <dt>&larrb;</dt>
+                    <dd>Move up in search results</dd>
+                    <dt>&rarrb;</dt>
+                    <dd>Move down in search results</dd>
+                    <dt>&#9166;</dt>
+                    <dd>Go to active search result</dd>
+                    <dt>+</dt>
+                    <dd>Collapse/expand all sections</dd>
+                </dl>
+            </div>
+
+            <div class="infos">
+                <h2>Search Tricks</h2>
+
+                <p>
+                    Prefix searches with a type followed by a colon (e.g.
+                    <code>fn:</code>) to restrict the search to a given type.
+                </p>
+
+                <p>
+                    Accepted types are: <code>fn</code>, <code>mod</code>,
+                    <code>struct</code>, <code>enum</code>,
+                    <code>trait</code>, <code>type</code>, <code>macro</code>,
+                    and <code>const</code>.
+                </p>
+
+                <p>
+                    Search functions by type signature (e.g.
+                    <code>vec -> usize</code> or <code>* -> vec</code>)
+                </p>
+            </div>
+        </div>
+    </aside>
+
+    
+
+    <script>
+        window.rootPath = "../";
+        window.currentCrate = "av_sys";
+    </script>
+    <script src="../jquery.js"></script>
+    <script src="../main.js"></script>
+    <script defer src="../search-index.js"></script>
+</body>
+</html>

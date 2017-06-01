@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <meta name="description" content="API documentation for the Rust `AVPacket` struct in crate `av_sys`.">
+    <meta name="keywords" content="rust, rustlang, rust-lang, AVPacket">
+
+    <title>av_sys::AVPacket - Rust</title>
+
+    <link rel="stylesheet" type="text/css" href="../normalize.css">
+    <link rel="stylesheet" type="text/css" href="../rustdoc.css">
+    <link rel="stylesheet" type="text/css" href="../main.css">
+    
+
+    
+    
+</head>
+<body class="rustdoc struct">
+    <!--[if lte IE 8]>
+    <div class="warning">
+        This old browser is unsupported and will most likely display funky
+        things.
+    </div>
+    <![endif]-->
+
+    
+
+    <nav class="sidebar">
+        
+        <p class='location'>Struct AVPacket</p><div class="block items"><ul><li><a href="#fields">Fields</a></li><li><a href="#implementations">Trait Implementations</a></li></ul></div><p class='location'><a href='index.html'>av_sys</a></p><script>window.sidebarCurrent = {name: 'AVPacket', ty: 'struct', relpath: ''};</script><script defer src="sidebar-items.js"></script>
+    </nav>
+
+    <nav class="sub">
+        <form class="search-form js-only">
+            <div class="search-container">
+                <input class="search-input" name="search"
+                       autocomplete="off"
+                       placeholder="Click or press ‘S’ to search, ‘?’ for more options…"
+                       type="search">
+            </div>
+        </form>
+    </nav>
+
+    <section id='main' class="content">
+<h1 class='fqn'><span class='in-band'>Struct <a href='index.html'>av_sys</a>::<wbr><a class="struct" href=''>AVPacket</a></span><span class='out-of-band'><span id='render-detail'>
+                   <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
+                       [<span class='inner'>&#x2212;</span>]
+                   </a>
+               </span><a class='srclink' href='../src/av_sys/home/travis/build/panicbit/rust-av/target/debug/build/av_sys-5aff961289ea4337/out/ffi.rs.html#1937-1966' title='goto source code'>[src]</a></span></h1>
+<pre class='rust struct'><div class="docblock attributes">#[repr(C)]
+</div>pub struct AVPacket {
+    pub buf: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*mut </a><a class="struct" href="../av_sys/struct.AVBufferRef.html" title="struct av_sys::AVBufferRef">AVBufferRef</a>,
+    pub pts: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.i64.html">i64</a>,
+    pub dts: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.i64.html">i64</a>,
+    pub data: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*mut </a><a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u8.html">u8</a>,
+    pub size: <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a>,
+    pub stream_index: <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a>,
+    pub flags: <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a>,
+    pub side_data: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*mut </a><a class="struct" href="../av_sys/struct.AVPacketSideData.html" title="struct av_sys::AVPacketSideData">AVPacketSideData</a>,
+    pub side_data_elems: <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a>,
+    pub duration: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.i64.html">i64</a>,
+    pub pos: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.i64.html">i64</a>,
+    pub convergence_duration: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.i64.html">i64</a>,
+}</pre><div class='docblock'><p>This structure stores compressed data. It is typically exported by demuxers
+and then passed as input to decoders, or received as output from encoders and
+then passed to muxers.</p>
+
+<p>For video, it should typically contain one compressed frame. For audio it may
+contain several compressed frames. Encoders are allowed to output empty
+packets, with no compressed data, containing only side data
+(e.g. to update some stream parameters at the end of encoding).</p>
+
+<p>AVPacket is one of the few structs in FFmpeg, whose size is a part of public
+ABI. Thus it may be allocated on stack and no new fields can be added to it
+without libavcodec and libavformat major bump.</p>
+
+<p>The semantics of data ownership depends on the buf field.
+If it is set, the packet data is dynamically allocated and is
+valid indefinitely until a call to av_packet_unref() reduces the
+reference count to 0.</p>
+
+<p>If the buf field is not set av_packet_ref() would make a copy instead
+of increasing the reference count.</p>
+
+<p>The side data is always allocated with av_malloc(), copied by
+av_packet_ref() and freed by av_packet_unref().</p>
+
+<p>@see av_packet_ref
+@see av_packet_unref</p>
+</div><h2 id='fields' class='fields'>Fields</h2><span id='structfield.buf' class="structfield">
+                           <span id='buf.v' class='invisible'>
+                           <code>buf: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*mut </a><a class="struct" href="../av_sys/struct.AVBufferRef.html" title="struct av_sys::AVBufferRef">AVBufferRef</a></code>
+                           </span></span><div class='docblock'><p>A reference to the reference-counted buffer where the packet data is
+stored.
+May be NULL, then the packet data is not reference-counted.</p>
+</div><span id='structfield.pts' class="structfield">
+                           <span id='pts.v' class='invisible'>
+                           <code>pts: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.i64.html">i64</a></code>
+                           </span></span><div class='docblock'><p>Presentation timestamp in AVStream-&gt;time_base units; the time at which
+the decompressed packet will be presented to the user.
+Can be AV_NOPTS_VALUE if it is not stored in the file.
+pts MUST be larger or equal to dts as presentation cannot happen before
+decompression, unless one wants to view hex dumps. Some formats misuse
+the terms dts and pts/cts to mean something different. Such timestamps
+must be converted to true pts/dts before they are stored in AVPacket.</p>
+</div><span id='structfield.dts' class="structfield">
+                           <span id='dts.v' class='invisible'>
+                           <code>dts: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.i64.html">i64</a></code>
+                           </span></span><div class='docblock'><p>Decompression timestamp in AVStream-&gt;time_base units; the time at which
+the packet is decompressed.
+Can be AV_NOPTS_VALUE if it is not stored in the file.</p>
+</div><span id='structfield.data' class="structfield">
+                           <span id='data.v' class='invisible'>
+                           <code>data: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*mut </a><a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u8.html">u8</a></code>
+                           </span></span><span id='structfield.size' class="structfield">
+                           <span id='size.v' class='invisible'>
+                           <code>size: <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a></code>
+                           </span></span><span id='structfield.stream_index' class="structfield">
+                           <span id='stream_index.v' class='invisible'>
+                           <code>stream_index: <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a></code>
+                           </span></span><span id='structfield.flags' class="structfield">
+                           <span id='flags.v' class='invisible'>
+                           <code>flags: <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a></code>
+                           </span></span><div class='docblock'><p>A combination of AV_PKT_FLAG values</p>
+</div><span id='structfield.side_data' class="structfield">
+                           <span id='side_data.v' class='invisible'>
+                           <code>side_data: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*mut </a><a class="struct" href="../av_sys/struct.AVPacketSideData.html" title="struct av_sys::AVPacketSideData">AVPacketSideData</a></code>
+                           </span></span><div class='docblock'><p>Additional packet data that can be provided by the container.
+Packet can contain several types of side information.</p>
+</div><span id='structfield.side_data_elems' class="structfield">
+                           <span id='side_data_elems.v' class='invisible'>
+                           <code>side_data_elems: <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a></code>
+                           </span></span><span id='structfield.duration' class="structfield">
+                           <span id='duration.v' class='invisible'>
+                           <code>duration: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.i64.html">i64</a></code>
+                           </span></span><div class='docblock'><p>Duration of this packet in AVStream-&gt;time_base units, 0 if unknown.
+Equals next_pts - this_pts in presentation order.</p>
+</div><span id='structfield.pos' class="structfield">
+                           <span id='pos.v' class='invisible'>
+                           <code>pos: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.i64.html">i64</a></code>
+                           </span></span><div class='docblock'><p>&lt; byte position in stream, -1 if unknown</p>
+</div><span id='structfield.convergence_duration' class="structfield">
+                           <span id='convergence_duration.v' class='invisible'>
+                           <code>convergence_duration: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.i64.html">i64</a></code>
+                           </span></span><div class='docblock'><p>@deprecated Same as the duration field, but as int64_t. This was required
+for Matroska subtitles, whose duration values could overflow when the
+duration field was still an int.</p>
+</div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><span class='in-band'><code>impl <a class="trait" href="https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html" title="trait core::fmt::Debug">Debug</a> for <a class="struct" href="../av_sys/struct.AVPacket.html" title="struct av_sys::AVPacket">AVPacket</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/av_sys/home/travis/build/panicbit/rust-av/target/debug/build/av_sys-5aff961289ea4337/out/ffi.rs.html#1937' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.fmt' class="method"><span id='fmt.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html#tymethod.fmt' class='fnname'>fmt</a>(&amp;self, __arg_0: &amp;mut <a class="struct" href="https://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html" title="struct core::fmt::Formatter">Formatter</a>) -&gt; <a class="type" href="https://doc.rust-lang.org/nightly/core/fmt/type.Result.html" title="type core::fmt::Result">Result</a></code></span></h4>
+<div class='docblock'><p>Formats the value using the given formatter.</p>
+</div></div><h3 class='impl'><span class='in-band'><code>impl <a class="trait" href="https://doc.rust-lang.org/nightly/core/marker/trait.Copy.html" title="trait core::marker::Copy">Copy</a> for <a class="struct" href="../av_sys/struct.AVPacket.html" title="struct av_sys::AVPacket">AVPacket</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/av_sys/home/travis/build/panicbit/rust-av/target/debug/build/av_sys-5aff961289ea4337/out/ffi.rs.html#1937' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'></div><h3 class='impl'><span class='in-band'><code>impl <a class="trait" href="https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html" title="trait core::clone::Clone">Clone</a> for <a class="struct" href="../av_sys/struct.AVPacket.html" title="struct av_sys::AVPacket">AVPacket</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/av_sys/home/travis/build/panicbit/rust-av/target/debug/build/av_sys-5aff961289ea4337/out/ffi.rs.html#1966' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.clone' class="method"><span id='clone.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#tymethod.clone' class='fnname'>clone</a>(&amp;self) -&gt; Self</code></span></h4>
+<div class='docblock'><p>Returns a copy of the value. <a href="https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#tymethod.clone">Read more</a></p>
+</div><h4 id='method.clone_from' class="method"><span id='clone_from.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#method.clone_from' class='fnname'>clone_from</a>(&amp;mut self, source: &amp;Self)</code><div class='since' title='Stable since Rust version 1.0.0'>1.0.0</div></span></h4>
+<div class='docblock'><p>Performs copy-assignment from <code>source</code>. <a href="https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#method.clone_from">Read more</a></p>
+</div></div></section>
+    <section id='search' class="content hidden"></section>
+
+    <section class="footer"></section>
+
+    <aside id="help" class="hidden">
+        <div>
+            <h1 class="hidden">Help</h1>
+
+            <div class="shortcuts">
+                <h2>Keyboard Shortcuts</h2>
+
+                <dl>
+                    <dt>?</dt>
+                    <dd>Show this help dialog</dd>
+                    <dt>S</dt>
+                    <dd>Focus the search field</dd>
+                    <dt>&larrb;</dt>
+                    <dd>Move up in search results</dd>
+                    <dt>&rarrb;</dt>
+                    <dd>Move down in search results</dd>
+                    <dt>&#9166;</dt>
+                    <dd>Go to active search result</dd>
+                    <dt>+</dt>
+                    <dd>Collapse/expand all sections</dd>
+                </dl>
+            </div>
+
+            <div class="infos">
+                <h2>Search Tricks</h2>
+
+                <p>
+                    Prefix searches with a type followed by a colon (e.g.
+                    <code>fn:</code>) to restrict the search to a given type.
+                </p>
+
+                <p>
+                    Accepted types are: <code>fn</code>, <code>mod</code>,
+                    <code>struct</code>, <code>enum</code>,
+                    <code>trait</code>, <code>type</code>, <code>macro</code>,
+                    and <code>const</code>.
+                </p>
+
+                <p>
+                    Search functions by type signature (e.g.
+                    <code>vec -> usize</code> or <code>* -> vec</code>)
+                </p>
+            </div>
+        </div>
+    </aside>
+
+    
+
+    <script>
+        window.rootPath = "../";
+        window.currentCrate = "av_sys";
+    </script>
+    <script src="../jquery.js"></script>
+    <script src="../main.js"></script>
+    <script defer src="../search-index.js"></script>
+</body>
+</html>

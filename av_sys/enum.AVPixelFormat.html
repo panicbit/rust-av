@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <meta name="description" content="API documentation for the Rust `AVPixelFormat` enum in crate `av_sys`.">
+    <meta name="keywords" content="rust, rustlang, rust-lang, AVPixelFormat">
+
+    <title>av_sys::AVPixelFormat - Rust</title>
+
+    <link rel="stylesheet" type="text/css" href="../normalize.css">
+    <link rel="stylesheet" type="text/css" href="../rustdoc.css">
+    <link rel="stylesheet" type="text/css" href="../main.css">
+    
+
+    
+    
+</head>
+<body class="rustdoc enum">
+    <!--[if lte IE 8]>
+    <div class="warning">
+        This old browser is unsupported and will most likely display funky
+        things.
+    </div>
+    <![endif]-->
+
+    
+
+    <nav class="sidebar">
+        
+        <p class='location'>Enum AVPixelFormat</p><div class="block items"><ul><li><a href="#variants">Variants</a></li><li><a href="#implementations">Trait Implementations</a></li></ul></div><p class='location'><a href='index.html'>av_sys</a></p><script>window.sidebarCurrent = {name: 'AVPixelFormat', ty: 'enum', relpath: ''};</script><script defer src="sidebar-items.js"></script>
+    </nav>
+
+    <nav class="sub">
+        <form class="search-form js-only">
+            <div class="search-container">
+                <input class="search-input" name="search"
+                       autocomplete="off"
+                       placeholder="Click or press ‘S’ to search, ‘?’ for more options…"
+                       type="search">
+            </div>
+        </form>
+    </nav>
+
+    <section id='main' class="content">
+<h1 class='fqn'><span class='in-band'>Enum <a href='index.html'>av_sys</a>::<wbr><a class="enum" href=''>AVPixelFormat</a></span><span class='out-of-band'><span id='render-detail'>
+                   <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
+                       [<span class='inner'>&#x2212;</span>]
+                   </a>
+               </span><a class='srclink' href='../src/av_sys/home/travis/build/panicbit/rust-av/target/debug/build/av_sys-5aff961289ea4337/out/ffi.rs.html#670' title='goto source code'>[src]</a></span></h1>
+<pre class='rust enum'><div class="docblock attributes">#[repr(i32)]
+</div>pub enum AVPixelFormat {
+    AV_PIX_FMT_NONE,
+    AV_PIX_FMT_YUV420P,
+    AV_PIX_FMT_YUYV422,
+    AV_PIX_FMT_RGB24,
+    AV_PIX_FMT_BGR24,
+    AV_PIX_FMT_YUV422P,
+    AV_PIX_FMT_YUV444P,
+    AV_PIX_FMT_YUV410P,
+    AV_PIX_FMT_YUV411P,
+    AV_PIX_FMT_GRAY8,
+    AV_PIX_FMT_MONOWHITE,
+    AV_PIX_FMT_MONOBLACK,
+    AV_PIX_FMT_PAL8,
+    AV_PIX_FMT_YUVJ420P,
+    AV_PIX_FMT_YUVJ422P,
+    AV_PIX_FMT_YUVJ444P,
+    AV_PIX_FMT_XVMC_MPEG2_MC,
+    AV_PIX_FMT_XVMC_MPEG2_IDCT,
+    AV_PIX_FMT_UYVY422,
+    AV_PIX_FMT_UYYVYY411,
+    AV_PIX_FMT_BGR8,
+    AV_PIX_FMT_BGR4,
+    AV_PIX_FMT_BGR4_BYTE,
+    AV_PIX_FMT_RGB8,
+    AV_PIX_FMT_RGB4,
+    AV_PIX_FMT_RGB4_BYTE,
+    AV_PIX_FMT_NV12,
+    AV_PIX_FMT_NV21,
+    AV_PIX_FMT_ARGB,
+    AV_PIX_FMT_RGBA,
+    AV_PIX_FMT_ABGR,
+    AV_PIX_FMT_BGRA,
+    AV_PIX_FMT_GRAY16BE,
+    AV_PIX_FMT_GRAY16LE,
+    AV_PIX_FMT_YUV440P,
+    AV_PIX_FMT_YUVJ440P,
+    AV_PIX_FMT_YUVA420P,
+    AV_PIX_FMT_VDPAU_H264,
+    AV_PIX_FMT_VDPAU_MPEG1,
+    AV_PIX_FMT_VDPAU_MPEG2,
+    AV_PIX_FMT_VDPAU_WMV3,
+    AV_PIX_FMT_VDPAU_VC1,
+    AV_PIX_FMT_RGB48BE,
+    AV_PIX_FMT_RGB48LE,
+    AV_PIX_FMT_RGB565BE,
+    AV_PIX_FMT_RGB565LE,
+    AV_PIX_FMT_RGB555BE,
+    AV_PIX_FMT_RGB555LE,
+    AV_PIX_FMT_BGR565BE,
+    AV_PIX_FMT_BGR565LE,
+    AV_PIX_FMT_BGR555BE,
+    AV_PIX_FMT_BGR555LE,
+    AV_PIX_FMT_VAAPI_MOCO,
+    AV_PIX_FMT_VAAPI_IDCT,
+    AV_PIX_FMT_VAAPI_VLD,
+    AV_PIX_FMT_YUV420P16LE,
+    AV_PIX_FMT_YUV420P16BE,
+    AV_PIX_FMT_YUV422P16LE,
+    AV_PIX_FMT_YUV422P16BE,
+    AV_PIX_FMT_YUV444P16LE,
+    AV_PIX_FMT_YUV444P16BE,
+    AV_PIX_FMT_VDPAU_MPEG4,
+    AV_PIX_FMT_DXVA2_VLD,
+    AV_PIX_FMT_RGB444LE,
+    AV_PIX_FMT_RGB444BE,
+    AV_PIX_FMT_BGR444LE,
+    AV_PIX_FMT_BGR444BE,
+    AV_PIX_FMT_YA8,
+    AV_PIX_FMT_BGR48BE,
+    AV_PIX_FMT_BGR48LE,
+    AV_PIX_FMT_YUV420P9BE,
+    AV_PIX_FMT_YUV420P9LE,
+    AV_PIX_FMT_YUV420P10BE,
+    AV_PIX_FMT_YUV420P10LE,
+    AV_PIX_FMT_YUV422P10BE,
+    AV_PIX_FMT_YUV422P10LE,
+    AV_PIX_FMT_YUV444P9BE,
+    AV_PIX_FMT_YUV444P9LE,
+    AV_PIX_FMT_YUV444P10BE,
+    AV_PIX_FMT_YUV444P10LE,
+    AV_PIX_FMT_YUV422P9BE,
+    AV_PIX_FMT_YUV422P9LE,
+    AV_PIX_FMT_VDA_VLD,
+    AV_PIX_FMT_GBRP,
+    AV_PIX_FMT_GBRP9BE,
+    AV_PIX_FMT_GBRP9LE,
+    AV_PIX_FMT_GBRP10BE,
+    AV_PIX_FMT_GBRP10LE,
+    AV_PIX_FMT_GBRP16BE,
+    AV_PIX_FMT_GBRP16LE,
+    AV_PIX_FMT_YUVA422P,
+    AV_PIX_FMT_YUVA444P,
+    AV_PIX_FMT_YUVA420P9BE,
+    AV_PIX_FMT_YUVA420P9LE,
+    AV_PIX_FMT_YUVA422P9BE,
+    AV_PIX_FMT_YUVA422P9LE,
+    AV_PIX_FMT_YUVA444P9BE,
+    AV_PIX_FMT_YUVA444P9LE,
+    AV_PIX_FMT_YUVA420P10BE,
+    AV_PIX_FMT_YUVA420P10LE,
+    AV_PIX_FMT_YUVA422P10BE,
+    AV_PIX_FMT_YUVA422P10LE,
+    AV_PIX_FMT_YUVA444P10BE,
+    AV_PIX_FMT_YUVA444P10LE,
+    AV_PIX_FMT_YUVA420P16BE,
+    AV_PIX_FMT_YUVA420P16LE,
+    AV_PIX_FMT_YUVA422P16BE,
+    AV_PIX_FMT_YUVA422P16LE,
+    AV_PIX_FMT_YUVA444P16BE,
+    AV_PIX_FMT_YUVA444P16LE,
+    AV_PIX_FMT_VDPAU,
+    AV_PIX_FMT_XYZ12LE,
+    AV_PIX_FMT_XYZ12BE,
+    AV_PIX_FMT_NV16,
+    AV_PIX_FMT_NV20LE,
+    AV_PIX_FMT_NV20BE,
+    AV_PIX_FMT_RGBA64BE,
+    AV_PIX_FMT_RGBA64LE,
+    AV_PIX_FMT_BGRA64BE,
+    AV_PIX_FMT_BGRA64LE,
+    AV_PIX_FMT_YVYU422,
+    AV_PIX_FMT_VDA,
+    AV_PIX_FMT_YA16BE,
+    AV_PIX_FMT_YA16LE,
+    AV_PIX_FMT_GBRAP,
+    AV_PIX_FMT_GBRAP16BE,
+    AV_PIX_FMT_GBRAP16LE,
+    AV_PIX_FMT_QSV,
+    AV_PIX_FMT_MMAL,
+    AV_PIX_FMT_D3D11VA_VLD,
+    AV_PIX_FMT_CUDA,
+    AV_PIX_FMT_0RGB,
+    AV_PIX_FMT_RGB0,
+    AV_PIX_FMT_0BGR,
+    AV_PIX_FMT_BGR0,
+    AV_PIX_FMT_YUV420P12BE,
+    AV_PIX_FMT_YUV420P12LE,
+    AV_PIX_FMT_YUV420P14BE,
+    AV_PIX_FMT_YUV420P14LE,
+    AV_PIX_FMT_YUV422P12BE,
+    AV_PIX_FMT_YUV422P12LE,
+    AV_PIX_FMT_YUV422P14BE,
+    AV_PIX_FMT_YUV422P14LE,
+    AV_PIX_FMT_YUV444P12BE,
+    AV_PIX_FMT_YUV444P12LE,
+    AV_PIX_FMT_YUV444P14BE,
+    AV_PIX_FMT_YUV444P14LE,
+    AV_PIX_FMT_GBRP12BE,
+    AV_PIX_FMT_GBRP12LE,
+    AV_PIX_FMT_GBRP14BE,
+    AV_PIX_FMT_GBRP14LE,
+    AV_PIX_FMT_YUVJ411P,
+    AV_PIX_FMT_BAYER_BGGR8,
+    AV_PIX_FMT_BAYER_RGGB8,
+    AV_PIX_FMT_BAYER_GBRG8,
+    AV_PIX_FMT_BAYER_GRBG8,
+    AV_PIX_FMT_BAYER_BGGR16LE,
+    AV_PIX_FMT_BAYER_BGGR16BE,
+    AV_PIX_FMT_BAYER_RGGB16LE,
+    AV_PIX_FMT_BAYER_RGGB16BE,
+    AV_PIX_FMT_BAYER_GBRG16LE,
+    AV_PIX_FMT_BAYER_GBRG16BE,
+    AV_PIX_FMT_BAYER_GRBG16LE,
+    AV_PIX_FMT_BAYER_GRBG16BE,
+    AV_PIX_FMT_YUV440P10LE,
+    AV_PIX_FMT_YUV440P10BE,
+    AV_PIX_FMT_YUV440P12LE,
+    AV_PIX_FMT_YUV440P12BE,
+    AV_PIX_FMT_AYUV64LE,
+    AV_PIX_FMT_AYUV64BE,
+    AV_PIX_FMT_VIDEOTOOLBOX,
+    AV_PIX_FMT_P010LE,
+    AV_PIX_FMT_P010BE,
+    AV_PIX_FMT_GBRAP12BE,
+    AV_PIX_FMT_GBRAP12LE,
+    AV_PIX_FMT_GBRAP10BE,
+    AV_PIX_FMT_GBRAP10LE,
+    AV_PIX_FMT_MEDIACODEC,
+    AV_PIX_FMT_GRAY12BE,
+    AV_PIX_FMT_GRAY12LE,
+    AV_PIX_FMT_GRAY10BE,
+    AV_PIX_FMT_GRAY10LE,
+    AV_PIX_FMT_P016LE,
+    AV_PIX_FMT_P016BE,
+    AV_PIX_FMT_NB,
+}</pre><div class='docblock'><p>Pixel format.</p>
+
+<p>@note
+AV_PIX_FMT_RGB32 is handled in an endian-specific manner. An RGBA
+color is put together as:
+ (A &lt;&lt; 24) | (R &lt;&lt; 16) | (G &lt;&lt; 8) | B
+This is stored as BGRA on little-endian CPU architectures and ARGB on
+big-endian CPUs.</p>
+
+<p>@par
+When the pixel format is palettized RGB32 (AV_PIX_FMT_PAL8), the palettized
+image data is stored in AVFrame.data[0]. The palette is transported in
+AVFrame.data[1], is 1024 bytes long (256 4-byte entries) and is
+formatted the same as in AV_PIX_FMT_RGB32 described above (i.e., it is
+also endian-specific). Note also that the individual RGB32 palette
+components stored in AVFrame.data[1] should be in the range 0..255.
+This is important as many custom PAL8 video codecs that were designed
+to run on the IBM VGA graphics adapter use 6-bit palette components.</p>
+
+<p>@par
+For all the 8 bits per pixel formats, an RGB32 palette is in data[1] like
+for pal8. This palette is filled in automatically by the function
+allocating the picture.</p>
+</div><h2 id='variants' class='variants'>Variants</h2>
+<span id='variant.AV_PIX_FMT_NONE' class='variant'><span id='AV_PIX_FMT_NONE.v' class='invisible'><code>AV_PIX_FMT_NONE</code></span></span><span id='variant.AV_PIX_FMT_YUV420P' class='variant'><span id='AV_PIX_FMT_YUV420P.v' class='invisible'><code>AV_PIX_FMT_YUV420P</code></span></span><span id='variant.AV_PIX_FMT_YUYV422' class='variant'><span id='AV_PIX_FMT_YUYV422.v' class='invisible'><code>AV_PIX_FMT_YUYV422</code></span></span><span id='variant.AV_PIX_FMT_RGB24' class='variant'><span id='AV_PIX_FMT_RGB24.v' class='invisible'><code>AV_PIX_FMT_RGB24</code></span></span><span id='variant.AV_PIX_FMT_BGR24' class='variant'><span id='AV_PIX_FMT_BGR24.v' class='invisible'><code>AV_PIX_FMT_BGR24</code></span></span><span id='variant.AV_PIX_FMT_YUV422P' class='variant'><span id='AV_PIX_FMT_YUV422P.v' class='invisible'><code>AV_PIX_FMT_YUV422P</code></span></span><span id='variant.AV_PIX_FMT_YUV444P' class='variant'><span id='AV_PIX_FMT_YUV444P.v' class='invisible'><code>AV_PIX_FMT_YUV444P</code></span></span><span id='variant.AV_PIX_FMT_YUV410P' class='variant'><span id='AV_PIX_FMT_YUV410P.v' class='invisible'><code>AV_PIX_FMT_YUV410P</code></span></span><span id='variant.AV_PIX_FMT_YUV411P' class='variant'><span id='AV_PIX_FMT_YUV411P.v' class='invisible'><code>AV_PIX_FMT_YUV411P</code></span></span><span id='variant.AV_PIX_FMT_GRAY8' class='variant'><span id='AV_PIX_FMT_GRAY8.v' class='invisible'><code>AV_PIX_FMT_GRAY8</code></span></span><span id='variant.AV_PIX_FMT_MONOWHITE' class='variant'><span id='AV_PIX_FMT_MONOWHITE.v' class='invisible'><code>AV_PIX_FMT_MONOWHITE</code></span></span><span id='variant.AV_PIX_FMT_MONOBLACK' class='variant'><span id='AV_PIX_FMT_MONOBLACK.v' class='invisible'><code>AV_PIX_FMT_MONOBLACK</code></span></span><span id='variant.AV_PIX_FMT_PAL8' class='variant'><span id='AV_PIX_FMT_PAL8.v' class='invisible'><code>AV_PIX_FMT_PAL8</code></span></span><span id='variant.AV_PIX_FMT_YUVJ420P' class='variant'><span id='AV_PIX_FMT_YUVJ420P.v' class='invisible'><code>AV_PIX_FMT_YUVJ420P</code></span></span><span id='variant.AV_PIX_FMT_YUVJ422P' class='variant'><span id='AV_PIX_FMT_YUVJ422P.v' class='invisible'><code>AV_PIX_FMT_YUVJ422P</code></span></span><span id='variant.AV_PIX_FMT_YUVJ444P' class='variant'><span id='AV_PIX_FMT_YUVJ444P.v' class='invisible'><code>AV_PIX_FMT_YUVJ444P</code></span></span><span id='variant.AV_PIX_FMT_XVMC_MPEG2_MC' class='variant'><span id='AV_PIX_FMT_XVMC_MPEG2_MC.v' class='invisible'><code>AV_PIX_FMT_XVMC_MPEG2_MC</code></span></span><span id='variant.AV_PIX_FMT_XVMC_MPEG2_IDCT' class='variant'><span id='AV_PIX_FMT_XVMC_MPEG2_IDCT.v' class='invisible'><code>AV_PIX_FMT_XVMC_MPEG2_IDCT</code></span></span><span id='variant.AV_PIX_FMT_UYVY422' class='variant'><span id='AV_PIX_FMT_UYVY422.v' class='invisible'><code>AV_PIX_FMT_UYVY422</code></span></span><span id='variant.AV_PIX_FMT_UYYVYY411' class='variant'><span id='AV_PIX_FMT_UYYVYY411.v' class='invisible'><code>AV_PIX_FMT_UYYVYY411</code></span></span><span id='variant.AV_PIX_FMT_BGR8' class='variant'><span id='AV_PIX_FMT_BGR8.v' class='invisible'><code>AV_PIX_FMT_BGR8</code></span></span><span id='variant.AV_PIX_FMT_BGR4' class='variant'><span id='AV_PIX_FMT_BGR4.v' class='invisible'><code>AV_PIX_FMT_BGR4</code></span></span><span id='variant.AV_PIX_FMT_BGR4_BYTE' class='variant'><span id='AV_PIX_FMT_BGR4_BYTE.v' class='invisible'><code>AV_PIX_FMT_BGR4_BYTE</code></span></span><span id='variant.AV_PIX_FMT_RGB8' class='variant'><span id='AV_PIX_FMT_RGB8.v' class='invisible'><code>AV_PIX_FMT_RGB8</code></span></span><span id='variant.AV_PIX_FMT_RGB4' class='variant'><span id='AV_PIX_FMT_RGB4.v' class='invisible'><code>AV_PIX_FMT_RGB4</code></span></span><span id='variant.AV_PIX_FMT_RGB4_BYTE' class='variant'><span id='AV_PIX_FMT_RGB4_BYTE.v' class='invisible'><code>AV_PIX_FMT_RGB4_BYTE</code></span></span><span id='variant.AV_PIX_FMT_NV12' class='variant'><span id='AV_PIX_FMT_NV12.v' class='invisible'><code>AV_PIX_FMT_NV12</code></span></span><span id='variant.AV_PIX_FMT_NV21' class='variant'><span id='AV_PIX_FMT_NV21.v' class='invisible'><code>AV_PIX_FMT_NV21</code></span></span><span id='variant.AV_PIX_FMT_ARGB' class='variant'><span id='AV_PIX_FMT_ARGB.v' class='invisible'><code>AV_PIX_FMT_ARGB</code></span></span><span id='variant.AV_PIX_FMT_RGBA' class='variant'><span id='AV_PIX_FMT_RGBA.v' class='invisible'><code>AV_PIX_FMT_RGBA</code></span></span><span id='variant.AV_PIX_FMT_ABGR' class='variant'><span id='AV_PIX_FMT_ABGR.v' class='invisible'><code>AV_PIX_FMT_ABGR</code></span></span><span id='variant.AV_PIX_FMT_BGRA' class='variant'><span id='AV_PIX_FMT_BGRA.v' class='invisible'><code>AV_PIX_FMT_BGRA</code></span></span><span id='variant.AV_PIX_FMT_GRAY16BE' class='variant'><span id='AV_PIX_FMT_GRAY16BE.v' class='invisible'><code>AV_PIX_FMT_GRAY16BE</code></span></span><span id='variant.AV_PIX_FMT_GRAY16LE' class='variant'><span id='AV_PIX_FMT_GRAY16LE.v' class='invisible'><code>AV_PIX_FMT_GRAY16LE</code></span></span><span id='variant.AV_PIX_FMT_YUV440P' class='variant'><span id='AV_PIX_FMT_YUV440P.v' class='invisible'><code>AV_PIX_FMT_YUV440P</code></span></span><span id='variant.AV_PIX_FMT_YUVJ440P' class='variant'><span id='AV_PIX_FMT_YUVJ440P.v' class='invisible'><code>AV_PIX_FMT_YUVJ440P</code></span></span><span id='variant.AV_PIX_FMT_YUVA420P' class='variant'><span id='AV_PIX_FMT_YUVA420P.v' class='invisible'><code>AV_PIX_FMT_YUVA420P</code></span></span><span id='variant.AV_PIX_FMT_VDPAU_H264' class='variant'><span id='AV_PIX_FMT_VDPAU_H264.v' class='invisible'><code>AV_PIX_FMT_VDPAU_H264</code></span></span><span id='variant.AV_PIX_FMT_VDPAU_MPEG1' class='variant'><span id='AV_PIX_FMT_VDPAU_MPEG1.v' class='invisible'><code>AV_PIX_FMT_VDPAU_MPEG1</code></span></span><span id='variant.AV_PIX_FMT_VDPAU_MPEG2' class='variant'><span id='AV_PIX_FMT_VDPAU_MPEG2.v' class='invisible'><code>AV_PIX_FMT_VDPAU_MPEG2</code></span></span><span id='variant.AV_PIX_FMT_VDPAU_WMV3' class='variant'><span id='AV_PIX_FMT_VDPAU_WMV3.v' class='invisible'><code>AV_PIX_FMT_VDPAU_WMV3</code></span></span><span id='variant.AV_PIX_FMT_VDPAU_VC1' class='variant'><span id='AV_PIX_FMT_VDPAU_VC1.v' class='invisible'><code>AV_PIX_FMT_VDPAU_VC1</code></span></span><span id='variant.AV_PIX_FMT_RGB48BE' class='variant'><span id='AV_PIX_FMT_RGB48BE.v' class='invisible'><code>AV_PIX_FMT_RGB48BE</code></span></span><span id='variant.AV_PIX_FMT_RGB48LE' class='variant'><span id='AV_PIX_FMT_RGB48LE.v' class='invisible'><code>AV_PIX_FMT_RGB48LE</code></span></span><span id='variant.AV_PIX_FMT_RGB565BE' class='variant'><span id='AV_PIX_FMT_RGB565BE.v' class='invisible'><code>AV_PIX_FMT_RGB565BE</code></span></span><span id='variant.AV_PIX_FMT_RGB565LE' class='variant'><span id='AV_PIX_FMT_RGB565LE.v' class='invisible'><code>AV_PIX_FMT_RGB565LE</code></span></span><span id='variant.AV_PIX_FMT_RGB555BE' class='variant'><span id='AV_PIX_FMT_RGB555BE.v' class='invisible'><code>AV_PIX_FMT_RGB555BE</code></span></span><span id='variant.AV_PIX_FMT_RGB555LE' class='variant'><span id='AV_PIX_FMT_RGB555LE.v' class='invisible'><code>AV_PIX_FMT_RGB555LE</code></span></span><span id='variant.AV_PIX_FMT_BGR565BE' class='variant'><span id='AV_PIX_FMT_BGR565BE.v' class='invisible'><code>AV_PIX_FMT_BGR565BE</code></span></span><span id='variant.AV_PIX_FMT_BGR565LE' class='variant'><span id='AV_PIX_FMT_BGR565LE.v' class='invisible'><code>AV_PIX_FMT_BGR565LE</code></span></span><span id='variant.AV_PIX_FMT_BGR555BE' class='variant'><span id='AV_PIX_FMT_BGR555BE.v' class='invisible'><code>AV_PIX_FMT_BGR555BE</code></span></span><span id='variant.AV_PIX_FMT_BGR555LE' class='variant'><span id='AV_PIX_FMT_BGR555LE.v' class='invisible'><code>AV_PIX_FMT_BGR555LE</code></span></span><span id='variant.AV_PIX_FMT_VAAPI_MOCO' class='variant'><span id='AV_PIX_FMT_VAAPI_MOCO.v' class='invisible'><code>AV_PIX_FMT_VAAPI_MOCO</code></span></span><span id='variant.AV_PIX_FMT_VAAPI_IDCT' class='variant'><span id='AV_PIX_FMT_VAAPI_IDCT.v' class='invisible'><code>AV_PIX_FMT_VAAPI_IDCT</code></span></span><span id='variant.AV_PIX_FMT_VAAPI_VLD' class='variant'><span id='AV_PIX_FMT_VAAPI_VLD.v' class='invisible'><code>AV_PIX_FMT_VAAPI_VLD</code></span></span><span id='variant.AV_PIX_FMT_YUV420P16LE' class='variant'><span id='AV_PIX_FMT_YUV420P16LE.v' class='invisible'><code>AV_PIX_FMT_YUV420P16LE</code></span></span><span id='variant.AV_PIX_FMT_YUV420P16BE' class='variant'><span id='AV_PIX_FMT_YUV420P16BE.v' class='invisible'><code>AV_PIX_FMT_YUV420P16BE</code></span></span><span id='variant.AV_PIX_FMT_YUV422P16LE' class='variant'><span id='AV_PIX_FMT_YUV422P16LE.v' class='invisible'><code>AV_PIX_FMT_YUV422P16LE</code></span></span><span id='variant.AV_PIX_FMT_YUV422P16BE' class='variant'><span id='AV_PIX_FMT_YUV422P16BE.v' class='invisible'><code>AV_PIX_FMT_YUV422P16BE</code></span></span><span id='variant.AV_PIX_FMT_YUV444P16LE' class='variant'><span id='AV_PIX_FMT_YUV444P16LE.v' class='invisible'><code>AV_PIX_FMT_YUV444P16LE</code></span></span><span id='variant.AV_PIX_FMT_YUV444P16BE' class='variant'><span id='AV_PIX_FMT_YUV444P16BE.v' class='invisible'><code>AV_PIX_FMT_YUV444P16BE</code></span></span><span id='variant.AV_PIX_FMT_VDPAU_MPEG4' class='variant'><span id='AV_PIX_FMT_VDPAU_MPEG4.v' class='invisible'><code>AV_PIX_FMT_VDPAU_MPEG4</code></span></span><span id='variant.AV_PIX_FMT_DXVA2_VLD' class='variant'><span id='AV_PIX_FMT_DXVA2_VLD.v' class='invisible'><code>AV_PIX_FMT_DXVA2_VLD</code></span></span><span id='variant.AV_PIX_FMT_RGB444LE' class='variant'><span id='AV_PIX_FMT_RGB444LE.v' class='invisible'><code>AV_PIX_FMT_RGB444LE</code></span></span><span id='variant.AV_PIX_FMT_RGB444BE' class='variant'><span id='AV_PIX_FMT_RGB444BE.v' class='invisible'><code>AV_PIX_FMT_RGB444BE</code></span></span><span id='variant.AV_PIX_FMT_BGR444LE' class='variant'><span id='AV_PIX_FMT_BGR444LE.v' class='invisible'><code>AV_PIX_FMT_BGR444LE</code></span></span><span id='variant.AV_PIX_FMT_BGR444BE' class='variant'><span id='AV_PIX_FMT_BGR444BE.v' class='invisible'><code>AV_PIX_FMT_BGR444BE</code></span></span><span id='variant.AV_PIX_FMT_YA8' class='variant'><span id='AV_PIX_FMT_YA8.v' class='invisible'><code>AV_PIX_FMT_YA8</code></span></span><span id='variant.AV_PIX_FMT_BGR48BE' class='variant'><span id='AV_PIX_FMT_BGR48BE.v' class='invisible'><code>AV_PIX_FMT_BGR48BE</code></span></span><span id='variant.AV_PIX_FMT_BGR48LE' class='variant'><span id='AV_PIX_FMT_BGR48LE.v' class='invisible'><code>AV_PIX_FMT_BGR48LE</code></span></span><span id='variant.AV_PIX_FMT_YUV420P9BE' class='variant'><span id='AV_PIX_FMT_YUV420P9BE.v' class='invisible'><code>AV_PIX_FMT_YUV420P9BE</code></span></span><span id='variant.AV_PIX_FMT_YUV420P9LE' class='variant'><span id='AV_PIX_FMT_YUV420P9LE.v' class='invisible'><code>AV_PIX_FMT_YUV420P9LE</code></span></span><span id='variant.AV_PIX_FMT_YUV420P10BE' class='variant'><span id='AV_PIX_FMT_YUV420P10BE.v' class='invisible'><code>AV_PIX_FMT_YUV420P10BE</code></span></span><span id='variant.AV_PIX_FMT_YUV420P10LE' class='variant'><span id='AV_PIX_FMT_YUV420P10LE.v' class='invisible'><code>AV_PIX_FMT_YUV420P10LE</code></span></span><span id='variant.AV_PIX_FMT_YUV422P10BE' class='variant'><span id='AV_PIX_FMT_YUV422P10BE.v' class='invisible'><code>AV_PIX_FMT_YUV422P10BE</code></span></span><span id='variant.AV_PIX_FMT_YUV422P10LE' class='variant'><span id='AV_PIX_FMT_YUV422P10LE.v' class='invisible'><code>AV_PIX_FMT_YUV422P10LE</code></span></span><span id='variant.AV_PIX_FMT_YUV444P9BE' class='variant'><span id='AV_PIX_FMT_YUV444P9BE.v' class='invisible'><code>AV_PIX_FMT_YUV444P9BE</code></span></span><span id='variant.AV_PIX_FMT_YUV444P9LE' class='variant'><span id='AV_PIX_FMT_YUV444P9LE.v' class='invisible'><code>AV_PIX_FMT_YUV444P9LE</code></span></span><span id='variant.AV_PIX_FMT_YUV444P10BE' class='variant'><span id='AV_PIX_FMT_YUV444P10BE.v' class='invisible'><code>AV_PIX_FMT_YUV444P10BE</code></span></span><span id='variant.AV_PIX_FMT_YUV444P10LE' class='variant'><span id='AV_PIX_FMT_YUV444P10LE.v' class='invisible'><code>AV_PIX_FMT_YUV444P10LE</code></span></span><span id='variant.AV_PIX_FMT_YUV422P9BE' class='variant'><span id='AV_PIX_FMT_YUV422P9BE.v' class='invisible'><code>AV_PIX_FMT_YUV422P9BE</code></span></span><span id='variant.AV_PIX_FMT_YUV422P9LE' class='variant'><span id='AV_PIX_FMT_YUV422P9LE.v' class='invisible'><code>AV_PIX_FMT_YUV422P9LE</code></span></span><span id='variant.AV_PIX_FMT_VDA_VLD' class='variant'><span id='AV_PIX_FMT_VDA_VLD.v' class='invisible'><code>AV_PIX_FMT_VDA_VLD</code></span></span><span id='variant.AV_PIX_FMT_GBRP' class='variant'><span id='AV_PIX_FMT_GBRP.v' class='invisible'><code>AV_PIX_FMT_GBRP</code></span></span><span id='variant.AV_PIX_FMT_GBRP9BE' class='variant'><span id='AV_PIX_FMT_GBRP9BE.v' class='invisible'><code>AV_PIX_FMT_GBRP9BE</code></span></span><span id='variant.AV_PIX_FMT_GBRP9LE' class='variant'><span id='AV_PIX_FMT_GBRP9LE.v' class='invisible'><code>AV_PIX_FMT_GBRP9LE</code></span></span><span id='variant.AV_PIX_FMT_GBRP10BE' class='variant'><span id='AV_PIX_FMT_GBRP10BE.v' class='invisible'><code>AV_PIX_FMT_GBRP10BE</code></span></span><span id='variant.AV_PIX_FMT_GBRP10LE' class='variant'><span id='AV_PIX_FMT_GBRP10LE.v' class='invisible'><code>AV_PIX_FMT_GBRP10LE</code></span></span><span id='variant.AV_PIX_FMT_GBRP16BE' class='variant'><span id='AV_PIX_FMT_GBRP16BE.v' class='invisible'><code>AV_PIX_FMT_GBRP16BE</code></span></span><span id='variant.AV_PIX_FMT_GBRP16LE' class='variant'><span id='AV_PIX_FMT_GBRP16LE.v' class='invisible'><code>AV_PIX_FMT_GBRP16LE</code></span></span><span id='variant.AV_PIX_FMT_YUVA422P' class='variant'><span id='AV_PIX_FMT_YUVA422P.v' class='invisible'><code>AV_PIX_FMT_YUVA422P</code></span></span><span id='variant.AV_PIX_FMT_YUVA444P' class='variant'><span id='AV_PIX_FMT_YUVA444P.v' class='invisible'><code>AV_PIX_FMT_YUVA444P</code></span></span><span id='variant.AV_PIX_FMT_YUVA420P9BE' class='variant'><span id='AV_PIX_FMT_YUVA420P9BE.v' class='invisible'><code>AV_PIX_FMT_YUVA420P9BE</code></span></span><span id='variant.AV_PIX_FMT_YUVA420P9LE' class='variant'><span id='AV_PIX_FMT_YUVA420P9LE.v' class='invisible'><code>AV_PIX_FMT_YUVA420P9LE</code></span></span><span id='variant.AV_PIX_FMT_YUVA422P9BE' class='variant'><span id='AV_PIX_FMT_YUVA422P9BE.v' class='invisible'><code>AV_PIX_FMT_YUVA422P9BE</code></span></span><span id='variant.AV_PIX_FMT_YUVA422P9LE' class='variant'><span id='AV_PIX_FMT_YUVA422P9LE.v' class='invisible'><code>AV_PIX_FMT_YUVA422P9LE</code></span></span><span id='variant.AV_PIX_FMT_YUVA444P9BE' class='variant'><span id='AV_PIX_FMT_YUVA444P9BE.v' class='invisible'><code>AV_PIX_FMT_YUVA444P9BE</code></span></span><span id='variant.AV_PIX_FMT_YUVA444P9LE' class='variant'><span id='AV_PIX_FMT_YUVA444P9LE.v' class='invisible'><code>AV_PIX_FMT_YUVA444P9LE</code></span></span><span id='variant.AV_PIX_FMT_YUVA420P10BE' class='variant'><span id='AV_PIX_FMT_YUVA420P10BE.v' class='invisible'><code>AV_PIX_FMT_YUVA420P10BE</code></span></span><span id='variant.AV_PIX_FMT_YUVA420P10LE' class='variant'><span id='AV_PIX_FMT_YUVA420P10LE.v' class='invisible'><code>AV_PIX_FMT_YUVA420P10LE</code></span></span><span id='variant.AV_PIX_FMT_YUVA422P10BE' class='variant'><span id='AV_PIX_FMT_YUVA422P10BE.v' class='invisible'><code>AV_PIX_FMT_YUVA422P10BE</code></span></span><span id='variant.AV_PIX_FMT_YUVA422P10LE' class='variant'><span id='AV_PIX_FMT_YUVA422P10LE.v' class='invisible'><code>AV_PIX_FMT_YUVA422P10LE</code></span></span><span id='variant.AV_PIX_FMT_YUVA444P10BE' class='variant'><span id='AV_PIX_FMT_YUVA444P10BE.v' class='invisible'><code>AV_PIX_FMT_YUVA444P10BE</code></span></span><span id='variant.AV_PIX_FMT_YUVA444P10LE' class='variant'><span id='AV_PIX_FMT_YUVA444P10LE.v' class='invisible'><code>AV_PIX_FMT_YUVA444P10LE</code></span></span><span id='variant.AV_PIX_FMT_YUVA420P16BE' class='variant'><span id='AV_PIX_FMT_YUVA420P16BE.v' class='invisible'><code>AV_PIX_FMT_YUVA420P16BE</code></span></span><span id='variant.AV_PIX_FMT_YUVA420P16LE' class='variant'><span id='AV_PIX_FMT_YUVA420P16LE.v' class='invisible'><code>AV_PIX_FMT_YUVA420P16LE</code></span></span><span id='variant.AV_PIX_FMT_YUVA422P16BE' class='variant'><span id='AV_PIX_FMT_YUVA422P16BE.v' class='invisible'><code>AV_PIX_FMT_YUVA422P16BE</code></span></span><span id='variant.AV_PIX_FMT_YUVA422P16LE' class='variant'><span id='AV_PIX_FMT_YUVA422P16LE.v' class='invisible'><code>AV_PIX_FMT_YUVA422P16LE</code></span></span><span id='variant.AV_PIX_FMT_YUVA444P16BE' class='variant'><span id='AV_PIX_FMT_YUVA444P16BE.v' class='invisible'><code>AV_PIX_FMT_YUVA444P16BE</code></span></span><span id='variant.AV_PIX_FMT_YUVA444P16LE' class='variant'><span id='AV_PIX_FMT_YUVA444P16LE.v' class='invisible'><code>AV_PIX_FMT_YUVA444P16LE</code></span></span><span id='variant.AV_PIX_FMT_VDPAU' class='variant'><span id='AV_PIX_FMT_VDPAU.v' class='invisible'><code>AV_PIX_FMT_VDPAU</code></span></span><span id='variant.AV_PIX_FMT_XYZ12LE' class='variant'><span id='AV_PIX_FMT_XYZ12LE.v' class='invisible'><code>AV_PIX_FMT_XYZ12LE</code></span></span><span id='variant.AV_PIX_FMT_XYZ12BE' class='variant'><span id='AV_PIX_FMT_XYZ12BE.v' class='invisible'><code>AV_PIX_FMT_XYZ12BE</code></span></span><span id='variant.AV_PIX_FMT_NV16' class='variant'><span id='AV_PIX_FMT_NV16.v' class='invisible'><code>AV_PIX_FMT_NV16</code></span></span><span id='variant.AV_PIX_FMT_NV20LE' class='variant'><span id='AV_PIX_FMT_NV20LE.v' class='invisible'><code>AV_PIX_FMT_NV20LE</code></span></span><span id='variant.AV_PIX_FMT_NV20BE' class='variant'><span id='AV_PIX_FMT_NV20BE.v' class='invisible'><code>AV_PIX_FMT_NV20BE</code></span></span><span id='variant.AV_PIX_FMT_RGBA64BE' class='variant'><span id='AV_PIX_FMT_RGBA64BE.v' class='invisible'><code>AV_PIX_FMT_RGBA64BE</code></span></span><span id='variant.AV_PIX_FMT_RGBA64LE' class='variant'><span id='AV_PIX_FMT_RGBA64LE.v' class='invisible'><code>AV_PIX_FMT_RGBA64LE</code></span></span><span id='variant.AV_PIX_FMT_BGRA64BE' class='variant'><span id='AV_PIX_FMT_BGRA64BE.v' class='invisible'><code>AV_PIX_FMT_BGRA64BE</code></span></span><span id='variant.AV_PIX_FMT_BGRA64LE' class='variant'><span id='AV_PIX_FMT_BGRA64LE.v' class='invisible'><code>AV_PIX_FMT_BGRA64LE</code></span></span><span id='variant.AV_PIX_FMT_YVYU422' class='variant'><span id='AV_PIX_FMT_YVYU422.v' class='invisible'><code>AV_PIX_FMT_YVYU422</code></span></span><span id='variant.AV_PIX_FMT_VDA' class='variant'><span id='AV_PIX_FMT_VDA.v' class='invisible'><code>AV_PIX_FMT_VDA</code></span></span><span id='variant.AV_PIX_FMT_YA16BE' class='variant'><span id='AV_PIX_FMT_YA16BE.v' class='invisible'><code>AV_PIX_FMT_YA16BE</code></span></span><span id='variant.AV_PIX_FMT_YA16LE' class='variant'><span id='AV_PIX_FMT_YA16LE.v' class='invisible'><code>AV_PIX_FMT_YA16LE</code></span></span><span id='variant.AV_PIX_FMT_GBRAP' class='variant'><span id='AV_PIX_FMT_GBRAP.v' class='invisible'><code>AV_PIX_FMT_GBRAP</code></span></span><span id='variant.AV_PIX_FMT_GBRAP16BE' class='variant'><span id='AV_PIX_FMT_GBRAP16BE.v' class='invisible'><code>AV_PIX_FMT_GBRAP16BE</code></span></span><span id='variant.AV_PIX_FMT_GBRAP16LE' class='variant'><span id='AV_PIX_FMT_GBRAP16LE.v' class='invisible'><code>AV_PIX_FMT_GBRAP16LE</code></span></span><span id='variant.AV_PIX_FMT_QSV' class='variant'><span id='AV_PIX_FMT_QSV.v' class='invisible'><code>AV_PIX_FMT_QSV</code></span></span><span id='variant.AV_PIX_FMT_MMAL' class='variant'><span id='AV_PIX_FMT_MMAL.v' class='invisible'><code>AV_PIX_FMT_MMAL</code></span></span><span id='variant.AV_PIX_FMT_D3D11VA_VLD' class='variant'><span id='AV_PIX_FMT_D3D11VA_VLD.v' class='invisible'><code>AV_PIX_FMT_D3D11VA_VLD</code></span></span><span id='variant.AV_PIX_FMT_CUDA' class='variant'><span id='AV_PIX_FMT_CUDA.v' class='invisible'><code>AV_PIX_FMT_CUDA</code></span></span><span id='variant.AV_PIX_FMT_0RGB' class='variant'><span id='AV_PIX_FMT_0RGB.v' class='invisible'><code>AV_PIX_FMT_0RGB</code></span></span><span id='variant.AV_PIX_FMT_RGB0' class='variant'><span id='AV_PIX_FMT_RGB0.v' class='invisible'><code>AV_PIX_FMT_RGB0</code></span></span><span id='variant.AV_PIX_FMT_0BGR' class='variant'><span id='AV_PIX_FMT_0BGR.v' class='invisible'><code>AV_PIX_FMT_0BGR</code></span></span><span id='variant.AV_PIX_FMT_BGR0' class='variant'><span id='AV_PIX_FMT_BGR0.v' class='invisible'><code>AV_PIX_FMT_BGR0</code></span></span><span id='variant.AV_PIX_FMT_YUV420P12BE' class='variant'><span id='AV_PIX_FMT_YUV420P12BE.v' class='invisible'><code>AV_PIX_FMT_YUV420P12BE</code></span></span><span id='variant.AV_PIX_FMT_YUV420P12LE' class='variant'><span id='AV_PIX_FMT_YUV420P12LE.v' class='invisible'><code>AV_PIX_FMT_YUV420P12LE</code></span></span><span id='variant.AV_PIX_FMT_YUV420P14BE' class='variant'><span id='AV_PIX_FMT_YUV420P14BE.v' class='invisible'><code>AV_PIX_FMT_YUV420P14BE</code></span></span><span id='variant.AV_PIX_FMT_YUV420P14LE' class='variant'><span id='AV_PIX_FMT_YUV420P14LE.v' class='invisible'><code>AV_PIX_FMT_YUV420P14LE</code></span></span><span id='variant.AV_PIX_FMT_YUV422P12BE' class='variant'><span id='AV_PIX_FMT_YUV422P12BE.v' class='invisible'><code>AV_PIX_FMT_YUV422P12BE</code></span></span><span id='variant.AV_PIX_FMT_YUV422P12LE' class='variant'><span id='AV_PIX_FMT_YUV422P12LE.v' class='invisible'><code>AV_PIX_FMT_YUV422P12LE</code></span></span><span id='variant.AV_PIX_FMT_YUV422P14BE' class='variant'><span id='AV_PIX_FMT_YUV422P14BE.v' class='invisible'><code>AV_PIX_FMT_YUV422P14BE</code></span></span><span id='variant.AV_PIX_FMT_YUV422P14LE' class='variant'><span id='AV_PIX_FMT_YUV422P14LE.v' class='invisible'><code>AV_PIX_FMT_YUV422P14LE</code></span></span><span id='variant.AV_PIX_FMT_YUV444P12BE' class='variant'><span id='AV_PIX_FMT_YUV444P12BE.v' class='invisible'><code>AV_PIX_FMT_YUV444P12BE</code></span></span><span id='variant.AV_PIX_FMT_YUV444P12LE' class='variant'><span id='AV_PIX_FMT_YUV444P12LE.v' class='invisible'><code>AV_PIX_FMT_YUV444P12LE</code></span></span><span id='variant.AV_PIX_FMT_YUV444P14BE' class='variant'><span id='AV_PIX_FMT_YUV444P14BE.v' class='invisible'><code>AV_PIX_FMT_YUV444P14BE</code></span></span><span id='variant.AV_PIX_FMT_YUV444P14LE' class='variant'><span id='AV_PIX_FMT_YUV444P14LE.v' class='invisible'><code>AV_PIX_FMT_YUV444P14LE</code></span></span><span id='variant.AV_PIX_FMT_GBRP12BE' class='variant'><span id='AV_PIX_FMT_GBRP12BE.v' class='invisible'><code>AV_PIX_FMT_GBRP12BE</code></span></span><span id='variant.AV_PIX_FMT_GBRP12LE' class='variant'><span id='AV_PIX_FMT_GBRP12LE.v' class='invisible'><code>AV_PIX_FMT_GBRP12LE</code></span></span><span id='variant.AV_PIX_FMT_GBRP14BE' class='variant'><span id='AV_PIX_FMT_GBRP14BE.v' class='invisible'><code>AV_PIX_FMT_GBRP14BE</code></span></span><span id='variant.AV_PIX_FMT_GBRP14LE' class='variant'><span id='AV_PIX_FMT_GBRP14LE.v' class='invisible'><code>AV_PIX_FMT_GBRP14LE</code></span></span><span id='variant.AV_PIX_FMT_YUVJ411P' class='variant'><span id='AV_PIX_FMT_YUVJ411P.v' class='invisible'><code>AV_PIX_FMT_YUVJ411P</code></span></span><span id='variant.AV_PIX_FMT_BAYER_BGGR8' class='variant'><span id='AV_PIX_FMT_BAYER_BGGR8.v' class='invisible'><code>AV_PIX_FMT_BAYER_BGGR8</code></span></span><span id='variant.AV_PIX_FMT_BAYER_RGGB8' class='variant'><span id='AV_PIX_FMT_BAYER_RGGB8.v' class='invisible'><code>AV_PIX_FMT_BAYER_RGGB8</code></span></span><span id='variant.AV_PIX_FMT_BAYER_GBRG8' class='variant'><span id='AV_PIX_FMT_BAYER_GBRG8.v' class='invisible'><code>AV_PIX_FMT_BAYER_GBRG8</code></span></span><span id='variant.AV_PIX_FMT_BAYER_GRBG8' class='variant'><span id='AV_PIX_FMT_BAYER_GRBG8.v' class='invisible'><code>AV_PIX_FMT_BAYER_GRBG8</code></span></span><span id='variant.AV_PIX_FMT_BAYER_BGGR16LE' class='variant'><span id='AV_PIX_FMT_BAYER_BGGR16LE.v' class='invisible'><code>AV_PIX_FMT_BAYER_BGGR16LE</code></span></span><span id='variant.AV_PIX_FMT_BAYER_BGGR16BE' class='variant'><span id='AV_PIX_FMT_BAYER_BGGR16BE.v' class='invisible'><code>AV_PIX_FMT_BAYER_BGGR16BE</code></span></span><span id='variant.AV_PIX_FMT_BAYER_RGGB16LE' class='variant'><span id='AV_PIX_FMT_BAYER_RGGB16LE.v' class='invisible'><code>AV_PIX_FMT_BAYER_RGGB16LE</code></span></span><span id='variant.AV_PIX_FMT_BAYER_RGGB16BE' class='variant'><span id='AV_PIX_FMT_BAYER_RGGB16BE.v' class='invisible'><code>AV_PIX_FMT_BAYER_RGGB16BE</code></span></span><span id='variant.AV_PIX_FMT_BAYER_GBRG16LE' class='variant'><span id='AV_PIX_FMT_BAYER_GBRG16LE.v' class='invisible'><code>AV_PIX_FMT_BAYER_GBRG16LE</code></span></span><span id='variant.AV_PIX_FMT_BAYER_GBRG16BE' class='variant'><span id='AV_PIX_FMT_BAYER_GBRG16BE.v' class='invisible'><code>AV_PIX_FMT_BAYER_GBRG16BE</code></span></span><span id='variant.AV_PIX_FMT_BAYER_GRBG16LE' class='variant'><span id='AV_PIX_FMT_BAYER_GRBG16LE.v' class='invisible'><code>AV_PIX_FMT_BAYER_GRBG16LE</code></span></span><span id='variant.AV_PIX_FMT_BAYER_GRBG16BE' class='variant'><span id='AV_PIX_FMT_BAYER_GRBG16BE.v' class='invisible'><code>AV_PIX_FMT_BAYER_GRBG16BE</code></span></span><span id='variant.AV_PIX_FMT_YUV440P10LE' class='variant'><span id='AV_PIX_FMT_YUV440P10LE.v' class='invisible'><code>AV_PIX_FMT_YUV440P10LE</code></span></span><span id='variant.AV_PIX_FMT_YUV440P10BE' class='variant'><span id='AV_PIX_FMT_YUV440P10BE.v' class='invisible'><code>AV_PIX_FMT_YUV440P10BE</code></span></span><span id='variant.AV_PIX_FMT_YUV440P12LE' class='variant'><span id='AV_PIX_FMT_YUV440P12LE.v' class='invisible'><code>AV_PIX_FMT_YUV440P12LE</code></span></span><span id='variant.AV_PIX_FMT_YUV440P12BE' class='variant'><span id='AV_PIX_FMT_YUV440P12BE.v' class='invisible'><code>AV_PIX_FMT_YUV440P12BE</code></span></span><span id='variant.AV_PIX_FMT_AYUV64LE' class='variant'><span id='AV_PIX_FMT_AYUV64LE.v' class='invisible'><code>AV_PIX_FMT_AYUV64LE</code></span></span><span id='variant.AV_PIX_FMT_AYUV64BE' class='variant'><span id='AV_PIX_FMT_AYUV64BE.v' class='invisible'><code>AV_PIX_FMT_AYUV64BE</code></span></span><span id='variant.AV_PIX_FMT_VIDEOTOOLBOX' class='variant'><span id='AV_PIX_FMT_VIDEOTOOLBOX.v' class='invisible'><code>AV_PIX_FMT_VIDEOTOOLBOX</code></span></span><span id='variant.AV_PIX_FMT_P010LE' class='variant'><span id='AV_PIX_FMT_P010LE.v' class='invisible'><code>AV_PIX_FMT_P010LE</code></span></span><span id='variant.AV_PIX_FMT_P010BE' class='variant'><span id='AV_PIX_FMT_P010BE.v' class='invisible'><code>AV_PIX_FMT_P010BE</code></span></span><span id='variant.AV_PIX_FMT_GBRAP12BE' class='variant'><span id='AV_PIX_FMT_GBRAP12BE.v' class='invisible'><code>AV_PIX_FMT_GBRAP12BE</code></span></span><span id='variant.AV_PIX_FMT_GBRAP12LE' class='variant'><span id='AV_PIX_FMT_GBRAP12LE.v' class='invisible'><code>AV_PIX_FMT_GBRAP12LE</code></span></span><span id='variant.AV_PIX_FMT_GBRAP10BE' class='variant'><span id='AV_PIX_FMT_GBRAP10BE.v' class='invisible'><code>AV_PIX_FMT_GBRAP10BE</code></span></span><span id='variant.AV_PIX_FMT_GBRAP10LE' class='variant'><span id='AV_PIX_FMT_GBRAP10LE.v' class='invisible'><code>AV_PIX_FMT_GBRAP10LE</code></span></span><span id='variant.AV_PIX_FMT_MEDIACODEC' class='variant'><span id='AV_PIX_FMT_MEDIACODEC.v' class='invisible'><code>AV_PIX_FMT_MEDIACODEC</code></span></span><span id='variant.AV_PIX_FMT_GRAY12BE' class='variant'><span id='AV_PIX_FMT_GRAY12BE.v' class='invisible'><code>AV_PIX_FMT_GRAY12BE</code></span></span><span id='variant.AV_PIX_FMT_GRAY12LE' class='variant'><span id='AV_PIX_FMT_GRAY12LE.v' class='invisible'><code>AV_PIX_FMT_GRAY12LE</code></span></span><span id='variant.AV_PIX_FMT_GRAY10BE' class='variant'><span id='AV_PIX_FMT_GRAY10BE.v' class='invisible'><code>AV_PIX_FMT_GRAY10BE</code></span></span><span id='variant.AV_PIX_FMT_GRAY10LE' class='variant'><span id='AV_PIX_FMT_GRAY10LE.v' class='invisible'><code>AV_PIX_FMT_GRAY10LE</code></span></span><span id='variant.AV_PIX_FMT_P016LE' class='variant'><span id='AV_PIX_FMT_P016LE.v' class='invisible'><code>AV_PIX_FMT_P016LE</code></span></span><span id='variant.AV_PIX_FMT_P016BE' class='variant'><span id='AV_PIX_FMT_P016BE.v' class='invisible'><code>AV_PIX_FMT_P016BE</code></span></span><span id='variant.AV_PIX_FMT_NB' class='variant'><span id='AV_PIX_FMT_NB.v' class='invisible'><code>AV_PIX_FMT_NB</code></span></span><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><span class='in-band'><code>impl <a class="trait" href="https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html" title="trait core::fmt::Debug">Debug</a> for <a class="enum" href="../av_sys/enum.AVPixelFormat.html" title="enum av_sys::AVPixelFormat">AVPixelFormat</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/av_sys/home/travis/build/panicbit/rust-av/target/debug/build/av_sys-5aff961289ea4337/out/ffi.rs.html#670' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.fmt' class="method"><span id='fmt.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html#tymethod.fmt' class='fnname'>fmt</a>(&amp;self, __arg_0: &amp;mut <a class="struct" href="https://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html" title="struct core::fmt::Formatter">Formatter</a>) -&gt; <a class="type" href="https://doc.rust-lang.org/nightly/core/fmt/type.Result.html" title="type core::fmt::Result">Result</a></code></span></h4>
+<div class='docblock'><p>Formats the value using the given formatter.</p>
+</div></div><h3 class='impl'><span class='in-band'><code>impl <a class="trait" href="https://doc.rust-lang.org/nightly/core/marker/trait.Copy.html" title="trait core::marker::Copy">Copy</a> for <a class="enum" href="../av_sys/enum.AVPixelFormat.html" title="enum av_sys::AVPixelFormat">AVPixelFormat</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/av_sys/home/travis/build/panicbit/rust-av/target/debug/build/av_sys-5aff961289ea4337/out/ffi.rs.html#670' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'></div><h3 class='impl'><span class='in-band'><code>impl <a class="trait" href="https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html" title="trait core::clone::Clone">Clone</a> for <a class="enum" href="../av_sys/enum.AVPixelFormat.html" title="enum av_sys::AVPixelFormat">AVPixelFormat</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/av_sys/home/travis/build/panicbit/rust-av/target/debug/build/av_sys-5aff961289ea4337/out/ffi.rs.html#670' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.clone' class="method"><span id='clone.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#tymethod.clone' class='fnname'>clone</a>(&amp;self) -&gt; <a class="enum" href="../av_sys/enum.AVPixelFormat.html" title="enum av_sys::AVPixelFormat">AVPixelFormat</a></code></span></h4>
+<div class='docblock'><p>Returns a copy of the value. <a href="https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#tymethod.clone">Read more</a></p>
+</div><h4 id='method.clone_from' class="method"><span id='clone_from.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#method.clone_from' class='fnname'>clone_from</a>(&amp;mut self, source: &amp;Self)</code><div class='since' title='Stable since Rust version 1.0.0'>1.0.0</div></span></h4>
+<div class='docblock'><p>Performs copy-assignment from <code>source</code>. <a href="https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#method.clone_from">Read more</a></p>
+</div></div><h3 class='impl'><span class='in-band'><code>impl <a class="trait" href="https://doc.rust-lang.org/nightly/core/cmp/trait.PartialEq.html" title="trait core::cmp::PartialEq">PartialEq</a> for <a class="enum" href="../av_sys/enum.AVPixelFormat.html" title="enum av_sys::AVPixelFormat">AVPixelFormat</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/av_sys/home/travis/build/panicbit/rust-av/target/debug/build/av_sys-5aff961289ea4337/out/ffi.rs.html#670' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.eq' class="method"><span id='eq.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/cmp/trait.PartialEq.html#tymethod.eq' class='fnname'>eq</a>(&amp;self, __arg_0: &amp;<a class="enum" href="../av_sys/enum.AVPixelFormat.html" title="enum av_sys::AVPixelFormat">AVPixelFormat</a>) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.bool.html">bool</a></code></span></h4>
+<div class='docblock'><p>This method tests for <code>self</code> and <code>other</code> values to be equal, and is used by <code>==</code>. <a href="https://doc.rust-lang.org/nightly/core/cmp/trait.PartialEq.html#tymethod.eq">Read more</a></p>
+</div><h4 id='method.ne' class="method"><span id='ne.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/cmp/trait.PartialEq.html#method.ne' class='fnname'>ne</a>(&amp;self, other: &amp;Rhs) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.bool.html">bool</a></code><div class='since' title='Stable since Rust version 1.0.0'>1.0.0</div></span></h4>
+<div class='docblock'><p>This method tests for <code>!=</code>.</p>
+</div></div><h3 class='impl'><span class='in-band'><code>impl <a class="trait" href="https://doc.rust-lang.org/nightly/core/cmp/trait.Eq.html" title="trait core::cmp::Eq">Eq</a> for <a class="enum" href="../av_sys/enum.AVPixelFormat.html" title="enum av_sys::AVPixelFormat">AVPixelFormat</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/av_sys/home/travis/build/panicbit/rust-av/target/debug/build/av_sys-5aff961289ea4337/out/ffi.rs.html#670' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'></div><h3 class='impl'><span class='in-band'><code>impl <a class="trait" href="https://doc.rust-lang.org/nightly/core/hash/trait.Hash.html" title="trait core::hash::Hash">Hash</a> for <a class="enum" href="../av_sys/enum.AVPixelFormat.html" title="enum av_sys::AVPixelFormat">AVPixelFormat</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/av_sys/home/travis/build/panicbit/rust-av/target/debug/build/av_sys-5aff961289ea4337/out/ffi.rs.html#670' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.hash' class="method"><span id='hash.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/hash/trait.Hash.html#tymethod.hash' class='fnname'>hash</a>&lt;__H:&nbsp;<a class="trait" href="https://doc.rust-lang.org/nightly/core/hash/trait.Hasher.html" title="trait core::hash::Hasher">Hasher</a>&gt;(&amp;self, __arg_0: &amp;mut __H)</code></span></h4>
+<div class='docblock'><p>Feeds this value into the given [<code>Hasher</code>]. <a href="https://doc.rust-lang.org/nightly/core/hash/trait.Hash.html#tymethod.hash">Read more</a></p>
+</div><h4 id='method.hash_slice' class="method"><span id='hash_slice.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/hash/trait.Hash.html#method.hash_slice' class='fnname'>hash_slice</a>&lt;H&gt;(data: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.slice.html">&amp;[Self]</a>, state: &amp;mut H) <span class="where fmt-newline">where<br>&nbsp;&nbsp;&nbsp;&nbsp;H: <a class="trait" href="https://doc.rust-lang.org/nightly/core/hash/trait.Hasher.html" title="trait core::hash::Hasher">Hasher</a>,&nbsp;</span></code><div class='since' title='Stable since Rust version 1.3.0'>1.3.0</div></span></h4>
+<div class='docblock'><p>Feeds a slice of this type into the given [<code>Hasher</code>]. <a href="https://doc.rust-lang.org/nightly/core/hash/trait.Hash.html#method.hash_slice">Read more</a></p>
+</div></div></section>
+    <section id='search' class="content hidden"></section>
+
+    <section class="footer"></section>
+
+    <aside id="help" class="hidden">
+        <div>
+            <h1 class="hidden">Help</h1>
+
+            <div class="shortcuts">
+                <h2>Keyboard Shortcuts</h2>
+
+                <dl>
+                    <dt>?</dt>
+                    <dd>Show this help dialog</dd>
+                    <dt>S</dt>
+                    <dd>Focus the search field</dd>
+                    <dt>&larrb;</dt>
+                    <dd>Move up in search results</dd>
+                    <dt>&rarrb;</dt>
+                    <dd>Move down in search results</dd>
+                    <dt>&#9166;</dt>
+                    <dd>Go to active search result</dd>
+                    <dt>+</dt>
+                    <dd>Collapse/expand all sections</dd>
+                </dl>
+            </div>
+
+            <div class="infos">
+                <h2>Search Tricks</h2>
+
+                <p>
+                    Prefix searches with a type followed by a colon (e.g.
+                    <code>fn:</code>) to restrict the search to a given type.
+                </p>
+
+                <p>
+                    Accepted types are: <code>fn</code>, <code>mod</code>,
+                    <code>struct</code>, <code>enum</code>,
+                    <code>trait</code>, <code>type</code>, <code>macro</code>,
+                    and <code>const</code>.
+                </p>
+
+                <p>
+                    Search functions by type signature (e.g.
+                    <code>vec -> usize</code> or <code>* -> vec</code>)
+                </p>
+            </div>
+        </div>
+    </aside>
+
+    
+
+    <script>
+        window.rootPath = "../";
+        window.currentCrate = "av_sys";
+    </script>
+    <script src="../jquery.js"></script>
+    <script src="../main.js"></script>
+    <script defer src="../search-index.js"></script>
+</body>
+</html>

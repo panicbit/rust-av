@@ -1,0 +1,1 @@
+initSidebarItems({"constant":[["MAX_PLANES",""]],"struct":[["Decoder",""],["Encoder",""],["EncoderBuilder","TODO: Check for invalid value ranges"],["Frame",""],["Frames",""],["Packets",""],["Scaler","A context for scaling/converting video frames."]]});

@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <meta name="description" content="API documentation for the Rust `AVIOContext` struct in crate `av_sys`.">
+    <meta name="keywords" content="rust, rustlang, rust-lang, AVIOContext">
+
+    <title>av_sys::AVIOContext - Rust</title>
+
+    <link rel="stylesheet" type="text/css" href="../normalize.css">
+    <link rel="stylesheet" type="text/css" href="../rustdoc.css">
+    <link rel="stylesheet" type="text/css" href="../main.css">
+    
+
+    
+    
+</head>
+<body class="rustdoc struct">
+    <!--[if lte IE 8]>
+    <div class="warning">
+        This old browser is unsupported and will most likely display funky
+        things.
+    </div>
+    <![endif]-->
+
+    
+
+    <nav class="sidebar">
+        
+        <p class='location'>Struct AVIOContext</p><div class="block items"><ul><li><a href="#fields">Fields</a></li><li><a href="#implementations">Trait Implementations</a></li></ul></div><p class='location'><a href='index.html'>av_sys</a></p><script>window.sidebarCurrent = {name: 'AVIOContext', ty: 'struct', relpath: ''};</script><script defer src="sidebar-items.js"></script>
+    </nav>
+
+    <nav class="sub">
+        <form class="search-form js-only">
+            <div class="search-container">
+                <input class="search-input" name="search"
+                       autocomplete="off"
+                       placeholder="Click or press ‘S’ to search, ‘?’ for more options…"
+                       type="search">
+            </div>
+        </form>
+    </nav>
+
+    <section id='main' class="content">
+<h1 class='fqn'><span class='in-band'>Struct <a href='index.html'>av_sys</a>::<wbr><a class="struct" href=''>AVIOContext</a></span><span class='out-of-band'><span id='render-detail'>
+                   <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
+                       [<span class='inner'>&#x2212;</span>]
+                   </a>
+               </span><a class='srclink' href='../src/av_sys/home/travis/build/panicbit/rust-av/target/debug/build/av_sys-5aff961289ea4337/out/ffi.rs.html#4560-4621' title='goto source code'>[src]</a></span></h1>
+<pre class='rust struct'><div class="docblock attributes">#[repr(C)]
+</div>pub struct AVIOContext {
+    pub av_class: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*const </a><a class="struct" href="../av_sys/struct.AVClass.html" title="struct av_sys::AVClass">AVClass</a>,
+    pub buffer: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*mut </a><a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_uchar.html" title="type std::os::raw::c_uchar">c_uchar</a>,
+    pub buffer_size: <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a>,
+    pub buf_ptr: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*mut </a><a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_uchar.html" title="type std::os::raw::c_uchar">c_uchar</a>,
+    pub buf_end: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*mut </a><a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_uchar.html" title="type std::os::raw::c_uchar">c_uchar</a>,
+    pub opaque: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*mut </a><a class="enum" href="https://doc.rust-lang.org/nightly/std/os/raw/enum.c_void.html" title="enum std::os::raw::c_void">c_void</a>,
+    pub read_packet: <a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;unsafe extern fn(_: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*mut </a><a class="enum" href="https://doc.rust-lang.org/nightly/std/os/raw/enum.c_void.html" title="enum std::os::raw::c_void">c_void</a>, _: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*mut </a><a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u8.html">u8</a>, _: <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a>) -&gt; <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a>&gt;,
+    pub write_packet: <a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;unsafe extern fn(_: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*mut </a><a class="enum" href="https://doc.rust-lang.org/nightly/std/os/raw/enum.c_void.html" title="enum std::os::raw::c_void">c_void</a>, _: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*mut </a><a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u8.html">u8</a>, _: <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a>) -&gt; <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a>&gt;,
+    pub seek: <a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;unsafe extern fn(_: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*mut </a><a class="enum" href="https://doc.rust-lang.org/nightly/std/os/raw/enum.c_void.html" title="enum std::os::raw::c_void">c_void</a>, _: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.i64.html">i64</a>, _: <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a>) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.i64.html">i64</a>&gt;,
+    pub pos: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.i64.html">i64</a>,
+    pub must_flush: <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a>,
+    pub eof_reached: <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a>,
+    pub write_flag: <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a>,
+    pub max_packet_size: <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a>,
+    pub checksum: <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_ulong.html" title="type std::os::raw::c_ulong">c_ulong</a>,
+    pub checksum_ptr: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*mut </a><a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_uchar.html" title="type std::os::raw::c_uchar">c_uchar</a>,
+    pub update_checksum: <a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;unsafe extern fn(_: <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_ulong.html" title="type std::os::raw::c_ulong">c_ulong</a>, _: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*const </a><a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u8.html">u8</a>, _: <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_uint.html" title="type std::os::raw::c_uint">c_uint</a>) -&gt; <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_ulong.html" title="type std::os::raw::c_ulong">c_ulong</a>&gt;,
+    pub error: <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a>,
+    pub read_pause: <a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;unsafe extern fn(_: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*mut </a><a class="enum" href="https://doc.rust-lang.org/nightly/std/os/raw/enum.c_void.html" title="enum std::os::raw::c_void">c_void</a>, _: <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a>) -&gt; <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a>&gt;,
+    pub read_seek: <a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;unsafe extern fn(_: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*mut </a><a class="enum" href="https://doc.rust-lang.org/nightly/std/os/raw/enum.c_void.html" title="enum std::os::raw::c_void">c_void</a>, _: <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a>, _: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.i64.html">i64</a>, _: <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a>) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.i64.html">i64</a>&gt;,
+    pub seekable: <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a>,
+    pub maxsize: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.i64.html">i64</a>,
+    pub direct: <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a>,
+    pub bytes_read: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.i64.html">i64</a>,
+    pub seek_count: <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a>,
+    pub writeout_count: <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a>,
+    pub orig_buffer_size: <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a>,
+    pub short_seek_threshold: <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a>,
+    pub protocol_whitelist: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*const </a><a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_char.html" title="type std::os::raw::c_char">c_char</a>,
+    pub protocol_blacklist: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*const </a><a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_char.html" title="type std::os::raw::c_char">c_char</a>,
+    pub write_data_type: <a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;unsafe extern fn(_: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*mut </a><a class="enum" href="https://doc.rust-lang.org/nightly/std/os/raw/enum.c_void.html" title="enum std::os::raw::c_void">c_void</a>, _: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*mut </a><a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u8.html">u8</a>, _: <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a>, _: <a class="enum" href="../av_sys/enum.AVIODataMarkerType.html" title="enum av_sys::AVIODataMarkerType">AVIODataMarkerType</a>, _: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.i64.html">i64</a>) -&gt; <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a>&gt;,
+    pub ignore_boundary_point: <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a>,
+    pub current_type: <a class="enum" href="../av_sys/enum.AVIODataMarkerType.html" title="enum av_sys::AVIODataMarkerType">AVIODataMarkerType</a>,
+    pub last_time: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.i64.html">i64</a>,
+    pub short_seek_get: <a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;unsafe extern fn(_: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*mut </a><a class="enum" href="https://doc.rust-lang.org/nightly/std/os/raw/enum.c_void.html" title="enum std::os::raw::c_void">c_void</a>) -&gt; <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a>&gt;,
+}</pre><div class='docblock'><p>Bytestream IO Context.
+New fields can be added to the end with minor version bumps.
+Removal, reordering and changes to existing fields require a major
+version bump.
+sizeof(AVIOContext) must not be used outside libav*.</p>
+
+<p>@note None of the function pointers in AVIOContext should be called
+      directly, they should only be set by the client application
+      when implementing custom I/O. Normally these are set to the
+      function pointers specified in avio_alloc_context()</p>
+</div><h2 id='fields' class='fields'>Fields</h2><span id='structfield.av_class' class="structfield">
+                           <span id='av_class.v' class='invisible'>
+                           <code>av_class: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*const </a><a class="struct" href="../av_sys/struct.AVClass.html" title="struct av_sys::AVClass">AVClass</a></code>
+                           </span></span><div class='docblock'><p>A class for private options.</p>
+
+<p>If this AVIOContext is created by avio_open2(), av_class is set and
+passes the options down to protocols.</p>
+
+<p>If this AVIOContext is manually allocated, then av_class may be set by
+the caller.</p>
+
+<p>warning -- this field can be NULL, be sure to not pass this AVIOContext
+to any av_opt_* functions in that case.</p>
+</div><span id='structfield.buffer' class="structfield">
+                           <span id='buffer.v' class='invisible'>
+                           <code>buffer: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*mut </a><a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_uchar.html" title="type std::os::raw::c_uchar">c_uchar</a></code>
+                           </span></span><div class='docblock'><p>&lt; Start of the buffer. </p>
+</div><span id='structfield.buffer_size' class="structfield">
+                           <span id='buffer_size.v' class='invisible'>
+                           <code>buffer_size: <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a></code>
+                           </span></span><div class='docblock'><p>&lt; Maximum buffer size </p>
+</div><span id='structfield.buf_ptr' class="structfield">
+                           <span id='buf_ptr.v' class='invisible'>
+                           <code>buf_ptr: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*mut </a><a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_uchar.html" title="type std::os::raw::c_uchar">c_uchar</a></code>
+                           </span></span><div class='docblock'><p>&lt; Current position in the buffer </p>
+</div><span id='structfield.buf_end' class="structfield">
+                           <span id='buf_end.v' class='invisible'>
+                           <code>buf_end: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*mut </a><a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_uchar.html" title="type std::os::raw::c_uchar">c_uchar</a></code>
+                           </span></span><div class='docblock'><p>&lt; End of the data, may be less than
+buffer+buffer_size if the read function returned
+less data than requested, e.g. for streams where
+no more data has been received yet. </p>
+</div><span id='structfield.opaque' class="structfield">
+                           <span id='opaque.v' class='invisible'>
+                           <code>opaque: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*mut </a><a class="enum" href="https://doc.rust-lang.org/nightly/std/os/raw/enum.c_void.html" title="enum std::os::raw::c_void">c_void</a></code>
+                           </span></span><div class='docblock'><p>&lt; A private pointer, passed to the read/write/seek/...
+functions. </p>
+</div><span id='structfield.read_packet' class="structfield">
+                           <span id='read_packet.v' class='invisible'>
+                           <code>read_packet: <a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;unsafe extern fn(_: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*mut </a><a class="enum" href="https://doc.rust-lang.org/nightly/std/os/raw/enum.c_void.html" title="enum std::os::raw::c_void">c_void</a>, _: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*mut </a><a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u8.html">u8</a>, _: <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a>) -&gt; <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a>&gt;</code>
+                           </span></span><span id='structfield.write_packet' class="structfield">
+                           <span id='write_packet.v' class='invisible'>
+                           <code>write_packet: <a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;unsafe extern fn(_: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*mut </a><a class="enum" href="https://doc.rust-lang.org/nightly/std/os/raw/enum.c_void.html" title="enum std::os::raw::c_void">c_void</a>, _: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*mut </a><a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u8.html">u8</a>, _: <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a>) -&gt; <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a>&gt;</code>
+                           </span></span><span id='structfield.seek' class="structfield">
+                           <span id='seek.v' class='invisible'>
+                           <code>seek: <a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;unsafe extern fn(_: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*mut </a><a class="enum" href="https://doc.rust-lang.org/nightly/std/os/raw/enum.c_void.html" title="enum std::os::raw::c_void">c_void</a>, _: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.i64.html">i64</a>, _: <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a>) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.i64.html">i64</a>&gt;</code>
+                           </span></span><span id='structfield.pos' class="structfield">
+                           <span id='pos.v' class='invisible'>
+                           <code>pos: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.i64.html">i64</a></code>
+                           </span></span><div class='docblock'><p>&lt; position in the file of the current buffer </p>
+</div><span id='structfield.must_flush' class="structfield">
+                           <span id='must_flush.v' class='invisible'>
+                           <code>must_flush: <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a></code>
+                           </span></span><div class='docblock'><p>&lt; true if the next seek should flush </p>
+</div><span id='structfield.eof_reached' class="structfield">
+                           <span id='eof_reached.v' class='invisible'>
+                           <code>eof_reached: <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a></code>
+                           </span></span><div class='docblock'><p>&lt; true if eof reached </p>
+</div><span id='structfield.write_flag' class="structfield">
+                           <span id='write_flag.v' class='invisible'>
+                           <code>write_flag: <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a></code>
+                           </span></span><div class='docblock'><p>&lt; true if open for writing </p>
+</div><span id='structfield.max_packet_size' class="structfield">
+                           <span id='max_packet_size.v' class='invisible'>
+                           <code>max_packet_size: <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a></code>
+                           </span></span><span id='structfield.checksum' class="structfield">
+                           <span id='checksum.v' class='invisible'>
+                           <code>checksum: <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_ulong.html" title="type std::os::raw::c_ulong">c_ulong</a></code>
+                           </span></span><span id='structfield.checksum_ptr' class="structfield">
+                           <span id='checksum_ptr.v' class='invisible'>
+                           <code>checksum_ptr: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*mut </a><a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_uchar.html" title="type std::os::raw::c_uchar">c_uchar</a></code>
+                           </span></span><span id='structfield.update_checksum' class="structfield">
+                           <span id='update_checksum.v' class='invisible'>
+                           <code>update_checksum: <a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;unsafe extern fn(_: <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_ulong.html" title="type std::os::raw::c_ulong">c_ulong</a>, _: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*const </a><a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u8.html">u8</a>, _: <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_uint.html" title="type std::os::raw::c_uint">c_uint</a>) -&gt; <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_ulong.html" title="type std::os::raw::c_ulong">c_ulong</a>&gt;</code>
+                           </span></span><span id='structfield.error' class="structfield">
+                           <span id='error.v' class='invisible'>
+                           <code>error: <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a></code>
+                           </span></span><div class='docblock'><p>&lt; contains the error code or 0 if no error happened </p>
+</div><span id='structfield.read_pause' class="structfield">
+                           <span id='read_pause.v' class='invisible'>
+                           <code>read_pause: <a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;unsafe extern fn(_: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*mut </a><a class="enum" href="https://doc.rust-lang.org/nightly/std/os/raw/enum.c_void.html" title="enum std::os::raw::c_void">c_void</a>, _: <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a>) -&gt; <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a>&gt;</code>
+                           </span></span><div class='docblock'><p>Pause or resume playback for network streaming protocols - e.g. MMS.</p>
+</div><span id='structfield.read_seek' class="structfield">
+                           <span id='read_seek.v' class='invisible'>
+                           <code>read_seek: <a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;unsafe extern fn(_: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*mut </a><a class="enum" href="https://doc.rust-lang.org/nightly/std/os/raw/enum.c_void.html" title="enum std::os::raw::c_void">c_void</a>, _: <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a>, _: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.i64.html">i64</a>, _: <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a>) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.i64.html">i64</a>&gt;</code>
+                           </span></span><div class='docblock'><p>Seek to a given timestamp in stream with the specified stream_index.
+Needed for some network streaming protocols which don&#39;t support seeking
+to byte position.</p>
+</div><span id='structfield.seekable' class="structfield">
+                           <span id='seekable.v' class='invisible'>
+                           <code>seekable: <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a></code>
+                           </span></span><div class='docblock'><p>A combination of AVIO_SEEKABLE_ flags or 0 when the stream is not seekable.</p>
+</div><span id='structfield.maxsize' class="structfield">
+                           <span id='maxsize.v' class='invisible'>
+                           <code>maxsize: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.i64.html">i64</a></code>
+                           </span></span><div class='docblock'><p>max filesize, used to limit allocations
+This field is internal to libavformat and access from outside is not allowed.</p>
+</div><span id='structfield.direct' class="structfield">
+                           <span id='direct.v' class='invisible'>
+                           <code>direct: <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a></code>
+                           </span></span><div class='docblock'><p>avio_read and avio_write should if possible be satisfied directly
+instead of going through a buffer, and avio_seek will always
+call the underlying seek function directly.</p>
+</div><span id='structfield.bytes_read' class="structfield">
+                           <span id='bytes_read.v' class='invisible'>
+                           <code>bytes_read: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.i64.html">i64</a></code>
+                           </span></span><div class='docblock'><p>Bytes read statistic
+This field is internal to libavformat and access from outside is not allowed.</p>
+</div><span id='structfield.seek_count' class="structfield">
+                           <span id='seek_count.v' class='invisible'>
+                           <code>seek_count: <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a></code>
+                           </span></span><div class='docblock'><p>seek statistic
+This field is internal to libavformat and access from outside is not allowed.</p>
+</div><span id='structfield.writeout_count' class="structfield">
+                           <span id='writeout_count.v' class='invisible'>
+                           <code>writeout_count: <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a></code>
+                           </span></span><div class='docblock'><p>writeout statistic
+This field is internal to libavformat and access from outside is not allowed.</p>
+</div><span id='structfield.orig_buffer_size' class="structfield">
+                           <span id='orig_buffer_size.v' class='invisible'>
+                           <code>orig_buffer_size: <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a></code>
+                           </span></span><div class='docblock'><p>Original buffer size
+used internally after probing and ensure seekback to reset the buffer size
+This field is internal to libavformat and access from outside is not allowed.</p>
+</div><span id='structfield.short_seek_threshold' class="structfield">
+                           <span id='short_seek_threshold.v' class='invisible'>
+                           <code>short_seek_threshold: <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a></code>
+                           </span></span><div class='docblock'><p>Threshold to favor readahead over seek.
+This is current internal only, do not use from outside.</p>
+</div><span id='structfield.protocol_whitelist' class="structfield">
+                           <span id='protocol_whitelist.v' class='invisible'>
+                           <code>protocol_whitelist: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*const </a><a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_char.html" title="type std::os::raw::c_char">c_char</a></code>
+                           </span></span><div class='docblock'><p>&#39;,&#39; separated list of allowed protocols.</p>
+</div><span id='structfield.protocol_blacklist' class="structfield">
+                           <span id='protocol_blacklist.v' class='invisible'>
+                           <code>protocol_blacklist: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*const </a><a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_char.html" title="type std::os::raw::c_char">c_char</a></code>
+                           </span></span><div class='docblock'><p>&#39;,&#39; separated list of disallowed protocols.</p>
+</div><span id='structfield.write_data_type' class="structfield">
+                           <span id='write_data_type.v' class='invisible'>
+                           <code>write_data_type: <a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;unsafe extern fn(_: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*mut </a><a class="enum" href="https://doc.rust-lang.org/nightly/std/os/raw/enum.c_void.html" title="enum std::os::raw::c_void">c_void</a>, _: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*mut </a><a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u8.html">u8</a>, _: <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a>, _: <a class="enum" href="../av_sys/enum.AVIODataMarkerType.html" title="enum av_sys::AVIODataMarkerType">AVIODataMarkerType</a>, _: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.i64.html">i64</a>) -&gt; <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a>&gt;</code>
+                           </span></span><div class='docblock'><p>A callback that is used instead of write_packet.</p>
+</div><span id='structfield.ignore_boundary_point' class="structfield">
+                           <span id='ignore_boundary_point.v' class='invisible'>
+                           <code>ignore_boundary_point: <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a></code>
+                           </span></span><div class='docblock'><p>If set, don&#39;t call write_data_type separately for AVIO_DATA_MARKER_BOUNDARY_POINT,
+but ignore them and treat them as AVIO_DATA_MARKER_UNKNOWN (to avoid needlessly
+small chunks of data returned from the callback).</p>
+</div><span id='structfield.current_type' class="structfield">
+                           <span id='current_type.v' class='invisible'>
+                           <code>current_type: <a class="enum" href="../av_sys/enum.AVIODataMarkerType.html" title="enum av_sys::AVIODataMarkerType">AVIODataMarkerType</a></code>
+                           </span></span><div class='docblock'><p>Internal, not meant to be used from outside of AVIOContext.</p>
+</div><span id='structfield.last_time' class="structfield">
+                           <span id='last_time.v' class='invisible'>
+                           <code>last_time: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.i64.html">i64</a></code>
+                           </span></span><span id='structfield.short_seek_get' class="structfield">
+                           <span id='short_seek_get.v' class='invisible'>
+                           <code>short_seek_get: <a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;unsafe extern fn(_: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*mut </a><a class="enum" href="https://doc.rust-lang.org/nightly/std/os/raw/enum.c_void.html" title="enum std::os::raw::c_void">c_void</a>) -&gt; <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a>&gt;</code>
+                           </span></span><div class='docblock'><p>A callback that is used instead of short_seek_threshold.
+This is current internal only, do not use from outside.</p>
+</div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><span class='in-band'><code>impl <a class="trait" href="https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html" title="trait core::fmt::Debug">Debug</a> for <a class="struct" href="../av_sys/struct.AVIOContext.html" title="struct av_sys::AVIOContext">AVIOContext</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/av_sys/home/travis/build/panicbit/rust-av/target/debug/build/av_sys-5aff961289ea4337/out/ffi.rs.html#4560' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.fmt' class="method"><span id='fmt.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html#tymethod.fmt' class='fnname'>fmt</a>(&amp;self, __arg_0: &amp;mut <a class="struct" href="https://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html" title="struct core::fmt::Formatter">Formatter</a>) -&gt; <a class="type" href="https://doc.rust-lang.org/nightly/core/fmt/type.Result.html" title="type core::fmt::Result">Result</a></code></span></h4>
+<div class='docblock'><p>Formats the value using the given formatter.</p>
+</div></div><h3 class='impl'><span class='in-band'><code>impl <a class="trait" href="https://doc.rust-lang.org/nightly/core/marker/trait.Copy.html" title="trait core::marker::Copy">Copy</a> for <a class="struct" href="../av_sys/struct.AVIOContext.html" title="struct av_sys::AVIOContext">AVIOContext</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/av_sys/home/travis/build/panicbit/rust-av/target/debug/build/av_sys-5aff961289ea4337/out/ffi.rs.html#4560' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'></div><h3 class='impl'><span class='in-band'><code>impl <a class="trait" href="https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html" title="trait core::clone::Clone">Clone</a> for <a class="struct" href="../av_sys/struct.AVIOContext.html" title="struct av_sys::AVIOContext">AVIOContext</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/av_sys/home/travis/build/panicbit/rust-av/target/debug/build/av_sys-5aff961289ea4337/out/ffi.rs.html#4621' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.clone' class="method"><span id='clone.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#tymethod.clone' class='fnname'>clone</a>(&amp;self) -&gt; Self</code></span></h4>
+<div class='docblock'><p>Returns a copy of the value. <a href="https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#tymethod.clone">Read more</a></p>
+</div><h4 id='method.clone_from' class="method"><span id='clone_from.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#method.clone_from' class='fnname'>clone_from</a>(&amp;mut self, source: &amp;Self)</code><div class='since' title='Stable since Rust version 1.0.0'>1.0.0</div></span></h4>
+<div class='docblock'><p>Performs copy-assignment from <code>source</code>. <a href="https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#method.clone_from">Read more</a></p>
+</div></div></section>
+    <section id='search' class="content hidden"></section>
+
+    <section class="footer"></section>
+
+    <aside id="help" class="hidden">
+        <div>
+            <h1 class="hidden">Help</h1>
+
+            <div class="shortcuts">
+                <h2>Keyboard Shortcuts</h2>
+
+                <dl>
+                    <dt>?</dt>
+                    <dd>Show this help dialog</dd>
+                    <dt>S</dt>
+                    <dd>Focus the search field</dd>
+                    <dt>&larrb;</dt>
+                    <dd>Move up in search results</dd>
+                    <dt>&rarrb;</dt>
+                    <dd>Move down in search results</dd>
+                    <dt>&#9166;</dt>
+                    <dd>Go to active search result</dd>
+                    <dt>+</dt>
+                    <dd>Collapse/expand all sections</dd>
+                </dl>
+            </div>
+
+            <div class="infos">
+                <h2>Search Tricks</h2>
+
+                <p>
+                    Prefix searches with a type followed by a colon (e.g.
+                    <code>fn:</code>) to restrict the search to a given type.
+                </p>
+
+                <p>
+                    Accepted types are: <code>fn</code>, <code>mod</code>,
+                    <code>struct</code>, <code>enum</code>,
+                    <code>trait</code>, <code>type</code>, <code>macro</code>,
+                    and <code>const</code>.
+                </p>
+
+                <p>
+                    Search functions by type signature (e.g.
+                    <code>vec -> usize</code> or <code>* -> vec</code>)
+                </p>
+            </div>
+        </div>
+    </aside>
+
+    
+
+    <script>
+        window.rootPath = "../";
+        window.currentCrate = "av_sys";
+    </script>
+    <script src="../jquery.js"></script>
+    <script src="../main.js"></script>
+    <script defer src="../search-index.js"></script>
+</body>
+</html>

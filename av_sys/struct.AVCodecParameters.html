@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <meta name="description" content="API documentation for the Rust `AVCodecParameters` struct in crate `av_sys`.">
+    <meta name="keywords" content="rust, rustlang, rust-lang, AVCodecParameters">
+
+    <title>av_sys::AVCodecParameters - Rust</title>
+
+    <link rel="stylesheet" type="text/css" href="../normalize.css">
+    <link rel="stylesheet" type="text/css" href="../rustdoc.css">
+    <link rel="stylesheet" type="text/css" href="../main.css">
+    
+
+    
+    
+</head>
+<body class="rustdoc struct">
+    <!--[if lte IE 8]>
+    <div class="warning">
+        This old browser is unsupported and will most likely display funky
+        things.
+    </div>
+    <![endif]-->
+
+    
+
+    <nav class="sidebar">
+        
+        <p class='location'>Struct AVCodecParameters</p><div class="block items"><ul><li><a href="#fields">Fields</a></li><li><a href="#implementations">Trait Implementations</a></li></ul></div><p class='location'><a href='index.html'>av_sys</a></p><script>window.sidebarCurrent = {name: 'AVCodecParameters', ty: 'struct', relpath: ''};</script><script defer src="sidebar-items.js"></script>
+    </nav>
+
+    <nav class="sub">
+        <form class="search-form js-only">
+            <div class="search-container">
+                <input class="search-input" name="search"
+                       autocomplete="off"
+                       placeholder="Click or press ‘S’ to search, ‘?’ for more options…"
+                       type="search">
+            </div>
+        </form>
+    </nav>
+
+    <section id='main' class="content">
+<h1 class='fqn'><span class='in-band'>Struct <a href='index.html'>av_sys</a>::<wbr><a class="struct" href=''>AVCodecParameters</a></span><span class='out-of-band'><span id='render-detail'>
+                   <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
+                       [<span class='inner'>&#x2212;</span>]
+                   </a>
+               </span><a class='srclink' href='../src/av_sys/home/travis/build/panicbit/rust-av/target/debug/build/av_sys-5aff961289ea4337/out/ffi.rs.html#3110-3193' title='goto source code'>[src]</a></span></h1>
+<pre class='rust struct'><div class="docblock attributes">#[repr(C)]
+</div>pub struct AVCodecParameters {
+    pub codec_type: <a class="enum" href="../av_sys/enum.AVMediaType.html" title="enum av_sys::AVMediaType">AVMediaType</a>,
+    pub codec_id: <a class="enum" href="../av_sys/enum.AVCodecID.html" title="enum av_sys::AVCodecID">AVCodecID</a>,
+    pub codec_tag: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u32.html">u32</a>,
+    pub extradata: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*mut </a><a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u8.html">u8</a>,
+    pub extradata_size: <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a>,
+    pub format: <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a>,
+    pub bit_rate: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.i64.html">i64</a>,
+    pub bits_per_coded_sample: <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a>,
+    pub bits_per_raw_sample: <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a>,
+    pub profile: <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a>,
+    pub level: <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a>,
+    pub width: <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a>,
+    pub height: <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a>,
+    pub sample_aspect_ratio: <a class="struct" href="../av_sys/struct.AVRational.html" title="struct av_sys::AVRational">AVRational</a>,
+    pub field_order: <a class="enum" href="../av_sys/enum.AVFieldOrder.html" title="enum av_sys::AVFieldOrder">AVFieldOrder</a>,
+    pub color_range: <a class="enum" href="../av_sys/enum.AVColorRange.html" title="enum av_sys::AVColorRange">AVColorRange</a>,
+    pub color_primaries: <a class="enum" href="../av_sys/enum.AVColorPrimaries.html" title="enum av_sys::AVColorPrimaries">AVColorPrimaries</a>,
+    pub color_trc: <a class="enum" href="../av_sys/enum.AVColorTransferCharacteristic.html" title="enum av_sys::AVColorTransferCharacteristic">AVColorTransferCharacteristic</a>,
+    pub color_space: <a class="enum" href="../av_sys/enum.AVColorSpace.html" title="enum av_sys::AVColorSpace">AVColorSpace</a>,
+    pub chroma_location: <a class="enum" href="../av_sys/enum.AVChromaLocation.html" title="enum av_sys::AVChromaLocation">AVChromaLocation</a>,
+    pub video_delay: <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a>,
+    pub channel_layout: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u64.html">u64</a>,
+    pub channels: <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a>,
+    pub sample_rate: <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a>,
+    pub block_align: <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a>,
+    pub frame_size: <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a>,
+    pub initial_padding: <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a>,
+    pub trailing_padding: <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a>,
+    pub seek_preroll: <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a>,
+}</pre><div class='docblock'><p>This struct describes the properties of an encoded stream.</p>
+
+<p>sizeof(AVCodecParameters) is not a part of the public ABI, this struct must
+be allocated with avcodec_parameters_alloc() and freed with
+avcodec_parameters_free().</p>
+</div><h2 id='fields' class='fields'>Fields</h2><span id='structfield.codec_type' class="structfield">
+                           <span id='codec_type.v' class='invisible'>
+                           <code>codec_type: <a class="enum" href="../av_sys/enum.AVMediaType.html" title="enum av_sys::AVMediaType">AVMediaType</a></code>
+                           </span></span><div class='docblock'><p>General type of the encoded data.</p>
+</div><span id='structfield.codec_id' class="structfield">
+                           <span id='codec_id.v' class='invisible'>
+                           <code>codec_id: <a class="enum" href="../av_sys/enum.AVCodecID.html" title="enum av_sys::AVCodecID">AVCodecID</a></code>
+                           </span></span><div class='docblock'><p>Specific type of the encoded data (the codec used).</p>
+</div><span id='structfield.codec_tag' class="structfield">
+                           <span id='codec_tag.v' class='invisible'>
+                           <code>codec_tag: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u32.html">u32</a></code>
+                           </span></span><div class='docblock'><p>Additional information about the codec (corresponds to the AVI FOURCC).</p>
+</div><span id='structfield.extradata' class="structfield">
+                           <span id='extradata.v' class='invisible'>
+                           <code>extradata: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*mut </a><a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u8.html">u8</a></code>
+                           </span></span><div class='docblock'><p>Extra binary data needed for initializing the decoder, codec-dependent.</p>
+
+<p>Must be allocated with av_malloc() and will be freed by
+avcodec_parameters_free(). The allocated size of extradata must be at
+least extradata_size + AV_INPUT_BUFFER_PADDING_SIZE, with the padding
+bytes zeroed.</p>
+</div><span id='structfield.extradata_size' class="structfield">
+                           <span id='extradata_size.v' class='invisible'>
+                           <code>extradata_size: <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a></code>
+                           </span></span><div class='docblock'><p>Size of the extradata content in bytes.</p>
+</div><span id='structfield.format' class="structfield">
+                           <span id='format.v' class='invisible'>
+                           <code>format: <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a></code>
+                           </span></span><div class='docblock'><ul>
+<li>video: the pixel format, the value corresponds to enum AVPixelFormat.</li>
+<li>audio: the sample format, the value corresponds to enum AVSampleFormat.</li>
+</ul>
+</div><span id='structfield.bit_rate' class="structfield">
+                           <span id='bit_rate.v' class='invisible'>
+                           <code>bit_rate: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.i64.html">i64</a></code>
+                           </span></span><div class='docblock'><p>The average bitrate of the encoded data (in bits per second).</p>
+</div><span id='structfield.bits_per_coded_sample' class="structfield">
+                           <span id='bits_per_coded_sample.v' class='invisible'>
+                           <code>bits_per_coded_sample: <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a></code>
+                           </span></span><div class='docblock'><p>The number of bits per sample in the codedwords.</p>
+
+<p>This is basically the bitrate per sample. It is mandatory for a bunch of
+formats to actually decode them. It&#39;s the number of bits for one sample in
+the actual coded bitstream.</p>
+
+<p>This could be for example 4 for ADPCM
+For PCM formats this matches bits_per_raw_sample
+Can be 0</p>
+</div><span id='structfield.bits_per_raw_sample' class="structfield">
+                           <span id='bits_per_raw_sample.v' class='invisible'>
+                           <code>bits_per_raw_sample: <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a></code>
+                           </span></span><div class='docblock'><p>This is the number of valid bits in each output sample. If the
+sample format has more bits, the least significant bits are additional
+padding bits, which are always 0. Use right shifts to reduce the sample
+to its actual size. For example, audio formats with 24 bit samples will
+have bits_per_raw_sample set to 24, and format set to AV_SAMPLE_FMT_S32.
+To get the original sample use &quot;(int32_t)sample &gt;&gt; 8&quot;.&quot;</p>
+
+<p>For ADPCM this might be 12 or 16 or similar
+Can be 0</p>
+</div><span id='structfield.profile' class="structfield">
+                           <span id='profile.v' class='invisible'>
+                           <code>profile: <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a></code>
+                           </span></span><div class='docblock'><p>Codec-specific bitstream restrictions that the stream conforms to.</p>
+</div><span id='structfield.level' class="structfield">
+                           <span id='level.v' class='invisible'>
+                           <code>level: <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a></code>
+                           </span></span><span id='structfield.width' class="structfield">
+                           <span id='width.v' class='invisible'>
+                           <code>width: <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a></code>
+                           </span></span><div class='docblock'><p>Video only. The dimensions of the video frame in pixels.</p>
+</div><span id='structfield.height' class="structfield">
+                           <span id='height.v' class='invisible'>
+                           <code>height: <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a></code>
+                           </span></span><span id='structfield.sample_aspect_ratio' class="structfield">
+                           <span id='sample_aspect_ratio.v' class='invisible'>
+                           <code>sample_aspect_ratio: <a class="struct" href="../av_sys/struct.AVRational.html" title="struct av_sys::AVRational">AVRational</a></code>
+                           </span></span><div class='docblock'><p>Video only. The aspect ratio (width / height) which a single pixel
+should have when displayed.</p>
+
+<p>When the aspect ratio is unknown / undefined, the numerator should be
+set to 0 (the denominator may have any value).</p>
+</div><span id='structfield.field_order' class="structfield">
+                           <span id='field_order.v' class='invisible'>
+                           <code>field_order: <a class="enum" href="../av_sys/enum.AVFieldOrder.html" title="enum av_sys::AVFieldOrder">AVFieldOrder</a></code>
+                           </span></span><div class='docblock'><p>Video only. The order of the fields in interlaced video.</p>
+</div><span id='structfield.color_range' class="structfield">
+                           <span id='color_range.v' class='invisible'>
+                           <code>color_range: <a class="enum" href="../av_sys/enum.AVColorRange.html" title="enum av_sys::AVColorRange">AVColorRange</a></code>
+                           </span></span><div class='docblock'><p>Video only. Additional colorspace characteristics.</p>
+</div><span id='structfield.color_primaries' class="structfield">
+                           <span id='color_primaries.v' class='invisible'>
+                           <code>color_primaries: <a class="enum" href="../av_sys/enum.AVColorPrimaries.html" title="enum av_sys::AVColorPrimaries">AVColorPrimaries</a></code>
+                           </span></span><span id='structfield.color_trc' class="structfield">
+                           <span id='color_trc.v' class='invisible'>
+                           <code>color_trc: <a class="enum" href="../av_sys/enum.AVColorTransferCharacteristic.html" title="enum av_sys::AVColorTransferCharacteristic">AVColorTransferCharacteristic</a></code>
+                           </span></span><span id='structfield.color_space' class="structfield">
+                           <span id='color_space.v' class='invisible'>
+                           <code>color_space: <a class="enum" href="../av_sys/enum.AVColorSpace.html" title="enum av_sys::AVColorSpace">AVColorSpace</a></code>
+                           </span></span><span id='structfield.chroma_location' class="structfield">
+                           <span id='chroma_location.v' class='invisible'>
+                           <code>chroma_location: <a class="enum" href="../av_sys/enum.AVChromaLocation.html" title="enum av_sys::AVChromaLocation">AVChromaLocation</a></code>
+                           </span></span><span id='structfield.video_delay' class="structfield">
+                           <span id='video_delay.v' class='invisible'>
+                           <code>video_delay: <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a></code>
+                           </span></span><div class='docblock'><p>Video only. Number of delayed frames.</p>
+</div><span id='structfield.channel_layout' class="structfield">
+                           <span id='channel_layout.v' class='invisible'>
+                           <code>channel_layout: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u64.html">u64</a></code>
+                           </span></span><div class='docblock'><p>Audio only. The channel layout bitmask. May be 0 if the channel layout is
+unknown or unspecified, otherwise the number of bits set must be equal to
+the channels field.</p>
+</div><span id='structfield.channels' class="structfield">
+                           <span id='channels.v' class='invisible'>
+                           <code>channels: <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a></code>
+                           </span></span><div class='docblock'><p>Audio only. The number of audio channels.</p>
+</div><span id='structfield.sample_rate' class="structfield">
+                           <span id='sample_rate.v' class='invisible'>
+                           <code>sample_rate: <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a></code>
+                           </span></span><div class='docblock'><p>Audio only. The number of audio samples per second.</p>
+</div><span id='structfield.block_align' class="structfield">
+                           <span id='block_align.v' class='invisible'>
+                           <code>block_align: <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a></code>
+                           </span></span><div class='docblock'><p>Audio only. The number of bytes per coded audio frame, required by some
+formats.</p>
+
+<p>Corresponds to nBlockAlign in WAVEFORMATEX.</p>
+</div><span id='structfield.frame_size' class="structfield">
+                           <span id='frame_size.v' class='invisible'>
+                           <code>frame_size: <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a></code>
+                           </span></span><div class='docblock'><p>Audio only. Audio frame size, if known. Required by some formats to be static.</p>
+</div><span id='structfield.initial_padding' class="structfield">
+                           <span id='initial_padding.v' class='invisible'>
+                           <code>initial_padding: <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a></code>
+                           </span></span><div class='docblock'><p>Audio only. The amount of padding (in samples) inserted by the encoder at
+the beginning of the audio. I.e. this number of leading decoded samples
+must be discarded by the caller to get the original audio without leading
+padding.</p>
+</div><span id='structfield.trailing_padding' class="structfield">
+                           <span id='trailing_padding.v' class='invisible'>
+                           <code>trailing_padding: <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a></code>
+                           </span></span><div class='docblock'><p>Audio only. The amount of padding (in samples) appended by the encoder to
+the end of the audio. I.e. this number of decoded samples must be
+discarded by the caller from the end of the stream to get the original
+audio without any trailing padding.</p>
+</div><span id='structfield.seek_preroll' class="structfield">
+                           <span id='seek_preroll.v' class='invisible'>
+                           <code>seek_preroll: <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a></code>
+                           </span></span><div class='docblock'><p>Audio only. Number of samples to skip after a discontinuity.</p>
+</div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><span class='in-band'><code>impl <a class="trait" href="https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html" title="trait core::fmt::Debug">Debug</a> for <a class="struct" href="../av_sys/struct.AVCodecParameters.html" title="struct av_sys::AVCodecParameters">AVCodecParameters</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/av_sys/home/travis/build/panicbit/rust-av/target/debug/build/av_sys-5aff961289ea4337/out/ffi.rs.html#3110' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.fmt' class="method"><span id='fmt.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html#tymethod.fmt' class='fnname'>fmt</a>(&amp;self, __arg_0: &amp;mut <a class="struct" href="https://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html" title="struct core::fmt::Formatter">Formatter</a>) -&gt; <a class="type" href="https://doc.rust-lang.org/nightly/core/fmt/type.Result.html" title="type core::fmt::Result">Result</a></code></span></h4>
+<div class='docblock'><p>Formats the value using the given formatter.</p>
+</div></div><h3 class='impl'><span class='in-band'><code>impl <a class="trait" href="https://doc.rust-lang.org/nightly/core/marker/trait.Copy.html" title="trait core::marker::Copy">Copy</a> for <a class="struct" href="../av_sys/struct.AVCodecParameters.html" title="struct av_sys::AVCodecParameters">AVCodecParameters</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/av_sys/home/travis/build/panicbit/rust-av/target/debug/build/av_sys-5aff961289ea4337/out/ffi.rs.html#3110' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'></div><h3 class='impl'><span class='in-band'><code>impl <a class="trait" href="https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html" title="trait core::clone::Clone">Clone</a> for <a class="struct" href="../av_sys/struct.AVCodecParameters.html" title="struct av_sys::AVCodecParameters">AVCodecParameters</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/av_sys/home/travis/build/panicbit/rust-av/target/debug/build/av_sys-5aff961289ea4337/out/ffi.rs.html#3193' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.clone' class="method"><span id='clone.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#tymethod.clone' class='fnname'>clone</a>(&amp;self) -&gt; Self</code></span></h4>
+<div class='docblock'><p>Returns a copy of the value. <a href="https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#tymethod.clone">Read more</a></p>
+</div><h4 id='method.clone_from' class="method"><span id='clone_from.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#method.clone_from' class='fnname'>clone_from</a>(&amp;mut self, source: &amp;Self)</code><div class='since' title='Stable since Rust version 1.0.0'>1.0.0</div></span></h4>
+<div class='docblock'><p>Performs copy-assignment from <code>source</code>. <a href="https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#method.clone_from">Read more</a></p>
+</div></div></section>
+    <section id='search' class="content hidden"></section>
+
+    <section class="footer"></section>
+
+    <aside id="help" class="hidden">
+        <div>
+            <h1 class="hidden">Help</h1>
+
+            <div class="shortcuts">
+                <h2>Keyboard Shortcuts</h2>
+
+                <dl>
+                    <dt>?</dt>
+                    <dd>Show this help dialog</dd>
+                    <dt>S</dt>
+                    <dd>Focus the search field</dd>
+                    <dt>&larrb;</dt>
+                    <dd>Move up in search results</dd>
+                    <dt>&rarrb;</dt>
+                    <dd>Move down in search results</dd>
+                    <dt>&#9166;</dt>
+                    <dd>Go to active search result</dd>
+                    <dt>+</dt>
+                    <dd>Collapse/expand all sections</dd>
+                </dl>
+            </div>
+
+            <div class="infos">
+                <h2>Search Tricks</h2>
+
+                <p>
+                    Prefix searches with a type followed by a colon (e.g.
+                    <code>fn:</code>) to restrict the search to a given type.
+                </p>
+
+                <p>
+                    Accepted types are: <code>fn</code>, <code>mod</code>,
+                    <code>struct</code>, <code>enum</code>,
+                    <code>trait</code>, <code>type</code>, <code>macro</code>,
+                    and <code>const</code>.
+                </p>
+
+                <p>
+                    Search functions by type signature (e.g.
+                    <code>vec -> usize</code> or <code>* -> vec</code>)
+                </p>
+            </div>
+        </div>
+    </aside>
+
+    
+
+    <script>
+        window.rootPath = "../";
+        window.currentCrate = "av_sys";
+    </script>
+    <script src="../jquery.js"></script>
+    <script src="../main.js"></script>
+    <script defer src="../search-index.js"></script>
+</body>
+</html>

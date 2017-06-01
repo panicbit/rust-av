@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <meta name="description" content="API documentation for the Rust `AVStream` struct in crate `av_sys`.">
+    <meta name="keywords" content="rust, rustlang, rust-lang, AVStream">
+
+    <title>av_sys::AVStream - Rust</title>
+
+    <link rel="stylesheet" type="text/css" href="../normalize.css">
+    <link rel="stylesheet" type="text/css" href="../rustdoc.css">
+    <link rel="stylesheet" type="text/css" href="../main.css">
+    
+
+    
+    
+</head>
+<body class="rustdoc struct">
+    <!--[if lte IE 8]>
+    <div class="warning">
+        This old browser is unsupported and will most likely display funky
+        things.
+    </div>
+    <![endif]-->
+
+    
+
+    <nav class="sidebar">
+        
+        <p class='location'>Struct AVStream</p><div class="block items"><ul><li><a href="#fields">Fields</a></li><li><a href="#implementations">Trait Implementations</a></li></ul></div><p class='location'><a href='index.html'>av_sys</a></p><script>window.sidebarCurrent = {name: 'AVStream', ty: 'struct', relpath: ''};</script><script defer src="sidebar-items.js"></script>
+    </nav>
+
+    <nav class="sub">
+        <form class="search-form js-only">
+            <div class="search-container">
+                <input class="search-input" name="search"
+                       autocomplete="off"
+                       placeholder="Click or press ‘S’ to search, ‘?’ for more options…"
+                       type="search">
+            </div>
+        </form>
+    </nav>
+
+    <section id='main' class="content">
+<h1 class='fqn'><span class='in-band'>Struct <a href='index.html'>av_sys</a>::<wbr><a class="struct" href=''>AVStream</a></span><span class='out-of-band'><span id='render-detail'>
+                   <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
+                       [<span class='inner'>&#x2212;</span>]
+                   </a>
+               </span><a class='srclink' href='../src/av_sys/home/travis/build/panicbit/rust-av/target/debug/build/av_sys-5aff961289ea4337/out/ffi.rs.html#5425-5588' title='goto source code'>[src]</a></span></h1>
+<pre class='rust struct'><div class="docblock attributes">#[repr(C)]
+</div>pub struct AVStream {
+    pub index: <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a>,
+    pub id: <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a>,
+    pub codec: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*mut </a><a class="struct" href="../av_sys/struct.AVCodecContext.html" title="struct av_sys::AVCodecContext">AVCodecContext</a>,
+    pub priv_data: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*mut </a><a class="enum" href="https://doc.rust-lang.org/nightly/std/os/raw/enum.c_void.html" title="enum std::os::raw::c_void">c_void</a>,
+    pub pts: <a class="struct" href="../av_sys/struct.AVFrac.html" title="struct av_sys::AVFrac">AVFrac</a>,
+    pub time_base: <a class="struct" href="../av_sys/struct.AVRational.html" title="struct av_sys::AVRational">AVRational</a>,
+    pub start_time: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.i64.html">i64</a>,
+    pub duration: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.i64.html">i64</a>,
+    pub nb_frames: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.i64.html">i64</a>,
+    pub disposition: <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a>,
+    pub discard: <a class="enum" href="../av_sys/enum.AVDiscard.html" title="enum av_sys::AVDiscard">AVDiscard</a>,
+    pub sample_aspect_ratio: <a class="struct" href="../av_sys/struct.AVRational.html" title="struct av_sys::AVRational">AVRational</a>,
+    pub metadata: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*mut </a><a class="struct" href="../av_sys/struct.AVDictionary.html" title="struct av_sys::AVDictionary">AVDictionary</a>,
+    pub avg_frame_rate: <a class="struct" href="../av_sys/struct.AVRational.html" title="struct av_sys::AVRational">AVRational</a>,
+    pub attached_pic: <a class="struct" href="../av_sys/struct.AVPacket.html" title="struct av_sys::AVPacket">AVPacket</a>,
+    pub side_data: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*mut </a><a class="struct" href="../av_sys/struct.AVPacketSideData.html" title="struct av_sys::AVPacketSideData">AVPacketSideData</a>,
+    pub nb_side_data: <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a>,
+    pub event_flags: <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a>,
+    pub info: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*mut </a><a class="struct" href="../av_sys/struct.AVStream__bindgen_ty_1.html" title="struct av_sys::AVStream__bindgen_ty_1">AVStream__bindgen_ty_1</a>,
+    pub pts_wrap_bits: <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a>,
+    pub first_dts: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.i64.html">i64</a>,
+    pub cur_dts: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.i64.html">i64</a>,
+    pub last_IP_pts: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.i64.html">i64</a>,
+    pub last_IP_duration: <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a>,
+    pub probe_packets: <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a>,
+    pub codec_info_nb_frames: <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a>,
+    pub need_parsing: <a class="enum" href="../av_sys/enum.AVStreamParseType.html" title="enum av_sys::AVStreamParseType">AVStreamParseType</a>,
+    pub parser: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*mut </a><a class="struct" href="../av_sys/struct.AVCodecParserContext.html" title="struct av_sys::AVCodecParserContext">AVCodecParserContext</a>,
+    pub last_in_packet_buffer: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*mut </a><a class="struct" href="../av_sys/struct.AVPacketList.html" title="struct av_sys::AVPacketList">AVPacketList</a>,
+    pub probe_data: <a class="struct" href="../av_sys/struct.AVProbeData.html" title="struct av_sys::AVProbeData">AVProbeData</a>,
+    pub pts_buffer: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.array.html">[</a><a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.i64.html">i64</a><a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.array.html">; 17]</a>,
+    pub index_entries: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*mut </a><a class="struct" href="../av_sys/struct.AVIndexEntry.html" title="struct av_sys::AVIndexEntry">AVIndexEntry</a>,
+    pub nb_index_entries: <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a>,
+    pub index_entries_allocated_size: <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_uint.html" title="type std::os::raw::c_uint">c_uint</a>,
+    pub r_frame_rate: <a class="struct" href="../av_sys/struct.AVRational.html" title="struct av_sys::AVRational">AVRational</a>,
+    pub stream_identifier: <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a>,
+    pub interleaver_chunk_size: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.i64.html">i64</a>,
+    pub interleaver_chunk_duration: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.i64.html">i64</a>,
+    pub request_probe: <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a>,
+    pub skip_to_keyframe: <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a>,
+    pub skip_samples: <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a>,
+    pub start_skip_samples: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.i64.html">i64</a>,
+    pub first_discard_sample: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.i64.html">i64</a>,
+    pub last_discard_sample: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.i64.html">i64</a>,
+    pub nb_decoded_frames: <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a>,
+    pub mux_ts_offset: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.i64.html">i64</a>,
+    pub pts_wrap_reference: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.i64.html">i64</a>,
+    pub pts_wrap_behavior: <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a>,
+    pub update_initial_durations_done: <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a>,
+    pub pts_reorder_error: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.array.html">[</a><a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.i64.html">i64</a><a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.array.html">; 17]</a>,
+    pub pts_reorder_error_count: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.array.html">[</a><a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u8.html">u8</a><a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.array.html">; 17]</a>,
+    pub last_dts_for_order_check: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.i64.html">i64</a>,
+    pub dts_ordered: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u8.html">u8</a>,
+    pub dts_misordered: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u8.html">u8</a>,
+    pub inject_global_side_data: <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a>,
+    pub recommended_encoder_configuration: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*mut </a><a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_char.html" title="type std::os::raw::c_char">c_char</a>,
+    pub display_aspect_ratio: <a class="struct" href="../av_sys/struct.AVRational.html" title="struct av_sys::AVRational">AVRational</a>,
+    pub priv_pts: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*mut </a><a class="struct" href="../av_sys/struct.FFFrac.html" title="struct av_sys::FFFrac">FFFrac</a>,
+    pub internal: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*mut </a><a class="struct" href="../av_sys/struct.AVStreamInternal.html" title="struct av_sys::AVStreamInternal">AVStreamInternal</a>,
+    pub codecpar: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*mut </a><a class="struct" href="../av_sys/struct.AVCodecParameters.html" title="struct av_sys::AVCodecParameters">AVCodecParameters</a>,
+}</pre><div class='docblock'><p>Stream structure.
+New fields can be added to the end with minor version bumps.
+Removal, reordering and changes to existing fields require a major
+version bump.
+sizeof(AVStream) must not be used outside libav*.</p>
+</div><h2 id='fields' class='fields'>Fields</h2><span id='structfield.index' class="structfield">
+                           <span id='index.v' class='invisible'>
+                           <code>index: <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a></code>
+                           </span></span><div class='docblock'><p>&lt; stream index in AVFormatContext </p>
+</div><span id='structfield.id' class="structfield">
+                           <span id='id.v' class='invisible'>
+                           <code>id: <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a></code>
+                           </span></span><div class='docblock'><p>Format-specific stream ID.
+decoding: set by libavformat
+encoding: set by the user, replaced by libavformat if left unset</p>
+</div><span id='structfield.codec' class="structfield">
+                           <span id='codec.v' class='invisible'>
+                           <code>codec: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*mut </a><a class="struct" href="../av_sys/struct.AVCodecContext.html" title="struct av_sys::AVCodecContext">AVCodecContext</a></code>
+                           </span></span><div class='docblock'><p>@deprecated use the codecpar struct instead</p>
+</div><span id='structfield.priv_data' class="structfield">
+                           <span id='priv_data.v' class='invisible'>
+                           <code>priv_data: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*mut </a><a class="enum" href="https://doc.rust-lang.org/nightly/std/os/raw/enum.c_void.html" title="enum std::os::raw::c_void">c_void</a></code>
+                           </span></span><span id='structfield.pts' class="structfield">
+                           <span id='pts.v' class='invisible'>
+                           <code>pts: <a class="struct" href="../av_sys/struct.AVFrac.html" title="struct av_sys::AVFrac">AVFrac</a></code>
+                           </span></span><div class='docblock'><p>@deprecated this field is unused</p>
+</div><span id='structfield.time_base' class="structfield">
+                           <span id='time_base.v' class='invisible'>
+                           <code>time_base: <a class="struct" href="../av_sys/struct.AVRational.html" title="struct av_sys::AVRational">AVRational</a></code>
+                           </span></span><div class='docblock'><p>This is the fundamental unit of time (in seconds) in terms
+of which frame timestamps are represented.</p>
+
+<p>decoding: set by libavformat
+encoding: May be set by the caller before avformat_write_header() to
+          provide a hint to the muxer about the desired timebase. In
+          avformat_write_header(), the muxer will overwrite this field
+          with the timebase that will actually be used for the timestamps
+          written into the file (which may or may not be related to the
+          user-provided one, depending on the format).</p>
+</div><span id='structfield.start_time' class="structfield">
+                           <span id='start_time.v' class='invisible'>
+                           <code>start_time: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.i64.html">i64</a></code>
+                           </span></span><div class='docblock'><p>Decoding: pts of the first frame of the stream in presentation order, in stream time base.
+Only set this if you are absolutely 100% sure that the value you set
+it to really is the pts of the first frame.
+This may be undefined (AV_NOPTS_VALUE).
+@note The ASF header does NOT contain a correct start_time the ASF
+demuxer must NOT set this.</p>
+</div><span id='structfield.duration' class="structfield">
+                           <span id='duration.v' class='invisible'>
+                           <code>duration: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.i64.html">i64</a></code>
+                           </span></span><div class='docblock'><p>Decoding: duration of the stream, in stream time base.
+If a source file does not specify a duration, but does specify
+a bitrate, this value will be estimated from bitrate and file size.</p>
+
+<p>Encoding: May be set by the caller before avformat_write_header() to
+provide a hint to the muxer about the estimated duration.</p>
+</div><span id='structfield.nb_frames' class="structfield">
+                           <span id='nb_frames.v' class='invisible'>
+                           <code>nb_frames: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.i64.html">i64</a></code>
+                           </span></span><div class='docblock'><p>&lt; number of frames in this stream if known or 0</p>
+</div><span id='structfield.disposition' class="structfield">
+                           <span id='disposition.v' class='invisible'>
+                           <code>disposition: <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a></code>
+                           </span></span><div class='docblock'><p>&lt; AV_DISPOSITION_* bit field </p>
+</div><span id='structfield.discard' class="structfield">
+                           <span id='discard.v' class='invisible'>
+                           <code>discard: <a class="enum" href="../av_sys/enum.AVDiscard.html" title="enum av_sys::AVDiscard">AVDiscard</a></code>
+                           </span></span><div class='docblock'><p>&lt; Selects which packets can be discarded at will and do not need to be demuxed.</p>
+</div><span id='structfield.sample_aspect_ratio' class="structfield">
+                           <span id='sample_aspect_ratio.v' class='invisible'>
+                           <code>sample_aspect_ratio: <a class="struct" href="../av_sys/struct.AVRational.html" title="struct av_sys::AVRational">AVRational</a></code>
+                           </span></span><div class='docblock'><p>sample aspect ratio (0 if unknown)
+- encoding: Set by user.
+- decoding: Set by libavformat.</p>
+</div><span id='structfield.metadata' class="structfield">
+                           <span id='metadata.v' class='invisible'>
+                           <code>metadata: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*mut </a><a class="struct" href="../av_sys/struct.AVDictionary.html" title="struct av_sys::AVDictionary">AVDictionary</a></code>
+                           </span></span><span id='structfield.avg_frame_rate' class="structfield">
+                           <span id='avg_frame_rate.v' class='invisible'>
+                           <code>avg_frame_rate: <a class="struct" href="../av_sys/struct.AVRational.html" title="struct av_sys::AVRational">AVRational</a></code>
+                           </span></span><div class='docblock'><p>Average framerate</p>
+
+<ul>
+<li>demuxing: May be set by libavformat when creating the stream or in
+        avformat_find_stream_info().</li>
+<li>muxing: May be set by the caller before avformat_write_header().</li>
+</ul>
+</div><span id='structfield.attached_pic' class="structfield">
+                           <span id='attached_pic.v' class='invisible'>
+                           <code>attached_pic: <a class="struct" href="../av_sys/struct.AVPacket.html" title="struct av_sys::AVPacket">AVPacket</a></code>
+                           </span></span><div class='docblock'><p>For streams with AV_DISPOSITION_ATTACHED_PIC disposition, this packet
+will contain the attached picture.</p>
+
+<p>decoding: set by libavformat, must not be modified by the caller.
+encoding: unused</p>
+</div><span id='structfield.side_data' class="structfield">
+                           <span id='side_data.v' class='invisible'>
+                           <code>side_data: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*mut </a><a class="struct" href="../av_sys/struct.AVPacketSideData.html" title="struct av_sys::AVPacketSideData">AVPacketSideData</a></code>
+                           </span></span><div class='docblock'><p>An array of side data that applies to the whole stream (i.e. the
+container does not allow it to change between packets).</p>
+
+<p>There may be no overlap between the side data in this array and side data
+in the packets. I.e. a given side data is either exported by the muxer
+(demuxing) / set by the caller (muxing) in this array, then it never
+appears in the packets, or the side data is exported / sent through
+the packets (always in the first packet where the value becomes known or
+changes), then it does not appear in this array.</p>
+
+<ul>
+<li>demuxing: Set by libavformat when the stream is created.</li>
+<li>muxing: May be set by the caller before avformat_write_header().</li>
+</ul>
+
+<p>Freed by libavformat in avformat_free_context().</p>
+
+<p>@see av_format_inject_global_side_data()</p>
+</div><span id='structfield.nb_side_data' class="structfield">
+                           <span id='nb_side_data.v' class='invisible'>
+                           <code>nb_side_data: <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a></code>
+                           </span></span><div class='docblock'><p>The number of elements in the AVStream.side_data array.</p>
+</div><span id='structfield.event_flags' class="structfield">
+                           <span id='event_flags.v' class='invisible'>
+                           <code>event_flags: <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a></code>
+                           </span></span><div class='docblock'><p>Flags for the user to detect events happening on the stream. Flags must
+be cleared by the user once the event has been handled.
+A combination of AVSTREAM_EVENT_FLAG_*.</p>
+</div><span id='structfield.info' class="structfield">
+                           <span id='info.v' class='invisible'>
+                           <code>info: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*mut </a><a class="struct" href="../av_sys/struct.AVStream__bindgen_ty_1.html" title="struct av_sys::AVStream__bindgen_ty_1">AVStream__bindgen_ty_1</a></code>
+                           </span></span><span id='structfield.pts_wrap_bits' class="structfield">
+                           <span id='pts_wrap_bits.v' class='invisible'>
+                           <code>pts_wrap_bits: <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a></code>
+                           </span></span><div class='docblock'><p>&lt; number of bits in pts (used for wrapping control) </p>
+</div><span id='structfield.first_dts' class="structfield">
+                           <span id='first_dts.v' class='invisible'>
+                           <code>first_dts: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.i64.html">i64</a></code>
+                           </span></span><div class='docblock'><p>Timestamp corresponding to the last dts sync point.</p>
+
+<p>Initialized when AVCodecParserContext.dts_sync_point &gt;= 0 and
+a DTS is received from the underlying container. Otherwise set to
+AV_NOPTS_VALUE by default.</p>
+</div><span id='structfield.cur_dts' class="structfield">
+                           <span id='cur_dts.v' class='invisible'>
+                           <code>cur_dts: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.i64.html">i64</a></code>
+                           </span></span><span id='structfield.last_IP_pts' class="structfield">
+                           <span id='last_IP_pts.v' class='invisible'>
+                           <code>last_IP_pts: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.i64.html">i64</a></code>
+                           </span></span><span id='structfield.last_IP_duration' class="structfield">
+                           <span id='last_IP_duration.v' class='invisible'>
+                           <code>last_IP_duration: <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a></code>
+                           </span></span><span id='structfield.probe_packets' class="structfield">
+                           <span id='probe_packets.v' class='invisible'>
+                           <code>probe_packets: <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a></code>
+                           </span></span><div class='docblock'><p>Number of packets to buffer for codec probing</p>
+</div><span id='structfield.codec_info_nb_frames' class="structfield">
+                           <span id='codec_info_nb_frames.v' class='invisible'>
+                           <code>codec_info_nb_frames: <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a></code>
+                           </span></span><div class='docblock'><p>Number of frames that have been demuxed during avformat_find_stream_info()</p>
+</div><span id='structfield.need_parsing' class="structfield">
+                           <span id='need_parsing.v' class='invisible'>
+                           <code>need_parsing: <a class="enum" href="../av_sys/enum.AVStreamParseType.html" title="enum av_sys::AVStreamParseType">AVStreamParseType</a></code>
+                           </span></span><span id='structfield.parser' class="structfield">
+                           <span id='parser.v' class='invisible'>
+                           <code>parser: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*mut </a><a class="struct" href="../av_sys/struct.AVCodecParserContext.html" title="struct av_sys::AVCodecParserContext">AVCodecParserContext</a></code>
+                           </span></span><span id='structfield.last_in_packet_buffer' class="structfield">
+                           <span id='last_in_packet_buffer.v' class='invisible'>
+                           <code>last_in_packet_buffer: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*mut </a><a class="struct" href="../av_sys/struct.AVPacketList.html" title="struct av_sys::AVPacketList">AVPacketList</a></code>
+                           </span></span><div class='docblock'><p>last packet in packet_buffer for this stream when muxing.</p>
+</div><span id='structfield.probe_data' class="structfield">
+                           <span id='probe_data.v' class='invisible'>
+                           <code>probe_data: <a class="struct" href="../av_sys/struct.AVProbeData.html" title="struct av_sys::AVProbeData">AVProbeData</a></code>
+                           </span></span><span id='structfield.pts_buffer' class="structfield">
+                           <span id='pts_buffer.v' class='invisible'>
+                           <code>pts_buffer: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.array.html">[</a><a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.i64.html">i64</a><a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.array.html">; 17]</a></code>
+                           </span></span><span id='structfield.index_entries' class="structfield">
+                           <span id='index_entries.v' class='invisible'>
+                           <code>index_entries: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*mut </a><a class="struct" href="../av_sys/struct.AVIndexEntry.html" title="struct av_sys::AVIndexEntry">AVIndexEntry</a></code>
+                           </span></span><div class='docblock'><p>&lt; Only used if the format does not
+support seeking natively. </p>
+</div><span id='structfield.nb_index_entries' class="structfield">
+                           <span id='nb_index_entries.v' class='invisible'>
+                           <code>nb_index_entries: <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a></code>
+                           </span></span><span id='structfield.index_entries_allocated_size' class="structfield">
+                           <span id='index_entries_allocated_size.v' class='invisible'>
+                           <code>index_entries_allocated_size: <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_uint.html" title="type std::os::raw::c_uint">c_uint</a></code>
+                           </span></span><span id='structfield.r_frame_rate' class="structfield">
+                           <span id='r_frame_rate.v' class='invisible'>
+                           <code>r_frame_rate: <a class="struct" href="../av_sys/struct.AVRational.html" title="struct av_sys::AVRational">AVRational</a></code>
+                           </span></span><div class='docblock'><p>Real base framerate of the stream.
+This is the lowest framerate with which all timestamps can be
+represented accurately (it is the least common multiple of all
+framerates in the stream). Note, this value is just a guess!
+For example, if the time base is 1/90000 and all frames have either
+approximately 3600 or 1800 timer ticks, then r_frame_rate will be 50/1.</p>
+
+<p>Code outside avformat should access this field using:
+av_stream_get/set_r_frame_rate(stream)</p>
+</div><span id='structfield.stream_identifier' class="structfield">
+                           <span id='stream_identifier.v' class='invisible'>
+                           <code>stream_identifier: <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a></code>
+                           </span></span><div class='docblock'><p>Stream Identifier
+This is the MPEG-TS stream identifier +1
+0 means unknown</p>
+</div><span id='structfield.interleaver_chunk_size' class="structfield">
+                           <span id='interleaver_chunk_size.v' class='invisible'>
+                           <code>interleaver_chunk_size: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.i64.html">i64</a></code>
+                           </span></span><span id='structfield.interleaver_chunk_duration' class="structfield">
+                           <span id='interleaver_chunk_duration.v' class='invisible'>
+                           <code>interleaver_chunk_duration: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.i64.html">i64</a></code>
+                           </span></span><span id='structfield.request_probe' class="structfield">
+                           <span id='request_probe.v' class='invisible'>
+                           <code>request_probe: <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a></code>
+                           </span></span><div class='docblock'><p>stream probing state
+-1   -&gt; probing finished
+ 0   -&gt; no probing requested
+rest -&gt; perform probing with request_probe being the minimum score to accept.
+NOT PART OF PUBLIC API</p>
+</div><span id='structfield.skip_to_keyframe' class="structfield">
+                           <span id='skip_to_keyframe.v' class='invisible'>
+                           <code>skip_to_keyframe: <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a></code>
+                           </span></span><div class='docblock'><p>Indicates that everything up to the next keyframe
+should be discarded.</p>
+</div><span id='structfield.skip_samples' class="structfield">
+                           <span id='skip_samples.v' class='invisible'>
+                           <code>skip_samples: <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a></code>
+                           </span></span><div class='docblock'><p>Number of samples to skip at the start of the frame decoded from the next packet.</p>
+</div><span id='structfield.start_skip_samples' class="structfield">
+                           <span id='start_skip_samples.v' class='invisible'>
+                           <code>start_skip_samples: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.i64.html">i64</a></code>
+                           </span></span><div class='docblock'><p>If not 0, the number of samples that should be skipped from the start of
+the stream (the samples are removed from packets with pts==0, which also
+assumes negative timestamps do not happen).
+Intended for use with formats such as mp3 with ad-hoc gapless audio
+support.</p>
+</div><span id='structfield.first_discard_sample' class="structfield">
+                           <span id='first_discard_sample.v' class='invisible'>
+                           <code>first_discard_sample: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.i64.html">i64</a></code>
+                           </span></span><div class='docblock'><p>If not 0, the first audio sample that should be discarded from the stream.
+This is broken by design (needs global sample count), but can&#39;t be
+avoided for broken by design formats such as mp3 with ad-hoc gapless
+audio support.</p>
+</div><span id='structfield.last_discard_sample' class="structfield">
+                           <span id='last_discard_sample.v' class='invisible'>
+                           <code>last_discard_sample: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.i64.html">i64</a></code>
+                           </span></span><div class='docblock'><p>The sample after last sample that is intended to be discarded after
+first_discard_sample. Works on frame boundaries only. Used to prevent
+early EOF if the gapless info is broken (considered concatenated mp3s).</p>
+</div><span id='structfield.nb_decoded_frames' class="structfield">
+                           <span id='nb_decoded_frames.v' class='invisible'>
+                           <code>nb_decoded_frames: <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a></code>
+                           </span></span><div class='docblock'><p>Number of internally decoded frames, used internally in libavformat, do not access
+its lifetime differs from info which is why it is not in that structure.</p>
+</div><span id='structfield.mux_ts_offset' class="structfield">
+                           <span id='mux_ts_offset.v' class='invisible'>
+                           <code>mux_ts_offset: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.i64.html">i64</a></code>
+                           </span></span><div class='docblock'><p>Timestamp offset added to timestamps before muxing
+NOT PART OF PUBLIC API</p>
+</div><span id='structfield.pts_wrap_reference' class="structfield">
+                           <span id='pts_wrap_reference.v' class='invisible'>
+                           <code>pts_wrap_reference: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.i64.html">i64</a></code>
+                           </span></span><div class='docblock'><p>Internal data to check for wrapping of the time stamp</p>
+</div><span id='structfield.pts_wrap_behavior' class="structfield">
+                           <span id='pts_wrap_behavior.v' class='invisible'>
+                           <code>pts_wrap_behavior: <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a></code>
+                           </span></span><div class='docblock'><p>Options for behavior, when a wrap is detected.</p>
+
+<p>Defined by AV_PTS_WRAP_ values.</p>
+
+<p>If correction is enabled, there are two possibilities:
+If the first time stamp is near the wrap point, the wrap offset
+will be subtracted, which will create negative time stamps.
+Otherwise the offset will be added.</p>
+</div><span id='structfield.update_initial_durations_done' class="structfield">
+                           <span id='update_initial_durations_done.v' class='invisible'>
+                           <code>update_initial_durations_done: <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a></code>
+                           </span></span><div class='docblock'><p>Internal data to prevent doing update_initial_durations() twice</p>
+</div><span id='structfield.pts_reorder_error' class="structfield">
+                           <span id='pts_reorder_error.v' class='invisible'>
+                           <code>pts_reorder_error: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.array.html">[</a><a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.i64.html">i64</a><a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.array.html">; 17]</a></code>
+                           </span></span><div class='docblock'><p>Internal data to generate dts from pts</p>
+</div><span id='structfield.pts_reorder_error_count' class="structfield">
+                           <span id='pts_reorder_error_count.v' class='invisible'>
+                           <code>pts_reorder_error_count: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.array.html">[</a><a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u8.html">u8</a><a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.array.html">; 17]</a></code>
+                           </span></span><span id='structfield.last_dts_for_order_check' class="structfield">
+                           <span id='last_dts_for_order_check.v' class='invisible'>
+                           <code>last_dts_for_order_check: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.i64.html">i64</a></code>
+                           </span></span><div class='docblock'><p>Internal data to analyze DTS and detect faulty mpeg streams</p>
+</div><span id='structfield.dts_ordered' class="structfield">
+                           <span id='dts_ordered.v' class='invisible'>
+                           <code>dts_ordered: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u8.html">u8</a></code>
+                           </span></span><span id='structfield.dts_misordered' class="structfield">
+                           <span id='dts_misordered.v' class='invisible'>
+                           <code>dts_misordered: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u8.html">u8</a></code>
+                           </span></span><span id='structfield.inject_global_side_data' class="structfield">
+                           <span id='inject_global_side_data.v' class='invisible'>
+                           <code>inject_global_side_data: <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_int.html" title="type std::os::raw::c_int">c_int</a></code>
+                           </span></span><div class='docblock'><p>Internal data to inject global side data</p>
+</div><span id='structfield.recommended_encoder_configuration' class="structfield">
+                           <span id='recommended_encoder_configuration.v' class='invisible'>
+                           <code>recommended_encoder_configuration: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*mut </a><a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_char.html" title="type std::os::raw::c_char">c_char</a></code>
+                           </span></span><div class='docblock'><p>String containing paris of key and values describing recommended encoder configuration.
+Paris are separated by &#39;,&#39;.
+Keys are separated from values by &#39;=&#39;.</p>
+</div><span id='structfield.display_aspect_ratio' class="structfield">
+                           <span id='display_aspect_ratio.v' class='invisible'>
+                           <code>display_aspect_ratio: <a class="struct" href="../av_sys/struct.AVRational.html" title="struct av_sys::AVRational">AVRational</a></code>
+                           </span></span><div class='docblock'><p>display aspect ratio (0 if unknown)
+- encoding: unused
+- decoding: Set by libavformat to calculate sample_aspect_ratio internally</p>
+</div><span id='structfield.priv_pts' class="structfield">
+                           <span id='priv_pts.v' class='invisible'>
+                           <code>priv_pts: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*mut </a><a class="struct" href="../av_sys/struct.FFFrac.html" title="struct av_sys::FFFrac">FFFrac</a></code>
+                           </span></span><span id='structfield.internal' class="structfield">
+                           <span id='internal.v' class='invisible'>
+                           <code>internal: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*mut </a><a class="struct" href="../av_sys/struct.AVStreamInternal.html" title="struct av_sys::AVStreamInternal">AVStreamInternal</a></code>
+                           </span></span><div class='docblock'><p>An opaque field for libavformat internal usage.
+Must not be accessed in any way by callers.</p>
+</div><span id='structfield.codecpar' class="structfield">
+                           <span id='codecpar.v' class='invisible'>
+                           <code>codecpar: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*mut </a><a class="struct" href="../av_sys/struct.AVCodecParameters.html" title="struct av_sys::AVCodecParameters">AVCodecParameters</a></code>
+                           </span></span><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><span class='in-band'><code>impl <a class="trait" href="https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html" title="trait core::fmt::Debug">Debug</a> for <a class="struct" href="../av_sys/struct.AVStream.html" title="struct av_sys::AVStream">AVStream</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/av_sys/home/travis/build/panicbit/rust-av/target/debug/build/av_sys-5aff961289ea4337/out/ffi.rs.html#5425' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.fmt' class="method"><span id='fmt.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html#tymethod.fmt' class='fnname'>fmt</a>(&amp;self, __arg_0: &amp;mut <a class="struct" href="https://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html" title="struct core::fmt::Formatter">Formatter</a>) -&gt; <a class="type" href="https://doc.rust-lang.org/nightly/core/fmt/type.Result.html" title="type core::fmt::Result">Result</a></code></span></h4>
+<div class='docblock'><p>Formats the value using the given formatter.</p>
+</div></div><h3 class='impl'><span class='in-band'><code>impl <a class="trait" href="https://doc.rust-lang.org/nightly/core/marker/trait.Copy.html" title="trait core::marker::Copy">Copy</a> for <a class="struct" href="../av_sys/struct.AVStream.html" title="struct av_sys::AVStream">AVStream</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/av_sys/home/travis/build/panicbit/rust-av/target/debug/build/av_sys-5aff961289ea4337/out/ffi.rs.html#5425' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'></div><h3 class='impl'><span class='in-band'><code>impl <a class="trait" href="https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html" title="trait core::clone::Clone">Clone</a> for <a class="struct" href="../av_sys/struct.AVStream.html" title="struct av_sys::AVStream">AVStream</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/av_sys/home/travis/build/panicbit/rust-av/target/debug/build/av_sys-5aff961289ea4337/out/ffi.rs.html#5594' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.clone' class="method"><span id='clone.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#tymethod.clone' class='fnname'>clone</a>(&amp;self) -&gt; Self</code></span></h4>
+<div class='docblock'><p>Returns a copy of the value. <a href="https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#tymethod.clone">Read more</a></p>
+</div><h4 id='method.clone_from' class="method"><span id='clone_from.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#method.clone_from' class='fnname'>clone_from</a>(&amp;mut self, source: &amp;Self)</code><div class='since' title='Stable since Rust version 1.0.0'>1.0.0</div></span></h4>
+<div class='docblock'><p>Performs copy-assignment from <code>source</code>. <a href="https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#method.clone_from">Read more</a></p>
+</div></div></section>
+    <section id='search' class="content hidden"></section>
+
+    <section class="footer"></section>
+
+    <aside id="help" class="hidden">
+        <div>
+            <h1 class="hidden">Help</h1>
+
+            <div class="shortcuts">
+                <h2>Keyboard Shortcuts</h2>
+
+                <dl>
+                    <dt>?</dt>
+                    <dd>Show this help dialog</dd>
+                    <dt>S</dt>
+                    <dd>Focus the search field</dd>
+                    <dt>&larrb;</dt>
+                    <dd>Move up in search results</dd>
+                    <dt>&rarrb;</dt>
+                    <dd>Move down in search results</dd>
+                    <dt>&#9166;</dt>
+                    <dd>Go to active search result</dd>
+                    <dt>+</dt>
+                    <dd>Collapse/expand all sections</dd>
+                </dl>
+            </div>
+
+            <div class="infos">
+                <h2>Search Tricks</h2>
+
+                <p>
+                    Prefix searches with a type followed by a colon (e.g.
+                    <code>fn:</code>) to restrict the search to a given type.
+                </p>
+
+                <p>
+                    Accepted types are: <code>fn</code>, <code>mod</code>,
+                    <code>struct</code>, <code>enum</code>,
+                    <code>trait</code>, <code>type</code>, <code>macro</code>,
+                    and <code>const</code>.
+                </p>
+
+                <p>
+                    Search functions by type signature (e.g.
+                    <code>vec -> usize</code> or <code>* -> vec</code>)
+                </p>
+            </div>
+        </div>
+    </aside>
+
+    
+
+    <script>
+        window.rootPath = "../";
+        window.currentCrate = "av_sys";
+    </script>
+    <script src="../jquery.js"></script>
+    <script src="../main.js"></script>
+    <script defer src="../search-index.js"></script>
+</body>
+</html>

@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <meta name="description" content="API documentation for the Rust `AVCodecID` enum in crate `av_sys`.">
+    <meta name="keywords" content="rust, rustlang, rust-lang, AVCodecID">
+
+    <title>av_sys::AVCodecID - Rust</title>
+
+    <link rel="stylesheet" type="text/css" href="../normalize.css">
+    <link rel="stylesheet" type="text/css" href="../rustdoc.css">
+    <link rel="stylesheet" type="text/css" href="../main.css">
+    
+
+    
+    
+</head>
+<body class="rustdoc enum">
+    <!--[if lte IE 8]>
+    <div class="warning">
+        This old browser is unsupported and will most likely display funky
+        things.
+    </div>
+    <![endif]-->
+
+    
+
+    <nav class="sidebar">
+        
+        <p class='location'>Enum AVCodecID</p><div class="block items"><ul><li><a href="#variants">Variants</a></li><li><a href="#implementations">Trait Implementations</a></li></ul></div><p class='location'><a href='index.html'>av_sys</a></p><script>window.sidebarCurrent = {name: 'AVCodecID', ty: 'enum', relpath: ''};</script><script defer src="sidebar-items.js"></script>
+    </nav>
+
+    <nav class="sub">
+        <form class="search-form js-only">
+            <div class="search-container">
+                <input class="search-input" name="search"
+                       autocomplete="off"
+                       placeholder="Click or press ‘S’ to search, ‘?’ for more options…"
+                       type="search">
+            </div>
+        </form>
+    </nav>
+
+    <section id='main' class="content">
+<h1 class='fqn'><span class='in-band'>Enum <a href='index.html'>av_sys</a>::<wbr><a class="enum" href=''>AVCodecID</a></span><span class='out-of-band'><span id='render-detail'>
+                   <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
+                       [<span class='inner'>&#x2212;</span>]
+                   </a>
+               </span><a class='srclink' href='../src/av_sys/home/travis/build/panicbit/rust-av/target/debug/build/av_sys-5aff961289ea4337/out/ffi.rs.html#1844' title='goto source code'>[src]</a></span></h1>
+<pre class='rust enum'><div class="docblock attributes">#[repr(u32)]
+</div>pub enum AVCodecID {
+    AV_CODEC_ID_NONE,
+    AV_CODEC_ID_MPEG1VIDEO,
+    AV_CODEC_ID_MPEG2VIDEO,
+    AV_CODEC_ID_MPEG2VIDEO_XVMC,
+    AV_CODEC_ID_H261,
+    AV_CODEC_ID_H263,
+    AV_CODEC_ID_RV10,
+    AV_CODEC_ID_RV20,
+    AV_CODEC_ID_MJPEG,
+    AV_CODEC_ID_MJPEGB,
+    AV_CODEC_ID_LJPEG,
+    AV_CODEC_ID_SP5X,
+    AV_CODEC_ID_JPEGLS,
+    AV_CODEC_ID_MPEG4,
+    AV_CODEC_ID_RAWVIDEO,
+    AV_CODEC_ID_MSMPEG4V1,
+    AV_CODEC_ID_MSMPEG4V2,
+    AV_CODEC_ID_MSMPEG4V3,
+    AV_CODEC_ID_WMV1,
+    AV_CODEC_ID_WMV2,
+    AV_CODEC_ID_H263P,
+    AV_CODEC_ID_H263I,
+    AV_CODEC_ID_FLV1,
+    AV_CODEC_ID_SVQ1,
+    AV_CODEC_ID_SVQ3,
+    AV_CODEC_ID_DVVIDEO,
+    AV_CODEC_ID_HUFFYUV,
+    AV_CODEC_ID_CYUV,
+    AV_CODEC_ID_H264,
+    AV_CODEC_ID_INDEO3,
+    AV_CODEC_ID_VP3,
+    AV_CODEC_ID_THEORA,
+    AV_CODEC_ID_ASV1,
+    AV_CODEC_ID_ASV2,
+    AV_CODEC_ID_FFV1,
+    AV_CODEC_ID_4XM,
+    AV_CODEC_ID_VCR1,
+    AV_CODEC_ID_CLJR,
+    AV_CODEC_ID_MDEC,
+    AV_CODEC_ID_ROQ,
+    AV_CODEC_ID_INTERPLAY_VIDEO,
+    AV_CODEC_ID_XAN_WC3,
+    AV_CODEC_ID_XAN_WC4,
+    AV_CODEC_ID_RPZA,
+    AV_CODEC_ID_CINEPAK,
+    AV_CODEC_ID_WS_VQA,
+    AV_CODEC_ID_MSRLE,
+    AV_CODEC_ID_MSVIDEO1,
+    AV_CODEC_ID_IDCIN,
+    AV_CODEC_ID_8BPS,
+    AV_CODEC_ID_SMC,
+    AV_CODEC_ID_FLIC,
+    AV_CODEC_ID_TRUEMOTION1,
+    AV_CODEC_ID_VMDVIDEO,
+    AV_CODEC_ID_MSZH,
+    AV_CODEC_ID_ZLIB,
+    AV_CODEC_ID_QTRLE,
+    AV_CODEC_ID_TSCC,
+    AV_CODEC_ID_ULTI,
+    AV_CODEC_ID_QDRAW,
+    AV_CODEC_ID_VIXL,
+    AV_CODEC_ID_QPEG,
+    AV_CODEC_ID_PNG,
+    AV_CODEC_ID_PPM,
+    AV_CODEC_ID_PBM,
+    AV_CODEC_ID_PGM,
+    AV_CODEC_ID_PGMYUV,
+    AV_CODEC_ID_PAM,
+    AV_CODEC_ID_FFVHUFF,
+    AV_CODEC_ID_RV30,
+    AV_CODEC_ID_RV40,
+    AV_CODEC_ID_VC1,
+    AV_CODEC_ID_WMV3,
+    AV_CODEC_ID_LOCO,
+    AV_CODEC_ID_WNV1,
+    AV_CODEC_ID_AASC,
+    AV_CODEC_ID_INDEO2,
+    AV_CODEC_ID_FRAPS,
+    AV_CODEC_ID_TRUEMOTION2,
+    AV_CODEC_ID_BMP,
+    AV_CODEC_ID_CSCD,
+    AV_CODEC_ID_MMVIDEO,
+    AV_CODEC_ID_ZMBV,
+    AV_CODEC_ID_AVS,
+    AV_CODEC_ID_SMACKVIDEO,
+    AV_CODEC_ID_NUV,
+    AV_CODEC_ID_KMVC,
+    AV_CODEC_ID_FLASHSV,
+    AV_CODEC_ID_CAVS,
+    AV_CODEC_ID_JPEG2000,
+    AV_CODEC_ID_VMNC,
+    AV_CODEC_ID_VP5,
+    AV_CODEC_ID_VP6,
+    AV_CODEC_ID_VP6F,
+    AV_CODEC_ID_TARGA,
+    AV_CODEC_ID_DSICINVIDEO,
+    AV_CODEC_ID_TIERTEXSEQVIDEO,
+    AV_CODEC_ID_TIFF,
+    AV_CODEC_ID_GIF,
+    AV_CODEC_ID_DXA,
+    AV_CODEC_ID_DNXHD,
+    AV_CODEC_ID_THP,
+    AV_CODEC_ID_SGI,
+    AV_CODEC_ID_C93,
+    AV_CODEC_ID_BETHSOFTVID,
+    AV_CODEC_ID_PTX,
+    AV_CODEC_ID_TXD,
+    AV_CODEC_ID_VP6A,
+    AV_CODEC_ID_AMV,
+    AV_CODEC_ID_VB,
+    AV_CODEC_ID_PCX,
+    AV_CODEC_ID_SUNRAST,
+    AV_CODEC_ID_INDEO4,
+    AV_CODEC_ID_INDEO5,
+    AV_CODEC_ID_MIMIC,
+    AV_CODEC_ID_RL2,
+    AV_CODEC_ID_ESCAPE124,
+    AV_CODEC_ID_DIRAC,
+    AV_CODEC_ID_BFI,
+    AV_CODEC_ID_CMV,
+    AV_CODEC_ID_MOTIONPIXELS,
+    AV_CODEC_ID_TGV,
+    AV_CODEC_ID_TGQ,
+    AV_CODEC_ID_TQI,
+    AV_CODEC_ID_AURA,
+    AV_CODEC_ID_AURA2,
+    AV_CODEC_ID_V210X,
+    AV_CODEC_ID_TMV,
+    AV_CODEC_ID_V210,
+    AV_CODEC_ID_DPX,
+    AV_CODEC_ID_MAD,
+    AV_CODEC_ID_FRWU,
+    AV_CODEC_ID_FLASHSV2,
+    AV_CODEC_ID_CDGRAPHICS,
+    AV_CODEC_ID_R210,
+    AV_CODEC_ID_ANM,
+    AV_CODEC_ID_BINKVIDEO,
+    AV_CODEC_ID_IFF_ILBM,
+    AV_CODEC_ID_KGV1,
+    AV_CODEC_ID_YOP,
+    AV_CODEC_ID_VP8,
+    AV_CODEC_ID_PICTOR,
+    AV_CODEC_ID_ANSI,
+    AV_CODEC_ID_A64_MULTI,
+    AV_CODEC_ID_A64_MULTI5,
+    AV_CODEC_ID_R10K,
+    AV_CODEC_ID_MXPEG,
+    AV_CODEC_ID_LAGARITH,
+    AV_CODEC_ID_PRORES,
+    AV_CODEC_ID_JV,
+    AV_CODEC_ID_DFA,
+    AV_CODEC_ID_WMV3IMAGE,
+    AV_CODEC_ID_VC1IMAGE,
+    AV_CODEC_ID_UTVIDEO,
+    AV_CODEC_ID_BMV_VIDEO,
+    AV_CODEC_ID_VBLE,
+    AV_CODEC_ID_DXTORY,
+    AV_CODEC_ID_V410,
+    AV_CODEC_ID_XWD,
+    AV_CODEC_ID_CDXL,
+    AV_CODEC_ID_XBM,
+    AV_CODEC_ID_ZEROCODEC,
+    AV_CODEC_ID_MSS1,
+    AV_CODEC_ID_MSA1,
+    AV_CODEC_ID_TSCC2,
+    AV_CODEC_ID_MTS2,
+    AV_CODEC_ID_CLLC,
+    AV_CODEC_ID_MSS2,
+    AV_CODEC_ID_VP9,
+    AV_CODEC_ID_AIC,
+    AV_CODEC_ID_ESCAPE130,
+    AV_CODEC_ID_G2M,
+    AV_CODEC_ID_WEBP,
+    AV_CODEC_ID_HNM4_VIDEO,
+    AV_CODEC_ID_HEVC,
+    AV_CODEC_ID_FIC,
+    AV_CODEC_ID_ALIAS_PIX,
+    AV_CODEC_ID_BRENDER_PIX,
+    AV_CODEC_ID_PAF_VIDEO,
+    AV_CODEC_ID_EXR,
+    AV_CODEC_ID_VP7,
+    AV_CODEC_ID_SANM,
+    AV_CODEC_ID_SGIRLE,
+    AV_CODEC_ID_MVC1,
+    AV_CODEC_ID_MVC2,
+    AV_CODEC_ID_HQX,
+    AV_CODEC_ID_TDSC,
+    AV_CODEC_ID_HQ_HQA,
+    AV_CODEC_ID_HAP,
+    AV_CODEC_ID_DDS,
+    AV_CODEC_ID_DXV,
+    AV_CODEC_ID_SCREENPRESSO,
+    AV_CODEC_ID_RSCC,
+    AV_CODEC_ID_Y41P,
+    AV_CODEC_ID_AVRP,
+    AV_CODEC_ID_012V,
+    AV_CODEC_ID_AVUI,
+    AV_CODEC_ID_AYUV,
+    AV_CODEC_ID_TARGA_Y216,
+    AV_CODEC_ID_V308,
+    AV_CODEC_ID_V408,
+    AV_CODEC_ID_YUV4,
+    AV_CODEC_ID_AVRN,
+    AV_CODEC_ID_CPIA,
+    AV_CODEC_ID_XFACE,
+    AV_CODEC_ID_SNOW,
+    AV_CODEC_ID_SMVJPEG,
+    AV_CODEC_ID_APNG,
+    AV_CODEC_ID_DAALA,
+    AV_CODEC_ID_CFHD,
+    AV_CODEC_ID_TRUEMOTION2RT,
+    AV_CODEC_ID_M101,
+    AV_CODEC_ID_MAGICYUV,
+    AV_CODEC_ID_SHEERVIDEO,
+    AV_CODEC_ID_YLC,
+    AV_CODEC_ID_PSD,
+    AV_CODEC_ID_PIXLET,
+    AV_CODEC_ID_SPEEDHQ,
+    AV_CODEC_ID_FMVC,
+    AV_CODEC_ID_SCPR,
+    AV_CODEC_ID_CLEARVIDEO,
+    AV_CODEC_ID_XPM,
+    AV_CODEC_ID_AV1,
+    AV_CODEC_ID_FIRST_AUDIO,
+    AV_CODEC_ID_PCM_S16BE,
+    AV_CODEC_ID_PCM_U16LE,
+    AV_CODEC_ID_PCM_U16BE,
+    AV_CODEC_ID_PCM_S8,
+    AV_CODEC_ID_PCM_U8,
+    AV_CODEC_ID_PCM_MULAW,
+    AV_CODEC_ID_PCM_ALAW,
+    AV_CODEC_ID_PCM_S32LE,
+    AV_CODEC_ID_PCM_S32BE,
+    AV_CODEC_ID_PCM_U32LE,
+    AV_CODEC_ID_PCM_U32BE,
+    AV_CODEC_ID_PCM_S24LE,
+    AV_CODEC_ID_PCM_S24BE,
+    AV_CODEC_ID_PCM_U24LE,
+    AV_CODEC_ID_PCM_U24BE,
+    AV_CODEC_ID_PCM_S24DAUD,
+    AV_CODEC_ID_PCM_ZORK,
+    AV_CODEC_ID_PCM_S16LE_PLANAR,
+    AV_CODEC_ID_PCM_DVD,
+    AV_CODEC_ID_PCM_F32BE,
+    AV_CODEC_ID_PCM_F32LE,
+    AV_CODEC_ID_PCM_F64BE,
+    AV_CODEC_ID_PCM_F64LE,
+    AV_CODEC_ID_PCM_BLURAY,
+    AV_CODEC_ID_PCM_LXF,
+    AV_CODEC_ID_S302M,
+    AV_CODEC_ID_PCM_S8_PLANAR,
+    AV_CODEC_ID_PCM_S24LE_PLANAR,
+    AV_CODEC_ID_PCM_S32LE_PLANAR,
+    AV_CODEC_ID_PCM_S16BE_PLANAR,
+    AV_CODEC_ID_PCM_S64LE,
+    AV_CODEC_ID_PCM_S64BE,
+    AV_CODEC_ID_PCM_F16LE,
+    AV_CODEC_ID_PCM_F24LE,
+    AV_CODEC_ID_ADPCM_IMA_QT,
+    AV_CODEC_ID_ADPCM_IMA_WAV,
+    AV_CODEC_ID_ADPCM_IMA_DK3,
+    AV_CODEC_ID_ADPCM_IMA_DK4,
+    AV_CODEC_ID_ADPCM_IMA_WS,
+    AV_CODEC_ID_ADPCM_IMA_SMJPEG,
+    AV_CODEC_ID_ADPCM_MS,
+    AV_CODEC_ID_ADPCM_4XM,
+    AV_CODEC_ID_ADPCM_XA,
+    AV_CODEC_ID_ADPCM_ADX,
+    AV_CODEC_ID_ADPCM_EA,
+    AV_CODEC_ID_ADPCM_G726,
+    AV_CODEC_ID_ADPCM_CT,
+    AV_CODEC_ID_ADPCM_SWF,
+    AV_CODEC_ID_ADPCM_YAMAHA,
+    AV_CODEC_ID_ADPCM_SBPRO_4,
+    AV_CODEC_ID_ADPCM_SBPRO_3,
+    AV_CODEC_ID_ADPCM_SBPRO_2,
+    AV_CODEC_ID_ADPCM_THP,
+    AV_CODEC_ID_ADPCM_IMA_AMV,
+    AV_CODEC_ID_ADPCM_EA_R1,
+    AV_CODEC_ID_ADPCM_EA_R3,
+    AV_CODEC_ID_ADPCM_EA_R2,
+    AV_CODEC_ID_ADPCM_IMA_EA_SEAD,
+    AV_CODEC_ID_ADPCM_IMA_EA_EACS,
+    AV_CODEC_ID_ADPCM_EA_XAS,
+    AV_CODEC_ID_ADPCM_EA_MAXIS_XA,
+    AV_CODEC_ID_ADPCM_IMA_ISS,
+    AV_CODEC_ID_ADPCM_G722,
+    AV_CODEC_ID_ADPCM_IMA_APC,
+    AV_CODEC_ID_ADPCM_VIMA,
+    AV_CODEC_ID_ADPCM_AFC,
+    AV_CODEC_ID_ADPCM_IMA_OKI,
+    AV_CODEC_ID_ADPCM_DTK,
+    AV_CODEC_ID_ADPCM_IMA_RAD,
+    AV_CODEC_ID_ADPCM_G726LE,
+    AV_CODEC_ID_ADPCM_THP_LE,
+    AV_CODEC_ID_ADPCM_PSX,
+    AV_CODEC_ID_ADPCM_AICA,
+    AV_CODEC_ID_ADPCM_IMA_DAT4,
+    AV_CODEC_ID_ADPCM_MTAF,
+    AV_CODEC_ID_AMR_NB,
+    AV_CODEC_ID_AMR_WB,
+    AV_CODEC_ID_RA_144,
+    AV_CODEC_ID_RA_288,
+    AV_CODEC_ID_ROQ_DPCM,
+    AV_CODEC_ID_INTERPLAY_DPCM,
+    AV_CODEC_ID_XAN_DPCM,
+    AV_CODEC_ID_SOL_DPCM,
+    AV_CODEC_ID_SDX2_DPCM,
+    AV_CODEC_ID_MP2,
+    AV_CODEC_ID_MP3,
+    AV_CODEC_ID_AAC,
+    AV_CODEC_ID_AC3,
+    AV_CODEC_ID_DTS,
+    AV_CODEC_ID_VORBIS,
+    AV_CODEC_ID_DVAUDIO,
+    AV_CODEC_ID_WMAV1,
+    AV_CODEC_ID_WMAV2,
+    AV_CODEC_ID_MACE3,
+    AV_CODEC_ID_MACE6,
+    AV_CODEC_ID_VMDAUDIO,
+    AV_CODEC_ID_FLAC,
+    AV_CODEC_ID_MP3ADU,
+    AV_CODEC_ID_MP3ON4,
+    AV_CODEC_ID_SHORTEN,
+    AV_CODEC_ID_ALAC,
+    AV_CODEC_ID_WESTWOOD_SND1,
+    AV_CODEC_ID_GSM,
+    AV_CODEC_ID_QDM2,
+    AV_CODEC_ID_COOK,
+    AV_CODEC_ID_TRUESPEECH,
+    AV_CODEC_ID_TTA,
+    AV_CODEC_ID_SMACKAUDIO,
+    AV_CODEC_ID_QCELP,
+    AV_CODEC_ID_WAVPACK,
+    AV_CODEC_ID_DSICINAUDIO,
+    AV_CODEC_ID_IMC,
+    AV_CODEC_ID_MUSEPACK7,
+    AV_CODEC_ID_MLP,
+    AV_CODEC_ID_GSM_MS,
+    AV_CODEC_ID_ATRAC3,
+    AV_CODEC_ID_VOXWARE,
+    AV_CODEC_ID_APE,
+    AV_CODEC_ID_NELLYMOSER,
+    AV_CODEC_ID_MUSEPACK8,
+    AV_CODEC_ID_SPEEX,
+    AV_CODEC_ID_WMAVOICE,
+    AV_CODEC_ID_WMAPRO,
+    AV_CODEC_ID_WMALOSSLESS,
+    AV_CODEC_ID_ATRAC3P,
+    AV_CODEC_ID_EAC3,
+    AV_CODEC_ID_SIPR,
+    AV_CODEC_ID_MP1,
+    AV_CODEC_ID_TWINVQ,
+    AV_CODEC_ID_TRUEHD,
+    AV_CODEC_ID_MP4ALS,
+    AV_CODEC_ID_ATRAC1,
+    AV_CODEC_ID_BINKAUDIO_RDFT,
+    AV_CODEC_ID_BINKAUDIO_DCT,
+    AV_CODEC_ID_AAC_LATM,
+    AV_CODEC_ID_QDMC,
+    AV_CODEC_ID_CELT,
+    AV_CODEC_ID_G723_1,
+    AV_CODEC_ID_G729,
+    AV_CODEC_ID_8SVX_EXP,
+    AV_CODEC_ID_8SVX_FIB,
+    AV_CODEC_ID_BMV_AUDIO,
+    AV_CODEC_ID_RALF,
+    AV_CODEC_ID_IAC,
+    AV_CODEC_ID_ILBC,
+    AV_CODEC_ID_OPUS,
+    AV_CODEC_ID_COMFORT_NOISE,
+    AV_CODEC_ID_TAK,
+    AV_CODEC_ID_METASOUND,
+    AV_CODEC_ID_PAF_AUDIO,
+    AV_CODEC_ID_ON2AVC,
+    AV_CODEC_ID_DSS_SP,
+    AV_CODEC_ID_FFWAVESYNTH,
+    AV_CODEC_ID_SONIC,
+    AV_CODEC_ID_SONIC_LS,
+    AV_CODEC_ID_EVRC,
+    AV_CODEC_ID_SMV,
+    AV_CODEC_ID_DSD_LSBF,
+    AV_CODEC_ID_DSD_MSBF,
+    AV_CODEC_ID_DSD_LSBF_PLANAR,
+    AV_CODEC_ID_DSD_MSBF_PLANAR,
+    AV_CODEC_ID_4GV,
+    AV_CODEC_ID_INTERPLAY_ACM,
+    AV_CODEC_ID_XMA1,
+    AV_CODEC_ID_XMA2,
+    AV_CODEC_ID_DST,
+    AV_CODEC_ID_ATRAC3AL,
+    AV_CODEC_ID_ATRAC3PAL,
+    AV_CODEC_ID_FIRST_SUBTITLE,
+    AV_CODEC_ID_DVB_SUBTITLE,
+    AV_CODEC_ID_TEXT,
+    AV_CODEC_ID_XSUB,
+    AV_CODEC_ID_SSA,
+    AV_CODEC_ID_MOV_TEXT,
+    AV_CODEC_ID_HDMV_PGS_SUBTITLE,
+    AV_CODEC_ID_DVB_TELETEXT,
+    AV_CODEC_ID_SRT,
+    AV_CODEC_ID_MICRODVD,
+    AV_CODEC_ID_EIA_608,
+    AV_CODEC_ID_JACOSUB,
+    AV_CODEC_ID_SAMI,
+    AV_CODEC_ID_REALTEXT,
+    AV_CODEC_ID_STL,
+    AV_CODEC_ID_SUBVIEWER1,
+    AV_CODEC_ID_SUBVIEWER,
+    AV_CODEC_ID_SUBRIP,
+    AV_CODEC_ID_WEBVTT,
+    AV_CODEC_ID_MPL2,
+    AV_CODEC_ID_VPLAYER,
+    AV_CODEC_ID_PJS,
+    AV_CODEC_ID_ASS,
+    AV_CODEC_ID_HDMV_TEXT_SUBTITLE,
+    AV_CODEC_ID_FIRST_UNKNOWN,
+    AV_CODEC_ID_SCTE_35,
+    AV_CODEC_ID_BINTEXT,
+    AV_CODEC_ID_XBIN,
+    AV_CODEC_ID_IDF,
+    AV_CODEC_ID_OTF,
+    AV_CODEC_ID_SMPTE_KLV,
+    AV_CODEC_ID_DVD_NAV,
+    AV_CODEC_ID_TIMED_ID3,
+    AV_CODEC_ID_BIN_DATA,
+    AV_CODEC_ID_PROBE,
+    AV_CODEC_ID_MPEG2TS,
+    AV_CODEC_ID_MPEG4SYSTEMS,
+    AV_CODEC_ID_FFMETADATA,
+    AV_CODEC_ID_WRAPPED_AVFRAME,
+}</pre><div class='docblock'><p>Identify the syntax and semantics of the bitstream.
+The principle is roughly:
+Two decoders with the same ID can decode the same streams.
+Two encoders with the same ID can encode compatible streams.
+There may be slight deviations from the principle due to implementation
+details.</p>
+
+<p>If you add a codec ID to this list, add it so that
+1. no value of an existing codec ID changes (that would break ABI),
+2. it is as close as possible to similar codecs</p>
+
+<p>After adding new codec IDs, do not forget to add an entry to the codec
+descriptor list and bump libavcodec minor version.</p>
+</div><h2 id='variants' class='variants'>Variants</h2>
+<span id='variant.AV_CODEC_ID_NONE' class='variant'><span id='AV_CODEC_ID_NONE.v' class='invisible'><code>AV_CODEC_ID_NONE</code></span></span><span id='variant.AV_CODEC_ID_MPEG1VIDEO' class='variant'><span id='AV_CODEC_ID_MPEG1VIDEO.v' class='invisible'><code>AV_CODEC_ID_MPEG1VIDEO</code></span></span><span id='variant.AV_CODEC_ID_MPEG2VIDEO' class='variant'><span id='AV_CODEC_ID_MPEG2VIDEO.v' class='invisible'><code>AV_CODEC_ID_MPEG2VIDEO</code></span></span><span id='variant.AV_CODEC_ID_MPEG2VIDEO_XVMC' class='variant'><span id='AV_CODEC_ID_MPEG2VIDEO_XVMC.v' class='invisible'><code>AV_CODEC_ID_MPEG2VIDEO_XVMC</code></span></span><span id='variant.AV_CODEC_ID_H261' class='variant'><span id='AV_CODEC_ID_H261.v' class='invisible'><code>AV_CODEC_ID_H261</code></span></span><span id='variant.AV_CODEC_ID_H263' class='variant'><span id='AV_CODEC_ID_H263.v' class='invisible'><code>AV_CODEC_ID_H263</code></span></span><span id='variant.AV_CODEC_ID_RV10' class='variant'><span id='AV_CODEC_ID_RV10.v' class='invisible'><code>AV_CODEC_ID_RV10</code></span></span><span id='variant.AV_CODEC_ID_RV20' class='variant'><span id='AV_CODEC_ID_RV20.v' class='invisible'><code>AV_CODEC_ID_RV20</code></span></span><span id='variant.AV_CODEC_ID_MJPEG' class='variant'><span id='AV_CODEC_ID_MJPEG.v' class='invisible'><code>AV_CODEC_ID_MJPEG</code></span></span><span id='variant.AV_CODEC_ID_MJPEGB' class='variant'><span id='AV_CODEC_ID_MJPEGB.v' class='invisible'><code>AV_CODEC_ID_MJPEGB</code></span></span><span id='variant.AV_CODEC_ID_LJPEG' class='variant'><span id='AV_CODEC_ID_LJPEG.v' class='invisible'><code>AV_CODEC_ID_LJPEG</code></span></span><span id='variant.AV_CODEC_ID_SP5X' class='variant'><span id='AV_CODEC_ID_SP5X.v' class='invisible'><code>AV_CODEC_ID_SP5X</code></span></span><span id='variant.AV_CODEC_ID_JPEGLS' class='variant'><span id='AV_CODEC_ID_JPEGLS.v' class='invisible'><code>AV_CODEC_ID_JPEGLS</code></span></span><span id='variant.AV_CODEC_ID_MPEG4' class='variant'><span id='AV_CODEC_ID_MPEG4.v' class='invisible'><code>AV_CODEC_ID_MPEG4</code></span></span><span id='variant.AV_CODEC_ID_RAWVIDEO' class='variant'><span id='AV_CODEC_ID_RAWVIDEO.v' class='invisible'><code>AV_CODEC_ID_RAWVIDEO</code></span></span><span id='variant.AV_CODEC_ID_MSMPEG4V1' class='variant'><span id='AV_CODEC_ID_MSMPEG4V1.v' class='invisible'><code>AV_CODEC_ID_MSMPEG4V1</code></span></span><span id='variant.AV_CODEC_ID_MSMPEG4V2' class='variant'><span id='AV_CODEC_ID_MSMPEG4V2.v' class='invisible'><code>AV_CODEC_ID_MSMPEG4V2</code></span></span><span id='variant.AV_CODEC_ID_MSMPEG4V3' class='variant'><span id='AV_CODEC_ID_MSMPEG4V3.v' class='invisible'><code>AV_CODEC_ID_MSMPEG4V3</code></span></span><span id='variant.AV_CODEC_ID_WMV1' class='variant'><span id='AV_CODEC_ID_WMV1.v' class='invisible'><code>AV_CODEC_ID_WMV1</code></span></span><span id='variant.AV_CODEC_ID_WMV2' class='variant'><span id='AV_CODEC_ID_WMV2.v' class='invisible'><code>AV_CODEC_ID_WMV2</code></span></span><span id='variant.AV_CODEC_ID_H263P' class='variant'><span id='AV_CODEC_ID_H263P.v' class='invisible'><code>AV_CODEC_ID_H263P</code></span></span><span id='variant.AV_CODEC_ID_H263I' class='variant'><span id='AV_CODEC_ID_H263I.v' class='invisible'><code>AV_CODEC_ID_H263I</code></span></span><span id='variant.AV_CODEC_ID_FLV1' class='variant'><span id='AV_CODEC_ID_FLV1.v' class='invisible'><code>AV_CODEC_ID_FLV1</code></span></span><span id='variant.AV_CODEC_ID_SVQ1' class='variant'><span id='AV_CODEC_ID_SVQ1.v' class='invisible'><code>AV_CODEC_ID_SVQ1</code></span></span><span id='variant.AV_CODEC_ID_SVQ3' class='variant'><span id='AV_CODEC_ID_SVQ3.v' class='invisible'><code>AV_CODEC_ID_SVQ3</code></span></span><span id='variant.AV_CODEC_ID_DVVIDEO' class='variant'><span id='AV_CODEC_ID_DVVIDEO.v' class='invisible'><code>AV_CODEC_ID_DVVIDEO</code></span></span><span id='variant.AV_CODEC_ID_HUFFYUV' class='variant'><span id='AV_CODEC_ID_HUFFYUV.v' class='invisible'><code>AV_CODEC_ID_HUFFYUV</code></span></span><span id='variant.AV_CODEC_ID_CYUV' class='variant'><span id='AV_CODEC_ID_CYUV.v' class='invisible'><code>AV_CODEC_ID_CYUV</code></span></span><span id='variant.AV_CODEC_ID_H264' class='variant'><span id='AV_CODEC_ID_H264.v' class='invisible'><code>AV_CODEC_ID_H264</code></span></span><span id='variant.AV_CODEC_ID_INDEO3' class='variant'><span id='AV_CODEC_ID_INDEO3.v' class='invisible'><code>AV_CODEC_ID_INDEO3</code></span></span><span id='variant.AV_CODEC_ID_VP3' class='variant'><span id='AV_CODEC_ID_VP3.v' class='invisible'><code>AV_CODEC_ID_VP3</code></span></span><span id='variant.AV_CODEC_ID_THEORA' class='variant'><span id='AV_CODEC_ID_THEORA.v' class='invisible'><code>AV_CODEC_ID_THEORA</code></span></span><span id='variant.AV_CODEC_ID_ASV1' class='variant'><span id='AV_CODEC_ID_ASV1.v' class='invisible'><code>AV_CODEC_ID_ASV1</code></span></span><span id='variant.AV_CODEC_ID_ASV2' class='variant'><span id='AV_CODEC_ID_ASV2.v' class='invisible'><code>AV_CODEC_ID_ASV2</code></span></span><span id='variant.AV_CODEC_ID_FFV1' class='variant'><span id='AV_CODEC_ID_FFV1.v' class='invisible'><code>AV_CODEC_ID_FFV1</code></span></span><span id='variant.AV_CODEC_ID_4XM' class='variant'><span id='AV_CODEC_ID_4XM.v' class='invisible'><code>AV_CODEC_ID_4XM</code></span></span><span id='variant.AV_CODEC_ID_VCR1' class='variant'><span id='AV_CODEC_ID_VCR1.v' class='invisible'><code>AV_CODEC_ID_VCR1</code></span></span><span id='variant.AV_CODEC_ID_CLJR' class='variant'><span id='AV_CODEC_ID_CLJR.v' class='invisible'><code>AV_CODEC_ID_CLJR</code></span></span><span id='variant.AV_CODEC_ID_MDEC' class='variant'><span id='AV_CODEC_ID_MDEC.v' class='invisible'><code>AV_CODEC_ID_MDEC</code></span></span><span id='variant.AV_CODEC_ID_ROQ' class='variant'><span id='AV_CODEC_ID_ROQ.v' class='invisible'><code>AV_CODEC_ID_ROQ</code></span></span><span id='variant.AV_CODEC_ID_INTERPLAY_VIDEO' class='variant'><span id='AV_CODEC_ID_INTERPLAY_VIDEO.v' class='invisible'><code>AV_CODEC_ID_INTERPLAY_VIDEO</code></span></span><span id='variant.AV_CODEC_ID_XAN_WC3' class='variant'><span id='AV_CODEC_ID_XAN_WC3.v' class='invisible'><code>AV_CODEC_ID_XAN_WC3</code></span></span><span id='variant.AV_CODEC_ID_XAN_WC4' class='variant'><span id='AV_CODEC_ID_XAN_WC4.v' class='invisible'><code>AV_CODEC_ID_XAN_WC4</code></span></span><span id='variant.AV_CODEC_ID_RPZA' class='variant'><span id='AV_CODEC_ID_RPZA.v' class='invisible'><code>AV_CODEC_ID_RPZA</code></span></span><span id='variant.AV_CODEC_ID_CINEPAK' class='variant'><span id='AV_CODEC_ID_CINEPAK.v' class='invisible'><code>AV_CODEC_ID_CINEPAK</code></span></span><span id='variant.AV_CODEC_ID_WS_VQA' class='variant'><span id='AV_CODEC_ID_WS_VQA.v' class='invisible'><code>AV_CODEC_ID_WS_VQA</code></span></span><span id='variant.AV_CODEC_ID_MSRLE' class='variant'><span id='AV_CODEC_ID_MSRLE.v' class='invisible'><code>AV_CODEC_ID_MSRLE</code></span></span><span id='variant.AV_CODEC_ID_MSVIDEO1' class='variant'><span id='AV_CODEC_ID_MSVIDEO1.v' class='invisible'><code>AV_CODEC_ID_MSVIDEO1</code></span></span><span id='variant.AV_CODEC_ID_IDCIN' class='variant'><span id='AV_CODEC_ID_IDCIN.v' class='invisible'><code>AV_CODEC_ID_IDCIN</code></span></span><span id='variant.AV_CODEC_ID_8BPS' class='variant'><span id='AV_CODEC_ID_8BPS.v' class='invisible'><code>AV_CODEC_ID_8BPS</code></span></span><span id='variant.AV_CODEC_ID_SMC' class='variant'><span id='AV_CODEC_ID_SMC.v' class='invisible'><code>AV_CODEC_ID_SMC</code></span></span><span id='variant.AV_CODEC_ID_FLIC' class='variant'><span id='AV_CODEC_ID_FLIC.v' class='invisible'><code>AV_CODEC_ID_FLIC</code></span></span><span id='variant.AV_CODEC_ID_TRUEMOTION1' class='variant'><span id='AV_CODEC_ID_TRUEMOTION1.v' class='invisible'><code>AV_CODEC_ID_TRUEMOTION1</code></span></span><span id='variant.AV_CODEC_ID_VMDVIDEO' class='variant'><span id='AV_CODEC_ID_VMDVIDEO.v' class='invisible'><code>AV_CODEC_ID_VMDVIDEO</code></span></span><span id='variant.AV_CODEC_ID_MSZH' class='variant'><span id='AV_CODEC_ID_MSZH.v' class='invisible'><code>AV_CODEC_ID_MSZH</code></span></span><span id='variant.AV_CODEC_ID_ZLIB' class='variant'><span id='AV_CODEC_ID_ZLIB.v' class='invisible'><code>AV_CODEC_ID_ZLIB</code></span></span><span id='variant.AV_CODEC_ID_QTRLE' class='variant'><span id='AV_CODEC_ID_QTRLE.v' class='invisible'><code>AV_CODEC_ID_QTRLE</code></span></span><span id='variant.AV_CODEC_ID_TSCC' class='variant'><span id='AV_CODEC_ID_TSCC.v' class='invisible'><code>AV_CODEC_ID_TSCC</code></span></span><span id='variant.AV_CODEC_ID_ULTI' class='variant'><span id='AV_CODEC_ID_ULTI.v' class='invisible'><code>AV_CODEC_ID_ULTI</code></span></span><span id='variant.AV_CODEC_ID_QDRAW' class='variant'><span id='AV_CODEC_ID_QDRAW.v' class='invisible'><code>AV_CODEC_ID_QDRAW</code></span></span><span id='variant.AV_CODEC_ID_VIXL' class='variant'><span id='AV_CODEC_ID_VIXL.v' class='invisible'><code>AV_CODEC_ID_VIXL</code></span></span><span id='variant.AV_CODEC_ID_QPEG' class='variant'><span id='AV_CODEC_ID_QPEG.v' class='invisible'><code>AV_CODEC_ID_QPEG</code></span></span><span id='variant.AV_CODEC_ID_PNG' class='variant'><span id='AV_CODEC_ID_PNG.v' class='invisible'><code>AV_CODEC_ID_PNG</code></span></span><span id='variant.AV_CODEC_ID_PPM' class='variant'><span id='AV_CODEC_ID_PPM.v' class='invisible'><code>AV_CODEC_ID_PPM</code></span></span><span id='variant.AV_CODEC_ID_PBM' class='variant'><span id='AV_CODEC_ID_PBM.v' class='invisible'><code>AV_CODEC_ID_PBM</code></span></span><span id='variant.AV_CODEC_ID_PGM' class='variant'><span id='AV_CODEC_ID_PGM.v' class='invisible'><code>AV_CODEC_ID_PGM</code></span></span><span id='variant.AV_CODEC_ID_PGMYUV' class='variant'><span id='AV_CODEC_ID_PGMYUV.v' class='invisible'><code>AV_CODEC_ID_PGMYUV</code></span></span><span id='variant.AV_CODEC_ID_PAM' class='variant'><span id='AV_CODEC_ID_PAM.v' class='invisible'><code>AV_CODEC_ID_PAM</code></span></span><span id='variant.AV_CODEC_ID_FFVHUFF' class='variant'><span id='AV_CODEC_ID_FFVHUFF.v' class='invisible'><code>AV_CODEC_ID_FFVHUFF</code></span></span><span id='variant.AV_CODEC_ID_RV30' class='variant'><span id='AV_CODEC_ID_RV30.v' class='invisible'><code>AV_CODEC_ID_RV30</code></span></span><span id='variant.AV_CODEC_ID_RV40' class='variant'><span id='AV_CODEC_ID_RV40.v' class='invisible'><code>AV_CODEC_ID_RV40</code></span></span><span id='variant.AV_CODEC_ID_VC1' class='variant'><span id='AV_CODEC_ID_VC1.v' class='invisible'><code>AV_CODEC_ID_VC1</code></span></span><span id='variant.AV_CODEC_ID_WMV3' class='variant'><span id='AV_CODEC_ID_WMV3.v' class='invisible'><code>AV_CODEC_ID_WMV3</code></span></span><span id='variant.AV_CODEC_ID_LOCO' class='variant'><span id='AV_CODEC_ID_LOCO.v' class='invisible'><code>AV_CODEC_ID_LOCO</code></span></span><span id='variant.AV_CODEC_ID_WNV1' class='variant'><span id='AV_CODEC_ID_WNV1.v' class='invisible'><code>AV_CODEC_ID_WNV1</code></span></span><span id='variant.AV_CODEC_ID_AASC' class='variant'><span id='AV_CODEC_ID_AASC.v' class='invisible'><code>AV_CODEC_ID_AASC</code></span></span><span id='variant.AV_CODEC_ID_INDEO2' class='variant'><span id='AV_CODEC_ID_INDEO2.v' class='invisible'><code>AV_CODEC_ID_INDEO2</code></span></span><span id='variant.AV_CODEC_ID_FRAPS' class='variant'><span id='AV_CODEC_ID_FRAPS.v' class='invisible'><code>AV_CODEC_ID_FRAPS</code></span></span><span id='variant.AV_CODEC_ID_TRUEMOTION2' class='variant'><span id='AV_CODEC_ID_TRUEMOTION2.v' class='invisible'><code>AV_CODEC_ID_TRUEMOTION2</code></span></span><span id='variant.AV_CODEC_ID_BMP' class='variant'><span id='AV_CODEC_ID_BMP.v' class='invisible'><code>AV_CODEC_ID_BMP</code></span></span><span id='variant.AV_CODEC_ID_CSCD' class='variant'><span id='AV_CODEC_ID_CSCD.v' class='invisible'><code>AV_CODEC_ID_CSCD</code></span></span><span id='variant.AV_CODEC_ID_MMVIDEO' class='variant'><span id='AV_CODEC_ID_MMVIDEO.v' class='invisible'><code>AV_CODEC_ID_MMVIDEO</code></span></span><span id='variant.AV_CODEC_ID_ZMBV' class='variant'><span id='AV_CODEC_ID_ZMBV.v' class='invisible'><code>AV_CODEC_ID_ZMBV</code></span></span><span id='variant.AV_CODEC_ID_AVS' class='variant'><span id='AV_CODEC_ID_AVS.v' class='invisible'><code>AV_CODEC_ID_AVS</code></span></span><span id='variant.AV_CODEC_ID_SMACKVIDEO' class='variant'><span id='AV_CODEC_ID_SMACKVIDEO.v' class='invisible'><code>AV_CODEC_ID_SMACKVIDEO</code></span></span><span id='variant.AV_CODEC_ID_NUV' class='variant'><span id='AV_CODEC_ID_NUV.v' class='invisible'><code>AV_CODEC_ID_NUV</code></span></span><span id='variant.AV_CODEC_ID_KMVC' class='variant'><span id='AV_CODEC_ID_KMVC.v' class='invisible'><code>AV_CODEC_ID_KMVC</code></span></span><span id='variant.AV_CODEC_ID_FLASHSV' class='variant'><span id='AV_CODEC_ID_FLASHSV.v' class='invisible'><code>AV_CODEC_ID_FLASHSV</code></span></span><span id='variant.AV_CODEC_ID_CAVS' class='variant'><span id='AV_CODEC_ID_CAVS.v' class='invisible'><code>AV_CODEC_ID_CAVS</code></span></span><span id='variant.AV_CODEC_ID_JPEG2000' class='variant'><span id='AV_CODEC_ID_JPEG2000.v' class='invisible'><code>AV_CODEC_ID_JPEG2000</code></span></span><span id='variant.AV_CODEC_ID_VMNC' class='variant'><span id='AV_CODEC_ID_VMNC.v' class='invisible'><code>AV_CODEC_ID_VMNC</code></span></span><span id='variant.AV_CODEC_ID_VP5' class='variant'><span id='AV_CODEC_ID_VP5.v' class='invisible'><code>AV_CODEC_ID_VP5</code></span></span><span id='variant.AV_CODEC_ID_VP6' class='variant'><span id='AV_CODEC_ID_VP6.v' class='invisible'><code>AV_CODEC_ID_VP6</code></span></span><span id='variant.AV_CODEC_ID_VP6F' class='variant'><span id='AV_CODEC_ID_VP6F.v' class='invisible'><code>AV_CODEC_ID_VP6F</code></span></span><span id='variant.AV_CODEC_ID_TARGA' class='variant'><span id='AV_CODEC_ID_TARGA.v' class='invisible'><code>AV_CODEC_ID_TARGA</code></span></span><span id='variant.AV_CODEC_ID_DSICINVIDEO' class='variant'><span id='AV_CODEC_ID_DSICINVIDEO.v' class='invisible'><code>AV_CODEC_ID_DSICINVIDEO</code></span></span><span id='variant.AV_CODEC_ID_TIERTEXSEQVIDEO' class='variant'><span id='AV_CODEC_ID_TIERTEXSEQVIDEO.v' class='invisible'><code>AV_CODEC_ID_TIERTEXSEQVIDEO</code></span></span><span id='variant.AV_CODEC_ID_TIFF' class='variant'><span id='AV_CODEC_ID_TIFF.v' class='invisible'><code>AV_CODEC_ID_TIFF</code></span></span><span id='variant.AV_CODEC_ID_GIF' class='variant'><span id='AV_CODEC_ID_GIF.v' class='invisible'><code>AV_CODEC_ID_GIF</code></span></span><span id='variant.AV_CODEC_ID_DXA' class='variant'><span id='AV_CODEC_ID_DXA.v' class='invisible'><code>AV_CODEC_ID_DXA</code></span></span><span id='variant.AV_CODEC_ID_DNXHD' class='variant'><span id='AV_CODEC_ID_DNXHD.v' class='invisible'><code>AV_CODEC_ID_DNXHD</code></span></span><span id='variant.AV_CODEC_ID_THP' class='variant'><span id='AV_CODEC_ID_THP.v' class='invisible'><code>AV_CODEC_ID_THP</code></span></span><span id='variant.AV_CODEC_ID_SGI' class='variant'><span id='AV_CODEC_ID_SGI.v' class='invisible'><code>AV_CODEC_ID_SGI</code></span></span><span id='variant.AV_CODEC_ID_C93' class='variant'><span id='AV_CODEC_ID_C93.v' class='invisible'><code>AV_CODEC_ID_C93</code></span></span><span id='variant.AV_CODEC_ID_BETHSOFTVID' class='variant'><span id='AV_CODEC_ID_BETHSOFTVID.v' class='invisible'><code>AV_CODEC_ID_BETHSOFTVID</code></span></span><span id='variant.AV_CODEC_ID_PTX' class='variant'><span id='AV_CODEC_ID_PTX.v' class='invisible'><code>AV_CODEC_ID_PTX</code></span></span><span id='variant.AV_CODEC_ID_TXD' class='variant'><span id='AV_CODEC_ID_TXD.v' class='invisible'><code>AV_CODEC_ID_TXD</code></span></span><span id='variant.AV_CODEC_ID_VP6A' class='variant'><span id='AV_CODEC_ID_VP6A.v' class='invisible'><code>AV_CODEC_ID_VP6A</code></span></span><span id='variant.AV_CODEC_ID_AMV' class='variant'><span id='AV_CODEC_ID_AMV.v' class='invisible'><code>AV_CODEC_ID_AMV</code></span></span><span id='variant.AV_CODEC_ID_VB' class='variant'><span id='AV_CODEC_ID_VB.v' class='invisible'><code>AV_CODEC_ID_VB</code></span></span><span id='variant.AV_CODEC_ID_PCX' class='variant'><span id='AV_CODEC_ID_PCX.v' class='invisible'><code>AV_CODEC_ID_PCX</code></span></span><span id='variant.AV_CODEC_ID_SUNRAST' class='variant'><span id='AV_CODEC_ID_SUNRAST.v' class='invisible'><code>AV_CODEC_ID_SUNRAST</code></span></span><span id='variant.AV_CODEC_ID_INDEO4' class='variant'><span id='AV_CODEC_ID_INDEO4.v' class='invisible'><code>AV_CODEC_ID_INDEO4</code></span></span><span id='variant.AV_CODEC_ID_INDEO5' class='variant'><span id='AV_CODEC_ID_INDEO5.v' class='invisible'><code>AV_CODEC_ID_INDEO5</code></span></span><span id='variant.AV_CODEC_ID_MIMIC' class='variant'><span id='AV_CODEC_ID_MIMIC.v' class='invisible'><code>AV_CODEC_ID_MIMIC</code></span></span><span id='variant.AV_CODEC_ID_RL2' class='variant'><span id='AV_CODEC_ID_RL2.v' class='invisible'><code>AV_CODEC_ID_RL2</code></span></span><span id='variant.AV_CODEC_ID_ESCAPE124' class='variant'><span id='AV_CODEC_ID_ESCAPE124.v' class='invisible'><code>AV_CODEC_ID_ESCAPE124</code></span></span><span id='variant.AV_CODEC_ID_DIRAC' class='variant'><span id='AV_CODEC_ID_DIRAC.v' class='invisible'><code>AV_CODEC_ID_DIRAC</code></span></span><span id='variant.AV_CODEC_ID_BFI' class='variant'><span id='AV_CODEC_ID_BFI.v' class='invisible'><code>AV_CODEC_ID_BFI</code></span></span><span id='variant.AV_CODEC_ID_CMV' class='variant'><span id='AV_CODEC_ID_CMV.v' class='invisible'><code>AV_CODEC_ID_CMV</code></span></span><span id='variant.AV_CODEC_ID_MOTIONPIXELS' class='variant'><span id='AV_CODEC_ID_MOTIONPIXELS.v' class='invisible'><code>AV_CODEC_ID_MOTIONPIXELS</code></span></span><span id='variant.AV_CODEC_ID_TGV' class='variant'><span id='AV_CODEC_ID_TGV.v' class='invisible'><code>AV_CODEC_ID_TGV</code></span></span><span id='variant.AV_CODEC_ID_TGQ' class='variant'><span id='AV_CODEC_ID_TGQ.v' class='invisible'><code>AV_CODEC_ID_TGQ</code></span></span><span id='variant.AV_CODEC_ID_TQI' class='variant'><span id='AV_CODEC_ID_TQI.v' class='invisible'><code>AV_CODEC_ID_TQI</code></span></span><span id='variant.AV_CODEC_ID_AURA' class='variant'><span id='AV_CODEC_ID_AURA.v' class='invisible'><code>AV_CODEC_ID_AURA</code></span></span><span id='variant.AV_CODEC_ID_AURA2' class='variant'><span id='AV_CODEC_ID_AURA2.v' class='invisible'><code>AV_CODEC_ID_AURA2</code></span></span><span id='variant.AV_CODEC_ID_V210X' class='variant'><span id='AV_CODEC_ID_V210X.v' class='invisible'><code>AV_CODEC_ID_V210X</code></span></span><span id='variant.AV_CODEC_ID_TMV' class='variant'><span id='AV_CODEC_ID_TMV.v' class='invisible'><code>AV_CODEC_ID_TMV</code></span></span><span id='variant.AV_CODEC_ID_V210' class='variant'><span id='AV_CODEC_ID_V210.v' class='invisible'><code>AV_CODEC_ID_V210</code></span></span><span id='variant.AV_CODEC_ID_DPX' class='variant'><span id='AV_CODEC_ID_DPX.v' class='invisible'><code>AV_CODEC_ID_DPX</code></span></span><span id='variant.AV_CODEC_ID_MAD' class='variant'><span id='AV_CODEC_ID_MAD.v' class='invisible'><code>AV_CODEC_ID_MAD</code></span></span><span id='variant.AV_CODEC_ID_FRWU' class='variant'><span id='AV_CODEC_ID_FRWU.v' class='invisible'><code>AV_CODEC_ID_FRWU</code></span></span><span id='variant.AV_CODEC_ID_FLASHSV2' class='variant'><span id='AV_CODEC_ID_FLASHSV2.v' class='invisible'><code>AV_CODEC_ID_FLASHSV2</code></span></span><span id='variant.AV_CODEC_ID_CDGRAPHICS' class='variant'><span id='AV_CODEC_ID_CDGRAPHICS.v' class='invisible'><code>AV_CODEC_ID_CDGRAPHICS</code></span></span><span id='variant.AV_CODEC_ID_R210' class='variant'><span id='AV_CODEC_ID_R210.v' class='invisible'><code>AV_CODEC_ID_R210</code></span></span><span id='variant.AV_CODEC_ID_ANM' class='variant'><span id='AV_CODEC_ID_ANM.v' class='invisible'><code>AV_CODEC_ID_ANM</code></span></span><span id='variant.AV_CODEC_ID_BINKVIDEO' class='variant'><span id='AV_CODEC_ID_BINKVIDEO.v' class='invisible'><code>AV_CODEC_ID_BINKVIDEO</code></span></span><span id='variant.AV_CODEC_ID_IFF_ILBM' class='variant'><span id='AV_CODEC_ID_IFF_ILBM.v' class='invisible'><code>AV_CODEC_ID_IFF_ILBM</code></span></span><span id='variant.AV_CODEC_ID_KGV1' class='variant'><span id='AV_CODEC_ID_KGV1.v' class='invisible'><code>AV_CODEC_ID_KGV1</code></span></span><span id='variant.AV_CODEC_ID_YOP' class='variant'><span id='AV_CODEC_ID_YOP.v' class='invisible'><code>AV_CODEC_ID_YOP</code></span></span><span id='variant.AV_CODEC_ID_VP8' class='variant'><span id='AV_CODEC_ID_VP8.v' class='invisible'><code>AV_CODEC_ID_VP8</code></span></span><span id='variant.AV_CODEC_ID_PICTOR' class='variant'><span id='AV_CODEC_ID_PICTOR.v' class='invisible'><code>AV_CODEC_ID_PICTOR</code></span></span><span id='variant.AV_CODEC_ID_ANSI' class='variant'><span id='AV_CODEC_ID_ANSI.v' class='invisible'><code>AV_CODEC_ID_ANSI</code></span></span><span id='variant.AV_CODEC_ID_A64_MULTI' class='variant'><span id='AV_CODEC_ID_A64_MULTI.v' class='invisible'><code>AV_CODEC_ID_A64_MULTI</code></span></span><span id='variant.AV_CODEC_ID_A64_MULTI5' class='variant'><span id='AV_CODEC_ID_A64_MULTI5.v' class='invisible'><code>AV_CODEC_ID_A64_MULTI5</code></span></span><span id='variant.AV_CODEC_ID_R10K' class='variant'><span id='AV_CODEC_ID_R10K.v' class='invisible'><code>AV_CODEC_ID_R10K</code></span></span><span id='variant.AV_CODEC_ID_MXPEG' class='variant'><span id='AV_CODEC_ID_MXPEG.v' class='invisible'><code>AV_CODEC_ID_MXPEG</code></span></span><span id='variant.AV_CODEC_ID_LAGARITH' class='variant'><span id='AV_CODEC_ID_LAGARITH.v' class='invisible'><code>AV_CODEC_ID_LAGARITH</code></span></span><span id='variant.AV_CODEC_ID_PRORES' class='variant'><span id='AV_CODEC_ID_PRORES.v' class='invisible'><code>AV_CODEC_ID_PRORES</code></span></span><span id='variant.AV_CODEC_ID_JV' class='variant'><span id='AV_CODEC_ID_JV.v' class='invisible'><code>AV_CODEC_ID_JV</code></span></span><span id='variant.AV_CODEC_ID_DFA' class='variant'><span id='AV_CODEC_ID_DFA.v' class='invisible'><code>AV_CODEC_ID_DFA</code></span></span><span id='variant.AV_CODEC_ID_WMV3IMAGE' class='variant'><span id='AV_CODEC_ID_WMV3IMAGE.v' class='invisible'><code>AV_CODEC_ID_WMV3IMAGE</code></span></span><span id='variant.AV_CODEC_ID_VC1IMAGE' class='variant'><span id='AV_CODEC_ID_VC1IMAGE.v' class='invisible'><code>AV_CODEC_ID_VC1IMAGE</code></span></span><span id='variant.AV_CODEC_ID_UTVIDEO' class='variant'><span id='AV_CODEC_ID_UTVIDEO.v' class='invisible'><code>AV_CODEC_ID_UTVIDEO</code></span></span><span id='variant.AV_CODEC_ID_BMV_VIDEO' class='variant'><span id='AV_CODEC_ID_BMV_VIDEO.v' class='invisible'><code>AV_CODEC_ID_BMV_VIDEO</code></span></span><span id='variant.AV_CODEC_ID_VBLE' class='variant'><span id='AV_CODEC_ID_VBLE.v' class='invisible'><code>AV_CODEC_ID_VBLE</code></span></span><span id='variant.AV_CODEC_ID_DXTORY' class='variant'><span id='AV_CODEC_ID_DXTORY.v' class='invisible'><code>AV_CODEC_ID_DXTORY</code></span></span><span id='variant.AV_CODEC_ID_V410' class='variant'><span id='AV_CODEC_ID_V410.v' class='invisible'><code>AV_CODEC_ID_V410</code></span></span><span id='variant.AV_CODEC_ID_XWD' class='variant'><span id='AV_CODEC_ID_XWD.v' class='invisible'><code>AV_CODEC_ID_XWD</code></span></span><span id='variant.AV_CODEC_ID_CDXL' class='variant'><span id='AV_CODEC_ID_CDXL.v' class='invisible'><code>AV_CODEC_ID_CDXL</code></span></span><span id='variant.AV_CODEC_ID_XBM' class='variant'><span id='AV_CODEC_ID_XBM.v' class='invisible'><code>AV_CODEC_ID_XBM</code></span></span><span id='variant.AV_CODEC_ID_ZEROCODEC' class='variant'><span id='AV_CODEC_ID_ZEROCODEC.v' class='invisible'><code>AV_CODEC_ID_ZEROCODEC</code></span></span><span id='variant.AV_CODEC_ID_MSS1' class='variant'><span id='AV_CODEC_ID_MSS1.v' class='invisible'><code>AV_CODEC_ID_MSS1</code></span></span><span id='variant.AV_CODEC_ID_MSA1' class='variant'><span id='AV_CODEC_ID_MSA1.v' class='invisible'><code>AV_CODEC_ID_MSA1</code></span></span><span id='variant.AV_CODEC_ID_TSCC2' class='variant'><span id='AV_CODEC_ID_TSCC2.v' class='invisible'><code>AV_CODEC_ID_TSCC2</code></span></span><span id='variant.AV_CODEC_ID_MTS2' class='variant'><span id='AV_CODEC_ID_MTS2.v' class='invisible'><code>AV_CODEC_ID_MTS2</code></span></span><span id='variant.AV_CODEC_ID_CLLC' class='variant'><span id='AV_CODEC_ID_CLLC.v' class='invisible'><code>AV_CODEC_ID_CLLC</code></span></span><span id='variant.AV_CODEC_ID_MSS2' class='variant'><span id='AV_CODEC_ID_MSS2.v' class='invisible'><code>AV_CODEC_ID_MSS2</code></span></span><span id='variant.AV_CODEC_ID_VP9' class='variant'><span id='AV_CODEC_ID_VP9.v' class='invisible'><code>AV_CODEC_ID_VP9</code></span></span><span id='variant.AV_CODEC_ID_AIC' class='variant'><span id='AV_CODEC_ID_AIC.v' class='invisible'><code>AV_CODEC_ID_AIC</code></span></span><span id='variant.AV_CODEC_ID_ESCAPE130' class='variant'><span id='AV_CODEC_ID_ESCAPE130.v' class='invisible'><code>AV_CODEC_ID_ESCAPE130</code></span></span><span id='variant.AV_CODEC_ID_G2M' class='variant'><span id='AV_CODEC_ID_G2M.v' class='invisible'><code>AV_CODEC_ID_G2M</code></span></span><span id='variant.AV_CODEC_ID_WEBP' class='variant'><span id='AV_CODEC_ID_WEBP.v' class='invisible'><code>AV_CODEC_ID_WEBP</code></span></span><span id='variant.AV_CODEC_ID_HNM4_VIDEO' class='variant'><span id='AV_CODEC_ID_HNM4_VIDEO.v' class='invisible'><code>AV_CODEC_ID_HNM4_VIDEO</code></span></span><span id='variant.AV_CODEC_ID_HEVC' class='variant'><span id='AV_CODEC_ID_HEVC.v' class='invisible'><code>AV_CODEC_ID_HEVC</code></span></span><span id='variant.AV_CODEC_ID_FIC' class='variant'><span id='AV_CODEC_ID_FIC.v' class='invisible'><code>AV_CODEC_ID_FIC</code></span></span><span id='variant.AV_CODEC_ID_ALIAS_PIX' class='variant'><span id='AV_CODEC_ID_ALIAS_PIX.v' class='invisible'><code>AV_CODEC_ID_ALIAS_PIX</code></span></span><span id='variant.AV_CODEC_ID_BRENDER_PIX' class='variant'><span id='AV_CODEC_ID_BRENDER_PIX.v' class='invisible'><code>AV_CODEC_ID_BRENDER_PIX</code></span></span><span id='variant.AV_CODEC_ID_PAF_VIDEO' class='variant'><span id='AV_CODEC_ID_PAF_VIDEO.v' class='invisible'><code>AV_CODEC_ID_PAF_VIDEO</code></span></span><span id='variant.AV_CODEC_ID_EXR' class='variant'><span id='AV_CODEC_ID_EXR.v' class='invisible'><code>AV_CODEC_ID_EXR</code></span></span><span id='variant.AV_CODEC_ID_VP7' class='variant'><span id='AV_CODEC_ID_VP7.v' class='invisible'><code>AV_CODEC_ID_VP7</code></span></span><span id='variant.AV_CODEC_ID_SANM' class='variant'><span id='AV_CODEC_ID_SANM.v' class='invisible'><code>AV_CODEC_ID_SANM</code></span></span><span id='variant.AV_CODEC_ID_SGIRLE' class='variant'><span id='AV_CODEC_ID_SGIRLE.v' class='invisible'><code>AV_CODEC_ID_SGIRLE</code></span></span><span id='variant.AV_CODEC_ID_MVC1' class='variant'><span id='AV_CODEC_ID_MVC1.v' class='invisible'><code>AV_CODEC_ID_MVC1</code></span></span><span id='variant.AV_CODEC_ID_MVC2' class='variant'><span id='AV_CODEC_ID_MVC2.v' class='invisible'><code>AV_CODEC_ID_MVC2</code></span></span><span id='variant.AV_CODEC_ID_HQX' class='variant'><span id='AV_CODEC_ID_HQX.v' class='invisible'><code>AV_CODEC_ID_HQX</code></span></span><span id='variant.AV_CODEC_ID_TDSC' class='variant'><span id='AV_CODEC_ID_TDSC.v' class='invisible'><code>AV_CODEC_ID_TDSC</code></span></span><span id='variant.AV_CODEC_ID_HQ_HQA' class='variant'><span id='AV_CODEC_ID_HQ_HQA.v' class='invisible'><code>AV_CODEC_ID_HQ_HQA</code></span></span><span id='variant.AV_CODEC_ID_HAP' class='variant'><span id='AV_CODEC_ID_HAP.v' class='invisible'><code>AV_CODEC_ID_HAP</code></span></span><span id='variant.AV_CODEC_ID_DDS' class='variant'><span id='AV_CODEC_ID_DDS.v' class='invisible'><code>AV_CODEC_ID_DDS</code></span></span><span id='variant.AV_CODEC_ID_DXV' class='variant'><span id='AV_CODEC_ID_DXV.v' class='invisible'><code>AV_CODEC_ID_DXV</code></span></span><span id='variant.AV_CODEC_ID_SCREENPRESSO' class='variant'><span id='AV_CODEC_ID_SCREENPRESSO.v' class='invisible'><code>AV_CODEC_ID_SCREENPRESSO</code></span></span><span id='variant.AV_CODEC_ID_RSCC' class='variant'><span id='AV_CODEC_ID_RSCC.v' class='invisible'><code>AV_CODEC_ID_RSCC</code></span></span><span id='variant.AV_CODEC_ID_Y41P' class='variant'><span id='AV_CODEC_ID_Y41P.v' class='invisible'><code>AV_CODEC_ID_Y41P</code></span></span><span id='variant.AV_CODEC_ID_AVRP' class='variant'><span id='AV_CODEC_ID_AVRP.v' class='invisible'><code>AV_CODEC_ID_AVRP</code></span></span><span id='variant.AV_CODEC_ID_012V' class='variant'><span id='AV_CODEC_ID_012V.v' class='invisible'><code>AV_CODEC_ID_012V</code></span></span><span id='variant.AV_CODEC_ID_AVUI' class='variant'><span id='AV_CODEC_ID_AVUI.v' class='invisible'><code>AV_CODEC_ID_AVUI</code></span></span><span id='variant.AV_CODEC_ID_AYUV' class='variant'><span id='AV_CODEC_ID_AYUV.v' class='invisible'><code>AV_CODEC_ID_AYUV</code></span></span><span id='variant.AV_CODEC_ID_TARGA_Y216' class='variant'><span id='AV_CODEC_ID_TARGA_Y216.v' class='invisible'><code>AV_CODEC_ID_TARGA_Y216</code></span></span><span id='variant.AV_CODEC_ID_V308' class='variant'><span id='AV_CODEC_ID_V308.v' class='invisible'><code>AV_CODEC_ID_V308</code></span></span><span id='variant.AV_CODEC_ID_V408' class='variant'><span id='AV_CODEC_ID_V408.v' class='invisible'><code>AV_CODEC_ID_V408</code></span></span><span id='variant.AV_CODEC_ID_YUV4' class='variant'><span id='AV_CODEC_ID_YUV4.v' class='invisible'><code>AV_CODEC_ID_YUV4</code></span></span><span id='variant.AV_CODEC_ID_AVRN' class='variant'><span id='AV_CODEC_ID_AVRN.v' class='invisible'><code>AV_CODEC_ID_AVRN</code></span></span><span id='variant.AV_CODEC_ID_CPIA' class='variant'><span id='AV_CODEC_ID_CPIA.v' class='invisible'><code>AV_CODEC_ID_CPIA</code></span></span><span id='variant.AV_CODEC_ID_XFACE' class='variant'><span id='AV_CODEC_ID_XFACE.v' class='invisible'><code>AV_CODEC_ID_XFACE</code></span></span><span id='variant.AV_CODEC_ID_SNOW' class='variant'><span id='AV_CODEC_ID_SNOW.v' class='invisible'><code>AV_CODEC_ID_SNOW</code></span></span><span id='variant.AV_CODEC_ID_SMVJPEG' class='variant'><span id='AV_CODEC_ID_SMVJPEG.v' class='invisible'><code>AV_CODEC_ID_SMVJPEG</code></span></span><span id='variant.AV_CODEC_ID_APNG' class='variant'><span id='AV_CODEC_ID_APNG.v' class='invisible'><code>AV_CODEC_ID_APNG</code></span></span><span id='variant.AV_CODEC_ID_DAALA' class='variant'><span id='AV_CODEC_ID_DAALA.v' class='invisible'><code>AV_CODEC_ID_DAALA</code></span></span><span id='variant.AV_CODEC_ID_CFHD' class='variant'><span id='AV_CODEC_ID_CFHD.v' class='invisible'><code>AV_CODEC_ID_CFHD</code></span></span><span id='variant.AV_CODEC_ID_TRUEMOTION2RT' class='variant'><span id='AV_CODEC_ID_TRUEMOTION2RT.v' class='invisible'><code>AV_CODEC_ID_TRUEMOTION2RT</code></span></span><span id='variant.AV_CODEC_ID_M101' class='variant'><span id='AV_CODEC_ID_M101.v' class='invisible'><code>AV_CODEC_ID_M101</code></span></span><span id='variant.AV_CODEC_ID_MAGICYUV' class='variant'><span id='AV_CODEC_ID_MAGICYUV.v' class='invisible'><code>AV_CODEC_ID_MAGICYUV</code></span></span><span id='variant.AV_CODEC_ID_SHEERVIDEO' class='variant'><span id='AV_CODEC_ID_SHEERVIDEO.v' class='invisible'><code>AV_CODEC_ID_SHEERVIDEO</code></span></span><span id='variant.AV_CODEC_ID_YLC' class='variant'><span id='AV_CODEC_ID_YLC.v' class='invisible'><code>AV_CODEC_ID_YLC</code></span></span><span id='variant.AV_CODEC_ID_PSD' class='variant'><span id='AV_CODEC_ID_PSD.v' class='invisible'><code>AV_CODEC_ID_PSD</code></span></span><span id='variant.AV_CODEC_ID_PIXLET' class='variant'><span id='AV_CODEC_ID_PIXLET.v' class='invisible'><code>AV_CODEC_ID_PIXLET</code></span></span><span id='variant.AV_CODEC_ID_SPEEDHQ' class='variant'><span id='AV_CODEC_ID_SPEEDHQ.v' class='invisible'><code>AV_CODEC_ID_SPEEDHQ</code></span></span><span id='variant.AV_CODEC_ID_FMVC' class='variant'><span id='AV_CODEC_ID_FMVC.v' class='invisible'><code>AV_CODEC_ID_FMVC</code></span></span><span id='variant.AV_CODEC_ID_SCPR' class='variant'><span id='AV_CODEC_ID_SCPR.v' class='invisible'><code>AV_CODEC_ID_SCPR</code></span></span><span id='variant.AV_CODEC_ID_CLEARVIDEO' class='variant'><span id='AV_CODEC_ID_CLEARVIDEO.v' class='invisible'><code>AV_CODEC_ID_CLEARVIDEO</code></span></span><span id='variant.AV_CODEC_ID_XPM' class='variant'><span id='AV_CODEC_ID_XPM.v' class='invisible'><code>AV_CODEC_ID_XPM</code></span></span><span id='variant.AV_CODEC_ID_AV1' class='variant'><span id='AV_CODEC_ID_AV1.v' class='invisible'><code>AV_CODEC_ID_AV1</code></span></span><span id='variant.AV_CODEC_ID_FIRST_AUDIO' class='variant'><span id='AV_CODEC_ID_FIRST_AUDIO.v' class='invisible'><code>AV_CODEC_ID_FIRST_AUDIO</code></span></span><span id='variant.AV_CODEC_ID_PCM_S16BE' class='variant'><span id='AV_CODEC_ID_PCM_S16BE.v' class='invisible'><code>AV_CODEC_ID_PCM_S16BE</code></span></span><span id='variant.AV_CODEC_ID_PCM_U16LE' class='variant'><span id='AV_CODEC_ID_PCM_U16LE.v' class='invisible'><code>AV_CODEC_ID_PCM_U16LE</code></span></span><span id='variant.AV_CODEC_ID_PCM_U16BE' class='variant'><span id='AV_CODEC_ID_PCM_U16BE.v' class='invisible'><code>AV_CODEC_ID_PCM_U16BE</code></span></span><span id='variant.AV_CODEC_ID_PCM_S8' class='variant'><span id='AV_CODEC_ID_PCM_S8.v' class='invisible'><code>AV_CODEC_ID_PCM_S8</code></span></span><span id='variant.AV_CODEC_ID_PCM_U8' class='variant'><span id='AV_CODEC_ID_PCM_U8.v' class='invisible'><code>AV_CODEC_ID_PCM_U8</code></span></span><span id='variant.AV_CODEC_ID_PCM_MULAW' class='variant'><span id='AV_CODEC_ID_PCM_MULAW.v' class='invisible'><code>AV_CODEC_ID_PCM_MULAW</code></span></span><span id='variant.AV_CODEC_ID_PCM_ALAW' class='variant'><span id='AV_CODEC_ID_PCM_ALAW.v' class='invisible'><code>AV_CODEC_ID_PCM_ALAW</code></span></span><span id='variant.AV_CODEC_ID_PCM_S32LE' class='variant'><span id='AV_CODEC_ID_PCM_S32LE.v' class='invisible'><code>AV_CODEC_ID_PCM_S32LE</code></span></span><span id='variant.AV_CODEC_ID_PCM_S32BE' class='variant'><span id='AV_CODEC_ID_PCM_S32BE.v' class='invisible'><code>AV_CODEC_ID_PCM_S32BE</code></span></span><span id='variant.AV_CODEC_ID_PCM_U32LE' class='variant'><span id='AV_CODEC_ID_PCM_U32LE.v' class='invisible'><code>AV_CODEC_ID_PCM_U32LE</code></span></span><span id='variant.AV_CODEC_ID_PCM_U32BE' class='variant'><span id='AV_CODEC_ID_PCM_U32BE.v' class='invisible'><code>AV_CODEC_ID_PCM_U32BE</code></span></span><span id='variant.AV_CODEC_ID_PCM_S24LE' class='variant'><span id='AV_CODEC_ID_PCM_S24LE.v' class='invisible'><code>AV_CODEC_ID_PCM_S24LE</code></span></span><span id='variant.AV_CODEC_ID_PCM_S24BE' class='variant'><span id='AV_CODEC_ID_PCM_S24BE.v' class='invisible'><code>AV_CODEC_ID_PCM_S24BE</code></span></span><span id='variant.AV_CODEC_ID_PCM_U24LE' class='variant'><span id='AV_CODEC_ID_PCM_U24LE.v' class='invisible'><code>AV_CODEC_ID_PCM_U24LE</code></span></span><span id='variant.AV_CODEC_ID_PCM_U24BE' class='variant'><span id='AV_CODEC_ID_PCM_U24BE.v' class='invisible'><code>AV_CODEC_ID_PCM_U24BE</code></span></span><span id='variant.AV_CODEC_ID_PCM_S24DAUD' class='variant'><span id='AV_CODEC_ID_PCM_S24DAUD.v' class='invisible'><code>AV_CODEC_ID_PCM_S24DAUD</code></span></span><span id='variant.AV_CODEC_ID_PCM_ZORK' class='variant'><span id='AV_CODEC_ID_PCM_ZORK.v' class='invisible'><code>AV_CODEC_ID_PCM_ZORK</code></span></span><span id='variant.AV_CODEC_ID_PCM_S16LE_PLANAR' class='variant'><span id='AV_CODEC_ID_PCM_S16LE_PLANAR.v' class='invisible'><code>AV_CODEC_ID_PCM_S16LE_PLANAR</code></span></span><span id='variant.AV_CODEC_ID_PCM_DVD' class='variant'><span id='AV_CODEC_ID_PCM_DVD.v' class='invisible'><code>AV_CODEC_ID_PCM_DVD</code></span></span><span id='variant.AV_CODEC_ID_PCM_F32BE' class='variant'><span id='AV_CODEC_ID_PCM_F32BE.v' class='invisible'><code>AV_CODEC_ID_PCM_F32BE</code></span></span><span id='variant.AV_CODEC_ID_PCM_F32LE' class='variant'><span id='AV_CODEC_ID_PCM_F32LE.v' class='invisible'><code>AV_CODEC_ID_PCM_F32LE</code></span></span><span id='variant.AV_CODEC_ID_PCM_F64BE' class='variant'><span id='AV_CODEC_ID_PCM_F64BE.v' class='invisible'><code>AV_CODEC_ID_PCM_F64BE</code></span></span><span id='variant.AV_CODEC_ID_PCM_F64LE' class='variant'><span id='AV_CODEC_ID_PCM_F64LE.v' class='invisible'><code>AV_CODEC_ID_PCM_F64LE</code></span></span><span id='variant.AV_CODEC_ID_PCM_BLURAY' class='variant'><span id='AV_CODEC_ID_PCM_BLURAY.v' class='invisible'><code>AV_CODEC_ID_PCM_BLURAY</code></span></span><span id='variant.AV_CODEC_ID_PCM_LXF' class='variant'><span id='AV_CODEC_ID_PCM_LXF.v' class='invisible'><code>AV_CODEC_ID_PCM_LXF</code></span></span><span id='variant.AV_CODEC_ID_S302M' class='variant'><span id='AV_CODEC_ID_S302M.v' class='invisible'><code>AV_CODEC_ID_S302M</code></span></span><span id='variant.AV_CODEC_ID_PCM_S8_PLANAR' class='variant'><span id='AV_CODEC_ID_PCM_S8_PLANAR.v' class='invisible'><code>AV_CODEC_ID_PCM_S8_PLANAR</code></span></span><span id='variant.AV_CODEC_ID_PCM_S24LE_PLANAR' class='variant'><span id='AV_CODEC_ID_PCM_S24LE_PLANAR.v' class='invisible'><code>AV_CODEC_ID_PCM_S24LE_PLANAR</code></span></span><span id='variant.AV_CODEC_ID_PCM_S32LE_PLANAR' class='variant'><span id='AV_CODEC_ID_PCM_S32LE_PLANAR.v' class='invisible'><code>AV_CODEC_ID_PCM_S32LE_PLANAR</code></span></span><span id='variant.AV_CODEC_ID_PCM_S16BE_PLANAR' class='variant'><span id='AV_CODEC_ID_PCM_S16BE_PLANAR.v' class='invisible'><code>AV_CODEC_ID_PCM_S16BE_PLANAR</code></span></span><span id='variant.AV_CODEC_ID_PCM_S64LE' class='variant'><span id='AV_CODEC_ID_PCM_S64LE.v' class='invisible'><code>AV_CODEC_ID_PCM_S64LE</code></span></span><span id='variant.AV_CODEC_ID_PCM_S64BE' class='variant'><span id='AV_CODEC_ID_PCM_S64BE.v' class='invisible'><code>AV_CODEC_ID_PCM_S64BE</code></span></span><span id='variant.AV_CODEC_ID_PCM_F16LE' class='variant'><span id='AV_CODEC_ID_PCM_F16LE.v' class='invisible'><code>AV_CODEC_ID_PCM_F16LE</code></span></span><span id='variant.AV_CODEC_ID_PCM_F24LE' class='variant'><span id='AV_CODEC_ID_PCM_F24LE.v' class='invisible'><code>AV_CODEC_ID_PCM_F24LE</code></span></span><span id='variant.AV_CODEC_ID_ADPCM_IMA_QT' class='variant'><span id='AV_CODEC_ID_ADPCM_IMA_QT.v' class='invisible'><code>AV_CODEC_ID_ADPCM_IMA_QT</code></span></span><span id='variant.AV_CODEC_ID_ADPCM_IMA_WAV' class='variant'><span id='AV_CODEC_ID_ADPCM_IMA_WAV.v' class='invisible'><code>AV_CODEC_ID_ADPCM_IMA_WAV</code></span></span><span id='variant.AV_CODEC_ID_ADPCM_IMA_DK3' class='variant'><span id='AV_CODEC_ID_ADPCM_IMA_DK3.v' class='invisible'><code>AV_CODEC_ID_ADPCM_IMA_DK3</code></span></span><span id='variant.AV_CODEC_ID_ADPCM_IMA_DK4' class='variant'><span id='AV_CODEC_ID_ADPCM_IMA_DK4.v' class='invisible'><code>AV_CODEC_ID_ADPCM_IMA_DK4</code></span></span><span id='variant.AV_CODEC_ID_ADPCM_IMA_WS' class='variant'><span id='AV_CODEC_ID_ADPCM_IMA_WS.v' class='invisible'><code>AV_CODEC_ID_ADPCM_IMA_WS</code></span></span><span id='variant.AV_CODEC_ID_ADPCM_IMA_SMJPEG' class='variant'><span id='AV_CODEC_ID_ADPCM_IMA_SMJPEG.v' class='invisible'><code>AV_CODEC_ID_ADPCM_IMA_SMJPEG</code></span></span><span id='variant.AV_CODEC_ID_ADPCM_MS' class='variant'><span id='AV_CODEC_ID_ADPCM_MS.v' class='invisible'><code>AV_CODEC_ID_ADPCM_MS</code></span></span><span id='variant.AV_CODEC_ID_ADPCM_4XM' class='variant'><span id='AV_CODEC_ID_ADPCM_4XM.v' class='invisible'><code>AV_CODEC_ID_ADPCM_4XM</code></span></span><span id='variant.AV_CODEC_ID_ADPCM_XA' class='variant'><span id='AV_CODEC_ID_ADPCM_XA.v' class='invisible'><code>AV_CODEC_ID_ADPCM_XA</code></span></span><span id='variant.AV_CODEC_ID_ADPCM_ADX' class='variant'><span id='AV_CODEC_ID_ADPCM_ADX.v' class='invisible'><code>AV_CODEC_ID_ADPCM_ADX</code></span></span><span id='variant.AV_CODEC_ID_ADPCM_EA' class='variant'><span id='AV_CODEC_ID_ADPCM_EA.v' class='invisible'><code>AV_CODEC_ID_ADPCM_EA</code></span></span><span id='variant.AV_CODEC_ID_ADPCM_G726' class='variant'><span id='AV_CODEC_ID_ADPCM_G726.v' class='invisible'><code>AV_CODEC_ID_ADPCM_G726</code></span></span><span id='variant.AV_CODEC_ID_ADPCM_CT' class='variant'><span id='AV_CODEC_ID_ADPCM_CT.v' class='invisible'><code>AV_CODEC_ID_ADPCM_CT</code></span></span><span id='variant.AV_CODEC_ID_ADPCM_SWF' class='variant'><span id='AV_CODEC_ID_ADPCM_SWF.v' class='invisible'><code>AV_CODEC_ID_ADPCM_SWF</code></span></span><span id='variant.AV_CODEC_ID_ADPCM_YAMAHA' class='variant'><span id='AV_CODEC_ID_ADPCM_YAMAHA.v' class='invisible'><code>AV_CODEC_ID_ADPCM_YAMAHA</code></span></span><span id='variant.AV_CODEC_ID_ADPCM_SBPRO_4' class='variant'><span id='AV_CODEC_ID_ADPCM_SBPRO_4.v' class='invisible'><code>AV_CODEC_ID_ADPCM_SBPRO_4</code></span></span><span id='variant.AV_CODEC_ID_ADPCM_SBPRO_3' class='variant'><span id='AV_CODEC_ID_ADPCM_SBPRO_3.v' class='invisible'><code>AV_CODEC_ID_ADPCM_SBPRO_3</code></span></span><span id='variant.AV_CODEC_ID_ADPCM_SBPRO_2' class='variant'><span id='AV_CODEC_ID_ADPCM_SBPRO_2.v' class='invisible'><code>AV_CODEC_ID_ADPCM_SBPRO_2</code></span></span><span id='variant.AV_CODEC_ID_ADPCM_THP' class='variant'><span id='AV_CODEC_ID_ADPCM_THP.v' class='invisible'><code>AV_CODEC_ID_ADPCM_THP</code></span></span><span id='variant.AV_CODEC_ID_ADPCM_IMA_AMV' class='variant'><span id='AV_CODEC_ID_ADPCM_IMA_AMV.v' class='invisible'><code>AV_CODEC_ID_ADPCM_IMA_AMV</code></span></span><span id='variant.AV_CODEC_ID_ADPCM_EA_R1' class='variant'><span id='AV_CODEC_ID_ADPCM_EA_R1.v' class='invisible'><code>AV_CODEC_ID_ADPCM_EA_R1</code></span></span><span id='variant.AV_CODEC_ID_ADPCM_EA_R3' class='variant'><span id='AV_CODEC_ID_ADPCM_EA_R3.v' class='invisible'><code>AV_CODEC_ID_ADPCM_EA_R3</code></span></span><span id='variant.AV_CODEC_ID_ADPCM_EA_R2' class='variant'><span id='AV_CODEC_ID_ADPCM_EA_R2.v' class='invisible'><code>AV_CODEC_ID_ADPCM_EA_R2</code></span></span><span id='variant.AV_CODEC_ID_ADPCM_IMA_EA_SEAD' class='variant'><span id='AV_CODEC_ID_ADPCM_IMA_EA_SEAD.v' class='invisible'><code>AV_CODEC_ID_ADPCM_IMA_EA_SEAD</code></span></span><span id='variant.AV_CODEC_ID_ADPCM_IMA_EA_EACS' class='variant'><span id='AV_CODEC_ID_ADPCM_IMA_EA_EACS.v' class='invisible'><code>AV_CODEC_ID_ADPCM_IMA_EA_EACS</code></span></span><span id='variant.AV_CODEC_ID_ADPCM_EA_XAS' class='variant'><span id='AV_CODEC_ID_ADPCM_EA_XAS.v' class='invisible'><code>AV_CODEC_ID_ADPCM_EA_XAS</code></span></span><span id='variant.AV_CODEC_ID_ADPCM_EA_MAXIS_XA' class='variant'><span id='AV_CODEC_ID_ADPCM_EA_MAXIS_XA.v' class='invisible'><code>AV_CODEC_ID_ADPCM_EA_MAXIS_XA</code></span></span><span id='variant.AV_CODEC_ID_ADPCM_IMA_ISS' class='variant'><span id='AV_CODEC_ID_ADPCM_IMA_ISS.v' class='invisible'><code>AV_CODEC_ID_ADPCM_IMA_ISS</code></span></span><span id='variant.AV_CODEC_ID_ADPCM_G722' class='variant'><span id='AV_CODEC_ID_ADPCM_G722.v' class='invisible'><code>AV_CODEC_ID_ADPCM_G722</code></span></span><span id='variant.AV_CODEC_ID_ADPCM_IMA_APC' class='variant'><span id='AV_CODEC_ID_ADPCM_IMA_APC.v' class='invisible'><code>AV_CODEC_ID_ADPCM_IMA_APC</code></span></span><span id='variant.AV_CODEC_ID_ADPCM_VIMA' class='variant'><span id='AV_CODEC_ID_ADPCM_VIMA.v' class='invisible'><code>AV_CODEC_ID_ADPCM_VIMA</code></span></span><span id='variant.AV_CODEC_ID_ADPCM_AFC' class='variant'><span id='AV_CODEC_ID_ADPCM_AFC.v' class='invisible'><code>AV_CODEC_ID_ADPCM_AFC</code></span></span><span id='variant.AV_CODEC_ID_ADPCM_IMA_OKI' class='variant'><span id='AV_CODEC_ID_ADPCM_IMA_OKI.v' class='invisible'><code>AV_CODEC_ID_ADPCM_IMA_OKI</code></span></span><span id='variant.AV_CODEC_ID_ADPCM_DTK' class='variant'><span id='AV_CODEC_ID_ADPCM_DTK.v' class='invisible'><code>AV_CODEC_ID_ADPCM_DTK</code></span></span><span id='variant.AV_CODEC_ID_ADPCM_IMA_RAD' class='variant'><span id='AV_CODEC_ID_ADPCM_IMA_RAD.v' class='invisible'><code>AV_CODEC_ID_ADPCM_IMA_RAD</code></span></span><span id='variant.AV_CODEC_ID_ADPCM_G726LE' class='variant'><span id='AV_CODEC_ID_ADPCM_G726LE.v' class='invisible'><code>AV_CODEC_ID_ADPCM_G726LE</code></span></span><span id='variant.AV_CODEC_ID_ADPCM_THP_LE' class='variant'><span id='AV_CODEC_ID_ADPCM_THP_LE.v' class='invisible'><code>AV_CODEC_ID_ADPCM_THP_LE</code></span></span><span id='variant.AV_CODEC_ID_ADPCM_PSX' class='variant'><span id='AV_CODEC_ID_ADPCM_PSX.v' class='invisible'><code>AV_CODEC_ID_ADPCM_PSX</code></span></span><span id='variant.AV_CODEC_ID_ADPCM_AICA' class='variant'><span id='AV_CODEC_ID_ADPCM_AICA.v' class='invisible'><code>AV_CODEC_ID_ADPCM_AICA</code></span></span><span id='variant.AV_CODEC_ID_ADPCM_IMA_DAT4' class='variant'><span id='AV_CODEC_ID_ADPCM_IMA_DAT4.v' class='invisible'><code>AV_CODEC_ID_ADPCM_IMA_DAT4</code></span></span><span id='variant.AV_CODEC_ID_ADPCM_MTAF' class='variant'><span id='AV_CODEC_ID_ADPCM_MTAF.v' class='invisible'><code>AV_CODEC_ID_ADPCM_MTAF</code></span></span><span id='variant.AV_CODEC_ID_AMR_NB' class='variant'><span id='AV_CODEC_ID_AMR_NB.v' class='invisible'><code>AV_CODEC_ID_AMR_NB</code></span></span><span id='variant.AV_CODEC_ID_AMR_WB' class='variant'><span id='AV_CODEC_ID_AMR_WB.v' class='invisible'><code>AV_CODEC_ID_AMR_WB</code></span></span><span id='variant.AV_CODEC_ID_RA_144' class='variant'><span id='AV_CODEC_ID_RA_144.v' class='invisible'><code>AV_CODEC_ID_RA_144</code></span></span><span id='variant.AV_CODEC_ID_RA_288' class='variant'><span id='AV_CODEC_ID_RA_288.v' class='invisible'><code>AV_CODEC_ID_RA_288</code></span></span><span id='variant.AV_CODEC_ID_ROQ_DPCM' class='variant'><span id='AV_CODEC_ID_ROQ_DPCM.v' class='invisible'><code>AV_CODEC_ID_ROQ_DPCM</code></span></span><span id='variant.AV_CODEC_ID_INTERPLAY_DPCM' class='variant'><span id='AV_CODEC_ID_INTERPLAY_DPCM.v' class='invisible'><code>AV_CODEC_ID_INTERPLAY_DPCM</code></span></span><span id='variant.AV_CODEC_ID_XAN_DPCM' class='variant'><span id='AV_CODEC_ID_XAN_DPCM.v' class='invisible'><code>AV_CODEC_ID_XAN_DPCM</code></span></span><span id='variant.AV_CODEC_ID_SOL_DPCM' class='variant'><span id='AV_CODEC_ID_SOL_DPCM.v' class='invisible'><code>AV_CODEC_ID_SOL_DPCM</code></span></span><span id='variant.AV_CODEC_ID_SDX2_DPCM' class='variant'><span id='AV_CODEC_ID_SDX2_DPCM.v' class='invisible'><code>AV_CODEC_ID_SDX2_DPCM</code></span></span><span id='variant.AV_CODEC_ID_MP2' class='variant'><span id='AV_CODEC_ID_MP2.v' class='invisible'><code>AV_CODEC_ID_MP2</code></span></span><span id='variant.AV_CODEC_ID_MP3' class='variant'><span id='AV_CODEC_ID_MP3.v' class='invisible'><code>AV_CODEC_ID_MP3</code></span></span><span id='variant.AV_CODEC_ID_AAC' class='variant'><span id='AV_CODEC_ID_AAC.v' class='invisible'><code>AV_CODEC_ID_AAC</code></span></span><span id='variant.AV_CODEC_ID_AC3' class='variant'><span id='AV_CODEC_ID_AC3.v' class='invisible'><code>AV_CODEC_ID_AC3</code></span></span><span id='variant.AV_CODEC_ID_DTS' class='variant'><span id='AV_CODEC_ID_DTS.v' class='invisible'><code>AV_CODEC_ID_DTS</code></span></span><span id='variant.AV_CODEC_ID_VORBIS' class='variant'><span id='AV_CODEC_ID_VORBIS.v' class='invisible'><code>AV_CODEC_ID_VORBIS</code></span></span><span id='variant.AV_CODEC_ID_DVAUDIO' class='variant'><span id='AV_CODEC_ID_DVAUDIO.v' class='invisible'><code>AV_CODEC_ID_DVAUDIO</code></span></span><span id='variant.AV_CODEC_ID_WMAV1' class='variant'><span id='AV_CODEC_ID_WMAV1.v' class='invisible'><code>AV_CODEC_ID_WMAV1</code></span></span><span id='variant.AV_CODEC_ID_WMAV2' class='variant'><span id='AV_CODEC_ID_WMAV2.v' class='invisible'><code>AV_CODEC_ID_WMAV2</code></span></span><span id='variant.AV_CODEC_ID_MACE3' class='variant'><span id='AV_CODEC_ID_MACE3.v' class='invisible'><code>AV_CODEC_ID_MACE3</code></span></span><span id='variant.AV_CODEC_ID_MACE6' class='variant'><span id='AV_CODEC_ID_MACE6.v' class='invisible'><code>AV_CODEC_ID_MACE6</code></span></span><span id='variant.AV_CODEC_ID_VMDAUDIO' class='variant'><span id='AV_CODEC_ID_VMDAUDIO.v' class='invisible'><code>AV_CODEC_ID_VMDAUDIO</code></span></span><span id='variant.AV_CODEC_ID_FLAC' class='variant'><span id='AV_CODEC_ID_FLAC.v' class='invisible'><code>AV_CODEC_ID_FLAC</code></span></span><span id='variant.AV_CODEC_ID_MP3ADU' class='variant'><span id='AV_CODEC_ID_MP3ADU.v' class='invisible'><code>AV_CODEC_ID_MP3ADU</code></span></span><span id='variant.AV_CODEC_ID_MP3ON4' class='variant'><span id='AV_CODEC_ID_MP3ON4.v' class='invisible'><code>AV_CODEC_ID_MP3ON4</code></span></span><span id='variant.AV_CODEC_ID_SHORTEN' class='variant'><span id='AV_CODEC_ID_SHORTEN.v' class='invisible'><code>AV_CODEC_ID_SHORTEN</code></span></span><span id='variant.AV_CODEC_ID_ALAC' class='variant'><span id='AV_CODEC_ID_ALAC.v' class='invisible'><code>AV_CODEC_ID_ALAC</code></span></span><span id='variant.AV_CODEC_ID_WESTWOOD_SND1' class='variant'><span id='AV_CODEC_ID_WESTWOOD_SND1.v' class='invisible'><code>AV_CODEC_ID_WESTWOOD_SND1</code></span></span><span id='variant.AV_CODEC_ID_GSM' class='variant'><span id='AV_CODEC_ID_GSM.v' class='invisible'><code>AV_CODEC_ID_GSM</code></span></span><span id='variant.AV_CODEC_ID_QDM2' class='variant'><span id='AV_CODEC_ID_QDM2.v' class='invisible'><code>AV_CODEC_ID_QDM2</code></span></span><span id='variant.AV_CODEC_ID_COOK' class='variant'><span id='AV_CODEC_ID_COOK.v' class='invisible'><code>AV_CODEC_ID_COOK</code></span></span><span id='variant.AV_CODEC_ID_TRUESPEECH' class='variant'><span id='AV_CODEC_ID_TRUESPEECH.v' class='invisible'><code>AV_CODEC_ID_TRUESPEECH</code></span></span><span id='variant.AV_CODEC_ID_TTA' class='variant'><span id='AV_CODEC_ID_TTA.v' class='invisible'><code>AV_CODEC_ID_TTA</code></span></span><span id='variant.AV_CODEC_ID_SMACKAUDIO' class='variant'><span id='AV_CODEC_ID_SMACKAUDIO.v' class='invisible'><code>AV_CODEC_ID_SMACKAUDIO</code></span></span><span id='variant.AV_CODEC_ID_QCELP' class='variant'><span id='AV_CODEC_ID_QCELP.v' class='invisible'><code>AV_CODEC_ID_QCELP</code></span></span><span id='variant.AV_CODEC_ID_WAVPACK' class='variant'><span id='AV_CODEC_ID_WAVPACK.v' class='invisible'><code>AV_CODEC_ID_WAVPACK</code></span></span><span id='variant.AV_CODEC_ID_DSICINAUDIO' class='variant'><span id='AV_CODEC_ID_DSICINAUDIO.v' class='invisible'><code>AV_CODEC_ID_DSICINAUDIO</code></span></span><span id='variant.AV_CODEC_ID_IMC' class='variant'><span id='AV_CODEC_ID_IMC.v' class='invisible'><code>AV_CODEC_ID_IMC</code></span></span><span id='variant.AV_CODEC_ID_MUSEPACK7' class='variant'><span id='AV_CODEC_ID_MUSEPACK7.v' class='invisible'><code>AV_CODEC_ID_MUSEPACK7</code></span></span><span id='variant.AV_CODEC_ID_MLP' class='variant'><span id='AV_CODEC_ID_MLP.v' class='invisible'><code>AV_CODEC_ID_MLP</code></span></span><span id='variant.AV_CODEC_ID_GSM_MS' class='variant'><span id='AV_CODEC_ID_GSM_MS.v' class='invisible'><code>AV_CODEC_ID_GSM_MS</code></span></span><span id='variant.AV_CODEC_ID_ATRAC3' class='variant'><span id='AV_CODEC_ID_ATRAC3.v' class='invisible'><code>AV_CODEC_ID_ATRAC3</code></span></span><span id='variant.AV_CODEC_ID_VOXWARE' class='variant'><span id='AV_CODEC_ID_VOXWARE.v' class='invisible'><code>AV_CODEC_ID_VOXWARE</code></span></span><span id='variant.AV_CODEC_ID_APE' class='variant'><span id='AV_CODEC_ID_APE.v' class='invisible'><code>AV_CODEC_ID_APE</code></span></span><span id='variant.AV_CODEC_ID_NELLYMOSER' class='variant'><span id='AV_CODEC_ID_NELLYMOSER.v' class='invisible'><code>AV_CODEC_ID_NELLYMOSER</code></span></span><span id='variant.AV_CODEC_ID_MUSEPACK8' class='variant'><span id='AV_CODEC_ID_MUSEPACK8.v' class='invisible'><code>AV_CODEC_ID_MUSEPACK8</code></span></span><span id='variant.AV_CODEC_ID_SPEEX' class='variant'><span id='AV_CODEC_ID_SPEEX.v' class='invisible'><code>AV_CODEC_ID_SPEEX</code></span></span><span id='variant.AV_CODEC_ID_WMAVOICE' class='variant'><span id='AV_CODEC_ID_WMAVOICE.v' class='invisible'><code>AV_CODEC_ID_WMAVOICE</code></span></span><span id='variant.AV_CODEC_ID_WMAPRO' class='variant'><span id='AV_CODEC_ID_WMAPRO.v' class='invisible'><code>AV_CODEC_ID_WMAPRO</code></span></span><span id='variant.AV_CODEC_ID_WMALOSSLESS' class='variant'><span id='AV_CODEC_ID_WMALOSSLESS.v' class='invisible'><code>AV_CODEC_ID_WMALOSSLESS</code></span></span><span id='variant.AV_CODEC_ID_ATRAC3P' class='variant'><span id='AV_CODEC_ID_ATRAC3P.v' class='invisible'><code>AV_CODEC_ID_ATRAC3P</code></span></span><span id='variant.AV_CODEC_ID_EAC3' class='variant'><span id='AV_CODEC_ID_EAC3.v' class='invisible'><code>AV_CODEC_ID_EAC3</code></span></span><span id='variant.AV_CODEC_ID_SIPR' class='variant'><span id='AV_CODEC_ID_SIPR.v' class='invisible'><code>AV_CODEC_ID_SIPR</code></span></span><span id='variant.AV_CODEC_ID_MP1' class='variant'><span id='AV_CODEC_ID_MP1.v' class='invisible'><code>AV_CODEC_ID_MP1</code></span></span><span id='variant.AV_CODEC_ID_TWINVQ' class='variant'><span id='AV_CODEC_ID_TWINVQ.v' class='invisible'><code>AV_CODEC_ID_TWINVQ</code></span></span><span id='variant.AV_CODEC_ID_TRUEHD' class='variant'><span id='AV_CODEC_ID_TRUEHD.v' class='invisible'><code>AV_CODEC_ID_TRUEHD</code></span></span><span id='variant.AV_CODEC_ID_MP4ALS' class='variant'><span id='AV_CODEC_ID_MP4ALS.v' class='invisible'><code>AV_CODEC_ID_MP4ALS</code></span></span><span id='variant.AV_CODEC_ID_ATRAC1' class='variant'><span id='AV_CODEC_ID_ATRAC1.v' class='invisible'><code>AV_CODEC_ID_ATRAC1</code></span></span><span id='variant.AV_CODEC_ID_BINKAUDIO_RDFT' class='variant'><span id='AV_CODEC_ID_BINKAUDIO_RDFT.v' class='invisible'><code>AV_CODEC_ID_BINKAUDIO_RDFT</code></span></span><span id='variant.AV_CODEC_ID_BINKAUDIO_DCT' class='variant'><span id='AV_CODEC_ID_BINKAUDIO_DCT.v' class='invisible'><code>AV_CODEC_ID_BINKAUDIO_DCT</code></span></span><span id='variant.AV_CODEC_ID_AAC_LATM' class='variant'><span id='AV_CODEC_ID_AAC_LATM.v' class='invisible'><code>AV_CODEC_ID_AAC_LATM</code></span></span><span id='variant.AV_CODEC_ID_QDMC' class='variant'><span id='AV_CODEC_ID_QDMC.v' class='invisible'><code>AV_CODEC_ID_QDMC</code></span></span><span id='variant.AV_CODEC_ID_CELT' class='variant'><span id='AV_CODEC_ID_CELT.v' class='invisible'><code>AV_CODEC_ID_CELT</code></span></span><span id='variant.AV_CODEC_ID_G723_1' class='variant'><span id='AV_CODEC_ID_G723_1.v' class='invisible'><code>AV_CODEC_ID_G723_1</code></span></span><span id='variant.AV_CODEC_ID_G729' class='variant'><span id='AV_CODEC_ID_G729.v' class='invisible'><code>AV_CODEC_ID_G729</code></span></span><span id='variant.AV_CODEC_ID_8SVX_EXP' class='variant'><span id='AV_CODEC_ID_8SVX_EXP.v' class='invisible'><code>AV_CODEC_ID_8SVX_EXP</code></span></span><span id='variant.AV_CODEC_ID_8SVX_FIB' class='variant'><span id='AV_CODEC_ID_8SVX_FIB.v' class='invisible'><code>AV_CODEC_ID_8SVX_FIB</code></span></span><span id='variant.AV_CODEC_ID_BMV_AUDIO' class='variant'><span id='AV_CODEC_ID_BMV_AUDIO.v' class='invisible'><code>AV_CODEC_ID_BMV_AUDIO</code></span></span><span id='variant.AV_CODEC_ID_RALF' class='variant'><span id='AV_CODEC_ID_RALF.v' class='invisible'><code>AV_CODEC_ID_RALF</code></span></span><span id='variant.AV_CODEC_ID_IAC' class='variant'><span id='AV_CODEC_ID_IAC.v' class='invisible'><code>AV_CODEC_ID_IAC</code></span></span><span id='variant.AV_CODEC_ID_ILBC' class='variant'><span id='AV_CODEC_ID_ILBC.v' class='invisible'><code>AV_CODEC_ID_ILBC</code></span></span><span id='variant.AV_CODEC_ID_OPUS' class='variant'><span id='AV_CODEC_ID_OPUS.v' class='invisible'><code>AV_CODEC_ID_OPUS</code></span></span><span id='variant.AV_CODEC_ID_COMFORT_NOISE' class='variant'><span id='AV_CODEC_ID_COMFORT_NOISE.v' class='invisible'><code>AV_CODEC_ID_COMFORT_NOISE</code></span></span><span id='variant.AV_CODEC_ID_TAK' class='variant'><span id='AV_CODEC_ID_TAK.v' class='invisible'><code>AV_CODEC_ID_TAK</code></span></span><span id='variant.AV_CODEC_ID_METASOUND' class='variant'><span id='AV_CODEC_ID_METASOUND.v' class='invisible'><code>AV_CODEC_ID_METASOUND</code></span></span><span id='variant.AV_CODEC_ID_PAF_AUDIO' class='variant'><span id='AV_CODEC_ID_PAF_AUDIO.v' class='invisible'><code>AV_CODEC_ID_PAF_AUDIO</code></span></span><span id='variant.AV_CODEC_ID_ON2AVC' class='variant'><span id='AV_CODEC_ID_ON2AVC.v' class='invisible'><code>AV_CODEC_ID_ON2AVC</code></span></span><span id='variant.AV_CODEC_ID_DSS_SP' class='variant'><span id='AV_CODEC_ID_DSS_SP.v' class='invisible'><code>AV_CODEC_ID_DSS_SP</code></span></span><span id='variant.AV_CODEC_ID_FFWAVESYNTH' class='variant'><span id='AV_CODEC_ID_FFWAVESYNTH.v' class='invisible'><code>AV_CODEC_ID_FFWAVESYNTH</code></span></span><span id='variant.AV_CODEC_ID_SONIC' class='variant'><span id='AV_CODEC_ID_SONIC.v' class='invisible'><code>AV_CODEC_ID_SONIC</code></span></span><span id='variant.AV_CODEC_ID_SONIC_LS' class='variant'><span id='AV_CODEC_ID_SONIC_LS.v' class='invisible'><code>AV_CODEC_ID_SONIC_LS</code></span></span><span id='variant.AV_CODEC_ID_EVRC' class='variant'><span id='AV_CODEC_ID_EVRC.v' class='invisible'><code>AV_CODEC_ID_EVRC</code></span></span><span id='variant.AV_CODEC_ID_SMV' class='variant'><span id='AV_CODEC_ID_SMV.v' class='invisible'><code>AV_CODEC_ID_SMV</code></span></span><span id='variant.AV_CODEC_ID_DSD_LSBF' class='variant'><span id='AV_CODEC_ID_DSD_LSBF.v' class='invisible'><code>AV_CODEC_ID_DSD_LSBF</code></span></span><span id='variant.AV_CODEC_ID_DSD_MSBF' class='variant'><span id='AV_CODEC_ID_DSD_MSBF.v' class='invisible'><code>AV_CODEC_ID_DSD_MSBF</code></span></span><span id='variant.AV_CODEC_ID_DSD_LSBF_PLANAR' class='variant'><span id='AV_CODEC_ID_DSD_LSBF_PLANAR.v' class='invisible'><code>AV_CODEC_ID_DSD_LSBF_PLANAR</code></span></span><span id='variant.AV_CODEC_ID_DSD_MSBF_PLANAR' class='variant'><span id='AV_CODEC_ID_DSD_MSBF_PLANAR.v' class='invisible'><code>AV_CODEC_ID_DSD_MSBF_PLANAR</code></span></span><span id='variant.AV_CODEC_ID_4GV' class='variant'><span id='AV_CODEC_ID_4GV.v' class='invisible'><code>AV_CODEC_ID_4GV</code></span></span><span id='variant.AV_CODEC_ID_INTERPLAY_ACM' class='variant'><span id='AV_CODEC_ID_INTERPLAY_ACM.v' class='invisible'><code>AV_CODEC_ID_INTERPLAY_ACM</code></span></span><span id='variant.AV_CODEC_ID_XMA1' class='variant'><span id='AV_CODEC_ID_XMA1.v' class='invisible'><code>AV_CODEC_ID_XMA1</code></span></span><span id='variant.AV_CODEC_ID_XMA2' class='variant'><span id='AV_CODEC_ID_XMA2.v' class='invisible'><code>AV_CODEC_ID_XMA2</code></span></span><span id='variant.AV_CODEC_ID_DST' class='variant'><span id='AV_CODEC_ID_DST.v' class='invisible'><code>AV_CODEC_ID_DST</code></span></span><span id='variant.AV_CODEC_ID_ATRAC3AL' class='variant'><span id='AV_CODEC_ID_ATRAC3AL.v' class='invisible'><code>AV_CODEC_ID_ATRAC3AL</code></span></span><span id='variant.AV_CODEC_ID_ATRAC3PAL' class='variant'><span id='AV_CODEC_ID_ATRAC3PAL.v' class='invisible'><code>AV_CODEC_ID_ATRAC3PAL</code></span></span><span id='variant.AV_CODEC_ID_FIRST_SUBTITLE' class='variant'><span id='AV_CODEC_ID_FIRST_SUBTITLE.v' class='invisible'><code>AV_CODEC_ID_FIRST_SUBTITLE</code></span></span><span id='variant.AV_CODEC_ID_DVB_SUBTITLE' class='variant'><span id='AV_CODEC_ID_DVB_SUBTITLE.v' class='invisible'><code>AV_CODEC_ID_DVB_SUBTITLE</code></span></span><span id='variant.AV_CODEC_ID_TEXT' class='variant'><span id='AV_CODEC_ID_TEXT.v' class='invisible'><code>AV_CODEC_ID_TEXT</code></span></span><span id='variant.AV_CODEC_ID_XSUB' class='variant'><span id='AV_CODEC_ID_XSUB.v' class='invisible'><code>AV_CODEC_ID_XSUB</code></span></span><span id='variant.AV_CODEC_ID_SSA' class='variant'><span id='AV_CODEC_ID_SSA.v' class='invisible'><code>AV_CODEC_ID_SSA</code></span></span><span id='variant.AV_CODEC_ID_MOV_TEXT' class='variant'><span id='AV_CODEC_ID_MOV_TEXT.v' class='invisible'><code>AV_CODEC_ID_MOV_TEXT</code></span></span><span id='variant.AV_CODEC_ID_HDMV_PGS_SUBTITLE' class='variant'><span id='AV_CODEC_ID_HDMV_PGS_SUBTITLE.v' class='invisible'><code>AV_CODEC_ID_HDMV_PGS_SUBTITLE</code></span></span><span id='variant.AV_CODEC_ID_DVB_TELETEXT' class='variant'><span id='AV_CODEC_ID_DVB_TELETEXT.v' class='invisible'><code>AV_CODEC_ID_DVB_TELETEXT</code></span></span><span id='variant.AV_CODEC_ID_SRT' class='variant'><span id='AV_CODEC_ID_SRT.v' class='invisible'><code>AV_CODEC_ID_SRT</code></span></span><span id='variant.AV_CODEC_ID_MICRODVD' class='variant'><span id='AV_CODEC_ID_MICRODVD.v' class='invisible'><code>AV_CODEC_ID_MICRODVD</code></span></span><span id='variant.AV_CODEC_ID_EIA_608' class='variant'><span id='AV_CODEC_ID_EIA_608.v' class='invisible'><code>AV_CODEC_ID_EIA_608</code></span></span><span id='variant.AV_CODEC_ID_JACOSUB' class='variant'><span id='AV_CODEC_ID_JACOSUB.v' class='invisible'><code>AV_CODEC_ID_JACOSUB</code></span></span><span id='variant.AV_CODEC_ID_SAMI' class='variant'><span id='AV_CODEC_ID_SAMI.v' class='invisible'><code>AV_CODEC_ID_SAMI</code></span></span><span id='variant.AV_CODEC_ID_REALTEXT' class='variant'><span id='AV_CODEC_ID_REALTEXT.v' class='invisible'><code>AV_CODEC_ID_REALTEXT</code></span></span><span id='variant.AV_CODEC_ID_STL' class='variant'><span id='AV_CODEC_ID_STL.v' class='invisible'><code>AV_CODEC_ID_STL</code></span></span><span id='variant.AV_CODEC_ID_SUBVIEWER1' class='variant'><span id='AV_CODEC_ID_SUBVIEWER1.v' class='invisible'><code>AV_CODEC_ID_SUBVIEWER1</code></span></span><span id='variant.AV_CODEC_ID_SUBVIEWER' class='variant'><span id='AV_CODEC_ID_SUBVIEWER.v' class='invisible'><code>AV_CODEC_ID_SUBVIEWER</code></span></span><span id='variant.AV_CODEC_ID_SUBRIP' class='variant'><span id='AV_CODEC_ID_SUBRIP.v' class='invisible'><code>AV_CODEC_ID_SUBRIP</code></span></span><span id='variant.AV_CODEC_ID_WEBVTT' class='variant'><span id='AV_CODEC_ID_WEBVTT.v' class='invisible'><code>AV_CODEC_ID_WEBVTT</code></span></span><span id='variant.AV_CODEC_ID_MPL2' class='variant'><span id='AV_CODEC_ID_MPL2.v' class='invisible'><code>AV_CODEC_ID_MPL2</code></span></span><span id='variant.AV_CODEC_ID_VPLAYER' class='variant'><span id='AV_CODEC_ID_VPLAYER.v' class='invisible'><code>AV_CODEC_ID_VPLAYER</code></span></span><span id='variant.AV_CODEC_ID_PJS' class='variant'><span id='AV_CODEC_ID_PJS.v' class='invisible'><code>AV_CODEC_ID_PJS</code></span></span><span id='variant.AV_CODEC_ID_ASS' class='variant'><span id='AV_CODEC_ID_ASS.v' class='invisible'><code>AV_CODEC_ID_ASS</code></span></span><span id='variant.AV_CODEC_ID_HDMV_TEXT_SUBTITLE' class='variant'><span id='AV_CODEC_ID_HDMV_TEXT_SUBTITLE.v' class='invisible'><code>AV_CODEC_ID_HDMV_TEXT_SUBTITLE</code></span></span><span id='variant.AV_CODEC_ID_FIRST_UNKNOWN' class='variant'><span id='AV_CODEC_ID_FIRST_UNKNOWN.v' class='invisible'><code>AV_CODEC_ID_FIRST_UNKNOWN</code></span></span><span id='variant.AV_CODEC_ID_SCTE_35' class='variant'><span id='AV_CODEC_ID_SCTE_35.v' class='invisible'><code>AV_CODEC_ID_SCTE_35</code></span></span><span id='variant.AV_CODEC_ID_BINTEXT' class='variant'><span id='AV_CODEC_ID_BINTEXT.v' class='invisible'><code>AV_CODEC_ID_BINTEXT</code></span></span><span id='variant.AV_CODEC_ID_XBIN' class='variant'><span id='AV_CODEC_ID_XBIN.v' class='invisible'><code>AV_CODEC_ID_XBIN</code></span></span><span id='variant.AV_CODEC_ID_IDF' class='variant'><span id='AV_CODEC_ID_IDF.v' class='invisible'><code>AV_CODEC_ID_IDF</code></span></span><span id='variant.AV_CODEC_ID_OTF' class='variant'><span id='AV_CODEC_ID_OTF.v' class='invisible'><code>AV_CODEC_ID_OTF</code></span></span><span id='variant.AV_CODEC_ID_SMPTE_KLV' class='variant'><span id='AV_CODEC_ID_SMPTE_KLV.v' class='invisible'><code>AV_CODEC_ID_SMPTE_KLV</code></span></span><span id='variant.AV_CODEC_ID_DVD_NAV' class='variant'><span id='AV_CODEC_ID_DVD_NAV.v' class='invisible'><code>AV_CODEC_ID_DVD_NAV</code></span></span><span id='variant.AV_CODEC_ID_TIMED_ID3' class='variant'><span id='AV_CODEC_ID_TIMED_ID3.v' class='invisible'><code>AV_CODEC_ID_TIMED_ID3</code></span></span><span id='variant.AV_CODEC_ID_BIN_DATA' class='variant'><span id='AV_CODEC_ID_BIN_DATA.v' class='invisible'><code>AV_CODEC_ID_BIN_DATA</code></span></span><span id='variant.AV_CODEC_ID_PROBE' class='variant'><span id='AV_CODEC_ID_PROBE.v' class='invisible'><code>AV_CODEC_ID_PROBE</code></span></span><span id='variant.AV_CODEC_ID_MPEG2TS' class='variant'><span id='AV_CODEC_ID_MPEG2TS.v' class='invisible'><code>AV_CODEC_ID_MPEG2TS</code></span></span><span id='variant.AV_CODEC_ID_MPEG4SYSTEMS' class='variant'><span id='AV_CODEC_ID_MPEG4SYSTEMS.v' class='invisible'><code>AV_CODEC_ID_MPEG4SYSTEMS</code></span></span><span id='variant.AV_CODEC_ID_FFMETADATA' class='variant'><span id='AV_CODEC_ID_FFMETADATA.v' class='invisible'><code>AV_CODEC_ID_FFMETADATA</code></span></span><span id='variant.AV_CODEC_ID_WRAPPED_AVFRAME' class='variant'><span id='AV_CODEC_ID_WRAPPED_AVFRAME.v' class='invisible'><code>AV_CODEC_ID_WRAPPED_AVFRAME</code></span></span><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><span class='in-band'><code>impl <a class="trait" href="https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html" title="trait core::fmt::Debug">Debug</a> for <a class="enum" href="../av_sys/enum.AVCodecID.html" title="enum av_sys::AVCodecID">AVCodecID</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/av_sys/home/travis/build/panicbit/rust-av/target/debug/build/av_sys-5aff961289ea4337/out/ffi.rs.html#1844' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.fmt' class="method"><span id='fmt.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html#tymethod.fmt' class='fnname'>fmt</a>(&amp;self, __arg_0: &amp;mut <a class="struct" href="https://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html" title="struct core::fmt::Formatter">Formatter</a>) -&gt; <a class="type" href="https://doc.rust-lang.org/nightly/core/fmt/type.Result.html" title="type core::fmt::Result">Result</a></code></span></h4>
+<div class='docblock'><p>Formats the value using the given formatter.</p>
+</div></div><h3 class='impl'><span class='in-band'><code>impl <a class="trait" href="https://doc.rust-lang.org/nightly/core/marker/trait.Copy.html" title="trait core::marker::Copy">Copy</a> for <a class="enum" href="../av_sys/enum.AVCodecID.html" title="enum av_sys::AVCodecID">AVCodecID</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/av_sys/home/travis/build/panicbit/rust-av/target/debug/build/av_sys-5aff961289ea4337/out/ffi.rs.html#1844' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'></div><h3 class='impl'><span class='in-band'><code>impl <a class="trait" href="https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html" title="trait core::clone::Clone">Clone</a> for <a class="enum" href="../av_sys/enum.AVCodecID.html" title="enum av_sys::AVCodecID">AVCodecID</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/av_sys/home/travis/build/panicbit/rust-av/target/debug/build/av_sys-5aff961289ea4337/out/ffi.rs.html#1844' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.clone' class="method"><span id='clone.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#tymethod.clone' class='fnname'>clone</a>(&amp;self) -&gt; <a class="enum" href="../av_sys/enum.AVCodecID.html" title="enum av_sys::AVCodecID">AVCodecID</a></code></span></h4>
+<div class='docblock'><p>Returns a copy of the value. <a href="https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#tymethod.clone">Read more</a></p>
+</div><h4 id='method.clone_from' class="method"><span id='clone_from.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#method.clone_from' class='fnname'>clone_from</a>(&amp;mut self, source: &amp;Self)</code><div class='since' title='Stable since Rust version 1.0.0'>1.0.0</div></span></h4>
+<div class='docblock'><p>Performs copy-assignment from <code>source</code>. <a href="https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#method.clone_from">Read more</a></p>
+</div></div><h3 class='impl'><span class='in-band'><code>impl <a class="trait" href="https://doc.rust-lang.org/nightly/core/cmp/trait.PartialEq.html" title="trait core::cmp::PartialEq">PartialEq</a> for <a class="enum" href="../av_sys/enum.AVCodecID.html" title="enum av_sys::AVCodecID">AVCodecID</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/av_sys/home/travis/build/panicbit/rust-av/target/debug/build/av_sys-5aff961289ea4337/out/ffi.rs.html#1844' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.eq' class="method"><span id='eq.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/cmp/trait.PartialEq.html#tymethod.eq' class='fnname'>eq</a>(&amp;self, __arg_0: &amp;<a class="enum" href="../av_sys/enum.AVCodecID.html" title="enum av_sys::AVCodecID">AVCodecID</a>) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.bool.html">bool</a></code></span></h4>
+<div class='docblock'><p>This method tests for <code>self</code> and <code>other</code> values to be equal, and is used by <code>==</code>. <a href="https://doc.rust-lang.org/nightly/core/cmp/trait.PartialEq.html#tymethod.eq">Read more</a></p>
+</div><h4 id='method.ne' class="method"><span id='ne.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/cmp/trait.PartialEq.html#method.ne' class='fnname'>ne</a>(&amp;self, other: &amp;Rhs) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.bool.html">bool</a></code><div class='since' title='Stable since Rust version 1.0.0'>1.0.0</div></span></h4>
+<div class='docblock'><p>This method tests for <code>!=</code>.</p>
+</div></div><h3 class='impl'><span class='in-band'><code>impl <a class="trait" href="https://doc.rust-lang.org/nightly/core/cmp/trait.Eq.html" title="trait core::cmp::Eq">Eq</a> for <a class="enum" href="../av_sys/enum.AVCodecID.html" title="enum av_sys::AVCodecID">AVCodecID</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/av_sys/home/travis/build/panicbit/rust-av/target/debug/build/av_sys-5aff961289ea4337/out/ffi.rs.html#1844' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'></div><h3 class='impl'><span class='in-band'><code>impl <a class="trait" href="https://doc.rust-lang.org/nightly/core/hash/trait.Hash.html" title="trait core::hash::Hash">Hash</a> for <a class="enum" href="../av_sys/enum.AVCodecID.html" title="enum av_sys::AVCodecID">AVCodecID</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/av_sys/home/travis/build/panicbit/rust-av/target/debug/build/av_sys-5aff961289ea4337/out/ffi.rs.html#1844' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.hash' class="method"><span id='hash.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/hash/trait.Hash.html#tymethod.hash' class='fnname'>hash</a>&lt;__H:&nbsp;<a class="trait" href="https://doc.rust-lang.org/nightly/core/hash/trait.Hasher.html" title="trait core::hash::Hasher">Hasher</a>&gt;(&amp;self, __arg_0: &amp;mut __H)</code></span></h4>
+<div class='docblock'><p>Feeds this value into the given [<code>Hasher</code>]. <a href="https://doc.rust-lang.org/nightly/core/hash/trait.Hash.html#tymethod.hash">Read more</a></p>
+</div><h4 id='method.hash_slice' class="method"><span id='hash_slice.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/hash/trait.Hash.html#method.hash_slice' class='fnname'>hash_slice</a>&lt;H&gt;(data: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.slice.html">&amp;[Self]</a>, state: &amp;mut H) <span class="where fmt-newline">where<br>&nbsp;&nbsp;&nbsp;&nbsp;H: <a class="trait" href="https://doc.rust-lang.org/nightly/core/hash/trait.Hasher.html" title="trait core::hash::Hasher">Hasher</a>,&nbsp;</span></code><div class='since' title='Stable since Rust version 1.3.0'>1.3.0</div></span></h4>
+<div class='docblock'><p>Feeds a slice of this type into the given [<code>Hasher</code>]. <a href="https://doc.rust-lang.org/nightly/core/hash/trait.Hash.html#method.hash_slice">Read more</a></p>
+</div></div></section>
+    <section id='search' class="content hidden"></section>
+
+    <section class="footer"></section>
+
+    <aside id="help" class="hidden">
+        <div>
+            <h1 class="hidden">Help</h1>
+
+            <div class="shortcuts">
+                <h2>Keyboard Shortcuts</h2>
+
+                <dl>
+                    <dt>?</dt>
+                    <dd>Show this help dialog</dd>
+                    <dt>S</dt>
+                    <dd>Focus the search field</dd>
+                    <dt>&larrb;</dt>
+                    <dd>Move up in search results</dd>
+                    <dt>&rarrb;</dt>
+                    <dd>Move down in search results</dd>
+                    <dt>&#9166;</dt>
+                    <dd>Go to active search result</dd>
+                    <dt>+</dt>
+                    <dd>Collapse/expand all sections</dd>
+                </dl>
+            </div>
+
+            <div class="infos">
+                <h2>Search Tricks</h2>
+
+                <p>
+                    Prefix searches with a type followed by a colon (e.g.
+                    <code>fn:</code>) to restrict the search to a given type.
+                </p>
+
+                <p>
+                    Accepted types are: <code>fn</code>, <code>mod</code>,
+                    <code>struct</code>, <code>enum</code>,
+                    <code>trait</code>, <code>type</code>, <code>macro</code>,
+                    and <code>const</code>.
+                </p>
+
+                <p>
+                    Search functions by type signature (e.g.
+                    <code>vec -> usize</code> or <code>* -> vec</code>)
+                </p>
+            </div>
+        </div>
+    </aside>
+
+    
+
+    <script>
+        window.rootPath = "../";
+        window.currentCrate = "av_sys";
+    </script>
+    <script src="../jquery.js"></script>
+    <script src="../main.js"></script>
+    <script defer src="../search-index.js"></script>
+</body>
+</html>

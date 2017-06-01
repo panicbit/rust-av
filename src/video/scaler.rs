@@ -21,6 +21,9 @@ pub struct Scaler {
     dst_fmt: AVPixelFormat,
 }
 
+unsafe impl Send for Scaler{}
+unsafe impl Sync for Scaler{}
+
 impl Scaler {
     /// Create a new scaling context.
     pub fn new() -> Self {

@@ -28,6 +28,9 @@ pub struct Encoder {
     tmp_frame: Option<Frame>,
 }
 
+unsafe impl Send for Encoder {}
+unsafe impl Sync for Encoder {}
+
 impl Encoder {
     pub fn from_codec(codec: Codec) -> Result<EncoderBuilder> {
         EncoderBuilder::from_codec(codec)

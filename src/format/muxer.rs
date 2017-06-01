@@ -37,6 +37,9 @@ pub struct Muxer {
     closed: bool,
 }
 
+unsafe impl Send for Muxer{}
+unsafe impl Sync for Muxer{}
+
 impl Muxer {
     pub fn new<W: io::AVWrite>(format: OutputFormat, writer: W) -> Result<MuxerBuilder> {
         MuxerBuilder::new(format, writer)
@@ -209,7 +212,7 @@ impl MuxerBuilder {
     }
 
     /// Add a new stream using the settings from an encoder.
-    pub fn add_stream_from_encoder(&mut self, encoder: &Encoder) -> Result<()> {
+    pub fn add_stream_from_encoder<E: AsRef<ffi::AVCodecContext>>(&mut self, encoder: E) -> Result<()> {
         unsafe {
             // Verify that encoder has global header flag set if required
             {
@@ -276,3 +279,6 @@ impl Drop for MuxerBuilder {
         }
     }
 }
+
+unsafe impl Send for MuxerBuilder {}
+unsafe impl Sync for MuxerBuilder {}
